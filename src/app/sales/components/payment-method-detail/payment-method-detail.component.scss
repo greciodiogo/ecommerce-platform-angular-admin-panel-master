@@ -1,0 +1,34 @@
+:host {
+  padding-top: 12px;
+  padding-bottom: 18px;
+  overflow: hidden;
+  width: 100%;
+}
+
+.method-form {
+  display: flex;
+  flex-direction: row;
+  column-gap: 12px;
+  flex-wrap: wrap;
+  mat-form-field {
+    flex: 1;
+    flex-basis: 120px;
+    flex-shrink: 0;
+    &:nth-child(2) {
+      flex-grow: 2;
+    }
+    &:nth-child(3) {
+      flex-shrink: 1;
+    }
+  }
+}
+
+.method-actions {
+  display: flex;
+  flex-direction: row;
+  column-gap: 12px;
+  flex-wrap: wrap;
+  .method-actions-spacer {
+    flex: 1
+  }
+}

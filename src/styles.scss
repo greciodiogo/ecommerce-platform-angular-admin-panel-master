@@ -1,0 +1,85 @@
+/* You can add global styles to this file, and also import other style files */
+
+html,
+body {
+  height: 100%;
+}
+body {
+  margin: 0;
+  font-family: Roboto, "Helvetica Neue", 'Noto Color Emoji', sans-serif;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+.mat-button, .mat-flat-button, .mat-raised-button {
+  text-transform: uppercase;
+}
+
+
+ngx-mat-intl-tel-input {
+  .country-selector {
+    width: 85px !important;
+    left: -10px !important;
+    top: -7px !important;
+    .mat-button-wrapper {
+      top: 2px !important;
+      position: relative;
+    }
+  }
+  input {
+    padding-left: 80px !important;
+    top: -2px !important;
+  }
+  .country-selector-flag {
+    filter: none !important;
+  }
+}
+.country-list-button {
+  .flag {
+    filter: none !important;
+  }
+}
+
+input.country-search {
+  margin-top: -7px !important;
+}
+
+
+.mat-select, .mat-option {
+  font-family: Roboto, "Helvetica Neue", 'Noto Color Emoji', sans-serif;
+}
+
+
+@-moz-document url-prefix() {
+  .mat-select, .mat-option {
+    font-family: Roboto, "Helvetica Neue", sans-serif;
+  }
+}
+
+.mat-form-field-outline ~ .mat-form-field-prefix {
+  top: 0 !important;
+}
+
+.empty-placeholder {
+  display: block;
+  font-size: 24px;
+  padding-top: 36px;
+  padding-bottom: 36px;
+  width: 100%;
+  text-align: center;
+  color: #7f7f7f;
+}
+
+.mat-form-field.fill-container,
+.mat-form-field.fill-container .mat-form-field-infix,
+.mat-form-field.fill-container .mat-form-field-flex,
+.mat-form-field.fill-container .mat-form-field-wrapper {
+  height: 100%;
+  width: 100%;
+}
+
+.mat-form-field.fill-container textarea {
+  height: calc(100% - 25px);
+}

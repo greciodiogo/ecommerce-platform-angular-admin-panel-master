@@ -1,0 +1,15 @@
+<mat-toolbar color="primary">
+  <button
+    mat-icon-button
+    *ngIf="matchesMedium | async"
+    (click)="toggleSidenav()"
+  >
+    <mat-icon>menu</mat-icon>
+  </button>
+  <span>{{ title.getTitle() }}</span>
+  <span class="spacer"></span>
+  <span>{{ email$ | async }}</span>
+  <button mat-icon-button (click)="logout()">
+    <mat-icon>logout</mat-icon>
+  </button>
+</mat-toolbar>

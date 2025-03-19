@@ -1,0 +1,79 @@
+<mat-table
+  [dataSource]="dataSource"
+  multiTemplateDataRows
+  matSort
+  matSortActive="id"
+  matSortDirection="asc"
+>
+  <ng-container matColumnDef="id">
+    <mat-header-cell *matHeaderCellDef mat-sort-header="id">ID</mat-header-cell>
+    <mat-cell *matCellDef="let item"
+      >{{ item.id
+      }}<a [routerLink]="['/catalog/products', item.product?.id ?? '']"></a
+    ></mat-cell>
+    <mat-footer-cell *matFooterCellDef></mat-footer-cell>
+  </ng-container>
+  <ng-container matColumnDef="name">
+    <mat-header-cell *matHeaderCellDef mat-sort-header="name"
+      >Name</mat-header-cell
+    >
+    <mat-cell *matCellDef="let item">
+      <app-product-photo
+        [product]="item.product"
+        *ngIf="item.product"
+      ></app-product-photo
+      >{{ item.product?.name }}</mat-cell
+    >
+    <mat-footer-cell *matFooterCellDef></mat-footer-cell>
+  </ng-container>
+  <ng-container matColumnDef="price">
+    <mat-header-cell
+      *matHeaderCellDef
+      mat-sort-header="price"
+      arrowPosition="before"
+    >
+      Price
+    </mat-header-cell>
+    <mat-cell *matCellDef="let item">{{
+      item.price | formatCurrency
+    }}</mat-cell>
+    <mat-footer-cell *matFooterCellDef></mat-footer-cell>
+  </ng-container>
+  <ng-container matColumnDef="quantity">
+    <mat-header-cell
+      *matHeaderCellDef
+      mat-sort-header="quantity"
+      arrowPosition="before"
+    >
+      Quantity
+    </mat-header-cell>
+    <mat-cell *matCellDef="let item">{{ item.quantity }}</mat-cell>
+    <mat-footer-cell *matFooterCellDef>{{ itemsQuantity }}</mat-footer-cell>
+  </ng-container>
+  <ng-container matColumnDef="total">
+    <mat-header-cell
+      *matHeaderCellDef
+      mat-sort-header="total"
+      arrowPosition="before"
+    >
+      Total
+    </mat-header-cell>
+    <mat-cell *matCellDef="let item">
+      {{ item.total | formatCurrency }}
+    </mat-cell>
+    <mat-footer-cell *matFooterCellDef>
+      {{ itemsTotal | formatCurrency }}
+    </mat-footer-cell>
+  </ng-container>
+
+  <mat-header-row
+    *matHeaderRowDef="['id', 'name', 'price', 'quantity', 'total']"
+  ></mat-header-row>
+  <mat-row
+    *matRowDef="let item; columns: ['id', 'name', 'price', 'quantity', 'total']"
+    class="item-row"
+  ></mat-row>
+  <mat-footer-row
+    *matFooterRowDef="['id', 'name', 'price', 'quantity', 'total']"
+  ></mat-footer-row>
+</mat-table>

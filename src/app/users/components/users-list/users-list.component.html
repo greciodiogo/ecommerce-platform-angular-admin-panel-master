@@ -1,0 +1,111 @@
+<mat-card>
+  <mat-card-title> Users </mat-card-title>
+  <mat-card-content>
+    <mat-table
+      [dataSource]="dataSource"
+      multiTemplateDataRows
+      matSort
+      matSortActive="id"
+      matSortDirection="asc"
+      (matSortChange)="expandedUser = null"
+    >
+      <ng-container matColumnDef="id">
+        <mat-header-cell *matHeaderCellDef mat-sort-header="id"
+          >ID</mat-header-cell
+        >
+        <mat-cell *matCellDef="let user">{{ user.id }}</mat-cell>
+      </ng-container>
+      <ng-container matColumnDef="email">
+        <mat-header-cell *matHeaderCellDef mat-sort-header="email"
+          >Email</mat-header-cell
+        >
+        <mat-cell *matCellDef="let user">{{ user.email }}</mat-cell>
+      </ng-container>
+      <ng-container matColumnDef="firstName">
+        <mat-header-cell *matHeaderCellDef mat-sort-header="firstName">
+          First name
+        </mat-header-cell>
+        <mat-cell *matCellDef="let user">{{ user.firstName }}</mat-cell>
+      </ng-container>
+      <ng-container matColumnDef="lastName">
+        <mat-header-cell *matHeaderCellDef mat-sort-header="LastName">
+          Last name
+        </mat-header-cell>
+        <mat-cell *matCellDef="let user">{{ user.lastName }}</mat-cell>
+      </ng-container>
+      <ng-container matColumnDef="role">
+        <mat-header-cell *matHeaderCellDef mat-sort-header="role"
+          >Role</mat-header-cell
+        >
+        <mat-cell *matCellDef="let user">{{ user.role | roleName }}</mat-cell>
+      </ng-container>
+      <ng-container matColumnDef="expand">
+        <mat-header-cell *matHeaderCellDef aria-label="row actions">
+          &nbsp;
+        </mat-header-cell>
+        <mat-cell *matCellDef="let user">
+          <button
+            mat-icon-button
+            aria-label="expand row"
+            (click)="
+              expandedUser = expandedUser === user ? null : user;
+              $event.stopPropagation()
+            "
+          >
+            <mat-icon *ngIf="expandedUser !== user">
+              keyboard_arrow_down
+            </mat-icon>
+            <mat-icon *ngIf="expandedUser === user">keyboard_arrow_up</mat-icon>
+          </button>
+        </mat-cell>
+      </ng-container>
+
+      <ng-container matColumnDef="expandedDetail">
+        <mat-cell *matCellDef="let user" [attr.colspan]="7">
+          <div
+            *ngIf="expandedUser === user"
+            class="user-detail"
+            [@detailExpand]="
+              user && user === expandedUser ? 'expanded' : 'collapsed'
+            "
+          >
+            <app-user-detail
+              [user]="user"
+              (cancel)="expandedUser = null"
+            ></app-user-detail>
+          </div>
+        </mat-cell>
+      </ng-container>
+
+      <mat-header-row
+        *matHeaderRowDef="[
+          'id',
+          'email',
+          'firstName',
+          'lastName',
+          'role',
+          'expand'
+        ]"
+      ></mat-header-row>
+      <mat-row
+        *matRowDef="
+          let user;
+          columns: ['id', 'email', 'firstName', 'lastName', 'role', 'expand']
+        "
+        class="user-row"
+        [class.user-expanded-row]="expandedUser === user"
+        (click)="expandedUser = expandedUser === user ? null : user"
+      ></mat-row>
+      <mat-row
+        *matRowDef="let row; columns: ['expandedDetail']"
+        class="user-detail-row"
+      ></mat-row>
+    </mat-table>
+    <mat-paginator
+      showFirstLastButtons
+      pageSize="50"
+      hidePageSize="true"
+      (page)="expandedUser = null"
+    ></mat-paginator>
+  </mat-card-content>
+</mat-card>

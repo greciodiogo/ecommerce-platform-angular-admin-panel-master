@@ -1,0 +1,35 @@
+mat-card {
+  width: 184px;
+  height: 278px;
+  cursor: pointer;
+
+  app-product-photo {
+    width: 184px;
+    height: 184px;
+    background: #eeeeee;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+
+  mat-card-title {
+    font-size: 20px;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+  }
+
+  mat-card-actions {
+    button {
+      z-index: 2;
+    }
+  }
+
+  a {
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+  }
+}

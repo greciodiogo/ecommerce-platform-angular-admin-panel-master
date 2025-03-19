@@ -1,0 +1,50 @@
+@use '@angular/material' as mat;
+
+
+:host {
+  flex: 1;
+  display: flex;
+  overflow: hidden;
+}
+
+mat-sidenav-container {
+  display: flex;
+  flex-direction: row;
+  position: relative;
+  flex: 1;
+  overflow: hidden;
+}
+
+mat-sidenav {
+  width: 220px;
+  padding-top: 0;
+
+  mat-nav-list {
+    padding-top: 12px;
+    padding-bottom: 12px;
+  }
+}
+
+mat-sidenav-content {
+  padding: 24px;
+  height: auto;
+  overflow-x: hidden;
+  overflow-y: scroll;
+  flex: 1;
+  background: map-get(mat.$blue-gray-palette, 50);
+}
+
+mat-divider {
+  margin: 12px 0;
+}
+
+.mat-list-item {
+  mat-icon {
+    color: rgba(0, 0, 0, 0.54);
+    margin-right: 8px;
+  }
+}
+
+a.active {
+  background: map-get(mat.$gray-palette, 100);
+}

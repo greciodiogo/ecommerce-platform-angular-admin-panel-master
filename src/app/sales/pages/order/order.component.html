@@ -1,0 +1,47 @@
+<mat-card>
+  <mat-card-title-group>
+    <mat-card-title>
+      <a mat-button routerLink="/sales/orders">
+        <mat-icon>arrow_back</mat-icon></a
+      >Order #{{ (order$ | async)?.id }}
+    </mat-card-title>
+  </mat-card-title-group>
+  <mat-tab-group dynamicHeight>
+    <mat-tab>
+      <ng-template mat-tab-label>
+        <mat-icon class="mat-tab-icon">info</mat-icon>
+        General
+      </ng-template>
+      <mat-card-content>
+        <app-order-details
+          *ngIf="order$ | async"
+          [order]="(order$ | async) ?? null"
+        ></app-order-details
+      ></mat-card-content>
+    </mat-tab>
+    <mat-tab>
+      <ng-template mat-tab-label>
+        <mat-icon class="mat-tab-icon">shopping_cart</mat-icon>
+        Items
+      </ng-template>
+      <mat-card-content>
+        <app-order-items
+          *ngIf="(order$ | async)?.items"
+          [order]="(order$ | async) ?? null"
+        ></app-order-items>
+      </mat-card-content>
+    </mat-tab>
+    <mat-tab>
+      <ng-template mat-tab-label>
+        <mat-icon class="mat-tab-icon">edit</mat-icon>
+        Edit
+      </ng-template>
+      <mat-card-content>
+        <app-edit-order-form
+          *ngIf="order$ | async"
+          [order]="(order$ | async) ?? null"
+        ></app-edit-order-form>
+      </mat-card-content>
+    </mat-tab>
+  </mat-tab-group>
+</mat-card>

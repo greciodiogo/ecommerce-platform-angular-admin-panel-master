@@ -1,0 +1,65 @@
+<form [formGroup]="editForm" (submit)="save()">
+  <mat-form-field appearance="outline" class="category-name">
+    <mat-label>Category name</mat-label>
+    <input matInput type="text" formControlName="name" />
+    <mat-error>Invalid category name</mat-error>
+  </mat-form-field>
+  <mat-form-field appearance="outline" class="category-groups">
+    <mat-label>Groups</mat-label>
+    <mat-chip-list #chipList>
+      <mat-chip
+        *ngFor="let group of editForm.controls.groups.value"
+        (removed)="removeGroup(group)"
+      >
+        {{ group }}
+        <button matChipRemove><mat-icon>cancel</mat-icon></button>
+      </mat-chip>
+      <input
+        placeholder="Add group..."
+        #groupInput
+        formControlName="newGroup"
+        [matAutocomplete]="auto"
+        [matChipInputFor]="chipList"
+        (focus)="editForm.controls.newGroup.setValue('')"
+        (matChipInputTokenEnd)="addGroup($event)"
+      />
+    </mat-chip-list>
+    <mat-autocomplete
+      #auto="matAutocomplete"
+      (optionSelected)="selected($event)"
+    >
+      <mat-option
+        *ngFor="let group of filteredGroups$ | async"
+        [value]="group.name"
+      >
+        {{ group.name }}
+      </mat-option>
+    </mat-autocomplete>
+  </mat-form-field>
+  <mat-form-field appearance="outline" class="category-description">
+    <mat-label>Category description</mat-label>
+    <textarea matInput type="text" formControlName="description"></textarea>
+    <mat-error>Invalid category description</mat-error>
+  </mat-form-field>
+  <mat-form-field appearance="outline" class="category-slug">
+    <mat-label>Category URL slug</mat-label>
+    <input matInput type="text" formControlName="slug" />
+    <mat-error>Invalid URL slug</mat-error>
+  </mat-form-field>
+  <div>
+    <button mat-flat-button type="button" (click)="delete()" color="warn">
+      Delete category
+    </button>
+    <button
+      mat-flat-button
+      type="submit"
+      [disabled]="!editForm.valid || !editForm.dirty"
+      color="primary"
+    >
+      Save
+    </button>
+    <button mat-button type="button" (click)="resetValues()" color="primary">
+      Cancel
+    </button>
+  </div>
+</form>

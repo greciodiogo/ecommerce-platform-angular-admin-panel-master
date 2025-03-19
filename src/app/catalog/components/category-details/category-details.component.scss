@@ -1,0 +1,36 @@
+
+
+form {
+  padding-bottom: 36px;
+}
+.category-name {
+  width: 100%;
+}
+
+.category-groups {
+  width: 100%;
+}
+
+.category-description {
+  width: 100%;
+  textarea {
+    height: 160px;
+  }
+}
+
+.category-slug {
+  width: 100%;
+}
+
+div {
+  position: absolute;
+  left: 16px;
+  bottom: 16px;
+  right: 16px;
+  button:first-child {
+    float: left;
+  }
+  button {
+    float: right
+  }
+}

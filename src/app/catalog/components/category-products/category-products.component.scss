@@ -1,0 +1,17 @@
+.products-list {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  gap: 12px;
+
+  > span {
+    margin-top: 12px;
+    width: 100%;
+    text-align: center;
+    color: #7f7f7f;
+  }
+}
+
+mat-divider {
+  margin: 18px -16px;
+}

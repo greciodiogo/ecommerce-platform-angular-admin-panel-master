@@ -1,0 +1,33 @@
+:host {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  gap: 16px;
+  margin-bottom: -16px !important;
+  margin-top: -8px !important;
+
+  div:first-child {
+    flex-grow: 1;
+    flex-basis: 240px
+  }
+  div:nth-child(2) {
+    flex: 0;
+    flex-grow: 0.2;
+    flex-basis: 240px;
+  }
+  div {
+    section {
+      margin-bottom: 18px;
+      strong {
+        font-weight: 500;
+      }
+
+      h2 {
+        margin-bottom: 4px;
+      }
+    }
+  }
+
+
+
+}

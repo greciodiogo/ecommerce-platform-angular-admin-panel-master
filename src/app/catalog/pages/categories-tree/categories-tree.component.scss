@@ -1,0 +1,110 @@
+@use '@angular/material' as mat;
+
+mat-card-content {
+  margin-top: 8px;
+  margin-left: -4px;
+  margin-right: -4px;
+}
+.categories-tree-invisible {
+  display: none;
+}
+
+.categories-tree ul,
+.categories-tree li {
+  margin-top: 0;
+  margin-bottom: 0;
+  list-style-type: none;
+}
+
+.categories-tree .mat-nested-tree-node div[role=group] {
+  margin-left: 24px;
+  padding-left: 5px;
+  position: relative;
+
+  &::after {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: -5px;
+    bottom: 22px;
+    width: 8px;
+    border-left: 2px solid mat.get-color-from-palette(mat.$gray-palette, 300);
+    border-bottom: 2px solid mat.get-color-from-palette(mat.$gray-palette, 300);
+  }
+}
+
+div[role=group] .mat-tree-node {
+  position: relative;
+  &::after {
+    content: "";
+    position: absolute;
+    top: 24px;
+    left: -32px;
+    bottom: 0;
+    width: 32px;
+    height: 2px;
+    background: mat.get-color-from-palette(mat.$gray-palette, 300);
+  }
+}
+
+div[role=group] .mat-nested-tree-node > .mat-tree-node {
+  &::after {
+    width: 8px;
+    left: -8px;
+  }
+}
+
+.categories-tree div[role=group] > .mat-tree-node {
+  margin-left: 24px;
+  padding-left: 16px;
+}
+
+.mat-tree-node {
+  margin-left: 24px;
+  padding-left: 16px;
+  position: relative;
+  button:first-child {
+    z-index: 2;
+  }
+  a {
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+  }
+}
+
+.mat-nested-tree-node .mat-tree-node {
+  margin-left: 0;
+  padding-left: 0;
+}
+
+.mat-tree-node:not(.new-node) {
+  cursor: pointer;
+  border-radius: 4px;
+  .add-button {
+    margin-left: 4px;
+    opacity: 0;
+  }
+  &:hover {
+    background: mat.get-color-from-palette(mat.$gray-palette, 100);
+    .add-button {
+      opacity: 1;
+    }
+  }
+}
+
+.new-node {
+  height: 8px;
+  margin-top: 4px;
+  margin-bottom: 4px;
+  button {
+    margin-left: 8px;
+    margin-top: 10px;
+    vertical-align: top;
+  }
+  mat-form-field {
+    height: 60px;
+  }
+}

@@ -1,0 +1,65 @@
+mat-card {
+  padding-bottom: 0;
+  overflow: hidden;
+}
+
+mat-card-content {
+  margin-left: -16px;
+  margin-right: -16px;
+}
+
+mat-row.paymentMethod-detail-row {
+  min-height: 0;
+}
+
+mat-row.paymentMethod-row:not(.paymentMethod-detail-row):hover {
+  background: whitesmoke;
+}
+
+mat-row.paymentMethod-row:not(.paymentMethod-detail-row):active {
+  background: #efefef;
+}
+
+.paymentMethod-row {
+  border-bottom-width: 0;
+}
+
+mat-row:last-child {
+  border-bottom-width: 0;
+}
+
+mat-row, mat-header-row {
+  gap: 16px;
+  padding-left: 16px;
+  padding-right: 16px;
+}
+
+
+.mat-column-id {
+  padding-left: 8px;
+  flex-basis: 48px;
+  flex-grow: 0.1;
+}
+.mat-column-price {
+  flex-basis: 64px;
+  flex-grow: 0.2;
+  flex-shrink: 1;
+}
+.mat-column-expand {
+  flex-basis: 48px;
+  flex-grow: 0;
+}
+.mat-column-expandedDetail {
+  padding-left: 0 !important;
+  padding-right: 0 !important;
+}
+.paymentMethod-detail {
+  overflow: hidden;
+  display: flex;
+  width: 100%;
+}
+
+
+mat-cell, mat-header-cell {
+  white-space: nowrap;
+}

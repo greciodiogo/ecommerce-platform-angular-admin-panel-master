@@ -1,0 +1,70 @@
+<mat-card>
+  <mat-card-title>Products</mat-card-title>
+  <mat-card-content>
+    <mat-table
+      [dataSource]="dataSource"
+      multiTemplateDataRows
+      matSort
+      matSortActive="id"
+      matSortDirection="asc"
+    >
+      <ng-container matColumnDef="id">
+        <mat-header-cell *matHeaderCellDef mat-sort-header="id"
+          >ID</mat-header-cell
+        >
+        <mat-cell *matCellDef="let product"
+          >{{ product.id }}
+          <a [routerLink]="['/catalog/products', product.id]"></a
+        ></mat-cell>
+      </ng-container>
+      <ng-container matColumnDef="name">
+        <mat-header-cell *matHeaderCellDef mat-sort-header="name"
+          >Name</mat-header-cell
+        >
+        <mat-cell *matCellDef="let product">{{ product.name }}</mat-cell>
+      </ng-container>
+      <ng-container matColumnDef="description">
+        <mat-header-cell *matHeaderCellDef mat-sort-header="description">
+          Description
+        </mat-header-cell>
+        <mat-cell *matCellDef="let product">{{ product.description }}</mat-cell>
+      </ng-container>
+      <ng-container matColumnDef="visible">
+        <mat-header-cell *matHeaderCellDef mat-sort-header="visible">
+          Visibility
+        </mat-header-cell>
+        <mat-cell *matCellDef="let product">
+          {{ product.visible | booleanText : 'Visible' : 'Hidden' }}
+        </mat-cell>
+      </ng-container>
+
+      <mat-header-row
+        *matHeaderRowDef="['id', 'name', 'description', 'visible']"
+      ></mat-header-row>
+      <mat-row
+        *matRowDef="
+          let product;
+          columns: ['id', 'name', 'description', 'visible']
+        "
+        class="product-row"
+      ></mat-row>
+    </mat-table>
+    <span *ngIf="(products$ | async)?.length === 0" class="empty-placeholder">
+      No products found
+    </span>
+    <mat-paginator
+      showFirstLastButtons
+      hidePageSize="true"
+      pageSize="50"
+    ></mat-paginator>
+  </mat-card-content>
+  <a
+    class="add-button"
+    mat-fab
+    color="primary"
+    routerLink="/catalog/products/new"
+    [appAuthRole]="['admin', 'manager']"
+  >
+    <mat-icon>add</mat-icon>
+  </a>
+</mat-card>

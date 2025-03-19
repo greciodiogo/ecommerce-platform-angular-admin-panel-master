@@ -1,0 +1,117 @@
+<mat-card>
+  <mat-card-title> Payment methods </mat-card-title>
+  <mat-card-content>
+    <mat-table
+      [dataSource]="dataSource"
+      multiTemplateDataRows
+      matSort
+      matSortActive="id"
+      matSortDirection="asc"
+      (matSortChange)="expandedPaymentMethod = null"
+    >
+      <ng-container matColumnDef="id">
+        <mat-header-cell *matHeaderCellDef mat-sort-header="id"
+          >ID</mat-header-cell
+        >
+        <mat-cell *matCellDef="let paymentMethod">{{
+          paymentMethod.id
+        }}</mat-cell>
+      </ng-container>
+      <ng-container matColumnDef="name">
+        <mat-header-cell *matHeaderCellDef mat-sort-header="name"
+          >Name</mat-header-cell
+        >
+        <mat-cell *matCellDef="let paymentMethod">
+          {{ paymentMethod.name }}
+        </mat-cell>
+      </ng-container>
+      <ng-container matColumnDef="description">
+        <mat-header-cell *matHeaderCellDef mat-sort-header="description">
+          Description
+        </mat-header-cell>
+        <mat-cell *matCellDef="let paymentMethod">
+          {{ paymentMethod.description }}
+        </mat-cell>
+      </ng-container>
+      <ng-container matColumnDef="price">
+        <mat-header-cell *matHeaderCellDef mat-sort-header="price"
+          >Price</mat-header-cell
+        >
+        <mat-cell *matCellDef="let paymentMethod">
+          {{ paymentMethod.price | formatCurrency }}
+        </mat-cell>
+      </ng-container>
+
+      <ng-container matColumnDef="expand">
+        <mat-header-cell *matHeaderCellDef aria-label="row actions">
+          &nbsp;
+        </mat-header-cell>
+        <mat-cell *matCellDef="let paymentMethod">
+          <button
+            mat-icon-button
+            aria-label="expand row"
+            (click)="
+              expandedPaymentMethod =
+                expandedPaymentMethod === paymentMethod ? null : paymentMethod;
+              $event.stopPropagation()
+            "
+          >
+            <mat-icon *ngIf="expandedPaymentMethod !== paymentMethod">
+              keyboard_arrow_down
+            </mat-icon>
+            <mat-icon *ngIf="expandedPaymentMethod === paymentMethod"
+              >keyboard_arrow_up</mat-icon
+            >
+          </button>
+        </mat-cell>
+      </ng-container>
+
+      <ng-container matColumnDef="expandedDetail">
+        <mat-cell *matCellDef="let paymentMethod" [attr.colspan]="7">
+          <div
+            *ngIf="expandedPaymentMethod === paymentMethod"
+            class="paymentMethod-detail"
+            [@detailExpand]="
+              paymentMethod && paymentMethod === expandedPaymentMethod
+                ? 'expanded'
+                : 'collapsed'
+            "
+          >
+            <app-payment-method-detail
+              [paymentMethod]="paymentMethod"
+              (cancel)="expandedPaymentMethod = null"
+            ></app-payment-method-detail>
+          </div>
+        </mat-cell>
+      </ng-container>
+
+      <mat-header-row
+        *matHeaderRowDef="['id', 'name', 'description', 'price', 'expand']"
+      ></mat-header-row>
+      <mat-row
+        *matRowDef="
+          let paymentMethod;
+          columns: ['id', 'name', 'description', 'price', 'expand']
+        "
+        class="paymentMethod-row"
+        [class.paymentMethod-expanded-row]="
+          expandedPaymentMethod === paymentMethod
+        "
+        (click)="
+          expandedPaymentMethod =
+            expandedPaymentMethod === paymentMethod ? null : paymentMethod
+        "
+      ></mat-row>
+      <mat-row
+        *matRowDef="let row; columns: ['expandedDetail']"
+        class="paymentMethod-detail-row"
+      ></mat-row>
+    </mat-table>
+    <span
+      *ngIf="(paymentMethods$ | async)?.length === 0"
+      class="empty-placeholder"
+    >
+      No methods found
+    </span>
+  </mat-card-content>
+</mat-card>

@@ -1,0 +1,119 @@
+<mat-card>
+  <mat-card-title> Delivery methods </mat-card-title>
+  <mat-card-content>
+    <mat-table
+      [dataSource]="dataSource"
+      multiTemplateDataRows
+      matSort
+      matSortActive="id"
+      matSortDirection="asc"
+      (matSortChange)="expandedDeliveryMethod = null"
+    >
+      <ng-container matColumnDef="id">
+        <mat-header-cell *matHeaderCellDef mat-sort-header="id"
+          >ID</mat-header-cell
+        >
+        <mat-cell *matCellDef="let deliveryMethod">{{
+          deliveryMethod.id
+        }}</mat-cell>
+      </ng-container>
+      <ng-container matColumnDef="name">
+        <mat-header-cell *matHeaderCellDef mat-sort-header="name"
+          >Name</mat-header-cell
+        >
+        <mat-cell *matCellDef="let deliveryMethod">
+          {{ deliveryMethod.name }}
+        </mat-cell>
+      </ng-container>
+      <ng-container matColumnDef="description">
+        <mat-header-cell *matHeaderCellDef mat-sort-header="description">
+          Description
+        </mat-header-cell>
+        <mat-cell *matCellDef="let deliveryMethod">
+          {{ deliveryMethod.description }}
+        </mat-cell>
+      </ng-container>
+      <ng-container matColumnDef="price">
+        <mat-header-cell *matHeaderCellDef mat-sort-header="price"
+          >Price</mat-header-cell
+        >
+        <mat-cell *matCellDef="let deliveryMethod">
+          {{ deliveryMethod.price | formatCurrency }}
+        </mat-cell>
+      </ng-container>
+
+      <ng-container matColumnDef="expand">
+        <mat-header-cell *matHeaderCellDef aria-label="row actions">
+          &nbsp;
+        </mat-header-cell>
+        <mat-cell *matCellDef="let deliveryMethod">
+          <button
+            mat-icon-button
+            aria-label="expand row"
+            (click)="
+              expandedDeliveryMethod =
+                expandedDeliveryMethod === deliveryMethod
+                  ? null
+                  : deliveryMethod;
+              $event.stopPropagation()
+            "
+          >
+            <mat-icon *ngIf="expandedDeliveryMethod !== deliveryMethod">
+              keyboard_arrow_down
+            </mat-icon>
+            <mat-icon *ngIf="expandedDeliveryMethod === deliveryMethod"
+              >keyboard_arrow_up</mat-icon
+            >
+          </button>
+        </mat-cell>
+      </ng-container>
+
+      <ng-container matColumnDef="expandedDetail">
+        <mat-cell *matCellDef="let deliveryMethod" [attr.colspan]="7">
+          <div
+            *ngIf="expandedDeliveryMethod === deliveryMethod"
+            class="deliveryMethod-detail"
+            [@detailExpand]="
+              deliveryMethod && deliveryMethod === expandedDeliveryMethod
+                ? 'expanded'
+                : 'collapsed'
+            "
+          >
+            <app-delivery-method-detail
+              [deliveryMethod]="deliveryMethod"
+              (cancel)="expandedDeliveryMethod = null"
+            ></app-delivery-method-detail>
+          </div>
+        </mat-cell>
+      </ng-container>
+
+      <mat-header-row
+        *matHeaderRowDef="['id', 'name', 'description', 'price', 'expand']"
+      ></mat-header-row>
+      <mat-row
+        *matRowDef="
+          let deliveryMethod;
+          columns: ['id', 'name', 'description', 'price', 'expand']
+        "
+        class="deliveryMethod-row"
+        [class.deliveryMethod-expanded-row]="
+          expandedDeliveryMethod === deliveryMethod
+        "
+        (click)="
+          expandedDeliveryMethod =
+            expandedDeliveryMethod === deliveryMethod ? null : deliveryMethod
+        "
+      ></mat-row>
+      <mat-row
+        *matRowDef="let row; columns: ['expandedDetail']"
+        class="deliveryMethod-detail-row"
+      ></mat-row>
+    </mat-table>
+    <span
+      *ngIf="(deliveryMethods$ | async)?.length === 0"
+      class="empty-placeholder"
+    >
+      No methods found
+    </span>
+  </mat-card-content>
+</mat-card>
