@@ -11,11 +11,11 @@ import { first } from 'rxjs';
 import { Router } from '@angular/router';
 
 @Component({
-  selector: 'app-create-faq-form',
-  templateUrl: './create-faq-form.component.html',
-  styleUrls: ['./create-faq-form.component.scss'],
+  selector: 'app-create-product-form',
+  templateUrl: './create-product-form.component.html',
+  styleUrls: ['./create-product-form.component.scss'],
 })
-export class CreateFaqFormComponent {
+export class CreateProductFormComponent {
   addForm = new FormGroup({
     name: new FormControl('', {
       nonNullable: true,

@@ -1,6 +1,6 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { CreateFaqFormComponent } from './create-faq-form.component';
+import { CreateProductFormComponent } from './create-product-form.component';
 import { MockStore, provideMockStore } from '@ngrx/store/testing';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';
@@ -27,9 +27,9 @@ import { first, skip } from 'rxjs';
 import { FormatCurrencyPipe } from '../../../shared/pipes/format-currency.pipe';
 import { selectSettingsList } from '../../../settings/store';
 
-describe('CreateFaqFormComponent', () => {
-  let component: CreateFaqFormComponent;
-  let fixture: ComponentFixture<CreateFaqFormComponent>;
+describe('CreateProductFormComponent', () => {
+  let component: CreateProductFormComponent;
+  let fixture: ComponentFixture<CreateProductFormComponent>;
   let store: MockStore;
   let loader: HarnessLoader;
 
@@ -49,7 +49,7 @@ describe('CreateFaqFormComponent', () => {
         MaterialFileInputModule,
       ],
       declarations: [
-        CreateFaqFormComponent,
+        CreateProductFormComponent,
         NewProductPhotosInputComponent,
         SafeUrlPipe,
         FormatCurrencyPipe,
@@ -80,7 +80,7 @@ describe('CreateFaqFormComponent', () => {
       ],
     }).compileComponents();
 
-    fixture = TestBed.createComponent(CreateFaqFormComponent);
+    fixture = TestBed.createComponent(CreateProductFormComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
     store = TestBed.inject(MockStore);

@@ -40,7 +40,7 @@ import { MatDialogModule } from '@angular/material/dialog';
 import { MatListModule } from '@angular/material/list';
 import { ProductAttributesAddFormComponent } from './components/product-attributes-add-form/product-attributes-add-form.component';
 import { ProductAttributeItemComponent } from './components/product-attribute-item/product-attribute-item.component';
-import { CreateProductFormComponent } from './pages/create-faq-form/create-faq-form.component';
+// import { CreateProductFormComponent } from './pages/create-product-form/create-product-form.component';
 import { NewProductPhotosInputComponent } from './components/new-product-photos-input/new-product-photos-input.component';
 import { CategoriesTreeComponent } from './pages/categories-tree/categories-tree.component';
 import { MatTreeModule } from '@angular/material/tree';
@@ -57,11 +57,13 @@ import { MatAutocompleteModule } from '@angular/material/autocomplete';
 import { DragDropModule } from '@angular/cdk/drag-drop';
 import { ProductRatingsComponent } from './components/product-ratings/product-ratings.component';
 import { ProductRatingDetailsComponent } from './components/product-rating-details/product-rating-details.component';
-
+import { CreateFaqFormComponent } from './pages/create-faq-form/create-faq-form.component';
+import { CreateProductFormComponent } from './pages/create-product-form/create-product-form.component';
 @NgModule({
   declarations: [
     CategoriesComponent,
     ProductsComponent,
+    CreateFaqFormComponent,
     ProductsListComponent,
     FaqsListComponent,
     ProductPhotoComponent,
