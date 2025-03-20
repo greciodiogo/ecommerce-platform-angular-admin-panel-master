@@ -6,7 +6,7 @@ import {
   ViewChild,
 } from '@angular/core';
 import { Store } from '@ngrx/store';
-import { ProductsActions, selectProductsList } from '../../store';
+import { FaqsActions, selectProductsList } from '../../store';
 import { Product } from '../../../core/api';
 import { MatTableDataSource } from '@angular/material/table';
 import { firstValueFrom, Subscription } from 'rxjs';
@@ -42,7 +42,7 @@ export class FaqsListComponent implements OnInit, AfterViewInit, OnDestroy {
     this.subscription = this.products$.subscribe((products) => {
       this.dataSource.data = products;
     });
-    this.store.dispatch(ProductsActions.loadProducts());
+    this.store.dispatch(FaqsActions.loadFaqs());
     this.dataSource.sort = this.sort;
     this.dataSource.paginator = this.paginator;
   }
