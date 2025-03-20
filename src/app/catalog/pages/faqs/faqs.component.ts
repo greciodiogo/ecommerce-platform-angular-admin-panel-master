@@ -11,6 +11,6 @@ export class FaqsComponent implements OnInit {
   constructor(private store: Store) {}
 
   ngOnInit() {
-    this.store.dispatch(FaqsActions.loadOrders());
+    this.store.dispatch(FaqsActions.loadFaqs());
   }
 }

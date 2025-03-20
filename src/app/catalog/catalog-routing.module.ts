@@ -12,6 +12,7 @@ import { CreateFaqFormComponent } from './pages/create-faq-form/create-faq-form.
 import { CategoryComponent } from './pages/category/category.component';
 import { CategoriesTreeComponent } from './pages/categories-tree/categories-tree.component';
 import { CreateProductFormComponent } from './pages/create-product-form/create-product-form.component';
+import { FaqsComponent } from './pages/faqs/faqs.component';
 
 const routes: Routes = [
   {
@@ -45,7 +46,7 @@ const routes: Routes = [
   {
     title: 'Faqs',
     path: 'faqs',
-    component: FaqsListComponent,
+    component: FaqsComponent,
     children: [
       {
         title: 'Create new faq',

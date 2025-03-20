@@ -74,7 +74,7 @@ export class CreateFaqFormComponent {
       .select(selectCatalogLoading)
       .pipe(first((v) => !v))
       .subscribe(() => {
-        this.router.navigate(['/catalog/products', productId]);
+        this.router.navigate(['/catalog/faqs', productId]);
       });
   }
 }

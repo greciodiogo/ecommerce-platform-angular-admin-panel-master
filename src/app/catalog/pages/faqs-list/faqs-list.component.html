@@ -1,5 +1,5 @@
 <mat-card>
-  <mat-card-title>Products</mat-card-title>
+  <mat-card-title>Frequent Answer and Questions</mat-card-title>
   <mat-card-content>
     <mat-table
       [dataSource]="dataSource"
@@ -13,19 +13,18 @@
           >ID</mat-header-cell
         >
         <mat-cell *matCellDef="let product"
-          >{{ product.id }}
-          <a [routerLink]="['/catalog/products', product.id]"></a
+          >{{ product.id }} <a [routerLink]="['/catalog/faqs', product.id]"></a
         ></mat-cell>
       </ng-container>
-      <ng-container matColumnDef="name">
-        <mat-header-cell *matHeaderCellDef mat-sort-header="name"
-          >Name</mat-header-cell
+      <ng-container matColumnDef="question">
+        <mat-header-cell *matHeaderCellDef mat-sort-header="question"
+          >Question</mat-header-cell
         >
         <mat-cell *matCellDef="let product">{{ product.name }}</mat-cell>
       </ng-container>
-      <ng-container matColumnDef="description">
-        <mat-header-cell *matHeaderCellDef mat-sort-header="description">
-          Description
+      <ng-container matColumnDef="answer">
+        <mat-header-cell *matHeaderCellDef mat-sort-header="answer">
+          Answer
         </mat-header-cell>
         <mat-cell *matCellDef="let product">{{ product.description }}</mat-cell>
       </ng-container>
@@ -39,12 +38,12 @@
       </ng-container>
 
       <mat-header-row
-        *matHeaderRowDef="['id', 'name', 'description', 'visible']"
+        *matHeaderRowDef="['id', 'question', 'answer', 'visible']"
       ></mat-header-row>
       <mat-row
         *matRowDef="
           let product;
-          columns: ['id', 'name', 'description', 'visible']
+          columns: ['id', 'question', 'answer', 'visible']
         "
         class="product-row"
       ></mat-row>
@@ -62,7 +61,7 @@
     class="add-button"
     mat-fab
     color="primary"
-    routerLink="/catalog/faq/new"
+    routerLink="/catalog/faqs/new"
     [appAuthRole]="['admin', 'manager']"
   >
     <mat-icon>add</mat-icon>

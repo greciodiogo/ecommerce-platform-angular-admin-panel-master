@@ -1,3 +1,4 @@
+export * from './faqs.effects';
 export * from './products.effects';
 export * from './categories.effects';
 export * from './attribute-types.effects';

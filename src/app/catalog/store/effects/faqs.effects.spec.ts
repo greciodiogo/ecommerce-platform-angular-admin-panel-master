@@ -44,9 +44,7 @@ describe('FaqsEffects', () => {
       actions$ = of(FaqsActions.loadFaqs());
 
       effects.loadFaqs$.subscribe((result) => {
-        expect(result).toEqual(
-          FaqsActions.loadFaqsFailure({ error: 'error' }),
-        );
+        expect(result).toEqual(FaqsActions.loadFaqsFailure({ error: 'error' }));
         done();
       });
 
@@ -65,7 +63,7 @@ describe('FaqsEffects', () => {
 
       effects.getFaq$.subscribe((result) => {
         expect(result).toEqual(
-          FaqsActions.getFaqSuccess({
+          FaqsActions.getFaqsuccess({
             faq: { id: 1, status: 'pending' } as any,
           }),
         );
@@ -81,9 +79,7 @@ describe('FaqsEffects', () => {
       actions$ = of(FaqsActions.getFaq({ faqId: 1 }));
 
       effects.getFaq$.subscribe((result) => {
-        expect(result).toEqual(
-          FaqsActions.getFaqFailure({ error: 'error' }),
-        );
+        expect(result).toEqual(FaqsActions.getFaqFailure({ error: 'error' }));
         done();
       });
 
@@ -117,7 +113,7 @@ describe('FaqsEffects', () => {
 
       effects.createFaq$.subscribe((result) => {
         expect(result).toEqual(
-          FaqsActions.createFaqSuccess({
+          FaqsActions.createFaqsuccess({
             faq: { id: 1, question: 'test?', answer: 'test' } as any,
           }),
         );
@@ -163,7 +159,7 @@ describe('FaqsEffects', () => {
 
       effects.updateFaq$.subscribe((result) => {
         expect(result).toEqual(
-          FaqsActions.updateFaqSuccess({
+          FaqsActions.updateFaqsuccess({
             faqId: 1,
             faq: { id: 1, question: 'test?', answer: 'updated' } as any,
           }),

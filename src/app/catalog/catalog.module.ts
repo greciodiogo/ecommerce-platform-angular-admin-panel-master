@@ -59,12 +59,14 @@ import { ProductRatingsComponent } from './components/product-ratings/product-ra
 import { ProductRatingDetailsComponent } from './components/product-rating-details/product-rating-details.component';
 import { CreateFaqFormComponent } from './pages/create-faq-form/create-faq-form.component';
 import { CreateProductFormComponent } from './pages/create-product-form/create-product-form.component';
+import { FaqsComponent } from './pages/faqs/faqs.component';
 @NgModule({
   declarations: [
     CategoriesComponent,
     ProductsComponent,
     CreateFaqFormComponent,
     ProductsListComponent,
+    FaqsComponent,
     FaqsListComponent,
     ProductPhotoComponent,
     ProductDetailsComponent,
