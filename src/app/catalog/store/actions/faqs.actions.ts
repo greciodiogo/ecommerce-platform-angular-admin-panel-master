@@ -18,52 +18,47 @@ export const selectFaq = createAction(
   props<{ faqId: number | null }>(),
 );
 
-export const selectFaqNumber = createAction(
-  '[Faqs] Select Faq',
-  props<{ faqId: number }>(),
-);
-
-export const getFaq = createAction(
-  '[Faqs] Get Faq',
-  props<{ faqId: number }>(),
-);
-
-export const getFaqsuccess = createAction(
-  '[Faqs] Get Faq Success',
-  props<{ faq: Faq }>(),
-);
-
-export const getFaqFailure = createAction(
-  '[Faqs] Get Faq Failure',
-  props<{ error: string }>(),
-);
-
-export const createFaq = createAction(
-  '[Faqs] Create Faq',
+export const addFaq = createAction(
+  '[Faqs] Add Faq',
   props<{ data: FaqCreateDto }>(),
 );
 
-export const createFaqsuccess = createAction(
-  '[Faqs] Create Faq Success',
+export const addFaqSuccess = createAction(
+  '[Faqs] Add Faq Success',
   props<{ faq: Faq }>(),
 );
 
-export const createFaqFailure = createAction(
-  '[Faqs] Create Faq Failure',
+export const addFaqFailure = createAction(
+  '[Faqs] Add Faq Failure',
   props<{ error: string }>(),
 );
 
 export const updateFaq = createAction(
   '[Faqs] Update Faq',
-  props<{ faqId: number; data: FaqUpdateDto }>(),
+  props<{ id: number; data: FaqUpdateDto }>(),
 );
 
-export const updateFaqsuccess = createAction(
+export const updateFaqSuccess = createAction(
   '[Faqs] Update Faq Success',
-  props<{ faqId: number; faq: Faq }>(),
+  props<{ id: number; faq: Faq }>(),
 );
 
 export const updateFaqFailure = createAction(
   '[Faqs] Update Faq Failure',
+  props<{ error: string }>(),
+);
+
+export const deleteFaq = createAction(
+  '[Faqs] Delete Faq',
+  props<{ id: number }>(),
+);
+
+export const deleteFaqSuccess = createAction(
+  '[Faqs] Delete Faq Success',
+  props<{ id: number }>(),
+);
+
+export const deleteFaqFailure = createAction(
+  '[Faqs] Delete Faq Failure',
   props<{ error: string }>(),
 );

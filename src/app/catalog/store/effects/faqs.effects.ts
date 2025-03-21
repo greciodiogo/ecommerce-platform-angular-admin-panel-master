@@ -1,8 +1,8 @@
 import { Injectable } from '@angular/core';
 import { Actions, createEffect, ofType } from '@ngrx/effects';
+import { CategoriesActions, FaqsActions } from '../actions';
 import { FaqsApiService } from '../../../core/api';
-import { FaqsActions } from '../actions';
-import { exhaustMap, filter, map } from 'rxjs/operators';
+import { concatMap, exhaustMap, map } from 'rxjs/operators';
 import { catchError, of } from 'rxjs';
 
 @Injectable()
@@ -11,7 +11,7 @@ export class FaqsEffects {
 
   loadFaqs$ = createEffect(() => {
     return this.actions$.pipe(
-      ofType(FaqsActions.loadFaqs),
+      ofType(FaqsActions.loadFaqs, CategoriesActions.loadCategories),
       exhaustMap(() =>
         this.faqsApi.getFaqs().pipe(
           map((faqs) => FaqsActions.loadFaqsSuccess({ faqs })),
@@ -23,36 +23,15 @@ export class FaqsEffects {
     );
   });
 
-  getFaq$ = createEffect(() => {
+  addFaq$ = createEffect(() => {
+    console.log('teste on effect');
     return this.actions$.pipe(
-      ofType(FaqsActions.getFaq),
-      exhaustMap(({ faqId }) =>
-        this.faqsApi.getFaq(faqId).pipe(
-          map((faq) => FaqsActions.getFaqsuccess({ faq })),
-          catchError(({ error }) =>
-            of(FaqsActions.getFaqFailure({ error: error.message })),
-          ),
-        ),
-      ),
-    );
-  });
-
-  selectFaq$ = createEffect(() => {
-    return this.actions$.pipe(
-      ofType(FaqsActions.selectFaqNumber),
-      filter(({ faqId }) => faqId !== null),
-      map(({ faqId }) => FaqsActions.getFaq({ faqId })),
-    );
-  });
-
-  createFaq$ = createEffect(() => {
-    return this.actions$.pipe(
-      ofType(FaqsActions.createFaq),
-      exhaustMap(({ data }) =>
+      ofType(FaqsActions.addFaq),
+      concatMap(({ data }) =>
         this.faqsApi.createFaq(data).pipe(
-          map((newFaq) => FaqsActions.createFaqsuccess({ faq: newFaq })),
+          map((faq) => FaqsActions.addFaqSuccess({ faq })),
           catchError(({ error }) =>
-            of(FaqsActions.createFaqFailure({ error: error.message })),
+            of(FaqsActions.addFaqFailure({ error: error.message })),
           ),
         ),
       ),
@@ -62,13 +41,25 @@ export class FaqsEffects {
   updateFaq$ = createEffect(() => {
     return this.actions$.pipe(
       ofType(FaqsActions.updateFaq),
-      exhaustMap(({ faqId, data }) =>
-        this.faqsApi.updateFaq(faqId, data).pipe(
-          map((updatedFaq) =>
-            FaqsActions.updateFaqsuccess({ faqId, faq: updatedFaq }),
-          ),
+      concatMap(({ id, data }) =>
+        this.faqsApi.updateFaq(id, data).pipe(
+          map((faq) => FaqsActions.updateFaqSuccess({ id, faq })),
           catchError(({ error }) =>
             of(FaqsActions.updateFaqFailure({ error: error.message })),
+          ),
+        ),
+      ),
+    );
+  });
+
+  deleteFaq$ = createEffect(() => {
+    return this.actions$.pipe(
+      ofType(FaqsActions.deleteFaq),
+      concatMap(({ id }) =>
+        this.faqsApi.deleteFaq(id).pipe(
+          map(() => FaqsActions.deleteFaqSuccess({ id })),
+          catchError(({ error }) =>
+            of(FaqsActions.deleteFaqFailure({ error: error.message })),
           ),
         ),
       ),

@@ -1,111 +1,52 @@
-import { CatalogState } from '../reducers';
 import {
-  selectProductPhoto,
-  selectProductPhotos,
-  selectProductsList,
-  selectProductsState,
-  selectSelectedProduct,
-  selectSelectedProductId,
-} from './products.selectors';
-import { Product } from '../../../core/api';
+  selectFaqsList,
+  selectSelectedFaq,
+  selectSelectedFaqId,
+} from './faqs.selectors';
+import { Faq } from '../../../core/api';
+import * as fromFaqs from '../reducers/faqs.reducer';
 
-describe('Products Selectors', () => {
-  let initialState: CatalogState;
+describe('Faqs Selectors', () => {
+  let initialState: fromFaqs.State;
 
   beforeEach(() => {
     initialState = {
-      products: {
-        list: [
-          {
-            id: 1,
-            name: 'Product 1',
-          } as Product,
-        ],
-        selectedProductId: 1,
-        photos: [
-          {
-            id: 1,
-            data: {} as Blob,
-          },
-        ],
-      },
-      categories: {
-        list: [],
-        groups: [],
-        selectedCategoryId: null,
-      },
-      attributeTypes: {
-        list: [],
-      },
-      productRatings: {
-        ratings: {},
-      },
-      status: {
-        loading: false,
-        error: null,
-        newProductId: null,
-      },
+      list: [
+        {
+          id: 1,
+          question: 'Question 1',
+          answer: 'Answer 1',
+        } as Faq,
+      ],
+      selectedFaqId: 1,
     };
   });
 
-  describe('selectProductsState', () => {
-    it('should select the products state', () => {
-      const result = selectProductsState.projector(initialState);
-      expect(result).toEqual(initialState.products);
+  describe('selectFaqsList', () => {
+    it('should select the faqs list', () => {
+      const result = selectFaqsList.projector(initialState);
+      expect(result).toEqual(initialState.list);
     });
   });
 
-  describe('selectProductsList', () => {
-    it('should select the products list', () => {
-      const result = selectProductsList.projector(initialState.products);
-      expect(result).toEqual(initialState.products.list);
+  describe('selectSelectedFaqId', () => {
+    it('should select the selected faq id', () => {
+      const result = selectSelectedFaqId.projector(initialState);
+      expect(result).toEqual(initialState.selectedFaqId);
     });
   });
 
-  describe('selectSelectedProductId', () => {
-    it('should select the selected product id', () => {
-      const result = selectSelectedProductId.projector(initialState.products);
-      expect(result).toEqual(initialState.products.selectedProductId);
-    });
-  });
-
-  describe('selectSelectedProduct', () => {
-    it('should select the selected product', () => {
-      const result = selectSelectedProduct.projector(
-        initialState.products,
-        initialState.products.selectedProductId,
+  describe('selectSelectedFaq', () => {
+    it('should select the selected faq', () => {
+      const result = selectSelectedFaq.projector(
+        initialState,
+        initialState.selectedFaqId,
       );
-      expect(result).toEqual(initialState.products.list[0]);
+      expect(result).toEqual(initialState.list[0]);
     });
 
-    it('should return null if no product is selected', () => {
-      const result = selectSelectedProduct.projector(
-        initialState.products,
-        null,
-      );
-      expect(result).toEqual(null);
-    });
-  });
-
-  describe('selectProductPhotos', () => {
-    it('should select the product photos', () => {
-      const result = selectProductPhotos.projector(initialState.products);
-      expect(result).toEqual(initialState.products.photos);
-    });
-  });
-
-  describe('selectProductPhoto', () => {
-    it('should select the product photo', () => {
-      const result = selectProductPhoto(1).projector(
-        initialState.products.photos,
-      );
-      expect(result).toEqual(initialState.products.photos[0]);
-    });
-
-    it('should return null if no photo is found', () => {
-      const result = selectProductPhoto(2).projector(
-        initialState.products.photos,
-      );
+    it('should return null if no faq is selected', () => {
+      const result = selectSelectedFaq.projector(initialState, null);
       expect(result).toEqual(null);
     });
   });

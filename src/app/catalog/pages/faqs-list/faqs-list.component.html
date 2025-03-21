@@ -12,28 +12,28 @@
         <mat-header-cell *matHeaderCellDef mat-sort-header="id"
           >ID</mat-header-cell
         >
-        <mat-cell *matCellDef="let product"
-          >{{ product.id }} <a [routerLink]="['/catalog/faqs', product.id]"></a
+        <mat-cell *matCellDef="let faq"
+          >{{ faq.id }} <a [routerLink]="['/catalog/faqs', faq.id]"></a
         ></mat-cell>
       </ng-container>
       <ng-container matColumnDef="question">
         <mat-header-cell *matHeaderCellDef mat-sort-header="question"
           >Question</mat-header-cell
         >
-        <mat-cell *matCellDef="let product">{{ product.name }}</mat-cell>
+        <mat-cell *matCellDef="let faq">{{ faq.question }}</mat-cell>
       </ng-container>
       <ng-container matColumnDef="answer">
         <mat-header-cell *matHeaderCellDef mat-sort-header="answer">
           Answer
         </mat-header-cell>
-        <mat-cell *matCellDef="let product">{{ product.description }}</mat-cell>
+        <mat-cell *matCellDef="let faq">{{ faq.answer }}</mat-cell>
       </ng-container>
       <ng-container matColumnDef="visible">
         <mat-header-cell *matHeaderCellDef mat-sort-header="visible">
           Visibility
         </mat-header-cell>
-        <mat-cell *matCellDef="let product">
-          {{ product.visible | booleanText : 'Visible' : 'Hidden' }}
+        <mat-cell *matCellDef="let faq">
+          {{ faq.visible | booleanText : 'Visible' : 'Hidden' }}
         </mat-cell>
       </ng-container>
 
@@ -41,15 +41,12 @@
         *matHeaderRowDef="['id', 'question', 'answer', 'visible']"
       ></mat-header-row>
       <mat-row
-        *matRowDef="
-          let product;
-          columns: ['id', 'question', 'answer', 'visible']
-        "
-        class="product-row"
+        *matRowDef="let faq; columns: ['id', 'question', 'answer', 'visible']"
+        class="faq-row"
       ></mat-row>
     </mat-table>
-    <span *ngIf="(products$ | async)?.length === 0" class="empty-placeholder">
-      No products found
+    <span *ngIf="(faqs$ | async)?.length === 0" class="empty-placeholder">
+      No faqs found
     </span>
     <mat-paginator
       showFirstLastButtons

@@ -6,3 +6,4 @@ export * from './selectors/categories.selectors';
 export * from './selectors/attribute-types.selectors';
 export * from './selectors/product-ratings.selectors';
 export * from './selectors/status.selectors';
+export * from './selectors/faqs.selectors';

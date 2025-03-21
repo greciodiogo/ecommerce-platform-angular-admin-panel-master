@@ -31,24 +31,24 @@ export const reducer = createReducer(
     }),
   ),
   on(
-    FaqsActions.addProductSuccess,
-    (state, { product }): State => ({
+    FaqsActions.addFaqSuccess,
+    (state, { faq }): State => ({
       ...state,
-      list: [...state.list, { ...product, photos: [], attributes: [] }],
+      list: [...state.list, { ...faq }],
     }),
   ),
   on(
-    FaqsActions.updateFaqsuccess,
+    FaqsActions.updateFaqSuccess,
     (state, { id, faq }): State => ({
       ...state,
       list: state.list.map((p) => (p.id === id ? faq : p)),
     }),
   ),
-  // on(
-  //   FaqsActions,
-  //   (state, { id }): State => ({
-  //     ...state,
-  //     list: state.list.filter((p) => p.id !== id),
-  //   }),
-  // ),
+  on(
+    FaqsActions.deleteFaqSuccess,
+    (state, { id }): State => ({
+      ...state,
+      list: state.list.filter((p) => p.id !== id),
+    }),
+  ),
 );
