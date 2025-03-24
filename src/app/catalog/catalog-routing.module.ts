@@ -13,6 +13,7 @@ import { CategoryComponent } from './pages/category/category.component';
 import { CategoriesTreeComponent } from './pages/categories-tree/categories-tree.component';
 import { CreateProductFormComponent } from './pages/create-product-form/create-product-form.component';
 import { FaqsComponent } from './pages/faqs/faqs.component';
+import { FaqComponent } from './pages/faq/faq.component';
 
 const routes: Routes = [
   {
@@ -60,7 +61,7 @@ const routes: Routes = [
         path: ':id',
         canActivate: [AuthRoleGuard],
         data: { roles: [RoleEnum.Admin, RoleEnum.Manager] },
-        component: ProductComponent,
+        component: FaqComponent,
       },
       {
         title: 'Faqs',

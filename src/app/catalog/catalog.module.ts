@@ -61,6 +61,8 @@ import { ProductRatingDetailsComponent } from './components/product-rating-detai
 import { CreateFaqFormComponent } from './pages/create-faq-form/create-faq-form.component';
 import { CreateProductFormComponent } from './pages/create-product-form/create-product-form.component';
 import { FaqsComponent } from './pages/faqs/faqs.component';
+import { FaqComponent } from './pages/faq/faq.component';
+import { FaqDetailsComponent } from './components/faq-details/faq-details.component';
 @NgModule({
   declarations: [
     CategoriesComponent,
@@ -71,8 +73,10 @@ import { FaqsComponent } from './pages/faqs/faqs.component';
     FaqsListComponent,
     ProductPhotoComponent,
     ProductDetailsComponent,
+    FaqDetailsComponent,
     ProductPhotosInputComponent,
     ProductComponent,
+    FaqComponent,
     ProductAttributesComponent,
     AttributeTypeCreateDialogComponent,
     ProductAttributesAddFormComponent,
