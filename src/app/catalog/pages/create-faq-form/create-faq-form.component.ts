@@ -1,7 +1,9 @@
 import { Component } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { Store } from '@ngrx/store';
-import { FaqsActions, selectFaqsList } from '../../store';
+import { FaqsActions, selectCatalogLoading, selectFaqsList } from '../../store';
+import { first } from 'rxjs';
+import { Router } from '@angular/router';
 @Component({
   selector: 'app-create-faq-form',
   templateUrl: './create-faq-form.component.html',
@@ -23,7 +25,7 @@ export class CreateFaqFormComponent {
   });
   newFaqId$ = this.store.select(selectFaqsList);
 
-  constructor(private store: Store) {}
+  constructor(private store: Store, private router: Router) {}
 
   async save() {
     this.store.dispatch(
@@ -34,5 +36,20 @@ export class CreateFaqFormComponent {
         },
       }),
     );
+
+    this.newFaqId$.pipe(first((v) => v !== null)).subscribe(async (value) => {
+      if (value) {
+        await this.redirectToFaq(value);
+      }
+    });
+  }
+
+  private async redirectToFaq(faqId: any) {
+    this.store
+      .select(selectCatalogLoading)
+      .pipe(first((v) => !v))
+      .subscribe(() => {
+        this.router.navigate(['/catalog/faqs', faqId]);
+      });
   }
 }

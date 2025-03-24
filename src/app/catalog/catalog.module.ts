@@ -11,6 +11,7 @@ import { EffectsModule } from '@ngrx/effects';
 import {
   AttributeTypesEffects,
   CategoriesEffects,
+  FaqsEffects,
   ProductRatingsEffects,
   ProductsEffects,
 } from './store/effects';
@@ -93,6 +94,7 @@ import { FaqsComponent } from './pages/faqs/faqs.component';
     StoreModule.forFeature(fromCatalog.catalogFeatureKey, fromCatalog.reducers),
     EffectsModule.forFeature([
       ProductsEffects,
+      FaqsEffects,
       CategoriesEffects,
       AttributeTypesEffects,
       ProductRatingsEffects,

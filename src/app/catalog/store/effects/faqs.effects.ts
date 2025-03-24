@@ -10,6 +10,7 @@ export class FaqsEffects {
   constructor(private actions$: Actions, private faqsApi: FaqsApiService) {}
 
   loadFaqs$ = createEffect(() => {
+    console.log('teste on load effect');
     return this.actions$.pipe(
       ofType(FaqsActions.loadFaqs, CategoriesActions.loadCategories),
       exhaustMap(() =>
