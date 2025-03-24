@@ -20,7 +20,7 @@
           Created
         </mat-header-cell>
         <mat-cell *matCellDef="let element">{{
-          element.created | date: 'd MMM yyyy, HH:mm'
+          element.created | date : 'd MMM yyyy, HH:mm'
         }}</mat-cell>
       </ng-container>
       <ng-container matColumnDef="status">
@@ -40,7 +40,7 @@
           Order Created
         </mat-header-cell>
         <mat-cell *matCellDef="let element">{{
-          element.order.created | date: 'd MMM yyyy, HH:mm'
+          element.order.created | date : 'd MMM yyyy, HH:mm'
         }}</mat-cell>
       </ng-container>
       <ng-container matColumnDef="itemsCount">

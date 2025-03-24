@@ -21,7 +21,7 @@
           Created
         </mat-header-cell>
         <mat-cell *matCellDef="let order">
-          {{ order.created | date: 'd MMM yyyy, HH:mm' }}
+          {{ order.created | date : 'd MMM yyyy, HH:mm' }}
         </mat-cell>
       </ng-container>
       <ng-container matColumnDef="status">

@@ -62,7 +62,7 @@
           Visibility
         </mat-header-cell>
         <mat-cell *matCellDef="let product">
-          {{ product.visible | booleanText: 'Visible':'Hidden' }}
+          {{ product.visible | booleanText : 'Visible' : 'Hidden' }}
         </mat-cell>
       </ng-container>
 

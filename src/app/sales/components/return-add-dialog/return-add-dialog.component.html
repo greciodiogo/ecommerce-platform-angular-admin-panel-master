@@ -7,7 +7,7 @@
         *ngFor="let order of ordersFiltered$ | async"
         [value]="order.id"
       >
-        #{{ order.id }} {{ order.created | date: 'short' }} -
+        #{{ order.id }} {{ order.created | date : 'short' }} -
         {{ order.itemsTotal }}
       </mat-option>
     </mat-select>
