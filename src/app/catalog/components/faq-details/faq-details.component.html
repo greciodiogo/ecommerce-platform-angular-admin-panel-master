@@ -1,0 +1,39 @@
+<form [formGroup]="editForm" (submit)="save()">
+  <div class="form-column">
+    <mat-form-field appearance="outline" class="faq-question">
+      <mat-label>Question</mat-label>
+      <input type="text" matInput required formControlName="question" />
+      <mat-error>Invalid faq question</mat-error>
+    </mat-form-field>
+    <mat-form-field appearance="outline" class="faq-answer">
+      <mat-label>Answer</mat-label>
+      <textarea matInput formControlName="answer"></textarea>
+      <mat-error>Invalid faq Answer</mat-error>
+    </mat-form-field>
+  </div>
+  <div class="form-column">
+    <mat-form-field appearance="outline" class="faq-visible">
+      <mat-label>Visibility</mat-label>
+      <mat-select formControlName="visible">
+        <mat-option value="true">Visible</mat-option>
+        <mat-option value="false">Hidden</mat-option>
+      </mat-select>
+    </mat-form-field>
+    <button mat-flat-button type="button" (click)="delete()" color="warn">
+      Delete faq
+    </button>
+    <div>
+      <button mat-button type="button" (click)="resetValues()" color="primary">
+        Cancel
+      </button>
+      <button
+        mat-flat-button
+        type="submit"
+        [disabled]="!editForm.valid || !editForm.dirty"
+        color="primary"
+      >
+        Save
+      </button>
+    </div>
+  </div>
+</form>
