@@ -9,10 +9,12 @@
  * https://openapi-generator.tech
  * Do not edit the class manually.
  */
+import { Product } from './product';
+import { Cart } from './cart';
 
-export interface DeliveryMethod {
+export interface CartItem {
   id: number;
-  name: string;
-  description: string;
-  price: number;
+  cart: Cart;
+  product: Product;
+  quantity: number;
 }

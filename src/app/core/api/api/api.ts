@@ -8,6 +8,8 @@ export * from './categories-api.service';
 import { CategoriesApiService } from './categories-api.service';
 export * from './delivery-methods-api.service';
 import { DeliveryMethodsApiService } from './delivery-methods-api.service';
+export * from './faqs-api.service';
+import { FaqsApiService } from './faqs-api.service';
 export * from './import-export-api.service';
 import { ImportExportApiService } from './import-export-api.service';
 export * from './orders-api.service';
@@ -28,14 +30,13 @@ export * from './users-api.service';
 import { UsersApiService } from './users-api.service';
 export * from './wishlists-api.service';
 import { WishlistsApiService } from './wishlists-api.service';
-export * from './faqs-api.service';
-import { FaqsApiService } from './faqs-api.service';
 export const APIS = [
   AttributeTypesApiService,
   AuthApiService,
   CartsApiService,
   CategoriesApiService,
   DeliveryMethodsApiService,
+  FaqsApiService,
   ImportExportApiService,
   OrdersApiService,
   PagesApiService,
@@ -46,5 +47,4 @@ export const APIS = [
   SettingsApiService,
   UsersApiService,
   WishlistsApiService,
-  FaqsApiService,
 ];

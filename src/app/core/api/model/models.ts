@@ -5,6 +5,8 @@ export * from './attribute-type';
 export * from './attribute-type-dto';
 export * from './cart';
 export * from './cart-dto';
+export * from './cart-item';
+export * from './cart-item-dto';
 export * from './category';
 export * from './category-create-dto';
 export * from './category-group';

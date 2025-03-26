@@ -28,6 +28,8 @@ model/attribute-type-dto.ts
 model/attribute-type.ts
 model/attribute.ts
 model/cart-dto.ts
+model/cart-item-dto.ts
+model/cart-item.ts
 model/cart.ts
 model/category-create-dto.ts
 model/category-group-dto.ts
@@ -37,9 +39,9 @@ model/category.ts
 model/delivery-method-dto.ts
 model/delivery-method.ts
 model/export-dto.ts
-model/faq';
-model/faq-create-dto';
-model/faq-update-dto';
+model/faq-create-dto.ts
+model/faq-update-dto.ts
+model/faq.ts
 model/login-dto.ts
 model/models.ts
 model/order-create-dto.ts

@@ -10,9 +10,7 @@
  * Do not edit the class manually.
  */
 
-export interface DeliveryMethod {
-  id: number;
-  name: string;
-  description: string;
-  price: number;
+export interface CartItemDto {
+  productId: number;
+  quantity: number;
 }
