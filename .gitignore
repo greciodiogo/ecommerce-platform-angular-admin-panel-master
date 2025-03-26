@@ -43,7 +43,6 @@ Thumbs.db
 
 .log
 
-src/app/core/api
 
 cypress/downloads
 cypress/screenshots
