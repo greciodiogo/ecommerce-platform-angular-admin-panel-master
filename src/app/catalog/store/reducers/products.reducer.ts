@@ -79,7 +79,11 @@ export const reducer = createReducer(
         photos: [...state.photos, { id: photoId ?? -1, data }],
         list: state.list.map((p) =>
           p.id === product.id
-            ? { ...p, photos: product.photos, photosOrder: photosOrder }
+            ? {
+                ...p,
+                photos: product.photos,
+                photosOrder: photosOrder ? photosOrder : '',
+              }
             : p,
         ),
       };
@@ -94,7 +98,7 @@ export const reducer = createReducer(
           ? {
               ...p,
               photos: p.photos.filter((p) => p.id !== photoId),
-              photosOrder: photosOrder,
+              photosOrder: photosOrder ? photosOrder : '',
             }
           : p,
       ),
