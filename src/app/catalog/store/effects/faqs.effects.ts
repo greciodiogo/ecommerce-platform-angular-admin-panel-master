@@ -25,7 +25,6 @@ export class FaqsEffects {
   });
 
   addFaq$ = createEffect(() => {
-    console.log('teste on effect');
     return this.actions$.pipe(
       ofType(FaqsActions.addFaq),
       concatMap(({ data }) =>

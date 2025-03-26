@@ -22,12 +22,29 @@ export * from './products-api.service';
 import { ProductsApiService } from './products-api.service';
 export * from './returns-api.service';
 import { ReturnsApiService } from './returns-api.service';
-export * from './faqs-api.service';
-import { FaqsApiService } from './faqs-api.service';
 export * from './settings-api.service';
 import { SettingsApiService } from './settings-api.service';
 export * from './users-api.service';
 import { UsersApiService } from './users-api.service';
 export * from './wishlists-api.service';
 import { WishlistsApiService } from './wishlists-api.service';
-export const APIS = [AttributeTypesApiService, AuthApiService, CartsApiService, CategoriesApiService, DeliveryMethodsApiService, ImportExportApiService, OrdersApiService, PagesApiService, PaymentMethodsApiService, ProductRatingsApiService, ProductsApiService, ReturnsApiService, SettingsApiService, UsersApiService, WishlistsApiService, FaqsApiService];
+export * from './faqs-api.service';
+import { FaqsApiService } from './faqs-api.service';
+export const APIS = [
+  AttributeTypesApiService,
+  AuthApiService,
+  CartsApiService,
+  CategoriesApiService,
+  DeliveryMethodsApiService,
+  ImportExportApiService,
+  OrdersApiService,
+  PagesApiService,
+  PaymentMethodsApiService,
+  ProductRatingsApiService,
+  ProductsApiService,
+  ReturnsApiService,
+  SettingsApiService,
+  UsersApiService,
+  WishlistsApiService,
+  FaqsApiService,
+];
