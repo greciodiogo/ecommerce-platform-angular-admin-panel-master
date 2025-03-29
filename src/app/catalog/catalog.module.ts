@@ -63,6 +63,7 @@ import { CreateProductFormComponent } from './pages/create-product-form/create-p
 import { FaqsComponent } from './pages/faqs/faqs.component';
 import { FaqComponent } from './pages/faq/faq.component';
 import { FaqDetailsComponent } from './components/faq-details/faq-details.component';
+import { ReportsComponent } from './pages/reports/reports.component';
 @NgModule({
   declarations: [
     CategoriesComponent,
@@ -91,6 +92,7 @@ import { FaqDetailsComponent } from './components/faq-details/faq-details.compon
     CategoriesProductsAddFormComponent,
     ProductRatingsComponent,
     ProductRatingDetailsComponent,
+    ReportsComponent,
   ],
   imports: [
     CommonModule,

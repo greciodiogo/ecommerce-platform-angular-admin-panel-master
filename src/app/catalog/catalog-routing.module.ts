@@ -14,6 +14,7 @@ import { CategoriesTreeComponent } from './pages/categories-tree/categories-tree
 import { CreateProductFormComponent } from './pages/create-product-form/create-product-form.component';
 import { FaqsComponent } from './pages/faqs/faqs.component';
 import { FaqComponent } from './pages/faq/faq.component';
+import { ReportsComponent } from './pages/reports/reports.component';
 
 const routes: Routes = [
   {
@@ -92,6 +93,13 @@ const routes: Routes = [
         component: CategoryComponent,
       },
     ],
+  },
+  {
+    title: 'Relatórios',
+    path: 'reports',
+    canActivate: [AuthRoleGuard],
+    data: { roles: [RoleEnum.Admin] },
+    component: ReportsComponent,
   },
   {
     path: '',
