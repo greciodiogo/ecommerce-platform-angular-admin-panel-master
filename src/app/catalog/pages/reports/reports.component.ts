@@ -13,6 +13,8 @@ import { firstValueFrom, Subscription } from 'rxjs';
 import { MatSort } from '@angular/material/sort';
 import { Router } from '@angular/router';
 import { MatPaginator } from '@angular/material/paginator';
+import * as moment from 'moment';
+import { ExportExcelService } from 'src/app/settings/services/export-excel.service';
 
 @Component({
   selector: 'app-reports',
@@ -41,7 +43,11 @@ export class ReportsComponent implements OnInit, AfterViewInit, OnDestroy {
   @ViewChild(MatSort) sort!: MatSort;
   @ViewChild(MatPaginator) paginator!: MatPaginator;
 
-  constructor(private store: Store, public router: Router) {}
+  constructor(
+    private store: Store,
+    public router: Router,
+    public exportExcelService: ExportExcelService, // private configService: ConfigService, //private excelService: ExcelService, //private ReportFacturacaoDiariaGlobalService: ReportFacturacaoDiariaGlobalService
+  ) {}
 
   ngOnInit() {
     this.dataSource.data = [];
@@ -61,5 +67,62 @@ export class ReportsComponent implements OnInit, AfterViewInit, OnDestroy {
     this.dataSource.paginator = this.paginator;
   }
 
-  generateReport(report: any) {}
+  generateReport(report: any) {
+    this.exportAsXLSX();
+  }
+
+  public exportAsXLSX() {
+    // var movimentosExcel = JSON.parse(JSON.stringify(this.cobrancas));
+
+    // for (let i = 0; i < movimentosExcel.length; i++) {
+    //   if (movimentosExcel[i].pago == 1) {
+    //     movimentosExcel[i].total = movimentosExcel[i].total;
+    //   } else {
+    //     movimentosExcel[i].total =
+    //       movimentosExcel[i].total - movimentosExcel[i].valor_aberto;
+    //   }
+
+    //   movimentosExcel[i].created_at = moment(
+    //     movimentosExcel[i].created_at
+    //   ).format('MM/DD/YYYY');
+    // }
+
+    var CurrentDate = new Date();
+    var keys = [
+      { key: 'filial_nome', width: 25 },
+      { key: 'loja_nome', width: 25 },
+      { key: 'factura_sigla', width: 25 },
+      { key: 'total', width: 25, style: { font: { name: 'Calibri' } } },
+      { key: 'created_at', width: 25, style: { font: { name: 'Calibri' } } },
+    ];
+
+    var Cols = ['Província', 'Loja', 'Documento', 'Valor', 'Data'];
+
+    var title = 'Facturação Diária - ';
+    var nameFile =
+      'Facturação Diária - [' +
+      moment(CurrentDate).format('DD') +
+      '-' +
+      moment(CurrentDate).format('MM') +
+      '-' +
+      moment(CurrentDate).format('YYYY') +
+      ' ]' +
+      moment(CurrentDate).format('H') +
+      ':' +
+      moment(CurrentDate).format('m');
+    this.exportExcelService.excels(
+      this.dataSource.data,
+      nameFile,
+      keys,
+      Cols,
+      title,
+      15,
+      5,
+      40,
+      3,
+      [1],
+      false,
+      {},
+    );
+  }
 }
