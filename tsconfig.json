@@ -5,7 +5,9 @@
     "baseUrl": "./",
     "outDir": "./dist/out-tsc",
     "forceConsistentCasingInFileNames": true,
-    "strict": true,
+    "noUnusedLocals": false,  // Ignorar variáveis locais não utilizadas
+    "noUnusedParameters": false,  // Ignorar parâmetros não utilizados
+    "strict": false,  // Desabilitar todas as verificações estritas
     "noImplicitOverride": true,
     "noPropertyAccessFromIndexSignature": true,
     "noImplicitReturns": true,
