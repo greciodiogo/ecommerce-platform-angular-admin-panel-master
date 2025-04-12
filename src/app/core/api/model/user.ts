@@ -14,6 +14,8 @@ export interface User {
   id: number;
   registered: string;
   firstName?: string;
+  shopName?: string;
+  alvaratitle?: string;
   lastName?: string;
   email: string;
   role: User.RoleEnum;
@@ -22,12 +24,14 @@ export namespace User {
   export type RoleEnum =
     | 'customer'
     | 'sales'
+    | 'shoper'
     | 'manager'
     | 'admin'
     | 'disabled';
   export const RoleEnum = {
     Customer: 'customer' as RoleEnum,
     Sales: 'sales' as RoleEnum,
+    shoper: 'shoper' as RoleEnum,
     Manager: 'manager' as RoleEnum,
     Admin: 'admin' as RoleEnum,
     Disabled: 'disabled' as RoleEnum,
