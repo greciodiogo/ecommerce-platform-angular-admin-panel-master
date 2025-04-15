@@ -4,7 +4,7 @@
 
 export const environment = {
   production: false,
-  apiUrl: 'https://encontrarshopping-api.up.railway.app',  
+  apiUrl: 'localhost:80',  
   demo: false,
 };
 
