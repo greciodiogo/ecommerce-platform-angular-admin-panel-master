@@ -7,7 +7,6 @@ export class RoleNamePipe implements PipeTransform {
   roleNames: Record<string, string> = {
     customer: 'Customer',
     sales: 'Salesman',
-    shoper: 'Shoper',
     manager: 'Manager',
     seller: 'Seller',
     admin: 'Administrator',

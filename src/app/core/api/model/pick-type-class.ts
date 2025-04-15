@@ -26,7 +26,6 @@ export namespace PickTypeClass {
   export const RoleEnum = {
     Customer: 'customer' as RoleEnum,
     Sales: 'sales' as RoleEnum,
-    Shoper: 'shoper' as RoleEnum,
     Manager: 'manager' as RoleEnum,
     Admin: 'admin' as RoleEnum,
     Disabled: 'disabled' as RoleEnum,

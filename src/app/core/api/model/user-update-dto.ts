@@ -20,14 +20,12 @@ export namespace UserUpdateDto {
   export type RoleEnum =
     | 'customer'
     | 'sales'
-    | 'shoper'
     | 'manager'
     | 'admin'
     | 'disabled';
   export const RoleEnum = {
     Customer: 'customer' as RoleEnum,
     Sales: 'sales' as RoleEnum,
-    Shoper: 'shoper' as RoleEnum,
     Manager: 'manager' as RoleEnum,
     Admin: 'admin' as RoleEnum,
     Disabled: 'disabled' as RoleEnum,

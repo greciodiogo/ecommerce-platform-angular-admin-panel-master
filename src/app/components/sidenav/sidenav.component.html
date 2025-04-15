@@ -53,7 +53,7 @@
       <a
         mat-list-item
         routerLink="/catalog/products"
-        [appAuthRole]="['admin', 'manager', 'sales', 'shoper']"
+        [appAuthRole]="['admin', 'manager', 'sales']"
         [ngClass]="{ active: router.url.startsWith('/catalog/products') }"
       >
         <mat-icon mat-list-icon>inventory_2</mat-icon>
@@ -80,7 +80,7 @@
       <a
         mat-list-item
         routerLink="/catalog/faqs"
-        [appAuthRole]="['admin', 'manager', 'sales', 'shoper']"
+        [appAuthRole]="['admin', 'manager', 'sales']"
         [ngClass]="{ active: router.url.startsWith('/catalog/categories') }"
       >
         <mat-icon mat-list-icon>question_answer</mat-icon>
