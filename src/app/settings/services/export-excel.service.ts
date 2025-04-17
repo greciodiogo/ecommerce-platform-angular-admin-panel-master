@@ -30,7 +30,7 @@ export class ExportExcelService {
     filtros = [],
   ) {
     var footer = ['ENCONTRAR'];
-    var localDate = JSON.parse(localStorage.getItem('accessToken'));
+    // var localDate = JSON.parse(localStorage.getItem('accessToken'));
     var workbook = new Excel.Workbook();
     workbook.creator = 'Web';
     workbook.lastModifiedBy = 'Web';
@@ -54,7 +54,8 @@ export class ExportExcelService {
       sheet.getCell('G2').value = moment(new Date()).format(
         'DD-MM-YYYY HH:mm:ss',
       );
-      sheet.getCell('G1').value = localDate.user.name;
+      // sheet.getCell('G1').value = localDate.user.name;
+      sheet.getCell('G1').value = "Encontrar";
       sheet.getCell('B3').value = title;
 
       if (filtros.length > 0) {
