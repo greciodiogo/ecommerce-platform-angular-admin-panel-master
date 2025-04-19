@@ -15,6 +15,7 @@ import { Router } from '@angular/router';
 import { MatPaginator } from '@angular/material/paginator';
 import * as moment from 'moment';
 import { ExportExcelService } from 'src/app/settings/services/export-excel.service';
+import { FormService } from 'src/app/services/form.service';
 
 @Component({
   selector: 'app-reports',
@@ -28,12 +29,14 @@ export class ReportsComponent implements OnInit, AfterViewInit, OnDestroy {
       name: 'Monthly Products Report',
       icon: 'calendar_view_month',
       color: 'primary',
+      status: 'active'
     },
     {
       url: '/report/monthly-orders-report',
       name: 'Monthly Orders Report',
       icon: 'calendar_view_month',
       color: 'primary',
+      status: 'disable'
     },
   ];
   products$ = this.store.select(selectProductsList);
@@ -46,6 +49,7 @@ export class ReportsComponent implements OnInit, AfterViewInit, OnDestroy {
   constructor(
     private store: Store,
     public router: Router,
+    public formService: FormService,
     public exportExcelService: ExportExcelService, // private configService: ConfigService, //private excelService: ExcelService, //private ReportFacturacaoDiariaGlobalService: ReportFacturacaoDiariaGlobalService
   ) {}
 
@@ -87,22 +91,29 @@ export class ReportsComponent implements OnInit, AfterViewInit, OnDestroy {
     //   ).format('MM/DD/YYYY');
     // }
 
-    var filtros = [{provincie: "Luanda"}, {year: "2025"}]
-
+    var filter = [{provincie: "Luanda"}, {year: "2025"}]
+    var filtros = this.formService.getFilterExcel(filter);
     var CurrentDate = new Date();
     var keys = [
-      { key: 'filial_nome', width: 25 },
-      { key: 'loja_nome', width: 25 },
-      { key: 'factura_sigla', width: 25 },
+      { key: 'filial_nome', width: 40 },
+      { key: 'type_shop', width: 40 },
+      { key: 'category', width: 50 },
+      { key: 'name', width: 25 },
+      { key: 'stock', width: 20 },
+      { key: 'price', width: 25 },
+      { key: 'delivery_tax', width: 20 },
+      { key: 'service_fee', width: 20 },
+      { key: 'service_fee', width: 25 },
+      { key: 'commission', width: 25 },
       { key: 'total', width: 25, style: { font: { name: 'Calibri' } } },
-      { key: 'created_at', width: 25, style: { font: { name: 'Calibri' } } },
     ];
 
-    var Cols = ['Província', 'Loja', 'Documento', 'Valor', 'Data'];
+    // var Cols = ['DATE', 'REPORT NUMBER', 'SHOP ID & NAME', 'PRODUCT', 'QUANTITY', 'PRICE', 'AMOUNT'];
+    var Cols = ['SHOP ID & NAME', 'TYPES OF SHOPS', 'CATEGORY OF PRODUCT', 'PRODUCT', 'QUANTITY', 'PRICE OF SHOP', 'DELIVERY TAX', 'SERVICE FEE', 'COMMISSION', 'TOTAL AMOUNT'];
 
-    var title = 'Facturação Diária - ';
+    var title = 'Monthly Products Report - ';
     var nameFile =
-      'Facturação Diária - [' +
+      'Monthly Products Report - [' +
       moment(CurrentDate).format('DD') +
       '-' +
       moment(CurrentDate).format('MM') +
