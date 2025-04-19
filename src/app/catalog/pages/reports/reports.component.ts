@@ -94,15 +94,17 @@ export class ReportsComponent implements OnInit, AfterViewInit, OnDestroy {
       movimentosExcel[i].filial_nome = 'default'
       movimentosExcel[i].type_shop = 'default'
       movimentosExcel[i].commission = 0;
+      movimentosExcel[i].delivery_tax = 0;
       movimentosExcel[i].filial_nome = 'default'
+      movimentosExcel[i].total = movimentosExcel[i].price * movimentosExcel[i].stock
   }
 
     var CurrentDate = new Date();
     var keys = [
       { key: 'filial_nome', width: 40 },
-      { key: 'type_shop', width: 40 },
-      { key: 'category', width: 50 },
-      { key: 'name', width: 25 },
+      { key: 'type_shop', width: 35 },
+      { key: 'category', width: 45 },
+      { key: 'name', width: 40 },
       { key: 'stock', width: 20 },
       { key: 'price', width: 25 },
       { key: 'delivery_tax', width: 20 },
@@ -114,9 +116,9 @@ export class ReportsComponent implements OnInit, AfterViewInit, OnDestroy {
     // var Cols = ['DATE', 'REPORT NUMBER', 'SHOP ID & NAME', 'PRODUCT', 'QUANTITY', 'PRICE', 'AMOUNT'];
     var Cols = ['SHOP ID & NAME', 'TYPES OF SHOPS', 'CATEGORY OF PRODUCT', 'PRODUCT', 'QUANTITY', 'PRICE OF SHOP', 'DELIVERY TAX', 'SERVICE FEE', 'COMMISSION', 'TOTAL AMOUNT'];
 
-    var title = 'Monthly Products Report - ';
+    var title = 'Monthly Stores Report ';
     var nameFile =
-      'Monthly Products Report - [' +
+      'Monthly Stores Report [' +
       moment(CurrentDate).format('DD') +
       '-' +
       moment(CurrentDate).format('MM') +
@@ -127,7 +129,7 @@ export class ReportsComponent implements OnInit, AfterViewInit, OnDestroy {
       ':' +
       moment(CurrentDate).format('m');
     this.exportExcelService.excels(
-      this.dataSource.data,
+      movimentosExcel,
       nameFile,
       keys,
       Cols,
