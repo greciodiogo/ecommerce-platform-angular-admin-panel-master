@@ -58,21 +58,21 @@ export class ExportExcelService {
       sheet.getCell('G1').value = "Encontrar";
       sheet.getCell('B3').value = title;
 
-      if (filtros.length > 0) {
-        var contCell = 8;
-        sheet.getCell('A6').value = 'FILTRAGEM POR:';
-        for (
-          let indexFiltros = 0;
-          indexFiltros < filtros.length;
-          indexFiltros++
-        ) {
-          sheet.getCell('A' + contCell).value = filtros[indexFiltros].name
-            .replace(/_/g, ' ')
-            .toUpperCase();
-          sheet.getCell('B' + contCell).value = filtros[indexFiltros].value;
-          contCell++;
-        }
-      }
+      // if (filtros.length > 0) {
+      //   var contCell = 8;
+      //   sheet.getCell('A6').value = 'FILTRAGEM POR:';
+      //   for (
+      //     let indexFiltros = 0;
+      //     indexFiltros < filtros.length;
+      //     indexFiltros++
+      //   ) {
+      //     sheet.getCell('A' + contCell).value = filtros[indexFiltros].name
+      //       .replace(/_/g, ' ')
+      //       .toUpperCase();
+      //     sheet.getCell('B' + contCell).value = filtros[indexFiltros].value;
+      //     contCell++;
+      //   }
+      // }
 
       //sheet.getCell('A1').value = " "
       /*  sheet.getCell('A2').value = " "

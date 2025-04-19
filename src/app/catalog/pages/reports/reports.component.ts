@@ -87,7 +87,7 @@ export class ReportsComponent implements OnInit, AfterViewInit, OnDestroy {
     //   ).format('MM/DD/YYYY');
     // }
 
-    var filtros = [{provincie: ""}, {year: "2025"}]
+    var filtros = [{provincie: "Luanda"}, {year: "2025"}]
 
     var CurrentDate = new Date();
     var keys = [
