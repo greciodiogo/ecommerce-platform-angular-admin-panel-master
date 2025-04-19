@@ -28,6 +28,10 @@ export class CreateProductFormComponent {
       nonNullable: true,
       validators: [Validators.required, Validators.min(0)],
     }),
+    service_fee: new FormControl(0, {
+      nonNullable: true,
+      validators: [Validators.required, Validators.min(0)],
+    }),
     stock: new FormControl(0, {
       nonNullable: true,
       validators: [Validators.required, Validators.min(0)],

@@ -2,6 +2,7 @@
     width: 100%;
     padding: 1rem;
     background-color: #eceff1;
+    height: calc(100vh - 64px);
   }
   
   .dashboard_container {
