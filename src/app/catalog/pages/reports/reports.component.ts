@@ -39,6 +39,14 @@ export class ReportsComponent implements OnInit, AfterViewInit, OnDestroy {
       status: 'disable'
     },
   ];
+  filter = {
+    provincie: 'LUANDA',
+    shops: ' ALL',
+    products: 'ALL',
+    categories: 'ALL',
+    year: 2025
+  }
+
   products$ = this.store.select(selectProductsList);
   dataSource = new MatTableDataSource<Product>();
   subscription!: Subscription;
@@ -76,23 +84,8 @@ export class ReportsComponent implements OnInit, AfterViewInit, OnDestroy {
   }
 
   public exportAsXLSX() {
-    // var movimentosExcel = JSON.parse(JSON.stringify(this.cobrancas));
 
-    // for (let i = 0; i < movimentosExcel.length; i++) {
-    //   if (movimentosExcel[i].pago == 1) {
-    //     movimentosExcel[i].total = movimentosExcel[i].total;
-    //   } else {
-    //     movimentosExcel[i].total =
-    //       movimentosExcel[i].total - movimentosExcel[i].valor_aberto;
-    //   }
-
-    //   movimentosExcel[i].created_at = moment(
-    //     movimentosExcel[i].created_at
-    //   ).format('MM/DD/YYYY');
-    // }
-
-    var filter = [{provincie: "Luanda"}, {year: "2025"}]
-    var filtros = this.formService.getFilterExcel(filter);
+    var filtros = this.formService.getFilterExcel(this.filter);
     var CurrentDate = new Date();
     var keys = [
       { key: 'filial_nome', width: 40 },
@@ -130,7 +123,7 @@ export class ReportsComponent implements OnInit, AfterViewInit, OnDestroy {
       Cols,
       title,
       15,
-      5,
+      11,
       40,
       3,
       [1],
