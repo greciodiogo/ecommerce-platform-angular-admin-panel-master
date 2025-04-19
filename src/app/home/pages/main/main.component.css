@@ -1,0 +1,118 @@
+.dashboard {
+    width: 100%;
+    padding: 1rem;
+    background-color: #eceff1;
+  }
+  
+  .dashboard_container {
+    display: flex;
+    flex-direction: column;
+    /* gap: 1rem; */
+  }
+  
+  .dashboard_title {
+    color: #111;
+    font-weight: 600;
+  }
+  
+  .dashboard_item_container {
+    display: grid;
+    grid-template-columns: repeat(5, 1fr);
+    gap: 1rem;
+  }
+  
+  .dashboard_item_container .box_item h4 {
+    /* font-size: 36px; */
+    font-weight: 600; 
+    color: var(--app-secondary-color);
+  }
+  
+  .dashboard_item_container .box_item a {
+    text-decoration: none;
+  }
+
+  .dashboard_item_container .box_item span {
+    font-size: 22px;
+    font-weight: normal;
+    color: var(--app-color);
+    text-decoration: none;
+  }
+  
+  .dashboard_item_container .box_item {
+    height: 100px;
+    /* border: 1px solid #ccc; */
+    background-color: white;
+    border-radius: 2px;
+    display: flex;
+    flex-direction: column;
+    /* gap: 10px; */
+    box-shadow: 0 2px 1px -1px #0003, 0 1px 1px #00000024, 0 1px 3px #0000001f;
+  }
+  
+  
+  .dashboard_item_container .box_item:nth-child(1) {
+    background-color: #3f51b5;
+    box-shadow: 0 2px 1px -1px #0003, 0 1px 1px #00000024, 0 1px 3px #0000001f;
+  }
+  
+  .wrapper {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 2rem;
+  }
+  .box_item {
+      height: 350px;
+      background-color: white;
+      border-radius: 4px;
+      padding: 1rem;
+      display: flex;
+      flex-direction: column;
+      justify-content: flex-start;
+      box-shadow: 0 2px 1px -1px #0003, 0 1px 1px #00000024, 0 1px 3px #0000001f;
+  }
+  
+  .wrapper .box_item:nth-child(2) {
+      margin-top: 2rem;
+  }
+  
+  
+  .wrapper .box_item:nth-child(2) h2{
+    color: #ffff;
+  }
+  
+  .wrapper .box_item:nth-child(2) ul{
+    padding: 0;
+    margin: 0;
+    margin-top: 1rem;
+    list-style: none;
+    color: #ffff;
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+  }
+  
+  .wrapper .box_item:nth-child(2) ul li{
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    gap: 5px;
+  }
+  
+  .single_item {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    color: #ffff;
+    opacity: .85;
+    font-size: 16px;
+    line-height: 1.2;
+    text-decoration: none;
+  }
+  
+  .wrapper .box_item:nth-child(2) ul li > span{
+    margin-left: 2rem;
+  }
+  
+  .wrapper .box_item:nth-child(3) {
+      margin-top: 4rem;
+  }
