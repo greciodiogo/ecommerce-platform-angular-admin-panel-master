@@ -5,7 +5,7 @@ import { map } from 'rxjs/operators';
 import { Store } from '@ngrx/store';
 import { AuthActions } from '../../core/auth/store/actions';
 import { Title } from '@angular/platform-browser';
-import { selectUserEmail } from '../../core/auth/store';
+import { selectUserRole } from '../../core/auth/store';
 
 @Component({
   selector: 'app-toolbar',
@@ -14,7 +14,7 @@ import { selectUserEmail } from '../../core/auth/store';
 })
 export class ToolbarComponent {
   matchesMedium: Observable<boolean>;
-  email$ = this.store.select(selectUserEmail);
+  role$ = this.store.select(selectUserRole);
 
   @Output() sidenavToggle = new EventEmitter<void>();
 
