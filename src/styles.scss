@@ -17,6 +17,14 @@ body {
   text-transform: uppercase;
 }
 
+.sales_color {
+  background-color: #222 !important;
+}
+
+.sales_text_color {
+  color: #222 !important;
+}
+
 
 ngx-mat-intl-tel-input {
   .country-selector {

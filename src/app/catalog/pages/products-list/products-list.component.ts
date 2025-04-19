@@ -13,6 +13,7 @@ import { firstValueFrom, Subscription } from 'rxjs';
 import { MatSort } from '@angular/material/sort';
 import { Router } from '@angular/router';
 import { MatPaginator } from '@angular/material/paginator';
+import { selectUserRole } from 'src/app/core/auth/store';
 
 @Component({
   selector: 'app-products-list',
@@ -21,6 +22,7 @@ import { MatPaginator } from '@angular/material/paginator';
 })
 export class ProductsListComponent implements OnInit, AfterViewInit, OnDestroy {
   products$ = this.store.select(selectProductsList);
+  role$ = this.store.select(selectUserRole);
   dataSource = new MatTableDataSource<Product>();
   subscription!: Subscription;
 

@@ -107,7 +107,8 @@
     mat-fab
     color="primary"
     routerLink="/catalog/products/new"
-    [appAuthRole]="['admin', 'manager']"
+    [ngClass]="{'sales_color': (role$ | async) === 'sales'}"
+    [appAuthRole]="['admin', 'manager', 'sales']"
   >
     <mat-icon>add</mat-icon>
   </a>
