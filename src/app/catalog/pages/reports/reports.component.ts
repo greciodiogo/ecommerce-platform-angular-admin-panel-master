@@ -86,6 +86,17 @@ export class ReportsComponent implements OnInit, AfterViewInit, OnDestroy {
   public exportAsXLSX() {
 
     var filtros = this.formService.getFilterExcel(this.filter);
+
+    
+    var movimentosExcel = JSON.parse(JSON.stringify(this.dataSource.data));
+
+    for (let i = 0; i < movimentosExcel?.length; i++) {
+      movimentosExcel[i].filial_nome = 'default'
+      movimentosExcel[i].type_shop = 'default'
+      movimentosExcel[i].commission = 0;
+      movimentosExcel[i].filial_nome = 'default'
+  }
+
     var CurrentDate = new Date();
     var keys = [
       { key: 'filial_nome', width: 40 },
@@ -96,7 +107,6 @@ export class ReportsComponent implements OnInit, AfterViewInit, OnDestroy {
       { key: 'price', width: 25 },
       { key: 'delivery_tax', width: 20 },
       { key: 'service_fee', width: 20 },
-      { key: 'service_fee', width: 25 },
       { key: 'commission', width: 25 },
       { key: 'total', width: 25, style: { font: { name: 'Calibri' } } },
     ];
@@ -123,7 +133,7 @@ export class ReportsComponent implements OnInit, AfterViewInit, OnDestroy {
       Cols,
       title,
       15,
-      11,
+      10,
       40,
       3,
       [1],
