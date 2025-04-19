@@ -28,11 +28,11 @@
           <input type="number" matInput required formControlName="price" />
           <mat-error>Invalid price</mat-error>
         </mat-form-field>
-        <mat-form-field appearance="outline" class="product-price">
+        <mat-form-field appearance="outline" class="product-service_fee">
           <mat-label>Service Fee</mat-label>
           <span matPrefix>{{ 0 | formatCurrency : true }}&nbsp;</span>
-          <input type="number" matInput required formControlName="price" />
-          <mat-error>Invalid price</mat-error>
+          <input type="number" matInput required formControlName="service_fee" />
+          <mat-error>Invalid service fee</mat-error>
         </mat-form-field>
         <mat-form-field appearance="outline" class="product-stock">
           <mat-label>Stock</mat-label>
