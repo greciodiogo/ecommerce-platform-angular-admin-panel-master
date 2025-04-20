@@ -1,6 +1,6 @@
 <div class="dashboard">
     <h2 class="dashboard_title">Dashboard</h2>
-    <div class="dashboard_item_container">
+    <div class="dashboard_item_container" *ngIf="(role$ | async) !== 'sales'">
       <div class="box_item"></div>
       <div class="box_item">
         <h4>Weekly billing</h4>
@@ -27,14 +27,43 @@
         </a>
       </div>
     </div>
+
+    <div class="dashboard_item_container" *ngIf="(role$ | async) === 'sales'">
+      <div class="box_item" [ngClass]="{'sales_color': (role$ | async) === 'sales'}"></div>
+      <div class="box_item">
+        <h4>products in stock</h4>
+        <span>
+          <i class="fa-duotone fa-credit-card"></i>
+          {{configService.formatarQuantidade(0)}}</span>
+      </div>
+      <div class="box_item">
+        <h4>total value of products</h4>
+        <a href="#">
+          <span [ngClass]="{'sales_text_color': (role$ | async) === 'sales'}"> {{configService.numberFormat(0)}}</span>
+        </a>
+      </div>
+      <div class="box_item">
+        <h4>valor products sold</h4>
+        <a href="#">
+          <span [ngClass]="{'sales_text_color': (role$ | async) === 'sales'}"> {{configService.numberFormat(0)}} kz</span>
+        </a>
+      </div>
+      <div class="box_item">
+        <h4>total active products</h4>
+        <a href="#">
+          <span [ngClass]="{'sales_text_color': (role$ | async) === 'sales'}"> {{configService.formatarQuantidade(1)}}</span>
+        </a>
+      </div>
+    </div>
     <div class="dashboard_container">
       <h2 class="dashboard_title" style="margin-top: 2rem;">Statistic</h2>
       <div class="wrapper">
         <div class="box_item">
           <!-- <grafico-bar-chart></grafico-bar-chart> -->
         </div>
-        <div class="box_item" style="background-color: #3f51b5;">
-          <h2>Last Orders</h2>
+        <div class="box_item" style="background-color: #3f51b5;" [ngClass]="{'sales_color': (role$ | async) === 'sales'}">
+          <h2>{{(role$ | async) !== 'sales' ? 'Last Orders' : 'latest sales' }}</h2>
+
           <ul>
             <li *ngFor="let item of dataJson">
               <a href="#" class="single_item">
@@ -49,7 +78,7 @@
           </ul>
           
         </div>
-        <div class="box_item">
+        <div class="box_item" *ngIf="(role$ | async) !== 'sales'">
           <!-- <grafico-pie-chart></grafico-pie-chart> -->
         </div>
       </div>
