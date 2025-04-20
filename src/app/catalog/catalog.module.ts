@@ -64,6 +64,10 @@ import { FaqsComponent } from './pages/faqs/faqs.component';
 import { FaqComponent } from './pages/faq/faq.component';
 import { FaqDetailsComponent } from './components/faq-details/faq-details.component';
 import { ReportsComponent } from './pages/reports/reports.component';
+import { ShopsComponent } from './pages/shops/shops.component';
+import { ShopsListComponent } from './pages/shops-list/shops-list.component';
+import { CreateShopFormComponent } from './pages/create-shop-form/create-shop-form.component';
+import { ShopDetailComponent } from './pages/shop-detail/shop-detail.component';
 @NgModule({
   declarations: [
     CategoriesComponent,
@@ -93,6 +97,10 @@ import { ReportsComponent } from './pages/reports/reports.component';
     ProductRatingsComponent,
     ProductRatingDetailsComponent,
     ReportsComponent,
+    ShopsComponent,
+    ShopsListComponent,
+    CreateShopFormComponent,
+    ShopDetailComponent,
   ],
   imports: [
     CommonModule,

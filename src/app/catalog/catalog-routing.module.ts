@@ -15,6 +15,7 @@ import { CreateProductFormComponent } from './pages/create-product-form/create-p
 import { FaqsComponent } from './pages/faqs/faqs.component';
 import { FaqComponent } from './pages/faq/faq.component';
 import { ReportsComponent } from './pages/reports/reports.component';
+import { ShopsComponent } from './pages/shops/shops.component';
 
 const routes: Routes = [
   {
@@ -100,6 +101,13 @@ const routes: Routes = [
     canActivate: [AuthRoleGuard],
     data: { roles: [RoleEnum.Admin] },
     component: ReportsComponent,
+  },
+  {
+    title: 'Lojas',
+    path: 'shops',
+    canActivate: [AuthRoleGuard],
+    data: { roles: [RoleEnum.Admin] },
+    component: ShopsComponent,
   },
   {
     path: '',

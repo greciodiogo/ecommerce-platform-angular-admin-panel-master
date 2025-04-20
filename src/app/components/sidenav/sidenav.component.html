@@ -108,6 +108,15 @@
       </a>
       <a
         mat-list-item
+        routerLink="/catalog/shops"
+        [appAuthRole]="['admin', 'manager']"
+        [ngClass]="{ active: router.url.startsWith('/users') }"
+      >
+        <mat-icon mat-list-icon>inventory_2</mat-icon>
+        Shops
+      </a>
+      <a
+        mat-list-item
         routerLink="/settings"
         [appAuthRole]="['admin']"
         [ngClass]="{ active: router.url.startsWith('/settings') }"
