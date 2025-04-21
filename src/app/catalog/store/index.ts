@@ -7,3 +7,4 @@ export * from './selectors/attribute-types.selectors';
 export * from './selectors/product-ratings.selectors';
 export * from './selectors/status.selectors';
 export * from './selectors/faqs.selectors';
+export * from './selectors/shops.selectors';

@@ -16,6 +16,7 @@ api/product-ratings-api.service.ts
 api/products-api.service.ts
 api/returns-api.service.ts
 api/settings-api.service.ts
+api/shops-api.service.ts
 api/users-api.service.ts
 api/wishlists-api.service.ts
 configuration.ts
@@ -75,6 +76,11 @@ model/return.ts
 model/setting-create-dto.ts
 model/setting-update-dto.ts
 model/setting.ts
+model/shop-create-dto.ts
+model/shop-item-dto.ts
+model/shop-item.ts
+model/shop-update-dto.ts
+model/shop.ts
 model/user-update-dto.ts
 model/user.ts
 model/wishlist-create-dto.ts

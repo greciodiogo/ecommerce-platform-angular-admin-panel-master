@@ -26,25 +26,10 @@ export * from './returns-api.service';
 import { ReturnsApiService } from './returns-api.service';
 export * from './settings-api.service';
 import { SettingsApiService } from './settings-api.service';
+export * from './shops-api.service';
+import { ShopsApiService } from './shops-api.service';
 export * from './users-api.service';
 import { UsersApiService } from './users-api.service';
 export * from './wishlists-api.service';
 import { WishlistsApiService } from './wishlists-api.service';
-export const APIS = [
-  AttributeTypesApiService,
-  AuthApiService,
-  CartsApiService,
-  CategoriesApiService,
-  DeliveryMethodsApiService,
-  FaqsApiService,
-  ImportExportApiService,
-  OrdersApiService,
-  PagesApiService,
-  PaymentMethodsApiService,
-  ProductRatingsApiService,
-  ProductsApiService,
-  ReturnsApiService,
-  SettingsApiService,
-  UsersApiService,
-  WishlistsApiService,
-];
+export const APIS = [AttributeTypesApiService, AuthApiService, CartsApiService, CategoriesApiService, DeliveryMethodsApiService, FaqsApiService, ImportExportApiService, OrdersApiService, PagesApiService, PaymentMethodsApiService, ProductRatingsApiService, ProductsApiService, ReturnsApiService, SettingsApiService, ShopsApiService, UsersApiService, WishlistsApiService];

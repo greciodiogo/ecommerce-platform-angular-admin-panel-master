@@ -1,16 +1,16 @@
 <form (submit)="save()" [formGroup]="editForm">
   <div class="user-form">
     <mat-form-field appearance="outline">
-      <mat-label>Email</mat-label>
-      <input matInput type="email" formControlName="email" required />
-      <mat-error *ngIf="editForm.controls.email.invalid">
-        Invalid email
+      <mat-label>NIF</mat-label>
+      <input matInput type="text" formControlName="nif" required />
+      <mat-error *ngIf="editForm.controls.nif.invalid">
+        Invalid nif
       </mat-error>
     </mat-form-field>
     <mat-form-field appearance="outline">
       <mat-label>Shop Name</mat-label>
-      <input matInput type="text" formControlName="firstName" />
-      <mat-error *ngIf="editForm.controls.firstName.invalid">
+      <input matInput type="text" formControlName="shopName" />
+      <mat-error *ngIf="editForm.controls.shopName.invalid">
         Invalid Shop name
       </mat-error>
     </mat-form-field>
@@ -20,26 +20,13 @@
       <mat-form-field appearance="outline"
       >
         <mat-label>Shop Alvara</mat-label>
-        <input matInput type="text" formControlName="lastName" />
-        <mat-error *ngIf="editForm.controls.lastName.invalid">
+        <input matInput type="text" formControlName="alvara" />
+        <mat-error *ngIf="editForm.controls.alvara.invalid">
           Invalid Shop Alvara
         </mat-error>
       </mat-form-field>
     </ng-template>
     
-    <mat-form-field appearance="outline">
-      <mat-label>Role</mat-label>
-      <mat-select formControlName="role">
-        <mat-option value="customer">{{ 'customer' | roleName }}</mat-option>
-        <mat-option value="sales">{{ 'sales' | roleName }}</mat-option>
-        <mat-option value="manager">{{ 'manager' | roleName }}</mat-option>
-        <mat-option value="admin">{{ 'admin' | roleName }}</mat-option>
-        <mat-option value="disabled">{{ 'disabled' | roleName }}</mat-option>
-      </mat-select>
-      <mat-error *ngIf="editForm.controls.role.invalid">
-        Invalid role
-      </mat-error>
-    </mat-form-field>
   </div>
   <div class="user-actions">
     <button mat-flat-button color="warn" (click)="delete()" type="button">
