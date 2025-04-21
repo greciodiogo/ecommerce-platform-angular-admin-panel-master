@@ -1,12 +1,11 @@
 import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
-import { User, UserUpdateDto } from '../../../core/api';
+import { Shop, ShopUpdateDto } from '../../../core/api';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { Store } from '@ngrx/store';
-import RoleEnum = UserUpdateDto.RoleEnum;
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { MatDialog } from '@angular/material/dialog';
 import { ConfirmDialogComponent } from '../../../shared/components/confirm-dialog/confirm-dialog.component';
-import { UsersActions } from 'src/app/users/store';
+import { ShopsActions } from '../../store'; 
 
 @Component({
   selector: 'app-shop-detail',
@@ -14,24 +13,20 @@ import { UsersActions } from 'src/app/users/store';
   styleUrls: ['./shop-detail.component.scss'],
 })
 export class ShopDetailComponent implements OnInit {
-  @Input() user!: User;
+  @Input() shop!: Shop;
 
   @Output() cancel = new EventEmitter<void>();
 
   editForm = new FormGroup({
-    email: new FormControl('', {
-      nonNullable: true,
-      validators: [Validators.required, Validators.email],
-    }),
-    firstName: new FormControl('', {
+    shopName: new FormControl('', {
       nonNullable: false,
       validators: [],
     }),
-    lastName: new FormControl('', {
+    alvara: new FormControl('', {
       nonNullable: false,
       validators: [],
     }),
-    role: new FormControl<RoleEnum>('customer', {
+    nif: new FormControl('', {
       nonNullable: true,
       validators: [Validators.required],
     }),
@@ -49,40 +44,38 @@ export class ShopDetailComponent implements OnInit {
 
   resetValues() {
     this.editForm.setValue({
-      email: this.user.email,
-      firstName: this.user.firstName ?? null,
-      lastName: this.user.lastName ?? null,
-      role: this.user.role,
+      shopName: this.shop.shopName ?? null,
+      alvara: this.shop.alvara ?? null,
+      nif: this.shop.nif,
     });
   }
 
   save() {
     this.store.dispatch(
-      UsersActions.updateUser({
-        id: this.user.id,
+      ShopsActions.updateShop({
+        id: this.shop.id,
         data: {
-          email: this.editForm.value.email,
-          firstName: this.editForm.value.firstName ?? undefined,
-          lastName: this.editForm.value.lastName ?? undefined,
-          role: this.editForm.value.role,
+          shopName: this.editForm.value.shopName ?? undefined,
+          alvara: this.editForm.value.alvara ?? undefined,
+          nif: this.editForm.value.nif,
         },
       }),
     );
-    this.snackBar.open('User updated', '', { duration: 2000 });
+    this.snackBar.open('Shop updated', '', { duration: 2000 });
   }
 
   delete() {
     const dialogRef = this.dialog.open(ConfirmDialogComponent, {
       data: {
-        title: 'Delete user',
-        message: 'Are you sure you want to delete this user?',
+        title: 'Delete shop',
+        message: 'Are you sure you want to delete this shop?',
         confirmButton: 'Delete',
       },
     });
     dialogRef.afterClosed().subscribe((result) => {
       if (result) {
-        this.store.dispatch(UsersActions.deleteUser({ id: this.user.id }));
-        this.snackBar.open('User deleted', '', { duration: 2000 });
+        this.store.dispatch(ShopsActions.deleteShop({ id: this.shop.id }));
+        this.snackBar.open('Shop deleted', '', { duration: 2000 });
       }
     });
   }

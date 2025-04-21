@@ -6,8 +6,7 @@ import {
   ViewChild,
 } from '@angular/core';
 import { Store } from '@ngrx/store';
-// import { UsersActions } from '../../store';
-import { User } from '../../../core/api';
+import { Shop } from '../../../core/api';
 import {
   animate,
   state,
@@ -19,8 +18,7 @@ import { MatSort } from '@angular/material/sort';
 import { MatTableDataSource } from '@angular/material/table';
 import { firstValueFrom, Subscription } from 'rxjs';
 import { MatPaginator } from '@angular/material/paginator';
-import { UsersActions } from 'src/app/users/store';
-import { selectUsersList } from 'src/app/users/store/selectors/accounts.selectors';
+import { selectShopsList, ShopsActions } from '../../store';
 
 @Component({
   selector: 'app-shops-list',
@@ -42,9 +40,9 @@ import { selectUsersList } from 'src/app/users/store/selectors/accounts.selector
   ],
 })
 export class ShopsListComponent implements OnInit, AfterViewInit, OnDestroy {
-  shops$ = this.store.select(selectUsersList);
-  expandedUser: User | null = null;
-  dataSource = new MatTableDataSource<User>();
+  shops$ = this.store.select(selectShopsList);
+  expandedUser: Shop | null = null;
+  dataSource = new MatTableDataSource<Shop>();
   subscription!: Subscription;
 
   @ViewChild(MatSort) sort!: MatSort;
@@ -66,7 +64,7 @@ export class ShopsListComponent implements OnInit, AfterViewInit, OnDestroy {
     this.subscription = this.shops$.subscribe((users) => {
       this.dataSource.data = users;
     });
-    this.store.dispatch(UsersActions.loadUsers());
+    this.store.dispatch(ShopsActions.loadShops());
     this.dataSource.sort = this.sort;
     this.dataSource.paginator = this.paginator;
   }

@@ -13,64 +13,64 @@
         <mat-header-cell *matHeaderCellDef mat-sort-header="id"
           >ID</mat-header-cell
         >
-        <mat-cell *matCellDef="let user">{{ user.id }}</mat-cell>
+        <mat-cell *matCellDef="let shop">{{ shop.id }}</mat-cell>
       </ng-container>
-      <ng-container matColumnDef="email">
-        <mat-header-cell *matHeaderCellDef mat-sort-header="email"
-          >Email</mat-header-cell
-        >
-        <mat-cell *matCellDef="let user">{{ user.email }}</mat-cell>
-      </ng-container>
-      <ng-container matColumnDef="firstName">
-        <mat-header-cell *matHeaderCellDef mat-sort-header="firstName">
-          First name
+      <ng-container matColumnDef="shopId">
+        <mat-header-cell *matHeaderCellDef mat-sort-header="shopId">
+          Shop Id
         </mat-header-cell>
-        <mat-cell *matCellDef="let user">{{ user.firstName }}</mat-cell>
+        <mat-cell *matCellDef="let shop">{{ shop.shopId }}</mat-cell>
       </ng-container>
-      <ng-container matColumnDef="lastName">
-        <mat-header-cell *matHeaderCellDef mat-sort-header="LastName">
-          Last name
+      <ng-container matColumnDef="shopName">
+        <mat-header-cell *matHeaderCellDef mat-sort-header="shopName">
+          Shop name
         </mat-header-cell>
-        <mat-cell *matCellDef="let user">{{ user.lastName }}</mat-cell>
+        <mat-cell *matCellDef="let shop">{{ shop.shopName }}</mat-cell>
       </ng-container>
-      <ng-container matColumnDef="role">
-        <mat-header-cell *matHeaderCellDef mat-sort-header="role"
-          >Role</mat-header-cell
+      <ng-container matColumnDef="alvara">
+        <mat-header-cell *matHeaderCellDef mat-sort-header="alvara"
+          >Alvara</mat-header-cell
         >
-        <mat-cell *matCellDef="let user">{{ user.role | roleName }}</mat-cell>
+        <mat-cell *matCellDef="let shop">{{ shop.nif }}</mat-cell>
+      </ng-container>
+      <ng-container matColumnDef="nif">
+        <mat-header-cell *matHeaderCellDef mat-sort-header="nif"
+          >NIF</mat-header-cell
+        >
+        <mat-cell *matCellDef="let shop">{{ shop.role | roleName }}</mat-cell>
       </ng-container>
       <ng-container matColumnDef="expand">
         <mat-header-cell *matHeaderCellDef aria-label="row actions">
           &nbsp;
         </mat-header-cell>
-        <mat-cell *matCellDef="let user">
+        <mat-cell *matCellDef="let shop">
           <button
             mat-icon-button
             aria-label="expand row"
             (click)="
-              expandedUser = expandedUser === user ? null : user;
+              expandedUser = expandedUser === shop ? null : shop;
               $event.stopPropagation()
             "
           >
-            <mat-icon *ngIf="expandedUser !== user">
+            <mat-icon *ngIf="expandedUser !== shop">
               keyboard_arrow_down
             </mat-icon>
-            <mat-icon *ngIf="expandedUser === user">keyboard_arrow_up</mat-icon>
+            <mat-icon *ngIf="expandedUser === shop">keyboard_arrow_up</mat-icon>
           </button>
         </mat-cell>
       </ng-container>
 
       <ng-container matColumnDef="expandedDetail">
-        <mat-cell *matCellDef="let user" [attr.colspan]="7">
+        <mat-cell *matCellDef="let shop" [attr.colspan]="7">
           <div
-            *ngIf="expandedUser === user"
-            class="user-detail"
+            *ngIf="expandedUser === shop"
+            class="shop-detail"
             [@detailExpand]="
-              user && user === expandedUser ? 'expanded' : 'collapsed'
+              shop && shop === expandedUser ? 'expanded' : 'collapsed'
             "
           >
             <app-shop-detail
-              [user]="user"
+              [shop]="shop"
               (cancel)="expandedUser = null"
             ></app-shop-detail>
           </div>
@@ -80,25 +80,24 @@
       <mat-header-row
         *matHeaderRowDef="[
           'id',
-          'email',
-          'firstName',
-          'lastName',
-          'role',
+          'shopName',
+          'alvara',
+          'nif',
           'expand'
         ]"
       ></mat-header-row>
       <mat-row
         *matRowDef="
-          let user;
-          columns: ['id', 'email', 'firstName', 'lastName', 'role', 'expand']
+          let shop;
+          columns: ['id', 'shopName', 'alvara', 'lastName', 'nif', 'expand']
         "
-        class="user-row"
-        [class.user-expanded-row]="expandedUser === user"
-        (click)="expandedUser = expandedUser === user ? null : user"
+        class="shop-row"
+        [class.shop-expanded-row]="expandedUser === shop"
+        (click)="expandedUser = expandedUser === shop ? null : shop"
       ></mat-row>
       <mat-row
         *matRowDef="let row; columns: ['expandedDetail']"
-        class="user-detail-row"
+        class="shop-detail-row"
       ></mat-row>
     </mat-table>
     <mat-paginator
