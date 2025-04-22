@@ -61,8 +61,8 @@ export class ShopsListComponent implements OnInit, AfterViewInit, OnDestroy {
   async ngAfterViewInit() {
     this.dataSource.data = await firstValueFrom(this.shops$);
     this.dataSource.paginator = this.paginator;
-    this.subscription = this.shops$.subscribe((users) => {
-      this.dataSource.data = users;
+    this.subscription = this.shops$.subscribe((shops) => {
+      this.dataSource.data = shops;
     });
     this.store.dispatch(ShopsActions.loadShops());
     this.dataSource.sort = this.sort;

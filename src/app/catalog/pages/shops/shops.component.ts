@@ -1,4 +1,6 @@
 import { Component } from '@angular/core';
+import { ShopsActions } from '../../store';
+import { Store } from '@ngrx/store';
 
 @Component({
   selector: 'app-shops',
@@ -6,5 +8,9 @@ import { Component } from '@angular/core';
   styleUrls: ['./shops.component.scss'],
 })
 export class ShopsComponent {
-  constructor() {}
+  constructor(private store: Store) {}
+
+   ngOnInit() {
+      this.store.dispatch(ShopsActions.loadShops());
+    }
 }

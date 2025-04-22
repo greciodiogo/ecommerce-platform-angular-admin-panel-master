@@ -31,13 +31,25 @@
         <mat-header-cell *matHeaderCellDef mat-sort-header="alvara"
           >Alvara</mat-header-cell
         >
-        <mat-cell *matCellDef="let shop">{{ shop.nif }}</mat-cell>
+        <mat-cell *matCellDef="let shop">{{ shop.alvara }}</mat-cell>
       </ng-container>
       <ng-container matColumnDef="nif">
         <mat-header-cell *matHeaderCellDef mat-sort-header="nif"
-          >NIF</mat-header-cell
+        >NIF</mat-header-cell
         >
-        <mat-cell *matCellDef="let shop">{{ shop.role | roleName }}</mat-cell>
+        <mat-cell *matCellDef="let shop">{{ shop.nif }}</mat-cell>
+      </ng-container>
+      <ng-container matColumnDef="contactPhone">
+        <mat-header-cell *matHeaderCellDef mat-sort-header="contactPhone"
+          >Contact Phone</mat-header-cell
+        >
+        <mat-cell *matCellDef="let shop">{{ shop.contactPhone }}</mat-cell>
+      </ng-container>
+      <ng-container matColumnDef="address">
+        <mat-header-cell *matHeaderCellDef mat-sort-header="address"
+          >Address</mat-header-cell
+        >
+        <mat-cell *matCellDef="let shop">{{ shop.address }}</mat-cell>
       </ng-container>
       <ng-container matColumnDef="expand">
         <mat-header-cell *matHeaderCellDef aria-label="row actions">
@@ -83,13 +95,14 @@
           'shopName',
           'alvara',
           'nif',
+          'contactPhone',
           'expand'
         ]"
       ></mat-header-row>
       <mat-row
         *matRowDef="
           let shop;
-          columns: ['id', 'shopName', 'alvara', 'lastName', 'nif', 'expand']
+          columns: ['id', 'shopName', 'alvara', 'nif', 'contactPhone', 'expand']
         "
         class="shop-row"
         [class.shop-expanded-row]="expandedUser === shop"

@@ -25,6 +25,7 @@ export class ShopsEffects {
   });
 
   addShop$ = createEffect(() => {
+    console.log("on effects")
     return this.actions$.pipe(
       ofType(ShopsActions.addShop),
       concatMap(({ data }) =>

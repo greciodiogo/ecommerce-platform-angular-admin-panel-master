@@ -2,10 +2,10 @@ import { Component } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { Store } from '@ngrx/store';
 // import { UsersActions } from '../../store';
-import { RegisterDto } from '../../../core/api';
+import { ShopCreateDto } from '../../../core/api';
 // import { selectUsersError } from '../../store/selectors/status.selectors';
-import { UsersActions } from 'src/app/users/store';
 import { selectUsersError } from 'src/app/users/store/selectors/status.selectors';
+import { ShopsActions } from '../../store';
 
 @Component({
   selector: 'app-create-shop-form',
@@ -14,35 +14,34 @@ import { selectUsersError } from 'src/app/users/store/selectors/status.selectors
 })
 export class CreateShopFormComponent {
   addForm = new FormGroup({
-    email: new FormControl('', {
+    shopName: new FormControl('', {
       nonNullable: true,
-      validators: [Validators.required, Validators.email],
+      validators: [Validators.required, Validators.minLength(4)],
     }),
-    password: new FormControl('', {
-      nonNullable: true,
-      validators: [Validators.required, Validators.minLength(8)],
-    }),
-    firstName: new FormControl('', {
+    alvara: new FormControl('', {
       nonNullable: false,
       validators: [],
     }),
-    lastName: new FormControl('', {
+    nif: new FormControl('', {
       nonNullable: false,
       validators: [],
     }),
-  });
-  error$ = this.store.select(selectUsersError);
-  errorSubscription = this.error$.subscribe((error) => {
-    if (!error) return;
-    this.addForm.controls.email.setErrors({ conflict: true });
+    contactPhone: new FormControl('', {
+      nonNullable: false,
+      validators: [],
+    }),
+    address: new FormControl('', {
+      nonNullable: false,
+      validators: [],
+    }),
   });
 
   constructor(private store: Store) {}
 
   async add() {
     this.store.dispatch(
-      UsersActions.addUser({
-        data: this.addForm.getRawValue() as RegisterDto,
+      ShopsActions.addShop({
+        data: this.addForm.getRawValue() as ShopCreateDto,
       }),
     );
   }

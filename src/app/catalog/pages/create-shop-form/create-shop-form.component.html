@@ -3,37 +3,37 @@
     <mat-card-title>Add shop</mat-card-title>
     <mat-card-content>
       <mat-form-field appearance="outline">
-        <mat-label>Email</mat-label>
-        <input matInput type="email" formControlName="email" required />
-        <mat-error *ngIf="addForm.controls.email.invalid">
-          <ng-container *ngIf="addForm.controls.email.hasError('conflict')">
-            Email is already taken
+        <mat-label>Shop Name</mat-label>
+        <input matInput type="shopName" formControlName="shopName" required />
+        <mat-error *ngIf="addForm.controls.shopName.invalid">
+          <ng-container *ngIf="addForm.controls.shopName.hasError('conflict')">
           </ng-container>
-          <ng-container *ngIf="!addForm.controls.email.hasError('conflict')">
-            Invalid email
+          <ng-container *ngIf="!addForm.controls.shopName.hasError('conflict')">
+            Invalid shopName
           </ng-container>
         </mat-error>
       </mat-form-field>
       <mat-form-field appearance="outline">
-        <mat-label>Password</mat-label>
-        <input matInput type="password" formControlName="password" required />
-        <mat-error *ngIf="addForm.controls.password.invalid">
-          Invalid password
+        <mat-label>Shop Alvara</mat-label>
+        <input matInput type="text" formControlName="alvara" required />
+        <mat-error *ngIf="addForm.controls.alvara.invalid">
+          Invalid Alvara
         </mat-error>
       </mat-form-field>
       <mat-form-field appearance="outline">
-        <mat-label>First name</mat-label>
-        <input matInput type="text" formControlName="firstName" />
-        <mat-error *ngIf="addForm.controls.firstName.invalid">
-          Invalid first name
+        <mat-label>NIF</mat-label>
+        <input matInput type="text" formControlName="nif" />
+        <mat-error *ngIf="addForm.controls.nif.invalid">
+          Invalid NIF
         </mat-error>
       </mat-form-field>
       <mat-form-field appearance="outline">
-        <mat-label>Last name</mat-label>
-        <input matInput type="text" formControlName="lastName" />
-        <mat-error *ngIf="addForm.controls.lastName.invalid">
-          Invalid last name
-        </mat-error>
+        <mat-label>Shop contact Phone</mat-label>
+        <input matInput type="text" formControlName="contactPhone" />
+      </mat-form-field>
+      <mat-form-field appearance="outline">
+        <mat-label>Shop Address</mat-label>
+        <input matInput type="text" formControlName="address" />
       </mat-form-field>
     </mat-card-content>
     <mat-card-actions align="end">

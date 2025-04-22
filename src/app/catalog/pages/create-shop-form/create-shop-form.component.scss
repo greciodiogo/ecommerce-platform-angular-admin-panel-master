@@ -18,3 +18,8 @@ mat-card-actions {
   padding-bottom: 0;
   padding-top: 0;
 }
+
+mat-card-content {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+}
