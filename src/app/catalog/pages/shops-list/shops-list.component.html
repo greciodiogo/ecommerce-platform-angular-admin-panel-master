@@ -109,7 +109,7 @@
         (click)="expandedUser = expandedUser === shop ? null : shop"
       ></mat-row>
       <mat-row
-        *matRowDef="let row; columns: ['expandedDetail']"
+        *matRowDef="let row; columns: ['expandedDetail']; when: isExpansionDetailRow"
         class="shop-detail-row"
       ></mat-row>
     </mat-table>

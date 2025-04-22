@@ -68,4 +68,5 @@ export class ShopsListComponent implements OnInit, AfterViewInit, OnDestroy {
     this.dataSource.sort = this.sort;
     this.dataSource.paginator = this.paginator;
   }
+  isExpansionDetailRow = (index: number, row: any) => row === this.expandedUser;
 }
