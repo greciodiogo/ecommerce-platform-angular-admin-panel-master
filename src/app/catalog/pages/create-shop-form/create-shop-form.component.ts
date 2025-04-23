@@ -34,6 +34,14 @@ export class CreateShopFormComponent {
       nonNullable: false,
       validators: [],
     }),
+    email: new FormControl('', {
+      nonNullable: true,
+      validators: [Validators.required, Validators.email],
+    }),
+    password: new FormControl('', {
+      nonNullable: true,
+      validators: [Validators.required, Validators.minLength(8)],
+    }),
     products: new FormControl<ShopItemDto[]>([], {
       nonNullable: true,
     }),

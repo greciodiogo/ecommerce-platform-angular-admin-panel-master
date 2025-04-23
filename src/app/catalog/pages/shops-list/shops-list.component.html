@@ -27,6 +27,12 @@
         </mat-header-cell>
         <mat-cell *matCellDef="let shop">{{ shop.shopName }}</mat-cell>
       </ng-container>
+      <ng-container matColumnDef="email">
+        <mat-header-cell *matHeaderCellDef mat-sort-header="email">
+          User Email
+        </mat-header-cell>
+        <mat-cell *matCellDef="let shop">{{ shop?.email }}</mat-cell>
+      </ng-container>
       <ng-container matColumnDef="alvara">
         <mat-header-cell *matHeaderCellDef mat-sort-header="alvara"
           >Alvara</mat-header-cell
@@ -93,6 +99,7 @@
         *matHeaderRowDef="[
           'id',
           'shopName',
+          'email',
           'alvara',
           'nif',
           'contactPhone',
@@ -102,7 +109,7 @@
       <mat-row
         *matRowDef="
           let shop;
-          columns: ['id', 'shopName', 'alvara', 'nif', 'contactPhone', 'expand']
+          columns: ['id', 'shopName', 'email', 'alvara', 'nif', 'contactPhone', 'expand']
         "
         class="shop-row"
         [class.shop-expanded-row]="expandedUser === shop"
