@@ -2,7 +2,7 @@ import { Component } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { Store } from '@ngrx/store';
 // import { UsersActions } from '../../store';
-import { ShopCreateDto } from '../../../core/api';
+import { ShopCreateDto, ShopItemDto } from '../../../core/api';
 // import { selectUsersError } from '../../store/selectors/status.selectors';
 import { selectUsersError } from 'src/app/users/store/selectors/status.selectors';
 import { ShopsActions } from '../../store';
@@ -33,6 +33,17 @@ export class CreateShopFormComponent {
     address: new FormControl('', {
       nonNullable: false,
       validators: [],
+    }),
+    email: new FormControl('', {
+      nonNullable: true,
+      validators: [Validators.required, Validators.email],
+    }),
+    password: new FormControl('', {
+      nonNullable: true,
+      validators: [Validators.required, Validators.minLength(8)],
+    }),
+    products: new FormControl<ShopItemDto[]>([], {
+      nonNullable: true,
     }),
   });
 

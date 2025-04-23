@@ -14,6 +14,7 @@ import {
   FaqsEffects,
   ProductRatingsEffects,
   ProductsEffects,
+  ShopsEffects,
 } from './store/effects';
 import { ProductsListComponent } from './pages/products-list/products-list.component';
 import { FaqsListComponent } from './pages/faqs-list/faqs-list.component';
@@ -109,6 +110,7 @@ import { ShopDetailComponent } from './pages/shop-detail/shop-detail.component';
     EffectsModule.forFeature([
       ProductsEffects,
       FaqsEffects,
+      ShopsEffects,
       CategoriesEffects,
       AttributeTypesEffects,
       ProductRatingsEffects,
