@@ -3,8 +3,8 @@ import { MatPaginator } from '@angular/material/paginator';
 import { MatSort } from '@angular/material/sort';
 import { MatTableDataSource } from '@angular/material/table';
 import { Store } from '@ngrx/store';
-import { firstValueFrom, Subscription } from 'rxjs';
-import { ProductsActions } from 'src/app/catalog/store';
+import { combineLatest, firstValueFrom, Subscription } from 'rxjs';
+import { ProductsActions, selectProductsList, selectShopsList, ShopsActions } from 'src/app/catalog/store';
 import { Order } from 'src/app/core/api';
 import { selectUserRole } from 'src/app/core/auth/store';
 import { OrdersActions, selectOrdersListWithItems } from 'src/app/sales/store';
@@ -15,8 +15,10 @@ import { FnService } from 'src/app/services/fn.helper.service';
   templateUrl: './main.component.html',
   styleUrls: ['./main.component.css'],
 })
-export class MainComponent implements OnInit, AfterViewInit, OnDestroy {
+export class MainComponent implements OnInit, OnDestroy {
     orders$ = this.store.select(selectOrdersListWithItems);
+    products$ = this.store.select(selectProductsList);
+    shops$ = this.store.select(selectShopsList);
     role$ = this.store.select(selectUserRole);
     dataSource = new MatTableDataSource<Order>();
     subscription!: Subscription;
@@ -33,13 +35,13 @@ export class MainComponent implements OnInit, AfterViewInit, OnDestroy {
     },
   ]
   public dashboard: any = {
-    facturas: 0,
-    clientes: 0,
-    produtos: 0,
-    recibos: 0,
-    servicos: 0,
-    vendas: 0
+    totalProductsInStock: 0,
+    totalProductsValue: 0,
+    totalProductsSoldValue: 0,
+    totalActiveProducts: 0,
   };
+
+  public dashboard_: any 
 
   constructor(public configService: FnService,
     private store: Store) { }
@@ -47,7 +49,11 @@ export class MainComponent implements OnInit, AfterViewInit, OnDestroy {
   ngOnInit() {
     this.dataSource.data = [];
     this.store.dispatch(ProductsActions.loadProducts());
-    this.ngAfterViewInit()
+    this.store.dispatch(OrdersActions.loadOrders());
+    this.store.dispatch(ShopsActions.loadShops());
+    this.view()
+
+    this.shopperDashboard()
   }
 
 
@@ -56,13 +62,28 @@ export class MainComponent implements OnInit, AfterViewInit, OnDestroy {
   }
 
 
-  async ngAfterViewInit() {
-    this.dataSource.data = await firstValueFrom(this.orders$);
-    this.subscription = this.orders$.subscribe((orders) => {
-      this.dataSource.data = orders;
+  public lastOrders
+  async view() {
+    this.subscription = combineLatest([
+      this.shops$,
+      this.products$,
+      this.orders$
+    ]).subscribe(([shops, products, orders]) => {
+      this.lastOrders = orders.slice(0,4)
+      this.dashboard_ = {
+        totalShops: shops?.length || 0,
+        totalProducts: products?.length || 0,
+        totalOrders: orders?.length || 0
+      };
     });
-    this.store.dispatch(OrdersActions.loadOrders());
-    this.dataSource.sort = this.sort;
-    this.dataSource.paginator = this.paginator;
+  }
+
+  async shopperDashboard(){
+    this.products$.subscribe(products => {
+      this.dashboard.totalProductsInStock = products.reduce((acc, p) => acc + (p.stock ?? 0), 0);
+      this.dashboard.totalProductsValue = products.reduce((acc, p) => acc + (p.stock * p.price), 0);
+      this.dashboard.totalProductsSoldValue = products.reduce((acc, p) => acc + (p.price ?? 0), 0);
+      this.dashboard.totalActiveProducts = products.filter(p => p.visible === true).length;
+    });
   }
 }
