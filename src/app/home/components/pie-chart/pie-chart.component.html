@@ -1,0 +1,23 @@
+  <div class="white_shd full margin_bottom_30">
+    <div class="full graph_head">
+      <div class="heading1 margin_0">
+        <h2>{{ title }}</h2>
+      </div>
+    </div>
+    <div class="map_section padding_infor_info">
+      <div id="chart apexchartsp2bo9yi8g">
+        <apx-chart
+          [series]="chartOptions.series"
+          [chart]="chartOptions.chart"
+          [yaxis]="chartOptions.yaxis"
+          [xaxis]="chartOptions.xaxis"
+          [labels]="chartOptions.labels"
+          [stroke]="chartOptions.stroke"
+          [title]="chartOptions.title"
+          [dataLabels]="chartOptions.dataLabels"
+          [fill]="chartOptions.fill"
+          [tooltip]="chartOptions.tooltip"
+        ></apx-chart>
+      </div>
+    </div>
+  </div>
