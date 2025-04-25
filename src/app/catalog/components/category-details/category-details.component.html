@@ -6,24 +6,15 @@
   </mat-form-field>
   <mat-form-field appearance="outline" class="category-groups">
     <mat-label>Groups</mat-label>
-    <mat-chip-list #chipList>
-      <mat-chip
-        *ngFor="let group of editForm.controls.groups.value"
-        (removed)="removeGroup(group)"
+    <mat-chip-listbox #chipListbox multiple formControlName="groups">
+      <mat-chip-option 
+      *ngFor="let group of editForm.controls.groups.value"
+      [value]="group"
+      [selected]="editForm.controls.groups.value?.includes(group)"
       >
         {{ group }}
-        <button matChipRemove><mat-icon>cancel</mat-icon></button>
-      </mat-chip>
-      <input
-        placeholder="Add group..."
-        #groupInput
-        formControlName="newGroup"
-        [matAutocomplete]="auto"
-        [matChipInputFor]="chipList"
-        (focus)="editForm.controls.newGroup.setValue('')"
-        (matChipInputTokenEnd)="addGroup($event)"
-      />
-    </mat-chip-list>
+      </mat-chip-option>
+    </mat-chip-listbox>
     <mat-autocomplete
       #auto="matAutocomplete"
       (optionSelected)="selected($event)"
