@@ -66,14 +66,14 @@ export class CreateProductFormComponent {
   }
 
   private async savePhotos(productId: number) {
-    for (const file of this.photosInput.photosToSave.value.files) {
-      this.store.dispatch(
-        ProductsActions.addProductPhoto({
-          productId,
-          data: file,
-        }),
-      );
-    }
+    // for (const file of this.photosInput.photosToSave.value.files) {
+    //   this.store.dispatch(
+    //     ProductsActions.addProductPhoto({
+    //       productId,
+    //       data: file,
+    //     }),
+    //   );
+    // }
     this.store
       .select(selectCatalogLoading)
       .pipe(first((v) => !v))

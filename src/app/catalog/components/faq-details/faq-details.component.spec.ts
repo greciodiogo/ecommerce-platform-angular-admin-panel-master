@@ -20,7 +20,7 @@ import { MatButtonHarness } from '@angular/material/button/testing';
 import { cold } from 'jasmine-marbles';
 import { first, skip } from 'rxjs';
 import { Faq } from '../../../core/api';
-import { FileInput, MaterialFileInputModule } from 'ngx-material-file-input';
+// import { FileInput, MaterialFileInputModule } from 'ngx-material-file-input';
 import { MatDialogModule } from '@angular/material/dialog';
 import { ConfirmDialogComponent } from '../../../shared/components/confirm-dialog/confirm-dialog.component';
 import { MatDialogHarness } from '@angular/material/dialog/testing';
@@ -45,7 +45,7 @@ describe('FaqDetailsComponent', () => {
         FormsModule,
         ReactiveFormsModule,
         MatIconModule,
-        MaterialFileInputModule,
+        // MaterialFileInputModule,
         MatDialogModule,
         RouterTestingModule,
       ],
