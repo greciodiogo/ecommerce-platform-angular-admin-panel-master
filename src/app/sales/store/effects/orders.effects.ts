@@ -23,6 +23,20 @@ export class OrdersEffects {
     );
   });
 
+  loadSales$ = createEffect(() => {
+    return this.actions$.pipe(
+      ofType(OrdersActions.loadSales),
+      exhaustMap(() =>
+        this.ordersApi.getOrders().pipe(
+          map((orders) => OrdersActions.loadOrdersSuccess({ orders })),
+          catchError(({ error }) =>
+            of(OrdersActions.loadOrdersFailure({ error: error.message })),
+          ),
+        ),
+      ),
+    );
+  });
+
   getOrder$ = createEffect(() => {
     return this.actions$.pipe(
       ofType(OrdersActions.getOrder),

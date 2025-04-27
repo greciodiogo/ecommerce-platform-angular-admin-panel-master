@@ -1,0 +1,122 @@
+<mat-card>
+  <mat-card-title>Sales</mat-card-title>
+  <mat-card-content>
+    <mat-table
+      [dataSource]="dataSource"
+      multiTemplateDataRows
+      matSort
+      matSortActive="id"
+      matSortDirection="asc"
+    >
+      <ng-container matColumnDef="id">
+        <mat-header-cell *matHeaderCellDef mat-sort-header="id"
+          >ID</mat-header-cell
+        >
+        <mat-cell *matCellDef="let sale"
+          >{{ sale.id }}
+        </mat-cell>
+      </ng-container>
+      <ng-container matColumnDef="created">
+        <mat-header-cell *matHeaderCellDef mat-sort-header="created">
+          Created
+        </mat-header-cell>
+        <mat-cell *matCellDef="let sale">
+          {{ sale.created | date : 'd MMM yyyy, HH:mm' }}
+        </mat-cell>
+      </ng-container>
+      <ng-container matColumnDef="status">
+        <mat-header-cell *matHeaderCellDef mat-sort-header="status">
+          Status
+        </mat-header-cell>
+        <mat-cell *matCellDef="let sale">{{ sale.status }}</mat-cell>
+      </ng-container>
+      <ng-container matColumnDef="itemsCount">
+        <mat-header-cell
+          *matHeaderCellDef
+          mat-sort-header="itemsCount"
+          arrowPosition="before"
+        >
+          Items
+        </mat-header-cell>
+        <mat-cell *matCellDef="let sale">
+          {{ sale.itemsCount }}
+        </mat-cell>
+      </ng-container>
+      <ng-container matColumnDef="itemsTotal">
+        <mat-header-cell
+          *matHeaderCellDef
+          mat-sort-header="itemsTotal"
+          arrowPosition="before"
+        >
+          Total price
+        </mat-header-cell>
+        <mat-cell *matCellDef="let sale">
+          {{
+            sale.itemsTotal +
+              sale.delivery.method.price +
+              sale.payment.method.price | formatCurrency
+          }}
+        </mat-cell>
+      </ng-container>
+      <ng-container matColumnDef="fullName">
+        <mat-header-cell *matHeaderCellDef mat-sort-header="fullName">
+          Full name
+        </mat-header-cell>
+        <mat-cell *matCellDef="let sale">{{ sale.fullName }}</mat-cell>
+      </ng-container>
+      <ng-container matColumnDef="delivery">
+        <mat-header-cell *matHeaderCellDef mat-sort-header="delivery">
+          Delivery
+        </mat-header-cell>
+        <mat-cell *matCellDef="let sale">
+          {{ sale.delivery.method.name }}
+        </mat-cell>
+      </ng-container>
+      <ng-container matColumnDef="payment">
+        <mat-header-cell *matHeaderCellDef mat-sort-header="payment">
+          Payment
+        </mat-header-cell>
+        <mat-cell *matCellDef="let sale">
+          {{ sale.payment.method.name }}
+        </mat-cell>
+      </ng-container>
+
+      <mat-header-row
+        *matHeaderRowDef="[
+          'id',
+          'created',
+          'status',
+          'itemsCount',
+          'itemsTotal',
+          'fullName',
+          'delivery',
+          'payment'
+        ]"
+      ></mat-header-row>
+      <mat-row
+        *matRowDef="
+          let sale;
+          columns: [
+            'id',
+            'created',
+            'status',
+            'itemsCount',
+            'itemsTotal',
+            'fullName',
+            'delivery',
+            'payment'
+          ]
+        "
+        class="sale-row"
+      ></mat-row>
+    </mat-table>
+    <span *ngIf="(sales$ | async)?.length === 0" class="empty-placeholder">
+      No sales found
+    </span>
+    <mat-paginator
+      hidePageSize
+      pageSize="50"
+      showFirstLastButtons
+    ></mat-paginator>
+  </mat-card-content>
+</mat-card>
