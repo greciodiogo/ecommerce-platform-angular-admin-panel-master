@@ -24,6 +24,13 @@ export const reducer = createReducer(
     }),
   ),
   on(
+    OrdersActions.loadSalesSuccess,
+    (state, { orders }): State => ({
+      ...state,
+      list: orders,
+    }),
+  ),
+  on(
     OrdersActions.selectOrder,
     (state, { orderId }): State => ({
       ...state,

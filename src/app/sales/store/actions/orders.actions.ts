@@ -3,13 +3,25 @@ import { Order, OrderCreateDto, OrderUpdateDto } from '../../../core/api';
 
 export const loadOrders = createAction('[Orders] Load Orders');
 
+export const loadSales = createAction('[Orders] Load Sales');
+
 export const loadOrdersSuccess = createAction(
   '[Orders] Load Orders Success',
   props<{ orders: Order[] }>(),
 );
 
+export const loadSalesSuccess = createAction(
+  '[Orders] Load Sales Success',
+  props<{ orders: Order[] }>(),
+);
+
 export const loadOrdersFailure = createAction(
   '[Orders] Load Orders Failure',
+  props<{ error: string }>(),
+);
+
+export const loadSalesFailure = createAction(
+  '[Orders] Load Sales Failure',
   props<{ error: string }>(),
 );
 

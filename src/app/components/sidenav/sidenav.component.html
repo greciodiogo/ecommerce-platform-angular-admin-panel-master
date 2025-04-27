@@ -12,12 +12,12 @@
         <mat-icon mat-list-icon>home</mat-icon>
         Home
       </a>
-      <!-- <mat-divider [appAuthRole]="['admin', 'manager', 'sales']"></mat-divider> -->
+      <mat-divider [appAuthRole]="['admin', 'manager']"></mat-divider>
       <a
         mat-list-item
-        routerLink="/sales/orders"
+        routerLink="/sales/sales"
         [appAuthRole]="['admin', 'manager']"
-        [ngClass]="{ active: router.url.startsWith('/sales/vendas') }"
+        [ngClass]="{ active: router.url.startsWith('/sales/sales') }"
       >
         <mat-icon mat-list-icon>sell</mat-icon>
         Sales

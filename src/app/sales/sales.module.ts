@@ -52,6 +52,8 @@ import { MatDialogModule } from '@angular/material/dialog';
 import { MatPaginatorModule } from '@angular/material/paginator';
 import { HttpClientModule } from '@angular/common/http';
 import { NgxMatIntlTelInputComponent } from 'ngx-mat-intl-tel-input';
+import { SalesComponent } from './pages/sales/sales.component';
+import { SalesListComponent } from './pages/sales-list/sales-list.component';
 
 @NgModule({
   declarations: [
@@ -77,6 +79,8 @@ import { NgxMatIntlTelInputComponent } from 'ngx-mat-intl-tel-input';
     OrderItemsInputComponent,
     ReturnDetailComponent,
     ReturnAddDialogComponent,
+    SalesComponent, 
+    SalesListComponent,
   ],
   imports: [
     CommonModule,

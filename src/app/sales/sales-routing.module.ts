@@ -13,6 +13,8 @@ import { CreateOrderFormComponent } from './pages/create-order-form/create-order
 import { OrderComponent } from './pages/order/order.component';
 import { OrdersListComponent } from './pages/orders-list/orders-list.component';
 import { ReturnComponent } from './pages/return/return.component';
+import { SalesListComponent } from './pages/sales-list/sales-list.component';
+import { SalesComponent } from './pages/sales/sales.component';
 
 const routes: Routes = [
   {
@@ -36,6 +38,25 @@ const routes: Routes = [
         title: 'Orders',
         path: '',
         component: OrdersListComponent,
+      },
+    ],
+  },
+  {
+    title: 'Sales',
+    path: 'sales',
+    canActivate: [AuthRoleGuard],
+    data: { roles: [RoleEnum.Admin, RoleEnum.Manager, RoleEnum.Sales] },
+    component: SalesComponent,
+    children: [
+      {
+        title: 'Sales',
+        path: ':id',
+        component: SalesListComponent,
+      },
+      {
+        title: 'Sales',
+        path: '',
+        component: SalesListComponent,
       },
     ],
   },

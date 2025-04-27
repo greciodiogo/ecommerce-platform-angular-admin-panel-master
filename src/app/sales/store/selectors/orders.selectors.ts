@@ -26,6 +26,19 @@ export const selectOrdersListWithItems = createSelector(
     })),
 );
 
+export const selectSalesListWithItems = createSelector(
+  selectOrdersList,
+  (sales): (Order & { itemsCount: number; itemsTotal: number })[] =>
+    sales.map((order) => ({
+      ...order,
+      itemsCount: order.items.reduce((acc, item) => acc + item.quantity, 0),
+      itemsTotal: order.items.reduce(
+        (acc, item) => acc + item.quantity * item.price,
+        0,
+      ),
+    })),
+);
+
 export const selectSelectedOrderId = createSelector(
   selectOrdersState,
   (state) => state.selectedOrderId,

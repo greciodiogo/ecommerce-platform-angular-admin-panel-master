@@ -6,7 +6,7 @@ import {
   ViewChild,
 } from '@angular/core';
 import { Store } from '@ngrx/store';
-import { OrdersActions, selectOrdersListWithItems } from '../../store';
+import { OrdersActions, selectOrdersListWithItems, selectSalesListWithItems } from '../../store';
 import { MatTableDataSource } from '@angular/material/table';
 import { Order } from '../../../core/api';
 import { firstValueFrom, Subscription } from 'rxjs';
@@ -15,12 +15,12 @@ import { ProductsActions } from '../../../catalog/store';
 import { MatPaginator } from '@angular/material/paginator';
 
 @Component({
-  selector: 'app-orders-list',
-  templateUrl: './orders-list.component.html',
-  styleUrls: ['./orders-list.component.scss'],
+  selector: 'app-sales-list',
+  templateUrl: './sales-list.component.html',
+  styleUrls: ['./sales-list.component.scss'],
 })
 export class SalesListComponent implements OnInit, AfterViewInit, OnDestroy {
-  sales$ = this.store.select(selectOrdersListWithItems);
+  sales$ = this.store.select(selectSalesListWithItems);
   dataSource = new MatTableDataSource<Order>();
   subscription!: Subscription;
 
@@ -40,10 +40,10 @@ export class SalesListComponent implements OnInit, AfterViewInit, OnDestroy {
 
   async ngAfterViewInit() {
     this.dataSource.data = await firstValueFrom(this.sales$);
-    this.subscription = this.sales$.subscribe((orders) => {
-      this.dataSource.data = orders;
+    this.subscription = this.sales$.subscribe((sales) => {
+      this.dataSource.data = sales;
     });
-    this.store.dispatch(OrdersActions.loadOrders());
+    this.store.dispatch(OrdersActions.loadSales());
     this.dataSource.sort = this.sort;
     this.dataSource.paginator = this.paginator;
   }
