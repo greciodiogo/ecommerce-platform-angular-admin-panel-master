@@ -4,7 +4,7 @@
     <input matInput type="text" formControlName="name" />
     <mat-error>Invalid category name</mat-error>
   </mat-form-field>
-  <mat-form-field appearance="outline" class="category-groups">
+  <!-- <mat-form-field appearance="outline" class="category-groups"> -->
     <mat-label>Groups</mat-label>
     <mat-chip-listbox #chipListbox multiple formControlName="groups">
       <mat-chip-option 
@@ -26,7 +26,7 @@
         {{ group.name }}
       </mat-option>
     </mat-autocomplete>
-  </mat-form-field>
+  <!-- </mat-form-field> -->
   <mat-form-field appearance="outline" class="category-description">
     <mat-label>Category description</mat-label>
     <textarea matInput type="text" formControlName="description"></textarea>

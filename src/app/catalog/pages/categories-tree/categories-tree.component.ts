@@ -2,7 +2,7 @@ import { Component, OnDestroy, OnInit } from '@angular/core';
 import { Category } from '../../../core/api';
 import { NestedTreeControl } from '@angular/cdk/tree';
 import { MatTreeNestedDataSource } from '@angular/material/tree';
-import { FormControl, Validators } from '@angular/forms';
+import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { Store } from '@ngrx/store';
 import { CategoriesActions, selectCategoriesList } from '../../store';
 import { map } from 'rxjs/operators';
@@ -32,9 +32,13 @@ export class CategoriesTreeComponent implements OnInit, OnDestroy {
     name: '',
     parentCategory: null,
   };
-  newName = new FormControl('', {
-    nonNullable: true,
-    validators: [Validators.required],
+
+  // formGroup: FormGroup
+  formGroup = new FormGroup({
+    newName: new FormControl('', {
+      nonNullable: true,
+      validators: [Validators.required],
+    }),
   });
 
   constructor(private store: Store) {}
@@ -97,19 +101,22 @@ export class CategoriesTreeComponent implements OnInit, OnDestroy {
     if (category) {
       this.treeControl.expand(category);
     }
-    this.newName.reset();
+    this.formGroup.reset();
   }
 
   add() {
+    if (this.formGroup.invalid) {
+      return;
+    }
     this.store.dispatch(
       CategoriesActions.addCategory({
         data: {
-          name: this.newName.value,
+          name: this.formGroup.value.newName,
           description: '',
           parentCategoryId: this.newNode.parentCategory?.id,
         },
       }),
     );
-    this.newName.reset();
+    this.formGroup.reset();
   }
 }
