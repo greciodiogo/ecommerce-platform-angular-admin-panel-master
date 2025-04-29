@@ -34,10 +34,10 @@
         class="new-node"
         [appAuthRole]="['admin', 'manager']"
       >
-        <form (submit)="add(); $event.preventDefault()">
+        <form (submit)="add(); $event.preventDefault()" [formGroup]="formGroup">
           <mat-form-field appearance="outline">
             <mat-label>Name</mat-label>
-            <input matInput type="text" [formControl]="newName" />
+            <input matInput type="text" formControlName="newName" />
           </mat-form-field>
           <button mat-flat-button color="primary">Add</button>
         </form>
