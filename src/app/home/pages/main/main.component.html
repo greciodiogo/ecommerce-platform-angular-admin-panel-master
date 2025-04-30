@@ -1,7 +1,9 @@
 <div class="dashboard">
     <h2 class="dashboard_title">Dashboard</h2>
     <div class="dashboard_item_container" *ngIf="(role$ | async) === 'admin'">
-      <div class="box_item"></div>
+      <div class="box_item">
+        <h3 class="title">Hi🖐🏿, {{ ( username$ | async ) || 'Guess'}}</h3>
+      </div>
       <div class="box_item">
         <h4>Weekly billing</h4>
         <span>
@@ -31,7 +33,9 @@
     <div class="dashboard_item_container" *ngIf="(role$ | async) === 'manager'">
       <div class="box_item" [ngClass]="{
         'manager_color': (role$ | async) === 'manager'
-      }"></div>
+      }">
+        <h3 class="title">Hi🖐🏿, {{ ( username$ | async ) || 'Guess'}}</h3>
+    </div>
       <div class="box_item">
         <h4>Weekly billing</h4>
         <span>
@@ -62,6 +66,7 @@
       <div class="box_item" [ngClass]="{
         'sales_color': (role$ | async) === 'sales'
       }">
+      <h3 class="title">Hi🖐🏿, {{ ( username$ | async ) || 'Guess'}}</h3>
     </div>
       <div class="box_item">
         <h4>products in stock</h4>
@@ -70,7 +75,7 @@
           {{configService.formatarQuantidade(dashboard.totalProductsInStock)}}</span>
       </div>
       <div class="box_item">
-        <h4>total value of products</h4>
+        <h4>Value in products</h4>
         <a href="#">
           <span [ngClass]="{
             'sales_text_color': (role$ | async) === 'sales',

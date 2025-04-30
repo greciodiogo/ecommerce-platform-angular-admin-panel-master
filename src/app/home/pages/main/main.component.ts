@@ -6,7 +6,7 @@ import { Store } from '@ngrx/store';
 import { combineLatest, firstValueFrom, Subscription } from 'rxjs';
 import { ProductsActions, selectProductsList, selectShopsList, ShopsActions } from 'src/app/catalog/store';
 import { Order } from 'src/app/core/api';
-import { selectUserRole } from 'src/app/core/auth/store';
+import { selectUsername, selectUserRole } from 'src/app/core/auth/store';
 import { OrdersActions, selectOrdersListWithItems } from 'src/app/sales/store';
 import { FnService } from 'src/app/services/fn.helper.service';
 
@@ -20,6 +20,7 @@ export class MainComponent implements OnInit, OnDestroy {
     products$ = this.store.select(selectProductsList);
     shops$ = this.store.select(selectShopsList);
     role$ = this.store.select(selectUserRole);
+    username$ = this.store.select(selectUsername);
     dataSource = new MatTableDataSource<Order>();
     subscription!: Subscription;
 

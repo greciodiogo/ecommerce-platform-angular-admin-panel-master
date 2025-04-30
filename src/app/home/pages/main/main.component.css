@@ -33,6 +33,15 @@
     text-decoration: none;
   }
   
+  .dashboard_item_container .box_item .title {
+    font-size: 24px;
+    font-weight: normal;
+    color: white;
+    text-decoration: none;
+    align-self: center;
+    margin-top: 20px;
+  }
+  
   .dashboard_item_container .box_item span {
     font-size: 22px;
     font-weight: normal;
