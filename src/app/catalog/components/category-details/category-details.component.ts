@@ -34,6 +34,10 @@ export class CategoryDetailsComponent implements OnInit {
     groups: new FormControl<string[]>([], {
       nonNullable: true,
     }),
+    service_fee: new FormControl(0, {
+      nonNullable: true,
+      validators: [Validators.required, Validators.min(0)],
+    }),
     newGroup: new FormControl(''),
   });
 
