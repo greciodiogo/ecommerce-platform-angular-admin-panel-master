@@ -29,7 +29,11 @@
     </div>
 
     <div class="dashboard_item_container" *ngIf="(role$ | async) === 'sales'">
-      <div class="box_item" [ngClass]="{'sales_color': (role$ | async) === 'sales'}"></div>
+      <div class="box_item" [ngClass]="{
+        'sales_color': (role$ | async) === 'sales',
+        'manager_color': (role$ | async) === 'manager'
+      }">
+    </div>
       <div class="box_item">
         <h4>products in stock</h4>
         <span>
@@ -39,19 +43,28 @@
       <div class="box_item">
         <h4>total value of products</h4>
         <a href="#">
-          <span [ngClass]="{'sales_text_color': (role$ | async) === 'sales'}"> {{configService.numberFormat(dashboard.totalProductsSoldValue)}}</span>
+          <span [ngClass]="{
+            'sales_text_color': (role$ | async) === 'sales',
+            'manager_text_color': (role$ | async) === 'manager',
+        }"> {{configService.numberFormat(dashboard.totalProductsSoldValue)}}</span>
         </a>
       </div>
       <div class="box_item">
         <h4>valor products sold</h4>
         <a href="#">
-          <span [ngClass]="{'sales_text_color': (role$ | async) === 'sales'}"> {{configService.numberFormat(0)}} kz</span>
+          <span [ngClass]="{
+            'sales_text_color': (role$ | async) === 'sales',
+            'manager_text_color': (role$ | async) === 'manager',
+        }"> {{configService.numberFormat(0)}} kz</span>
         </a>
       </div>
       <div class="box_item">
         <h4>total active products</h4>
         <a href="#">
-          <span [ngClass]="{'sales_text_color': (role$ | async) === 'sales'}"> {{configService.formatarQuantidade(dashboard.totalActiveProducts)}}</span>
+          <span [ngClass]="{
+            'sales_text_color': (role$ | async) === 'sales',
+            'manager_text_color': (role$ | async) === 'manager',
+        }"> {{configService.formatarQuantidade(dashboard.totalActiveProducts)}}</span>
         </a>
       </div>
     </div>
