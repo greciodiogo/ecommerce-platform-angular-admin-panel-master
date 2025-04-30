@@ -4,12 +4,14 @@ import { Store } from '@ngrx/store';
 import { FaqsActions, selectCatalogLoading, selectFaqsList } from '../../store';
 import { first } from 'rxjs';
 import { Router } from '@angular/router';
+import { selectUserRole } from 'src/app/core/auth/store';
 @Component({
   selector: 'app-create-faq-form',
   templateUrl: './create-faq-form.component.html',
   styleUrls: ['./create-faq-form.component.scss'],
 })
 export class CreateFaqFormComponent {
+    role$ = this.store.select(selectUserRole);
   addForm = new FormGroup({
     question: new FormControl('', {
       nonNullable: true,

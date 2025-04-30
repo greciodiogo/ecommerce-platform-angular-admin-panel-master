@@ -7,6 +7,7 @@ import { Product } from '../../../core/api';
 import { MatDialog } from '@angular/material/dialog';
 import { ConfirmDialogComponent } from '../../../shared/components/confirm-dialog/confirm-dialog.component';
 import { Router } from '@angular/router';
+import { selectUserRole } from 'src/app/core/auth/store';
 
 @Component({
   selector: 'app-product-details',
@@ -14,6 +15,7 @@ import { Router } from '@angular/router';
   styleUrls: ['./product-details.component.scss'],
 })
 export class ProductDetailsComponent implements OnInit {
+    role$ = this.store.select(selectUserRole);  
   @Input() product: Product | null = null;
 
   editForm = new FormGroup({

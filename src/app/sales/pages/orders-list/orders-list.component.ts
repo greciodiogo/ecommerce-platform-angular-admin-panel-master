@@ -13,6 +13,7 @@ import { firstValueFrom, Subscription } from 'rxjs';
 import { MatSort } from '@angular/material/sort';
 import { ProductsActions } from '../../../catalog/store';
 import { MatPaginator } from '@angular/material/paginator';
+import { selectUserRole } from 'src/app/core/auth/store';
 
 @Component({
   selector: 'app-orders-list',
@@ -23,6 +24,8 @@ export class OrdersListComponent implements OnInit, AfterViewInit, OnDestroy {
   orders$ = this.store.select(selectOrdersListWithItems);
   dataSource = new MatTableDataSource<Order>();
   subscription!: Subscription;
+  role$ = this.store.select(selectUserRole);
+  
 
   @ViewChild(MatSort) sort!: MatSort;
   @ViewChild(MatPaginator) paginator!: MatPaginator;

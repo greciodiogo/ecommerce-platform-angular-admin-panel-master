@@ -13,6 +13,7 @@ import { firstValueFrom, Subscription } from 'rxjs';
 import { MatSort } from '@angular/material/sort';
 import { Router } from '@angular/router';
 import { MatPaginator } from '@angular/material/paginator';
+import { selectUserRole } from 'src/app/core/auth/store';
 
 @Component({
   selector: 'app-faqs-list',
@@ -23,6 +24,8 @@ export class FaqsListComponent implements OnInit, AfterViewInit, OnDestroy {
   faqs$ = this.store.select(selectFaqsList);
   dataSource = new MatTableDataSource<Faq>();
   subscription!: Subscription;
+  role$ = this.store.select(selectUserRole);
+  
 
   @ViewChild(MatSort) sort!: MatSort;
   @ViewChild(MatPaginator) paginator!: MatPaginator;

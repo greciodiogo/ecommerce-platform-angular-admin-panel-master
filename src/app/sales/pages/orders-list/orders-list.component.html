@@ -119,7 +119,11 @@
       showFirstLastButtons
     ></mat-paginator>
   </mat-card-content>
-  <a class="add-button" mat-fab color="primary" routerLink="/sales/orders/new">
+  <a class="add-button" mat-fab color="primary" routerLink="/sales/orders/new" [ngClass]="{
+    'admin_color': (role$ | async) === 'admin',
+    'sales_color': (role$ | async) === 'sales',
+    'manager_color': (role$ | async) === 'manager',
+}">
     <mat-icon>add</mat-icon>
   </a>
 </mat-card>

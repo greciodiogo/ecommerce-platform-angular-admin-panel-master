@@ -6,6 +6,7 @@ import { MatSnackBar } from '@angular/material/snack-bar';
 import { MatDialog } from '@angular/material/dialog';
 import { ConfirmDialogComponent } from '../../../shared/components/confirm-dialog/confirm-dialog.component';
 import { ShopsActions } from '../../store'; 
+import { selectUserRole } from 'src/app/core/auth/store';
 
 @Component({
   selector: 'app-shop-detail',
@@ -13,6 +14,8 @@ import { ShopsActions } from '../../store';
   styleUrls: ['./shop-detail.component.scss'],
 })
 export class ShopDetailComponent implements OnInit {
+  role$ = this.store.select(selectUserRole);
+  
   @Input() shop!: Shop;
 
   @Output() cancel = new EventEmitter<void>();

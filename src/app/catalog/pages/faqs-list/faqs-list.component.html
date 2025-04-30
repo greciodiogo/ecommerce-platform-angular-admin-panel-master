@@ -60,6 +60,11 @@
     color="primary"
     routerLink="/catalog/faqs/new"
     [appAuthRole]="['admin', 'manager']"
+    [ngClass]="{
+      'admin_color': (role$ | async) === 'admin',
+      'sales_color': (role$ | async) === 'sales',
+      'manager_color': (role$ | async) === 'manager',
+  }"
   >
     <mat-icon>add</mat-icon>
   </a>

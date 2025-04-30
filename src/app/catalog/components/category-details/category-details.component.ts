@@ -9,6 +9,7 @@ import { Router } from '@angular/router';
 import { MatChipInputEvent } from '@angular/material/chips';
 import { combineLatestWith, map } from 'rxjs';
 import { MatAutocompleteSelectedEvent } from '@angular/material/autocomplete';
+import { selectUserRole } from 'src/app/core/auth/store';
 
 @Component({
   selector: 'app-category-details',
@@ -16,6 +17,7 @@ import { MatAutocompleteSelectedEvent } from '@angular/material/autocomplete';
   styleUrls: ['./category-details.component.scss'],
 })
 export class CategoryDetailsComponent implements OnInit {
+    role$ = this.store.select(selectUserRole);
   @Input() category: Category | null = null;
 
   editForm = new FormGroup({

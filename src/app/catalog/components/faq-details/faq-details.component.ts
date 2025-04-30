@@ -6,6 +6,7 @@ import { Faq } from '../../../core/api';
 import { MatDialog } from '@angular/material/dialog';
 import { ConfirmDialogComponent } from '../../../shared/components/confirm-dialog/confirm-dialog.component';
 import { Router } from '@angular/router';
+import { selectUserRole } from 'src/app/core/auth/store';
 
 @Component({
   selector: 'app-faq-details',
@@ -13,6 +14,7 @@ import { Router } from '@angular/router';
   styleUrls: ['./faq-details.component.scss'],
 })
 export class FaqDetailsComponent implements OnInit {
+  role$ = this.store.select(selectUserRole);
   @Input() faq: Faq | null = null;
 
   editForm = new FormGroup({
