@@ -54,6 +54,11 @@
           (!editForm.valid || !editForm.dirty) && photosInputDirty === false
         "
         color="primary"
+        [ngClass]="{
+          'admin_color': (role$ | async) === 'admin',
+          'sales_color': (role$ | async) === 'sales',
+          'manager_color': (role$ | async) === 'manager',
+      }"
       >
         Save
       </button>

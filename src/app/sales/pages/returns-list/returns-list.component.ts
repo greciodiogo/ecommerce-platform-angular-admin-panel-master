@@ -21,6 +21,7 @@ import {
 import { MatDialog } from '@angular/material/dialog';
 import { ReturnAddDialogComponent } from '../../components/return-add-dialog/return-add-dialog.component';
 import { MatPaginator } from '@angular/material/paginator';
+import { selectUserRole } from 'src/app/core/auth/store';
 
 @Component({
   selector: 'app-returns-list',
@@ -45,6 +46,7 @@ export class ReturnsListComponent implements OnInit, OnDestroy, AfterViewInit {
   returns$ = this.store.select(selectReturnsListWithItems);
   dataSource = new MatTableDataSource<Return>();
   expandedReturn: Return | null = null;
+  role$ = this.store.select(selectUserRole);
 
   private subscription!: Subscription;
 

@@ -8,6 +8,7 @@ import {
   selectDeliveryMethodsList,
   selectPaymentMethodsList,
 } from '../../store';
+import { selectUserRole } from 'src/app/core/auth/store';
 
 @Component({
   selector: 'app-edit-order-form',
@@ -15,6 +16,8 @@ import {
   styleUrls: ['./edit-order-form.component.scss'],
 })
 export class EditOrderFormComponent implements OnInit {
+  role$ = this.store.select(selectUserRole);
+  
   @Input() order: Order | null = null;
 
   editForm = new FormGroup({

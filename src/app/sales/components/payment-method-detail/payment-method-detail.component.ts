@@ -5,6 +5,7 @@ import { MatDialog } from '@angular/material/dialog';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { PaymentMethodsActions } from '../../store';
 import { ConfirmDialogComponent } from '../../../shared/components/confirm-dialog/confirm-dialog.component';
+import { selectUserRole } from 'src/app/core/auth/store';
 
 @Component({
   selector: 'app-payment-method-detail',
@@ -12,6 +13,7 @@ import { ConfirmDialogComponent } from '../../../shared/components/confirm-dialo
   styleUrls: ['./payment-method-detail.component.scss'],
 })
 export class PaymentMethodDetailComponent implements OnInit {
+  role$ = this.store.select(selectUserRole);
   @Input() paymentMethod!: PaymentMethod;
 
   @Output() cancel = new EventEmitter<void>();

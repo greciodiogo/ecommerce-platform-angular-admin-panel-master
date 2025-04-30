@@ -21,6 +21,7 @@ import { MatAutocompleteSelectedEvent } from '@angular/material/autocomplete';
 import { map } from 'rxjs/operators';
 import { MatDialog } from '@angular/material/dialog';
 import { ConfirmDialogComponent } from '../../../shared/components/confirm-dialog/confirm-dialog.component';
+import { selectUserRole } from 'src/app/core/auth/store';
 
 @Component({
   selector: 'app-page',
@@ -28,6 +29,7 @@ import { ConfirmDialogComponent } from '../../../shared/components/confirm-dialo
   styleUrls: ['./page.component.scss'],
 })
 export class PageComponent implements OnInit, OnDestroy {
+  role$ = this.store.select(selectUserRole);
   page$: Observable<Page | null> = this.route.paramMap.pipe(
     combineLatestWith(this.store.select(selectPagesList)),
     map(([params, pages]) => {

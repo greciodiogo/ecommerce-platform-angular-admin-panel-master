@@ -9,6 +9,7 @@ import {
 } from '../../store';
 import { first } from 'rxjs';
 import { Router } from '@angular/router';
+import { selectUserRole } from 'src/app/core/auth/store';
 
 @Component({
   selector: 'app-create-product-form',
@@ -16,6 +17,7 @@ import { Router } from '@angular/router';
   styleUrls: ['./create-product-form.component.scss'],
 })
 export class CreateProductFormComponent {
+    role$ = this.store.select(selectUserRole);
   addForm = new FormGroup({
     name: new FormControl('', {
       nonNullable: true,
@@ -25,10 +27,6 @@ export class CreateProductFormComponent {
       nonNullable: true,
     }),
     price: new FormControl(0, {
-      nonNullable: true,
-      validators: [Validators.required, Validators.min(0)],
-    }),
-    service_fee: new FormControl(0, {
       nonNullable: true,
       validators: [Validators.required, Validators.min(0)],
     }),

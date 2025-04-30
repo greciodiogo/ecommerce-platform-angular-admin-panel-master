@@ -5,6 +5,7 @@ import { MatDialog } from '@angular/material/dialog';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { DeliveryMethodsActions } from '../../store';
 import { ConfirmDialogComponent } from '../../../shared/components/confirm-dialog/confirm-dialog.component';
+import { selectUserRole } from 'src/app/core/auth/store';
 
 @Component({
   selector: 'app-delivery-method-detail',
@@ -12,6 +13,7 @@ import { ConfirmDialogComponent } from '../../../shared/components/confirm-dialo
   styleUrls: ['./delivery-method-detail.component.scss'],
 })
 export class DeliveryMethodDetailComponent implements OnInit {
+    role$ = this.store.select(selectUserRole);
   @Input() deliveryMethod!: DeliveryMethod;
 
   @Output() cancel = new EventEmitter<void>();

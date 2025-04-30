@@ -68,7 +68,11 @@
       <button mat-button color="primary" type="button" (click)="resetValues()">
         Cancel
       </button>
-      <button mat-flat-button color="primary" type="submit">Save</button>
+      <button mat-flat-button color="primary" type="submit" [ngClass]="{
+        'admin_color': (role$ | async) === 'admin',
+        'sales_color': (role$ | async) === 'sales',
+        'manager_color': (role$ | async) === 'manager',
+    }">Save</button>
     </div>
   </div>
 </form>

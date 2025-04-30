@@ -1,7 +1,37 @@
 <div class="dashboard">
     <h2 class="dashboard_title">Dashboard</h2>
-    <div class="dashboard_item_container" *ngIf="(role$ | async) !== 'sales'">
+    <div class="dashboard_item_container" *ngIf="(role$ | async) === 'admin'">
       <div class="box_item"></div>
+      <div class="box_item">
+        <h4>Weekly billing</h4>
+        <span>
+          <i class="fa-duotone fa-credit-card"></i>
+          {{configService.numberFormat(0)}} Kz</span>
+      </div>
+      <div class="box_item">
+        <h4>total shops</h4>
+        <a href="#">
+          <span> {{configService.formatarQuantidade(dashboard_.totalShops)}}</span>
+        </a>
+      </div>
+      <div class="box_item">
+        <h4>total active orders</h4>
+        <a href="#">
+          <span> {{configService.formatarQuantidade(dashboard_.totalOrders)}}</span>
+        </a>
+      </div>
+      <div class="box_item">
+        <h4>total active products</h4>
+        <a href="#">
+          <span> {{configService.formatarQuantidade(dashboard_.totalProducts)}}</span>
+        </a>
+      </div>
+    </div>
+
+    <div class="dashboard_item_container" *ngIf="(role$ | async) === 'manager'">
+      <div class="box_item" [ngClass]="{
+        'manager_color': (role$ | async) === 'manager'
+      }"></div>
       <div class="box_item">
         <h4>Weekly billing</h4>
         <span>
@@ -30,8 +60,7 @@
 
     <div class="dashboard_item_container" *ngIf="(role$ | async) === 'sales'">
       <div class="box_item" [ngClass]="{
-        'sales_color': (role$ | async) === 'sales',
-        'manager_color': (role$ | async) === 'manager'
+        'sales_color': (role$ | async) === 'sales'
       }">
     </div>
       <div class="box_item">
@@ -74,7 +103,11 @@
         <div class="box_item">
           <grafico-bar-chart></grafico-bar-chart>
         </div>
-        <div class="box_item" style="background-color: #3f51b5;" [ngClass]="{'sales_color': (role$ | async) === 'sales'}">
+        <div class="box_item" [ngClass]="{
+          'admin_color': (role$ | async) === 'admin',
+          'sales_color': (role$ | async) === 'sales',
+          'manager_color': (role$ | async) === 'manager',
+      }">
           <h2>{{(role$ | async) !== 'sales' ? 'Last Orders' : 'latest sales' }}</h2>
 
           <ul>

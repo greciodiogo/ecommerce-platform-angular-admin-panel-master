@@ -7,6 +7,7 @@ import RoleEnum = UserUpdateDto.RoleEnum;
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { MatDialog } from '@angular/material/dialog';
 import { ConfirmDialogComponent } from '../../../shared/components/confirm-dialog/confirm-dialog.component';
+import { selectUserRole } from 'src/app/core/auth/store';
 
 @Component({
   selector: 'app-user-detail',
@@ -14,6 +15,8 @@ import { ConfirmDialogComponent } from '../../../shared/components/confirm-dialo
   styleUrls: ['./user-detail.component.scss'],
 })
 export class UserDetailComponent implements OnInit {
+  role$ = this.store.select(selectUserRole);
+  
   @Input() user!: User;
 
   @Output() cancel = new EventEmitter<void>();

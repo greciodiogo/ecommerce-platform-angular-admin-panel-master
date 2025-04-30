@@ -37,6 +37,12 @@
     <input matInput type="text" formControlName="slug" />
     <mat-error>Invalid URL slug</mat-error>
   </mat-form-field>
+  <mat-form-field appearance="outline" class="product-service_fee">
+    <mat-label>Service Fee</mat-label>
+    <span matPrefix>{{ 0 | formatCurrency : true }}&nbsp;</span>
+    <input type="number" matInput required formControlName="service_fee" />
+    <mat-error>Invalid service fee</mat-error>
+  </mat-form-field>
   <div>
     <button mat-flat-button type="button" (click)="delete()" color="warn">
       Delete category
@@ -46,6 +52,11 @@
       type="submit"
       [disabled]="!editForm.valid || !editForm.dirty"
       color="primary"
+      [ngClass]="{
+        'admin_color': (role$ | async) === 'admin',
+        'sales_color': (role$ | async) === 'sales',
+        'manager_color': (role$ | async) === 'manager',
+    }"
     >
       Save
     </button>

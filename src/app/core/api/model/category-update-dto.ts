@@ -16,6 +16,7 @@ export interface CategoryUpdateDto {
     name?: string;
     description?: string;
     slug?: string;
+    service_fee?: number;
     parentCategoryId?: number;
     groups?: Array<CategoryGroupDto>;
 }
