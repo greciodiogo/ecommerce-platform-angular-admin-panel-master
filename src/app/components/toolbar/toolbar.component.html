@@ -1,5 +1,10 @@
-<mat-toolbar color="primary" 
-[ngClass]="{'sales_color': (role$ | async) === 'sales'}">
+<mat-toolbar
+  color="primary"
+  [ngClass]="{
+    sales_color: (role$ | async) === 'sales',
+    manager_color: (role$ | async) === 'manager'
+  }"
+>
   <button
     mat-icon-button
     *ngIf="matchesMedium | async"
@@ -9,7 +14,9 @@
   </button>
   <span>{{ title.getTitle() }}</span>
   <span class="spacer"></span>
-  <span>{{ (role$ | async) === 'sales' ? 'shopkeeper' : (role$ | async) }}</span>
+  <span>{{
+    (role$ | async) === 'sales' ? 'shopkeeper' : (role$ | async)
+  }}</span>
   <button mat-icon-button (click)="logout()">
     <mat-icon>logout</mat-icon>
   </button>
