@@ -72,7 +72,7 @@
       <a
         mat-list-item
         routerLink="/catalog/categories"
-        [appAuthRole]="['admin', 'manager']"
+        [appAuthRole]="['admin']"
         [ngClass]="{ active: router.url.startsWith('/catalog/categories') }"
       >
         <mat-icon mat-list-icon>local_offer</mat-icon>
@@ -118,7 +118,7 @@
       <a
         mat-list-item
         routerLink="/catalog/shops"
-        [appAuthRole]="['admin', 'manager']"
+        [appAuthRole]="['admin']"
         [ngClass]="{ active: router.url.startsWith('/users') }"
       >
         <mat-icon mat-list-icon>inventory_2</mat-icon>
