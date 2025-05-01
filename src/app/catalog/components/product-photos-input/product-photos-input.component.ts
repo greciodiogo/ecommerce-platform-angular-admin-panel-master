@@ -9,7 +9,7 @@ import {
 } from '@angular/core';
 import { Product, ProductPhoto } from '../../../core/api';
 import { FormControl } from '@angular/forms';
-// import { FileInput } from 'ngx-material-file-input';
+import { FileInput } from 'ngx-custom-material-file-input';
 import { ProductsActions, selectSelectedProduct } from '../../store';
 import { Store } from '@ngrx/store';
 import { CdkDragDrop, moveItemInArray } from '@angular/cdk/drag-drop';
@@ -23,9 +23,9 @@ import { firstValueFrom, of, skipWhile, timeout } from 'rxjs';
 export class ProductPhotosInputComponent implements OnChanges, OnInit {
   @Input() product: Product | null | undefined = null;
 
-  // photosToSave = new FormControl<FileInput>(new FileInput([]), {
-  //   nonNullable: true,
-  // });
+  photosToSave = new FormControl<FileInput>(new FileInput([]), {
+    nonNullable: true,
+  });
   photosToDelete = new FormControl<number[]>([], {
     nonNullable: true,
   });
@@ -74,20 +74,20 @@ export class ProductPhotosInputComponent implements OnChanges, OnInit {
 
   updatePhotosToDisplay() {
     this.photosToDisplay = [];
-    // for (const file of this.photosToSave.value.files) {
-    //   this.photosToDisplay.push({
-    //     name: file.name,
-    //     data: URL.createObjectURL(file),
-    //   });
-    // }
+    for (const file of this.photosToSave.value.files) {
+      this.photosToDisplay.push({
+        name: file.name,
+        data: URL.createObjectURL(file),
+      });
+    }
   }
 
   removePhoto(name: string) {
-    // this.photosToSave.setValue(
-    //   new FileInput(
-    //     this.photosToSave.value.files.filter((file) => file.name !== name),
-    //   ),
-    // );
+    this.photosToSave.setValue(
+      new FileInput(
+        this.photosToSave.value.files.filter((file) => file.name !== name),
+      ),
+    );
     this.photosToDisplay = this.photosToDisplay.filter(
       (photo) => photo.name !== name,
     );
@@ -121,7 +121,7 @@ export class ProductPhotosInputComponent implements OnChanges, OnInit {
   }
 
   resetValues() {
-    // this.photosToSave.setValue(new FileInput([]));
+    this.photosToSave.setValue(new FileInput([]));
     this.photosToDelete.setValue([]);
     this.newPhotosOrder.setValue(
       this.product?.photosOrder
@@ -145,14 +145,14 @@ export class ProductPhotosInputComponent implements OnChanges, OnInit {
     if (!this.product) {
       return;
     }
-    // for (const file of this.photosToSave.value.files) {
-    //   this.store.dispatch(
-    //     ProductsActions.addProductPhoto({
-    //       productId: this.product.id,
-    //       data: file,
-    //     }),
-    //   );
-    // }
+    for (const file of this.photosToSave.value.files) {
+      this.store.dispatch(
+        ProductsActions.addProductPhoto({
+          productId: this.product.id,
+          data: file,
+        }),
+      );
+    }
   }
 
   private async deletePhotos() {

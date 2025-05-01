@@ -51,6 +51,7 @@ export class MainComponent implements OnInit, OnDestroy {
     this.dataSource.data = [];
     this.store.dispatch(ProductsActions.loadProducts());
     this.store.dispatch(OrdersActions.loadOrders());
+    this.store.dispatch(OrdersActions.loadDashboard());
     this.store.dispatch(ShopsActions.loadShops());
     this.view()
 

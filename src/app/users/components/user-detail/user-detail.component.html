@@ -8,24 +8,19 @@
       </mat-error>
     </mat-form-field>
     <mat-form-field appearance="outline">
-      <mat-label>Shop Name</mat-label>
+      <mat-label>First name</mat-label>
       <input matInput type="text" formControlName="firstName" />
       <mat-error *ngIf="editForm.controls.firstName.invalid">
-        Invalid Shop name
+        Invalid first name
       </mat-error>
     </mat-form-field>
-    <ng-template
-      [appAuthRole]="['sales']"
-    >
-      <mat-form-field appearance="outline"
-      >
-        <mat-label>Shop Alvara</mat-label>
-        <input matInput type="text" formControlName="lastName" />
-        <mat-error *ngIf="editForm.controls.lastName.invalid">
-          Invalid Shop Alvara
-        </mat-error>
-      </mat-form-field>
-    </ng-template>
+    <mat-form-field appearance="outline">
+      <mat-label>Last name</mat-label>
+      <input matInput type="text" formControlName="lastName" />
+      <mat-error *ngIf="editForm.controls.lastName.invalid">
+        Invalid last name
+      </mat-error>
+    </mat-form-field>
     
     <mat-form-field appearance="outline">
       <mat-label>Role</mat-label>

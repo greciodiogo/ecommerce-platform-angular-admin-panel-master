@@ -12,7 +12,7 @@ import { ConfirmDialogComponent } from '../../../shared/components/confirm-dialo
 import { MatDialogModule } from '@angular/material/dialog';
 import { HarnessLoader } from '@angular/cdk/testing';
 import { TestbedHarnessEnvironment } from '@angular/cdk/testing/testbed';
-import { FileInput, MaterialFileInputModule } from 'ngx-material-file-input';
+import { FileInput, MaterialFileInputModule } from 'ngx-custom-material-file-input';
 import { MatButtonHarness } from '@angular/material/button/testing';
 import { MatDialogHarness } from '@angular/material/dialog/testing';
 import { MatSlideToggleHarness } from '@angular/material/slide-toggle/testing';

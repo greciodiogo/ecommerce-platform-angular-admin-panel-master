@@ -7,7 +7,7 @@ import { NoopAnimationsModule } from '@angular/platform-browser/animations';
 import { ProductPhotoComponent } from '../product-photo/product-photo.component';
 import { SafeUrlPipe } from '../../../shared/pipes/safe-url.pipe';
 import { MatIconModule } from '@angular/material/icon';
-import { FileInput, MaterialFileInputModule } from 'ngx-material-file-input';
+import { FileInput, MaterialFileInputModule } from 'ngx-custom-material-file-input';
 import { Product } from '../../../core/api';
 import { ProductsActions } from '../../store';
 import { By } from '@angular/platform-browser';
