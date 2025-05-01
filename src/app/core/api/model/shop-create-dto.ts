@@ -19,5 +19,7 @@ export interface ShopCreateDto {
     nif: string;
     contactPhone: string;
     address?: string;
+    email: string;
+    password: string;
 }
 

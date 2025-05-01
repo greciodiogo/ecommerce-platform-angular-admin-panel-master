@@ -20,3 +20,8 @@ export const selectUserEmail = createSelector(
   selectUser,
   (user) => user?.email ?? '',
 );
+
+export const selectUsername = createSelector(
+  selectUser,
+  (user) => user?.firstName ?? '',
+);

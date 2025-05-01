@@ -6,7 +6,7 @@ export const userFeatureKey = 'user';
 
 export interface State {
   checked: boolean;
-  user: Pick<User, 'id' | 'email' | 'role'> | null;
+  user: Pick<User, 'id' | 'firstName' | 'email' | 'role'> | null;
 }
 
 export const initialState: State = {
