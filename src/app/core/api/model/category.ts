@@ -18,7 +18,7 @@ export interface Category {
     name: string;
     description: string;
     slug?: string;
-    service_fee?: number;
+    service_fee: number;
     parentCategory?: Category;
     childCategories: Array<Category>;
     groups: Array<CategoryGroup>;
