@@ -12,12 +12,14 @@ import * as fromCatalog from './../catalog/store';
 import * as fromSales from './../sales/store';
 import { OrdersEffects } from '../sales/store/effects';
 import { StoreModule } from '@ngrx/store';
+import { MatIconModule } from '@angular/material/icon';
 
 @NgModule({
   declarations: [MainComponent, PieChartComponent, BarChartComponent],
   imports: [
     CommonModule, 
     HomeRoutingModule, 
+    MatIconModule,
     StoreModule.forFeature(
       fromCatalog.catalogFeatureKey, 
       fromCatalog.reducers,
