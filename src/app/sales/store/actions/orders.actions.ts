@@ -5,6 +5,13 @@ export const loadOrders = createAction('[Orders] Load Orders');
 
 export const loadSales = createAction('[Orders] Load Sales');
 
+export const loadDashboard = createAction('[Orders] Load Dashboard');
+
+export const loadDashboardSuccess = createAction(
+  '[Orders] Load Dashboard Success',
+  props<{ orders: any[] }>(),
+);
+
 export const loadOrdersSuccess = createAction(
   '[Orders] Load Orders Success',
   props<{ orders: Order[] }>(),
@@ -22,6 +29,11 @@ export const loadOrdersFailure = createAction(
 
 export const loadSalesFailure = createAction(
   '[Orders] Load Sales Failure',
+  props<{ error: string }>(),
+);
+
+export const loadDashboardFailure = createAction(
+  '[Orders] Load Dashboard Failure',
   props<{ error: string }>(),
 );
 
