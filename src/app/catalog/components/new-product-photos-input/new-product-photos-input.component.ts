@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
 import { FormControl } from '@angular/forms';
-import { FileInput } from 'ngx-material-file-input';
+import { FileInput } from 'ngx-custom-material-file-input';
 
 @Component({
   selector: 'app-new-product-photos-input',

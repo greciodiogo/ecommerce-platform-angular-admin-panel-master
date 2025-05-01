@@ -9,7 +9,7 @@ import {
 } from '@angular/core';
 import { Product, ProductPhoto } from '../../../core/api';
 import { FormControl } from '@angular/forms';
-import { FileInput } from 'ngx-material-file-input';
+import { FileInput } from 'ngx-custom-material-file-input';
 import { ProductsActions, selectSelectedProduct } from '../../store';
 import { Store } from '@ngrx/store';
 import { CdkDragDrop, moveItemInArray } from '@angular/cdk/drag-drop';

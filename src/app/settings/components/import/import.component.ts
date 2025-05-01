@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
 import { ImportExportService } from '../../services/import-export.service';
-import { FileInput } from 'ngx-material-file-input';
+import { FileInput } from 'ngx-custom-material-file-input';
 import { MatDialog } from '@angular/material/dialog';
 import { ConfirmDialogComponent } from '../../../shared/components/confirm-dialog/confirm-dialog.component';
 

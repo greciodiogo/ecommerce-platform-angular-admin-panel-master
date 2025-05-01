@@ -13,7 +13,7 @@ import { MatSelectModule } from '@angular/material/select';
 import { MatIconModule } from '@angular/material/icon';
 import { NewProductPhotosInputComponent } from '../../components/new-product-photos-input/new-product-photos-input.component';
 import { SafeUrlPipe } from '../../../shared/pipes/safe-url.pipe';
-import { FileInput, MaterialFileInputModule } from 'ngx-material-file-input';
+import { FileInput, MaterialFileInputModule } from 'ngx-custom-material-file-input';
 import {
   ProductsActions,
   selectCatalogLoading,

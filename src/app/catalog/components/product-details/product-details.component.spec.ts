@@ -21,7 +21,7 @@ import { cold } from 'jasmine-marbles';
 import { first, skip } from 'rxjs';
 import { Product } from '../../../core/api';
 import { ProductPhotosInputComponent } from '../product-photos-input/product-photos-input.component';
-import { FileInput, MaterialFileInputModule } from 'ngx-material-file-input';
+import { FileInput, MaterialFileInputModule } from 'ngx-custom-material-file-input';
 import { MatDialogModule } from '@angular/material/dialog';
 import { ConfirmDialogComponent } from '../../../shared/components/confirm-dialog/confirm-dialog.component';
 import { MatDialogHarness } from '@angular/material/dialog/testing';
