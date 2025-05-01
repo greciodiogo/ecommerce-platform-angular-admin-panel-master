@@ -13,19 +13,22 @@
       <div class="box_item">
         <h4>total shops</h4>
         <a href="#">
-          <span> {{configService.formatarQuantidade(dashboard_.totalShops)}}</span>
+          <span class="mt-1"> {{configService.formatarQuantidade(dashboard_.totalShops)}}</span>
+          <mat-icon mat-list-icon>inventory_2</mat-icon>
         </a>
       </div>
       <div class="box_item">
         <h4>total active orders</h4>
         <a href="#">
-          <span> {{configService.formatarQuantidade(dashboard_.totalOrders)}}</span>
+          <span class="mt-1"> {{configService.formatarQuantidade(dashboard_.totalOrders)}}</span>
+          <mat-icon mat-list-icon>receipt</mat-icon>
         </a>
       </div>
       <div class="box_item">
         <h4>total active products</h4>
         <a href="#">
-          <span> {{configService.formatarQuantidade(dashboard_.totalProducts)}}</span>
+          <span class="mt-1"> {{configService.formatarQuantidade(dashboard_.totalProducts)}}</span>
+          <mat-icon mat-list-icon>inventory_2</mat-icon>
         </a>
       </div>
     </div>
@@ -113,18 +116,58 @@
           'sales_color': (role$ | async) === 'sales',
           'manager_color': (role$ | async) === 'manager',
       }">
-          <h2>{{(role$ | async) !== 'sales' ? 'Last Orders' : 'latest sales' }}</h2>
+          <h2>Weekly summary</h2>
 
           <ul>
-            <li *ngFor="let item of lastOrders">
+            <li>
               <a href="#" class="single_item">
                 <span>
                   <i style="color: white;" class="fa-solid fa-flask-round-potion mr-2"></i>
-                  {{ item?.name }}
+                  Total sales
                 </span>
                 <i style="color: white;" class="fa-solid fa-arrow-up-right"></i>
               </a>
-              <span>{{ item?.created_at }}</span>
+              <span>0</span>
+            </li>
+            <li>
+              <a href="#" class="single_item">
+                <span>
+                  <i style="color: white;" class="fa-solid fa-flask-round-potion mr-2"></i>
+                  Confirmed Orders
+                </span>
+                <i style="color: white;" class="fa-solid fa-arrow-up-right"></i>
+              </a>
+              <span>0</span>
+            </li>
+            <li>
+              <a href="#" class="single_item">
+                <span>
+                  <i style="color: white;" class="fa-solid fa-flask-round-potion mr-2"></i>
+                  Completed deliveries
+                </span>
+                <i style="color: white;" class="fa-solid fa-arrow-up-right"></i>
+              </a>
+              <span>0</span>
+            </li>
+            <li>
+              <a href="#" class="single_item">
+                <span>
+                  <i style="color: white;" class="fa-solid fa-flask-round-potion mr-2"></i>
+                  New registered customers
+                </span>
+                <i style="color: white;" class="fa-solid fa-arrow-up-right"></i>
+              </a>
+              <span>0</span>
+            </li>
+            <li>
+              <a href="#" class="single_item">
+                <span>
+                  <i style="color: white;" class="fa-solid fa-flask-round-potion mr-2"></i>
+                  Products in low stock
+                </span>
+                <i style="color: white;" class="fa-solid fa-arrow-up-right"></i>
+              </a>
+              <span>0</span>
             </li>
           </ul>
           
