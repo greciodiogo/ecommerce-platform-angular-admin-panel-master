@@ -1,15 +1,15 @@
 <form (submit)="submit()">
   <div class="file">
     <h2>Import data</h2>
-    <!-- <mat-form-field appearance="outline"> -->
-      <!-- <mat-label>Select file to import</mat-label> -->
-      <!-- <ngx-mat-file-input
+    <mat-form-field appearance="outline">
+      <mat-label>Select file to import</mat-label>
+      <ngx-mat-file-input
         accept="application/json,.tar.gz"
         [(ngModel)]="file"
         name="file"
-      ></ngx-mat-file-input> -->
-      <!-- <mat-icon matSuffix>download</mat-icon> -->
-    <!-- </mat-form-field> -->
+      ></ngx-mat-file-input>
+      <mat-icon matSuffix>download</mat-icon>
+    </mat-form-field>
   </div>
   <div class="options">
     <h2>Options</h2>
