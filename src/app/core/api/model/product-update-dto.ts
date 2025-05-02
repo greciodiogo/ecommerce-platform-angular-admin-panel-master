@@ -18,5 +18,6 @@ export interface ProductUpdateDto {
     description?: string;
     stock?: number;
     photosOrder?: string;
+    shopId?: number;
 }
 

@@ -17,5 +17,6 @@ export interface ProductCreateDto {
     visible?: boolean;
     description: string;
     stock: number;
+    shopId?: number;
 }
 
