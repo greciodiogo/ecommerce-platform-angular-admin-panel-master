@@ -17,5 +17,6 @@ export interface DashboardState {
     completedDeliveriesWeek: number;
     newUsers: number;
     totalSales: number;
+    lowStockProductsCount: number;
 }
 

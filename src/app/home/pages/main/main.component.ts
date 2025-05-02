@@ -36,13 +36,14 @@ export class MainComponent implements OnInit, OnDestroy {
     totalProductsSoldValue: 0,
     totalActiveProducts: 0,
   };
-
+  
   public summary = {
     confirmedToday: 0,
     confirmedOrderWeek: 0,
     completedDeliveriesWeek: 0,
     newUsers: 0,
-    totalSales: 0
+    totalSales: 0,
+    lowStockProductsCount: 0,
   }
 
   public dashboard_: any 
@@ -86,7 +87,8 @@ export class MainComponent implements OnInit, OnDestroy {
         confirmedOrderWeek: dashboard.confirmedOrderWeek,
         completedDeliveriesWeek: dashboard.completedDeliveriesWeek,
         newUsers: dashboard.newUsers,
-        totalSales: dashboard.totalSales
+        totalSales: dashboard.totalSales,
+        lowStockProductsCount: dashboard.lowStockProductsCount
       }
     });
   }
