@@ -22,5 +22,10 @@
       </mat-option>
     </mat-select>
   </mat-form-field>
-  <button mat-flat-button color="primary" type="submit">Add</button>
+  <button mat-flat-button color="primary" type="submit" 
+  [ngClass]="{
+    'admin_color': (role$ | async) === 'admin',
+    'sales_color': (role$ | async) === 'sales',
+    'manager_color': (role$ | async) === 'manager',
+}">Add</button>
 </form>

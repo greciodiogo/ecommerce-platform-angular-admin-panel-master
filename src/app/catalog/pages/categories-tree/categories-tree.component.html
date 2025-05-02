@@ -39,7 +39,11 @@
             <mat-label>Name</mat-label>
             <input matInput type="text" formControlName="newName" />
           </mat-form-field>
-          <button mat-flat-button color="primary">Add</button>
+          <button mat-flat-button color="primary" [ngClass]="{
+            'admin_color': (role$ | async) === 'admin',
+            'sales_color': (role$ | async) === 'sales',
+            'manager_color': (role$ | async) === 'manager',
+        }">Add</button>
         </form>
       </mat-tree-node>
 
@@ -64,6 +68,11 @@
             color="primary"
             (click)="addCategory(node)"
             [appAuthRole]="['admin', 'manager']"
+            [ngClass]="{
+              'admin_color': (role$ | async) === 'admin',
+              'sales_color': (role$ | async) === 'sales',
+              'manager_color': (role$ | async) === 'manager',
+          }"
           >
             <mat-icon>add</mat-icon>
           </button>
@@ -83,6 +92,11 @@
       (click)="addCategory()"
       *ngIf="!!newNode.parentCategory"
       [appAuthRole]="['admin', 'manager']"
+      [ngClass]="{
+        'admin_color': (role$ | async) === 'admin',
+        'sales_color': (role$ | async) === 'sales',
+        'manager_color': (role$ | async) === 'manager',
+    }"
     >
       <mat-icon>add</mat-icon>
     </button>

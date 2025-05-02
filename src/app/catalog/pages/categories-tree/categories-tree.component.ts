@@ -7,6 +7,7 @@ import { Store } from '@ngrx/store';
 import { CategoriesActions, selectCategoriesList } from '../../store';
 import { map } from 'rxjs/operators';
 import { Subscription } from 'rxjs';
+import { selectUserRole } from 'src/app/core/auth/store';
 
 @Component({
   selector: 'app-categories-tree',
@@ -15,6 +16,7 @@ import { Subscription } from 'rxjs';
 })
 export class CategoriesTreeComponent implements OnInit, OnDestroy {
   categories$ = this.store.select(selectCategoriesList);
+  role$ = this.store.select(selectUserRole);
   categoriesTree$ = this.categories$.pipe(
     map((categories) => {
       return CategoriesTreeComponent.createTree(categories);
