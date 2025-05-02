@@ -9,6 +9,7 @@
  * https://openapi-generator.tech
  * Do not edit the class manually.
  */
+import { Shop } from './shop';
 import { ProductRating } from './product-rating';
 import { Attribute } from './attribute';
 import { ProductPhoto } from './product-photo';
@@ -27,5 +28,7 @@ export interface Product {
     photos: Array<ProductPhoto>;
     photosOrder: string;
     ratings: Array<ProductRating>;
+    shop: Shop;
+    shopId: number;
 }
 
