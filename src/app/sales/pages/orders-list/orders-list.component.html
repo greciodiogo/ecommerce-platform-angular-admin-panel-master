@@ -119,11 +119,57 @@
       showFirstLastButtons
     ></mat-paginator>
   </mat-card-content>
-  <a class="add-button" mat-fab color="primary" routerLink="/sales/orders/new" [ngClass]="{
+  <a
+    class="add-button"
+    mat-fab
+    color="primary"
+    routerLink="/sales/orders/new"
+    [ngClass]="{
     'admin_color': (role$ | async) === 'admin',
     'sales_color': (role$ | async) === 'sales',
     'manager_color': (role$ | async) === 'manager',
-}">
+}"
+  >
     <mat-icon>add</mat-icon>
   </a>
 </mat-card>
+
+<app-filter-helper>
+  <h2>Filter</h2>
+  <mat-form-field appearance="outline" class="faq-visible">
+    <mat-label>Status</mat-label>
+    <mat-select>
+      <mat-option value="pending">Pending</mat-option>
+      <mat-option value="failed">Failed</mat-option>
+      <mat-option value="confirmed">Confirmed</mat-option>
+      <mat-option value="open">Open</mat-option>
+      <mat-option value="cancelled">Cancelled</mat-option>
+      <mat-option value="delivered">Delivered</mat-option>
+      <mat-option value="refunded">Refunded</mat-option>
+    </mat-select>
+  </mat-form-field>
+
+  <mat-form-field appearance="outline" class="faq-visible">
+    <mat-label>Delivery</mat-label>
+    <mat-select>
+      <mat-option
+        *ngFor="let method of deliveryMethods$ | async"
+        [value]="method.id"
+      >
+        {{ method.name }}
+      </mat-option>
+    </mat-select>
+  </mat-form-field>
+
+  <mat-form-field appearance="outline" class="faq-visible">
+    <mat-label>Payment</mat-label>
+    <mat-select>
+      <mat-option
+        *ngFor="let method of paymentMethods$ | async"
+        [value]="method.id"
+      >
+        {{ method.name }}
+      </mat-option>
+    </mat-select>
+  </mat-form-field>
+</app-filter-helper>

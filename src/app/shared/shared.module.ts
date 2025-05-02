@@ -19,6 +19,8 @@ import { RatingStarsComponent } from './components/rating-stars/rating-stars.com
 import { MatIconModule } from '@angular/material/icon';
 import { CheckboxTreeComponent } from './components/checkbox-tree/checkbox-tree.component';
 import { MatCheckboxModule } from '@angular/material/checkbox';
+import { FilterHelper } from './components/filter-helper/filter-helper.component';
+import { AsideRightComponent } from './components/aside-right/aside-right.component';
 
 @NgModule({
   declarations: [
@@ -34,6 +36,8 @@ import { MatCheckboxModule } from '@angular/material/checkbox';
     FormatCurrencyPipe,
     RatingStarsComponent,
     CheckboxTreeComponent,
+    AsideRightComponent,
+    FilterHelper
   ],
   imports: [
     CommonModule,
@@ -57,6 +61,8 @@ import { MatCheckboxModule } from '@angular/material/checkbox';
     FormatCurrencyPipe,
     RatingStarsComponent,
     CheckboxTreeComponent,
+    AsideRightComponent,
+    FilterHelper
   ],
 })
 export class SharedModule {}

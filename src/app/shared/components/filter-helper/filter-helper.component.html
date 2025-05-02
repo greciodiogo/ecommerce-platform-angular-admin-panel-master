@@ -1,0 +1,16 @@
+
+<div class="faq-helper">
+
+  <a routerLink="/faqs" (click)="handleClick()" routerLinkActive="active" class="apoio-cliente" [ngClass]="{
+    'admin_color': (role$ | async) === 'admin',
+    'sales_color': (role$ | async) === 'sales',
+    'manager_color': (role$ | async) === 'manager',
+}">
+
+    <mat-icon style="color: white;">filter_alt</mat-icon>
+  </a>
+</div>
+
+<app-aside-right [isOpen]="openModal">
+  <ng-content></ng-content>
+</app-aside-right>
