@@ -12,6 +12,7 @@ export * from './category-create-dto';
 export * from './category-group';
 export * from './category-group-dto';
 export * from './category-update-dto';
+export * from './dashboard-state';
 export * from './delivery-method';
 export * from './delivery-method-dto';
 export * from './export-dto';

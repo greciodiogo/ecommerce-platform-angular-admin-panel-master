@@ -7,7 +7,7 @@ import { combineLatest, firstValueFrom, Subscription } from 'rxjs';
 import { ProductsActions, selectProductsList, selectShopsList, ShopsActions } from 'src/app/catalog/store';
 import { Order } from 'src/app/core/api';
 import { selectUsername, selectUserRole } from 'src/app/core/auth/store';
-import { OrdersActions, selectOrdersListWithItems } from 'src/app/sales/store';
+import { DashboardActions, OrdersActions, selectDashboardItems, selectOrdersListWithItems } from 'src/app/sales/store';
 import { FnService } from 'src/app/services/fn.helper.service';
 
 @Component({
@@ -16,6 +16,9 @@ import { FnService } from 'src/app/services/fn.helper.service';
   styleUrls: ['./main.component.css'],
 })
 export class MainComponent implements OnInit, OnDestroy {
+    // Dados do Dashboard
+    dashboard$ = this.store.select(selectDashboardItems);
+
     orders$ = this.store.select(selectOrdersListWithItems);
     products$ = this.store.select(selectProductsList);
     shops$ = this.store.select(selectShopsList);
@@ -27,20 +30,21 @@ export class MainComponent implements OnInit, OnDestroy {
     @ViewChild(MatSort) sort!: MatSort;
     @ViewChild(MatPaginator) paginator!: MatPaginator;
 
-  dataJson = [
-    {
-      "id": 1,
-      "name": "Macbook Pro ",
-      "price": 3.5,
-      "created_at": "2025-04-18",
-    },
-  ]
   public dashboard: any = {
     totalProductsInStock: 0,
     totalProductsValue: 0,
     totalProductsSoldValue: 0,
     totalActiveProducts: 0,
   };
+  
+  public summary = {
+    confirmedToday: 0,
+    confirmedOrderWeek: 0,
+    completedDeliveriesWeek: 0,
+    newUsers: 0,
+    totalSales: 0,
+    lowStockProductsCount: 0,
+  }
 
   public dashboard_: any 
 
@@ -51,7 +55,7 @@ export class MainComponent implements OnInit, OnDestroy {
     this.dataSource.data = [];
     this.store.dispatch(ProductsActions.loadProducts());
     this.store.dispatch(OrdersActions.loadOrders());
-    this.store.dispatch(OrdersActions.loadDashboard());
+    this.store.dispatch(DashboardActions.loadDashboard());
     this.store.dispatch(ShopsActions.loadShops());
     this.view()
 
@@ -69,14 +73,23 @@ export class MainComponent implements OnInit, OnDestroy {
     this.subscription = combineLatest([
       this.shops$,
       this.products$,
-      this.orders$
-    ]).subscribe(([shops, products, orders]) => {
+      this.orders$,
+      this.dashboard$,
+    ]).subscribe(([shops, products, orders, dashboard]) => {
       this.lastOrders = orders.slice(0,4)
       this.dashboard_ = {
         totalShops: shops?.length || 0,
         totalProducts: products?.length || 0,
         totalOrders: orders?.length || 0
       };
+      this.summary = {
+        confirmedToday: dashboard.confirmedToday,
+        confirmedOrderWeek: dashboard.confirmedOrderWeek,
+        completedDeliveriesWeek: dashboard.completedDeliveriesWeek,
+        newUsers: dashboard.newUsers,
+        totalSales: dashboard.totalSales,
+        lowStockProductsCount: dashboard.lowStockProductsCount
+      }
     });
   }
 

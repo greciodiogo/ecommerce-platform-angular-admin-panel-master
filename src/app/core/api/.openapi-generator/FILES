@@ -6,6 +6,7 @@ api/attribute-types-api.service.ts
 api/auth-api.service.ts
 api/carts-api.service.ts
 api/categories-api.service.ts
+api/default-api.service.ts
 api/delivery-methods-api.service.ts
 api/faqs-api.service.ts
 api/import-export-api.service.ts
@@ -37,6 +38,7 @@ model/category-group-dto.ts
 model/category-group.ts
 model/category-update-dto.ts
 model/category.ts
+model/dashboard-state.ts
 model/delivery-method-dto.ts
 model/delivery-method.ts
 model/export-dto.ts

@@ -6,6 +6,7 @@ import { AttributeTypesApiService } from './api/attribute-types-api.service';
 import { AuthApiService } from './api/auth-api.service';
 import { CartsApiService } from './api/carts-api.service';
 import { CategoriesApiService } from './api/categories-api.service';
+import { DefaultApiService } from './api/default-api.service';
 import { DeliveryMethodsApiService } from './api/delivery-methods-api.service';
 import { FaqsApiService } from './api/faqs-api.service';
 import { ImportExportApiService } from './api/import-export-api.service';

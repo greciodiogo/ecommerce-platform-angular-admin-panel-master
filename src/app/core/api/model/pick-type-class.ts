@@ -13,6 +13,7 @@
 
 export interface PickTypeClass { 
     id: number;
+    firstName?: string;
     email: string;
     role: PickTypeClass.RoleEnum;
 }

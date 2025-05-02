@@ -5,6 +5,7 @@ import { FormControl } from '@angular/forms';
 import { combineLatestWith } from 'rxjs';
 import { map } from 'rxjs/operators';
 import { Store } from '@ngrx/store';
+import { selectUserRole } from 'src/app/core/auth/store';
 
 @Component({
   selector: 'app-categories-products-add-form',
@@ -13,6 +14,7 @@ import { Store } from '@ngrx/store';
 })
 export class CategoriesProductsAddFormComponent {
   @Input() category: Category | null = null;
+  role$ = this.store.select(selectUserRole);
   products$ = this.store.select(selectProductsList);
 
   selectedProducts = new FormControl<number[]>([], {
