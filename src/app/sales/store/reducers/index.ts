@@ -1,5 +1,6 @@
 import * as fromOrders from './orders.reducer';
 import * as fromReturns from './returns.reducer';
+import * as fromDashboard from './dashboard.reducer';
 import * as fromPaymentMethods from './payment-methods.reducer';
 import * as fromDeliveryMethods from './delivery-methods.reducer';
 import * as fromStatus from './status.reducer';
@@ -11,6 +12,7 @@ export const salesFeatureKey = 'sales';
 export interface SalesState {
   [fromOrders.ordersFeatureKey]: fromOrders.State;
   [fromReturns.returnsFeatureKey]: fromReturns.State;
+  [fromDashboard.dashboardFeatureKey]: fromDashboard.State;
   [fromPaymentMethods.paymentMethodsFeatureKey]: fromPaymentMethods.State;
   [fromDeliveryMethods.deliveryMethodsFeatureKey]: fromDeliveryMethods.State;
   [fromStatus.statusFeatureKey]: fromStatus.State;
@@ -25,6 +27,7 @@ export const reducers = (state: SalesState | undefined, action: Action) =>
     [fromOrders.ordersFeatureKey]: fromOrders.reducer,
     [fromReturns.returnsFeatureKey]: fromReturns.reducer,
     [fromPaymentMethods.paymentMethodsFeatureKey]: fromPaymentMethods.reducer,
+    [fromDashboard.dashboardFeatureKey]: fromDashboard.reducer,
     [fromDeliveryMethods.deliveryMethodsFeatureKey]:
       fromDeliveryMethods.reducer,
     [fromStatus.statusFeatureKey]: fromStatus.reducer,

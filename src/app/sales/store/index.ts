@@ -1,6 +1,7 @@
 export * from './reducers';
 export * from './actions';
 export * from './selectors';
+export * from './selectors/dashboard.selectors';
 export * from './selectors/orders.selectors';
 export * from './selectors/returns.selectors';
 export * from './selectors/payment-methods.selectors';

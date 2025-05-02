@@ -127,7 +127,7 @@
                 </span>
                 <i style="color: white;" class="fa-solid fa-arrow-up-right"></i>
               </a>
-              <span>0</span>
+              <span>{{configService.numberFormat(summary.totalSales)}}</span>
             </li>
             <li>
               <a href="#" class="single_item">
@@ -137,7 +137,7 @@
                 </span>
                 <i style="color: white;" class="fa-solid fa-arrow-up-right"></i>
               </a>
-              <span>0</span>
+              <span>{{configService.formatarQuantidade(summary.confirmedOrderWeek)}}</span>
             </li>
             <li>
               <a href="#" class="single_item">
@@ -147,7 +147,7 @@
                 </span>
                 <i style="color: white;" class="fa-solid fa-arrow-up-right"></i>
               </a>
-              <span>0</span>
+              <span>{{configService.formatarQuantidade(summary.completedDeliveriesWeek)}}</span>
             </li>
             <li>
               <a href="#" class="single_item">
@@ -157,7 +157,7 @@
                 </span>
                 <i style="color: white;" class="fa-solid fa-arrow-up-right"></i>
               </a>
-              <span>0</span>
+              <span>{{configService.formatarQuantidade(summary.newUsers)}}</span>
             </li>
             <li>
               <a href="#" class="single_item">
@@ -167,7 +167,7 @@
                 </span>
                 <i style="color: white;" class="fa-solid fa-arrow-up-right"></i>
               </a>
-              <span>0</span>
+              <span>{{configService.formatarQuantidade(summary.confirmedToday)}}</span>
             </li>
           </ul>
           

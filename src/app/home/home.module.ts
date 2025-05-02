@@ -13,6 +13,7 @@ import * as fromSales from './../sales/store';
 import { OrdersEffects } from '../sales/store/effects';
 import { StoreModule } from '@ngrx/store';
 import { MatIconModule } from '@angular/material/icon';
+import { DashboardEffects } from '../sales/store/effects/dashboard.effects';
 
 @NgModule({
   declarations: [MainComponent, PieChartComponent, BarChartComponent],
@@ -32,6 +33,7 @@ import { MatIconModule } from '@angular/material/icon';
       ProductsEffects,
       ShopsEffects,
       OrdersEffects,
+      DashboardEffects
     ]),
     NgApexchartsModule],
 })

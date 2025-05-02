@@ -6,6 +6,7 @@ import { StoreModule } from '@ngrx/store';
 import * as fromSales from './store';
 import { EffectsModule } from '@ngrx/effects';
 import {
+  DashboardEffects,
   DeliveryMethodsEffects,
   OrdersEffects,
   PaymentMethodsEffects,
@@ -87,6 +88,7 @@ import { SalesListComponent } from './pages/sales-list/sales-list.component';
     SalesRoutingModule,
     StoreModule.forFeature(fromSales.salesFeatureKey, fromSales.reducers),
     EffectsModule.forFeature([
+      DashboardEffects,
       OrdersEffects,
       ReturnsEffects,
       PaymentMethodsEffects,
