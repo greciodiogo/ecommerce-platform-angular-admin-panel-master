@@ -1,0 +1,13 @@
+<aside [class.active]="isOpen">
+    <div class="container-aside size_medium" [class.container_active]="isOpen"> 
+      <div class="closeBtn" (click)="onClose()">
+        <mat-icon style="color: black;">close</mat-icon>
+      </div>
+      <div class="aside-main">
+        <h2>{{ componentTitle || ' ' }}</h2>
+        <h5>{{ componentDesc || ' ' }}</h5>
+        <ng-content></ng-content>
+        
+      </div>
+    </div>
+  </aside>

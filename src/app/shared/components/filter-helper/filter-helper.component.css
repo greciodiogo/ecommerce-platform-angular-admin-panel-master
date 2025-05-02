@@ -1,0 +1,100 @@
+
+*{
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+.apoio-cliente:hover{
+  opacity: .85;
+}
+
+.apoio-cliente{
+  position: fixed;
+  right: 40px;
+  bottom: 40px;
+  width: 50px;
+  height: 50px;
+  border-radius: 50%;
+  box-shadow: 0 4px 18px rgba(43, 43, 61,.1);
+  background-color: #02507C;
+  cursor: pointer;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 998;
+}
+
+.apoio-cliente img:hover {
+  transform: scale(1.1);
+  margin-bottom: 10px;
+}
+
+.apoio-cliente img {
+    width: 90%;
+    height: 90%;
+    border-radius: 50%;
+}
+
+.message-helper {
+  position: relative;
+}
+
+.message-helper p {
+  display: none;
+  position: fixed;
+  bottom: 240px;
+  right: 0px;
+  width: 250px;
+  color: #02507C;
+  /* color: white; */
+  /* padding: 10px ; */
+  font-size: 18px;
+  border-radius: 12px;
+}
+
+.apoio-cliente:hover .message-helper p{
+  display: flex;
+}
+
+@media (min-width: 1600px) {
+
+    .apoio-cliente{
+        width: 130px;
+        height: 130px;
+    }
+    
+  .apoio-cliente img {
+    width: 100%;
+    height: 100%;
+  }
+
+  .message-helper p {
+    bottom: 270px;
+    font-size: 24px;
+    width: 300px;
+  } 
+
+}
+
+.faq-helper{
+  position: relative;
+  transition: 300ms linear ease-in-out;
+}
+
+.faq-helper:hover .message-helper p{
+  display: flex;
+}
+
+@media (max-width:870px) {
+  .apoio-cliente{
+    bottom: 35px;
+    height: 50px;
+    width: 50px;
+  }
+
+  .message-helper p {
+    bottom: 170px;
+  }
+}
