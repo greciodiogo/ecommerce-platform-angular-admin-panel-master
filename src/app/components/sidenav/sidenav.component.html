@@ -85,7 +85,15 @@
         [ngClass]="{ active: router.url.startsWith('/catalog/categories') }"
       >
         <mat-icon mat-list-icon>bookmark_border</mat-icon>
-        Relatórios
+        Reports
+      </a>
+      <a
+        mat-list-item
+        [appAuthRole]="['admin']"
+        [ngClass]="{ active: router.url.startsWith('/catalog/categories') }"
+      >
+        <mat-icon mat-list-icon>personal_injury</mat-icon>
+        Complaints
       </a>
       <a
         mat-list-item
@@ -121,9 +129,19 @@
         [appAuthRole]="['admin']"
         [ngClass]="{ active: router.url.startsWith('/users') }"
       >
-        <mat-icon mat-list-icon>inventory_2</mat-icon>
+        <mat-icon mat-list-icon>shopping_bag_speed</mat-icon>
         Shops
       </a>
+
+        <a
+        mat-list-item
+        [appAuthRole]="['admin']"
+        [ngClass]="{ active: router.url.startsWith('/sales/delivery-methods') }"
+      >
+        <mat-icon mat-list-icon>group</mat-icon>
+        Deliveries
+      </a>
+
       <a
         mat-list-item
         routerLink="/settings"
