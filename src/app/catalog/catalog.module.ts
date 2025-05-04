@@ -69,6 +69,8 @@ import { ShopsComponent } from './pages/shops/shops.component';
 import { ShopsListComponent } from './pages/shops-list/shops-list.component';
 import { CreateShopFormComponent } from './pages/create-shop-form/create-shop-form.component';
 import { ShopDetailComponent } from './pages/shop-detail/shop-detail.component';
+import { MatSnackBarModule } from '@angular/material/snack-bar';
+
 @NgModule({
   declarations: [
     CategoriesComponent,
@@ -138,6 +140,7 @@ import { ShopDetailComponent } from './pages/shop-detail/shop-detail.component';
     MatChipsModule,
     MatAutocompleteModule,
     DragDropModule,
+    MatSnackBarModule
   ],
   exports: [ProductPhotoComponent],
 })

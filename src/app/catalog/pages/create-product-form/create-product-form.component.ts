@@ -10,6 +10,7 @@ import {
 import { first } from 'rxjs';
 import { Router } from '@angular/router';
 import { selectUserRole } from 'src/app/core/auth/store';
+import { MatSnackBar } from '@angular/material/snack-bar';
 
 @Component({
   selector: 'app-create-product-form',
@@ -43,7 +44,8 @@ export class CreateProductFormComponent {
   @ViewChild(NewProductPhotosInputComponent)
   photosInput!: NewProductPhotosInputComponent;
 
-  constructor(private store: Store, private router: Router) {}
+  constructor(private store: Store, private router: Router, private snackBar: MatSnackBar,
+  ) {}
 
   async save() {
     this.store.dispatch(
@@ -61,6 +63,8 @@ export class CreateProductFormComponent {
           await this.savePhotos(value);
         }
       });
+      this.snackBar.open('Product Created', '', { duration: 2000 });
+      this.addForm.reset()
   }
 
   private async savePhotos(productId: number) {
@@ -76,7 +80,7 @@ export class CreateProductFormComponent {
       .select(selectCatalogLoading)
       .pipe(first((v) => !v))
       .subscribe(() => {
-        this.router.navigate(['/catalog/products', productId]);
+        this.router.navigate(['/catalog/products']);
       });
   }
 }
