@@ -82,7 +82,7 @@
         mat-list-item
         routerLink="/catalog/reports"
         [appAuthRole]="['admin']"
-        [ngClass]="{ active: router.url.startsWith('/catalog/categories') }"
+        [ngClass]="{ active: router.url.startsWith('/catalog/reports') }"
       >
         <mat-icon mat-list-icon>bookmark_border</mat-icon>
         Reports
@@ -90,7 +90,7 @@
       <a
         mat-list-item
         [appAuthRole]="['admin']"
-        [ngClass]="{ active: router.url.startsWith('/catalog/categories') }"
+        [ngClass]="{ active: router.url.startsWith('/catalog/complaints') }"
       >
         <mat-icon mat-list-icon>personal_injury</mat-icon>
         Complaints
@@ -99,7 +99,7 @@
         mat-list-item
         routerLink="/catalog/faqs"
         [appAuthRole]="['admin', 'manager']"
-        [ngClass]="{ active: router.url.startsWith('/catalog/categories') }"
+        [ngClass]="{ active: router.url.startsWith('/catalog/faqs') }"
       >
         <mat-icon mat-list-icon>question_answer</mat-icon>
         FAQ
@@ -127,7 +127,7 @@
         mat-list-item
         routerLink="/catalog/shops"
         [appAuthRole]="['admin']"
-        [ngClass]="{ active: router.url.startsWith('/users') }"
+        [ngClass]="{ active: router.url.startsWith('/shops') }"
       >
         <mat-icon mat-list-icon>shopping_bag_speed</mat-icon>
         Shops
@@ -136,7 +136,7 @@
         <a
         mat-list-item
         [appAuthRole]="['admin']"
-        [ngClass]="{ active: router.url.startsWith('/sales/delivery-methods') }"
+        [ngClass]="{ active: router.url.startsWith('/sales/deliveries') }"
       >
         <mat-icon mat-list-icon>group</mat-icon>
         Deliveries
