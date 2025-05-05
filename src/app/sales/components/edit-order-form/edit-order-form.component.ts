@@ -9,6 +9,7 @@ import {
   selectPaymentMethodsList,
 } from '../../store';
 import { selectUserRole } from 'src/app/core/auth/store';
+import { MatSnackBar } from '@angular/material/snack-bar';
 
 @Component({
   selector: 'app-edit-order-form',
@@ -44,7 +45,8 @@ export class EditOrderFormComponent implements OnInit {
   deliveryMethods$ = this.store.select(selectDeliveryMethodsList);
   paymentMethods$ = this.store.select(selectPaymentMethodsList);
 
-  constructor(private store: Store) {}
+  constructor(private store: Store, 
+    private snackBar: MatSnackBar) {}
 
   resetValues() {
     this.editForm.reset({
@@ -81,5 +83,6 @@ export class EditOrderFormComponent implements OnInit {
         },
       }),
     );
+    this.snackBar.open('Order Updated', '', { duration: 2000 });
   }
 }

@@ -29,11 +29,11 @@ export class CreateProductFormComponent {
     }),
     price: new FormControl(0, {
       nonNullable: true,
-      validators: [Validators.required, Validators.min(0)],
+      validators: [Validators.required, Validators.min(100)],
     }),
     stock: new FormControl(0, {
       nonNullable: true,
-      validators: [Validators.required, Validators.min(0)],
+      validators: [Validators.required, Validators.min(1)],
     }),
     visible: new FormControl('true', {
       nonNullable: true,
