@@ -15,6 +15,10 @@ import { OrdersListComponent } from './pages/orders-list/orders-list.component';
 import { ReturnComponent } from './pages/return/return.component';
 import { SalesListComponent } from './pages/sales-list/sales-list.component';
 import { SalesComponent } from './pages/sales/sales.component';
+import { ComplaintComponent } from './pages/complaint/complaint.component';
+import { ComplaintsListComponent } from './pages/complaints-list/complaints-list.component';
+import { ComplaintsComponent } from './pages/complaints/complaints.component';
+import { CreateComplaintFormComponent } from './pages/create-complaint-form/create-complaint-form.component';
 
 const routes: Routes = [
   {
@@ -38,6 +42,30 @@ const routes: Routes = [
         title: 'Orders',
         path: '',
         component: OrdersListComponent,
+      },
+    ],
+  },
+  {
+    title: 'Complaints',
+    path: 'complaints',
+    canActivate: [AuthRoleGuard],
+    data: { roles: [RoleEnum.Admin, RoleEnum.Manager, RoleEnum.Sales] },
+    component: ComplaintsComponent,
+    children: [
+      {
+        title: 'Create new complaint',
+        path: 'new',
+        component: CreateComplaintFormComponent,
+      },
+      {
+        title: 'Complaints',
+        path: ':id',
+        component: ComplaintComponent,
+      },
+      {
+        title: 'Complaints',
+        path: '',
+        component: ComplaintsListComponent,
       },
     ],
   },

@@ -1,0 +1,35 @@
+<mat-card>
+  <mat-card-title-group>
+    <mat-card-title>
+      <a mat-button routerLink="/sales/orders">
+        <mat-icon>arrow_back</mat-icon></a
+      >Complaint #{{ (order$ | async)?.id }}
+    </mat-card-title>
+  </mat-card-title-group>
+  <mat-tab-group dynamicHeight>
+    <mat-tab>
+      <ng-template mat-tab-label>
+        <mat-icon class="mat-tab-icon">info</mat-icon>
+        General
+      </ng-template>
+      <mat-card-content>
+        <app-complaint-details
+          *ngIf="order$ | async"
+          [complaint]="(order$ | async) ?? null"
+        ></app-complaint-details
+      ></mat-card-content>
+    </mat-tab>
+    <mat-tab>
+      <ng-template mat-tab-label>
+        <mat-icon class="mat-tab-icon">edit</mat-icon>
+        Edit
+      </ng-template>
+      <mat-card-content>
+        <app-edit-complaint-form
+          *ngIf="order$ | async"
+          [complaint]="(order$ | async) ?? null"
+        ></app-edit-complaint-form>
+      </mat-card-content>
+    </mat-tab>
+  </mat-tab-group>
+</mat-card>
