@@ -14,6 +14,7 @@ import { MatSort } from '@angular/material/sort';
 import { Router } from '@angular/router';
 import { MatPaginator } from '@angular/material/paginator';
 import { selectUserRole } from 'src/app/core/auth/store';
+import { FnService } from 'src/app/services/fn.helper.service';
 
 @Component({
   selector: 'app-products-list',
@@ -26,10 +27,12 @@ export class ProductsListComponent implements OnInit, AfterViewInit, OnDestroy {
   dataSource = new MatTableDataSource<Product>();
   subscription!: Subscription;
 
+  public dashboard_: any 
+
   @ViewChild(MatSort) sort!: MatSort;
   @ViewChild(MatPaginator) paginator!: MatPaginator;
 
-  constructor(private store: Store, public router: Router) {}
+  constructor(public configService: FnService, private store: Store, public router: Router) {}
 
   ngOnInit() {
     this.dataSource.data = [];

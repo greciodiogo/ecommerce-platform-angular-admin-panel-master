@@ -55,6 +55,12 @@ import { HttpClientModule } from '@angular/common/http';
 import { NgxMatIntlTelInputComponent } from 'ngx-mat-intl-tel-input';
 import { SalesComponent } from './pages/sales/sales.component';
 import { SalesListComponent } from './pages/sales-list/sales-list.component';
+import { CreateComplaintFormComponent } from './pages/create-complaint-form/create-complaint-form.component';
+import { ComplaintComponent } from './pages/complaint/complaint.component';
+import { ComplaintsListComponent } from './pages/complaints-list/complaints-list.component';
+import { ComplaintsComponent } from './pages/complaints/complaints.component';
+import { ComplaintDetailsComponent } from './components/complaint-details/complaint-details.component';
+import { EditComplaintFormComponent } from './components/edit-complaint-form/edit-complaint-form.component';
 
 @NgModule({
   declarations: [
@@ -82,6 +88,12 @@ import { SalesListComponent } from './pages/sales-list/sales-list.component';
     ReturnAddDialogComponent,
     SalesComponent, 
     SalesListComponent,
+    CreateComplaintFormComponent,
+    ComplaintComponent,
+    ComplaintsComponent,
+    ComplaintsListComponent,
+    ComplaintDetailsComponent,
+    EditComplaintFormComponent,
   ],
   imports: [
     CommonModule,

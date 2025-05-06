@@ -8,6 +8,7 @@ import { MatDialog } from '@angular/material/dialog';
 import { ConfirmDialogComponent } from '../../../shared/components/confirm-dialog/confirm-dialog.component';
 import { Router } from '@angular/router';
 import { selectUserRole } from 'src/app/core/auth/store';
+import { MatSnackBar } from '@angular/material/snack-bar';
 
 @Component({
   selector: 'app-product-details',
@@ -28,11 +29,11 @@ export class ProductDetailsComponent implements OnInit {
     }),
     price: new FormControl(0, {
       nonNullable: true,
-      validators: [Validators.required, Validators.min(0)],
+      validators: [Validators.required, Validators.min(100)],
     }),
     stock: new FormControl(0, {
       nonNullable: true,
-      validators: [Validators.required, Validators.min(0)],
+      validators: [Validators.required, Validators.min(1)],
     }),
     visible: new FormControl('true', {
       nonNullable: true,
@@ -48,6 +49,7 @@ export class ProductDetailsComponent implements OnInit {
     private store: Store,
     private dialog: MatDialog,
     private router: Router,
+    private snackBar: MatSnackBar
   ) {}
 
   async ngOnInit() {
@@ -85,6 +87,7 @@ export class ProductDetailsComponent implements OnInit {
     );
     await this.photosInput.save();
     await this.editForm.markAsPristine();
+    this.snackBar.open('Product Updated', '', { duration: 2000 });
   }
 
   delete() {
@@ -95,6 +98,8 @@ export class ProductDetailsComponent implements OnInit {
         confirmButton: 'Delete',
       },
     });
+
+    this.snackBar.open('Product Deleted', '', { duration: 2000 });
 
     dialogRef.afterClosed().subscribe(async (result) => {
       if (result && this.product) {

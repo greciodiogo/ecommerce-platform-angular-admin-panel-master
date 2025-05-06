@@ -1,0 +1,46 @@
+<div>
+  <section *ngIf="complaint">
+    <h2>Account</h2>
+    <p *ngIf="!complaint.user">Guest account</p>
+    <p *ngIf="complaint.user">
+      <strong>{{ complaint.user.email }}</strong
+      ><br />
+      <strong>{{ complaint.user.firstName }} {{ complaint.user.lastName }}</strong>
+    </p>
+  </section>
+  <section *ngIf="complaint">
+    <h2>General info</h2>
+    <p>
+      Complaint ID: <strong>{{ complaint.id }}</strong> <br />
+      Complaint created date: <strong>{{ complaint.created | date : 'medium' }} </strong
+      ><br />
+      Complaint updated date:
+      <strong>{{ complaint.updated | date : 'medium' }} </strong>
+    </p>
+  </section>
+  <section *ngIf="complaint">
+    <h2>Status</h2>
+    <p>
+      <strong>{{ complaint.status }}</strong>
+    </p>
+  </section>
+  <section *ngIf="complaint">
+    <h2>Message</h2>
+    <p>
+      {{ complaint.message || '-' }}
+    </p>
+  </section>
+</div>
+
+<div>
+  <section *ngIf="complaint">
+    <h2>Contact Info</h2>
+    <p>
+      Name: <strong>{{ complaint.fullName || '-' }}</strong
+      ><br />
+      E-mail: <strong>{{ complaint.contactEmail || '-' }}</strong
+      ><br />
+      Phone number: <strong>{{ complaint.contactPhone || '-' }}</strong>
+    </p>
+  </section>
+</div>

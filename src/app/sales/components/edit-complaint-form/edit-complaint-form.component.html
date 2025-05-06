@@ -1,0 +1,30 @@
+<form [formGroup]="editForm" (submit)="save()">
+  <div class="status">
+    <h2>Status</h2>
+    <mat-form-field appearance="outline" class="order-status">
+      <mat-label>Status</mat-label>
+      <mat-select formControlName="status">
+        <mat-option value="pending">Pending</mat-option>
+        <mat-option value="failed">Failed</mat-option>
+        <mat-option value="confirmed">Confirmed</mat-option>
+        <mat-option value="open">Open</mat-option>
+        <mat-option value="cancelled">Cancelled</mat-option>
+        <mat-option value="delivered">Delivered</mat-option>
+        <mat-option value="refunded">Refunded</mat-option>
+      </mat-select>
+      <mat-error *ngIf="editForm.controls.status.invalid">
+        Invalid status
+      </mat-error>
+    </mat-form-field>
+  </div>
+  <div class="delivery">
+    <h2>Description</h2>
+    <mat-form-field appearance="outline" class="order-delivery-status">
+      <mat-label>Description status</mat-label>
+      <input type="text" matInput formControlName="description" />
+      <mat-error *ngIf="editForm.controls.description.invalid">
+        Invalid delivery status
+      </mat-error>
+    </mat-form-field>
+  </div>
+</form>

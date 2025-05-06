@@ -89,7 +89,8 @@
       </a>
       <a
         mat-list-item
-        [appAuthRole]="['admin']"
+        routerLink="/sales/complaints"
+        [appAuthRole]="['admin', 'manager']"
         [ngClass]="{ active: router.url.startsWith('/catalog/complaints') }"
       >
         <mat-icon mat-list-icon>personal_injury</mat-icon>
@@ -135,7 +136,7 @@
 
         <a
         mat-list-item
-        [appAuthRole]="['admin']"
+        [appAuthRole]="['admin', 'manager']"
         [ngClass]="{ active: router.url.startsWith('/sales/deliveries') }"
       >
         <mat-icon mat-list-icon>group</mat-icon>
