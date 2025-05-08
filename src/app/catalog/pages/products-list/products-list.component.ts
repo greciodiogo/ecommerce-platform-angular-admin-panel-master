@@ -19,7 +19,7 @@ import { FnService } from 'src/app/services/fn.helper.service';
 @Component({
   selector: 'app-products-list',
   templateUrl: './products-list.component.html',
-  styleUrls: ['./products-list.component.scss'],
+  styleUrls: ['./products-list.component.scss', '../../../home/pages/main/main.component.css'],
 })
 export class ProductsListComponent implements OnInit, AfterViewInit, OnDestroy {
   products$ = this.store.select(selectProductsList);

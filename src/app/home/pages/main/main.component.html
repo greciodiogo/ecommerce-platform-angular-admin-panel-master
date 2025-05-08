@@ -149,8 +149,8 @@
               </a>
               <span>{{configService.formatarQuantidade(summary.completedDeliveriesWeek)}}</span>
             </li>
-            <li>
-              <a href="#" class="single_item" *ngIf="(role$ | async) !== 'sales'">
+            <li  *ngIf="(role$ | async) !== 'sales'">
+              <a href="#" class="single_item">
                 <span>
                   <i style="color: white;" class="fa-solid fa-flask-round-potion mr-2"></i>
                   New registered customers
