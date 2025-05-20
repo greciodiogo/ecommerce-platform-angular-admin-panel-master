@@ -21,7 +21,7 @@ export interface Product {
     updated: string;
     name: string;
     price: number;
-    salesPrice: number;
+    purchasePrice: number;
     visible: boolean;
     description: string;
     stock: number;

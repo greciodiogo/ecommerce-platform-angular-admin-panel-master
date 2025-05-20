@@ -1,5 +1,5 @@
-<h2 class="dashboard_title">Dashboard</h2>
-<div class="dashboard_item_container">
+<h2 class="dashboard_title" *ngIf="(role$ | async) !== 'sales'">Dashboard</h2>
+<div class="dashboard_item_container" *ngIf="(role$ | async) !== 'sales'">
   <div class="box_item" [ngClass]="{
     'admin_color': (role$ | async) === 'admin',
     'sales_color': (role$ | async) === 'sales',
@@ -39,7 +39,7 @@
 
 <mat-card>
   <mat-card-title>Products</mat-card-title>
-  <mat-card-content>
+  <mat-card-content >
     <mat-table
       [dataSource]="dataSource"
       multiTemplateDataRows
@@ -54,6 +54,7 @@
           'name',
           'description',
           'price',
+          'purchasePrice',
           'stock',
           'visible'
         ]"
@@ -67,6 +68,7 @@
             'name',
             'description',
             'price',
+            'purchasePrice',
             'stock',
             'visible'
           ]
@@ -111,6 +113,17 @@
         >
         <mat-cell *matCellDef="let product">{{
           product.price | formatCurrency
+        }}</mat-cell>
+      </ng-container>
+      <ng-container matColumnDef="purchasePrice">
+        <mat-header-cell
+          *matHeaderCellDef
+          mat-sort-header="purchasePrice"
+          arrowPosition="before"
+          >Sales Price</mat-header-cell
+        >
+        <mat-cell *matCellDef="let product">{{
+          product.purchasePrice | formatCurrency
         }}</mat-cell>
       </ng-container>
       <ng-container matColumnDef="stock">

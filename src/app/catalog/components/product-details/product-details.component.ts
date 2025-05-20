@@ -37,7 +37,7 @@ export class ProductDetailsComponent implements OnInit {
     }),
     comission: new FormControl(0, {
       nonNullable: true,
-      validators: [Validators.required, Validators.min(10)],
+      validators: [Validators.required, Validators.min(0), Validators.max(100)],
     }),
     visible: new FormControl('true', {
       nonNullable: true,
