@@ -27,6 +27,7 @@ export interface Product {
     attributes: Array<Attribute>;
     photos: Array<ProductPhoto>;
     photosOrder: string;
+    comission: number;
     ratings: Array<ProductRating>;
     shop: Shop;
     shopId: number;
