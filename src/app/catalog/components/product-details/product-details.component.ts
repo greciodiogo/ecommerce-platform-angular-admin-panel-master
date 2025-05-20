@@ -35,6 +35,10 @@ export class ProductDetailsComponent implements OnInit {
       nonNullable: true,
       validators: [Validators.required, Validators.min(1)],
     }),
+    comission: new FormControl(0, {
+      nonNullable: true,
+      validators: [Validators.required, Validators.min(10)],
+    }),
     visible: new FormControl('true', {
       nonNullable: true,
     }),
@@ -65,6 +69,7 @@ export class ProductDetailsComponent implements OnInit {
       description: this.product.description,
       price: this.product.price,
       stock: this.product.stock,
+      comission: this.product.stock,
       visible: this.product.visible.toString(),
     });
   }

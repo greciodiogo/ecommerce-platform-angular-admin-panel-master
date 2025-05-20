@@ -17,6 +17,7 @@ export interface ProductUpdateDto {
     visible?: boolean;
     description?: string;
     stock?: number;
+    comission?: number;
     photosOrder?: string;
     shopId?: number;
 }
