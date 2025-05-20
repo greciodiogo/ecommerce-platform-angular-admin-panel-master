@@ -31,6 +31,14 @@ export class CreateProductFormComponent {
       nonNullable: true,
       validators: [Validators.required, Validators.min(100)],
     }),
+    salesPrice: new FormControl(0, {
+      nonNullable: false,
+      validators: [],
+    }),
+    comission: new FormControl(0, {
+      nonNullable: false,
+      validators: [],
+    }),
     stock: new FormControl(0, {
       nonNullable: true,
       validators: [Validators.required, Validators.min(1)],
@@ -52,6 +60,7 @@ export class CreateProductFormComponent {
       ProductsActions.addProduct({
         data: {
           ...this.addForm.getRawValue(),
+          salesPrice: this.addForm.value.price,
           visible: this.addForm.value.visible === 'true',
         },
       }),
