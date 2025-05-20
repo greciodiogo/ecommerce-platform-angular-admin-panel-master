@@ -105,10 +105,10 @@ export class ImportExportApiService {
      * @param observe set whether or not to return the data Observable as the body, response or events. defaults to returning the body.
      * @param reportProgress flag to report request and response progress.
      */
-    public _export(exportDto: ExportDto, observe?: 'body', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json' | 'application/gzip', context?: HttpContext}): Observable<Blob>;
-    public _export(exportDto: ExportDto, observe?: 'response', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json' | 'application/gzip', context?: HttpContext}): Observable<HttpResponse<Blob>>;
-    public _export(exportDto: ExportDto, observe?: 'events', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json' | 'application/gzip', context?: HttpContext}): Observable<HttpEvent<Blob>>;
-    public _export(exportDto: ExportDto, observe: any = 'body', reportProgress: boolean = false, options?: {httpHeaderAccept?: 'application/json' | 'application/gzip', context?: HttpContext}): Observable<any> {
+    public _export(exportDto: ExportDto, observe?: 'body', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json' | 'application/gzip' | 'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet', context?: HttpContext}): Observable<Blob>;
+    public _export(exportDto: ExportDto, observe?: 'response', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json' | 'application/gzip' | 'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet', context?: HttpContext}): Observable<HttpResponse<Blob>>;
+    public _export(exportDto: ExportDto, observe?: 'events', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json' | 'application/gzip' | 'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet', context?: HttpContext}): Observable<HttpEvent<Blob>>;
+    public _export(exportDto: ExportDto, observe: any = 'body', reportProgress: boolean = false, options?: {httpHeaderAccept?: 'application/json' | 'application/gzip' | 'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet', context?: HttpContext}): Observable<any> {
         if (exportDto === null || exportDto === undefined) {
             throw new Error('Required parameter exportDto was null or undefined when calling _export.');
         }
@@ -120,7 +120,8 @@ export class ImportExportApiService {
             // to determine the Accept header
             const httpHeaderAccepts: string[] = [
                 'application/json',
-                'application/gzip'
+                'application/gzip',
+                'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet'
             ];
             localVarHttpHeaderAcceptSelected = this.configuration.selectHeaderAccept(httpHeaderAccepts);
         }

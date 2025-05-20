@@ -6,6 +6,7 @@ api/attribute-types-api.service.ts
 api/auth-api.service.ts
 api/carts-api.service.ts
 api/categories-api.service.ts
+api/codes-api.service.ts
 api/default-api.service.ts
 api/delivery-methods-api.service.ts
 api/faqs-api.service.ts
@@ -38,6 +39,8 @@ model/category-group-dto.ts
 model/category-group.ts
 model/category-update-dto.ts
 model/category.ts
+model/code-update-dto.ts
+model/code.ts
 model/dashboard-state.ts
 model/delivery-method-dto.ts
 model/delivery-method.ts
@@ -75,6 +78,7 @@ model/register-dto.ts
 model/return-create-dto.ts
 model/return-update-dto.ts
 model/return.ts
+model/send-verification-code-dto.ts
 model/setting-create-dto.ts
 model/setting-update-dto.ts
 model/setting.ts

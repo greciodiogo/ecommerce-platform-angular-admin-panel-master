@@ -31,10 +31,11 @@ export namespace ExportDto {
         Orders: 'orders' as DataEnum,
         Returns: 'returns' as DataEnum
     };
-    export type FormatEnum = 'json' | 'csv';
+    export type FormatEnum = 'json' | 'csv' | 'xlsx';
     export const FormatEnum = {
         Json: 'json' as FormatEnum,
-        Csv: 'csv' as FormatEnum
+        Csv: 'csv' as FormatEnum,
+        Xlsx: 'xlsx' as FormatEnum
     };
 }
 
