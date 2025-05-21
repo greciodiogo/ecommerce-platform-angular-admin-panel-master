@@ -48,34 +48,11 @@
       matSortActive="id"
       matSortDirection="asc"
     >
-    <mat-header-row
-        *matHeaderRowDef="[
-          'id',
-          'photo',
-          'name',
-          'description',
-          'purchasePrice',
-          'price',
-          'stock',
-          'visible'
-        ]"
-      ></mat-header-row>
-      <mat-row
-        *matRowDef="
-          let product;
-          columns: [
-            'id',
-            'photo',
-            'name',
-            'description',
-            'purchasePrice',
-            'price',
-            'stock',
-            'visible'
-          ]
-        "
-        class="product-row"
-      ></mat-row>
+    <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
+    <mat-row
+      *matRowDef="let product; columns: displayedColumns"
+      class="product-row"
+    ></mat-row>
       <ng-container matColumnDef="id">
         <mat-header-cell *matHeaderCellDef mat-sort-header="id"
           >ID</mat-header-cell

@@ -29,7 +29,7 @@ export class ProductsListComponent implements OnInit, AfterViewInit, OnDestroy {
   subscription!: Subscription;
 
   dashboard$ = this.store.select(selectDashboardItems);
-  
+  displayedColumns: string[] = [];
   public dashboard_: any 
 
   public summary = {
@@ -49,6 +49,18 @@ export class ProductsListComponent implements OnInit, AfterViewInit, OnDestroy {
   ngOnInit() {
     this.dataSource.data = [];
     this.store.dispatch(DashboardActions.loadDashboard());
+     this.role$.subscribe(role => {
+    this.displayedColumns = [
+      'id',
+      'photo',
+      'name',
+      'description',
+      'purchasePrice',
+      ...(role !== 'sales' ? ['price'] : []),  // 👈 adiciona 'price' só se não for sales
+      'stock',
+      'visible',
+    ];
+  });
     this.view()
   }
 
