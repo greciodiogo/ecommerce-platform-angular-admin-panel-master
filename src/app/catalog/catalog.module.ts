@@ -70,6 +70,7 @@ import { ShopsListComponent } from './pages/shops-list/shops-list.component';
 import { CreateShopFormComponent } from './pages/create-shop-form/create-shop-form.component';
 import { ShopDetailComponent } from './pages/shop-detail/shop-detail.component';
 import { MatSnackBarModule } from '@angular/material/snack-bar';
+import { DashboardEffects } from '../sales/store/effects';
 
 @NgModule({
   declarations: [
@@ -116,6 +117,8 @@ import { MatSnackBarModule } from '@angular/material/snack-bar';
       CategoriesEffects,
       AttributeTypesEffects,
       ProductRatingsEffects,
+      DashboardEffects
+      
     ]),
     MatCardModule,
     MatTableModule,

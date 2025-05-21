@@ -86,6 +86,7 @@ export class ProductDetailsComponent implements OnInit {
           description: this.editForm.value.description,
           price: this.editForm.value.price,
           stock: this.editForm.value.stock,
+          comission: this.editForm.value.comission,
           visible: this.editForm.value.visible === 'true',
         },
       }),
