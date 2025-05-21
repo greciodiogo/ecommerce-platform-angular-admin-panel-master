@@ -23,11 +23,11 @@
       <input type="number" matInput required formControlName="price" />
       <mat-error>Invalid price</mat-error>
     </mat-form-field>
-    <mat-form-field appearance="outline" class="product-stock"  [appAuthRole]="['admin',  'manager']">
+    <!-- <mat-form-field appearance="outline" class="product-stock"  [appAuthRole]="['admin',  'manager']">
       <mat-label>Comission %</mat-label>
       <input type="number" matInput required formControlName="comission" />
       <mat-error>Invalid comission</mat-error>
-    </mat-form-field>
+    </mat-form-field> -->
     <mat-form-field appearance="outline" class="product-stock"  [appAuthRole]="['admin', 'sales']">
       <mat-label>Stock</mat-label>
       <input type="number" matInput required formControlName="stock" />

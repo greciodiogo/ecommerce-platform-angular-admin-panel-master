@@ -9,12 +9,13 @@ import { Store } from '@ngrx/store';
 import { ProductsActions, selectProductsList } from '../../store';
 import { Product } from '../../../core/api';
 import { MatTableDataSource } from '@angular/material/table';
-import { firstValueFrom, Subscription } from 'rxjs';
+import { combineLatest, firstValueFrom, Subscription } from 'rxjs';
 import { MatSort } from '@angular/material/sort';
 import { Router } from '@angular/router';
 import { MatPaginator } from '@angular/material/paginator';
 import { selectUserRole } from 'src/app/core/auth/store';
 import { FnService } from 'src/app/services/fn.helper.service';
+import { DashboardActions, selectDashboardItems } from 'src/app/sales/store';
 
 @Component({
   selector: 'app-products-list',
@@ -27,7 +28,18 @@ export class ProductsListComponent implements OnInit, AfterViewInit, OnDestroy {
   dataSource = new MatTableDataSource<Product>();
   subscription!: Subscription;
 
+  dashboard$ = this.store.select(selectDashboardItems);
+  
   public dashboard_: any 
+
+  public summary = {
+  confirmedToday: 0,
+  confirmedOrderWeek: 0,
+  completedDeliveriesWeek: 0,
+  newUsers: 0,
+  totalSales: 0,
+  lowStockProductsCount: 0,
+}
 
   @ViewChild(MatSort) sort!: MatSort;
   @ViewChild(MatPaginator) paginator!: MatPaginator;
@@ -36,6 +48,8 @@ export class ProductsListComponent implements OnInit, AfterViewInit, OnDestroy {
 
   ngOnInit() {
     this.dataSource.data = [];
+    this.store.dispatch(DashboardActions.loadDashboard());
+    this.view()
   }
 
   ngOnDestroy() {
@@ -51,4 +65,24 @@ export class ProductsListComponent implements OnInit, AfterViewInit, OnDestroy {
     this.dataSource.sort = this.sort;
     this.dataSource.paginator = this.paginator;
   }
+
+    async view() {
+      this.subscription = combineLatest([
+        this.products$,
+        this.dashboard$,
+      ]).subscribe(([products, dashboard]) => {
+        this.dashboard_ = {
+          totalProducts: products?.length || 0,
+          lowStockProductsCount: dashboard?.lowStockProductsCount || 0
+        };
+        this.summary = {
+          confirmedToday: dashboard.confirmedToday,
+          confirmedOrderWeek: dashboard.confirmedOrderWeek,
+          completedDeliveriesWeek: dashboard.completedDeliveriesWeek,
+          newUsers: dashboard.newUsers,
+          totalSales: dashboard.totalSales,
+          lowStockProductsCount: dashboard.lowStockProductsCount
+        }
+      });
+    }
 }

@@ -25,7 +25,7 @@
         <mat-form-field appearance="outline" class="product-price"  [appAuthRole]="['admin', 'sales']">
           <mat-label>Price</mat-label>
           <span matPrefix>{{ 0 | formatCurrency : true }}&nbsp;</span>
-          <input type="number" matInput required formControlName="price" />
+          <input type="number" matInput required formControlName="purchasePrice" />
           <mat-error>Invalid price</mat-error>
         </mat-form-field>
         <mat-form-field appearance="outline" class="product-stock"  [appAuthRole]="['admin',  'sales']">

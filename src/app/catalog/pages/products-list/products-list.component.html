@@ -1,45 +1,46 @@
-<h2 class="dashboard_title">Dashboard</h2>
-<div class="dashboard_item_container">
-  <div class="box_item" [ngClass]="{
-    'admin_color': (role$ | async) === 'admin',
-    'sales_color': (role$ | async) === 'sales',
-    'manager_color': (role$ | async) === 'manager',
-  }">
-    <!-- <h3 class="title">Hi🖐🏿, {{ ( username$ | async ) || 'Guess'}}</h3> -->
-  </div>
-  <div class="box_item">
-    <h4>Weekly billing</h4>
-    <span>
-      <i class="fa-duotone fa-credit-card"></i>
-      {{configService.numberFormat(0)}} Kz</span>
-  </div>
-  <div class="box_item">
-    <h4>total</h4>
-    <a href="#">
-      <span class="mt-1"> {{configService.formatarQuantidade(dashboard_?.totalShops || 0)}}</span>
-      <mat-icon mat-list-icon>inventory_2</mat-icon>
-    </a>
-  </div>
-  <div class="box_item">
-    <h4>total orders</h4>
-    <a href="#">
-      <span class="mt-1"> {{configService.formatarQuantidade(dashboard_?.totalOrders || 0)}}</span>
-      <mat-icon mat-list-icon>receipt</mat-icon>
-    </a>
-  </div>
-  <div class="box_item">
-    <h4>total products</h4>
-    <a href="#">
-      <span class="mt-1"> {{configService.formatarQuantidade(dashboard_?.totalProducts || 0)}}</span>
-      <mat-icon mat-list-icon>inventory_2</mat-icon>
-    </a>
+<div class="dashboard" style="padding: 0;">
+  <h2 class="dashboard_title" *ngIf="(role$ | async) !== 'sales'">Dashboard</h2>
+  <div class="dashboard_item_container" *ngIf="(role$ | async) !== 'sales'">
+    <div class="box_item" [ngClass]="{
+      'admin_color': (role$ | async) === 'admin',
+      'sales_color': (role$ | async) === 'sales',
+      'manager_color': (role$ | async) === 'manager',
+    }">
+      <!-- <h3 class="title">Hi🖐🏿, {{ ( username$ | async ) || 'Guess'}}</h3> -->
+    </div>
+    <div class="box_item">
+      <h4>Weekly billing</h4>
+      <span>
+        <i class="fa-duotone fa-credit-card"></i>
+        {{configService.numberFormat(0)}} Kz</span>
+    </div>
+    <div class="box_item">
+      <h4>total</h4>
+      <a href="#">
+        <span class="mt-1"> {{configService.formatarQuantidade(dashboard_?.totalShops || 0)}}</span>
+        <mat-icon mat-list-icon>inventory_2</mat-icon>
+      </a>
+    </div>
+    <div class="box_item">
+      <h4>Baixo Stock</h4>
+      <a href="#">
+        <span class="mt-1"> {{configService.formatarQuantidade(summary?.lowStockProductsCount || 0)}}</span>
+        <mat-icon mat-list-icon>receipt</mat-icon>
+      </a>
+    </div>
+    <div class="box_item">
+      <h4>total products</h4>
+      <a href="#">
+        <span class="mt-1"> {{configService.formatarQuantidade(dashboard_?.totalProducts || 0)}}</span>
+        <mat-icon mat-list-icon>inventory_2</mat-icon>
+      </a>
+    </div>
   </div>
 </div>
 
-
 <mat-card>
   <mat-card-title>Products</mat-card-title>
-  <mat-card-content>
+  <mat-card-content >
     <mat-table
       [dataSource]="dataSource"
       multiTemplateDataRows
@@ -53,6 +54,7 @@
           'photo',
           'name',
           'description',
+          'purchasePrice',
           'price',
           'stock',
           'visible'
@@ -66,6 +68,7 @@
             'photo',
             'name',
             'description',
+            'purchasePrice',
             'price',
             'stock',
             'visible'
@@ -102,12 +105,23 @@
         </mat-header-cell>
         <mat-cell *matCellDef="let product">{{ product.description }}</mat-cell>
       </ng-container>
+      <ng-container matColumnDef="purchasePrice">
+        <mat-header-cell
+          *matHeaderCellDef
+          mat-sort-header="purchasePrice"
+          arrowPosition="before"
+          >Price</mat-header-cell
+        >
+        <mat-cell *matCellDef="let product">{{
+          product.purchasePrice | formatCurrency
+        }}</mat-cell>
+      </ng-container>
       <ng-container matColumnDef="price">
         <mat-header-cell
           *matHeaderCellDef
           mat-sort-header="price"
           arrowPosition="before"
-          >Price</mat-header-cell
+          >Sales Price</mat-header-cell
         >
         <mat-cell *matCellDef="let product">{{
           product.price | formatCurrency

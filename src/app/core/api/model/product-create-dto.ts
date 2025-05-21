@@ -14,6 +14,7 @@
 export interface ProductCreateDto { 
     name: string;
     price: number;
+    purchasePrice: number;
     visible?: boolean;
     description: string;
     stock: number;
