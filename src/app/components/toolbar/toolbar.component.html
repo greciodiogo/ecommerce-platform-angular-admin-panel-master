@@ -14,6 +14,9 @@
   </button>
   <span>{{ title.getTitle() }}</span>
   <span class="spacer"></span>
+  <div class="demo-section">
+    <mat-icon matBadge="5" matBadgePosition="after" matBadgeColor="accent">notifications</mat-icon>
+  </div>
   <span>{{
     (role$ | async) === 'sales' ? 'shopkeeper' : (role$ | async)
   }}</span>
