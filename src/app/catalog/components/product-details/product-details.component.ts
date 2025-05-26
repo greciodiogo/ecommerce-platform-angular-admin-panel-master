@@ -27,6 +27,10 @@ export class ProductDetailsComponent implements OnInit {
     description: new FormControl('', {
       nonNullable: true,
     }),
+    purchasePrice: new FormControl(0, {
+      nonNullable: true,
+      validators: [Validators.required, Validators.min(100)],
+    }),
     price: new FormControl(0, {
       nonNullable: true,
       validators: [Validators.required, Validators.min(100)],
@@ -67,6 +71,7 @@ export class ProductDetailsComponent implements OnInit {
     this.editForm.reset({
       name: this.product.name,
       description: this.product.description,
+      purchasePrice: this.product.purchasePrice,
       price: this.product.price,
       stock: this.product.stock,
       comission: this.product.stock,
@@ -84,6 +89,7 @@ export class ProductDetailsComponent implements OnInit {
         data: {
           name: this.editForm.value.name,
           description: this.editForm.value.description,
+          purchasePrice: this.editForm.value.purchasePrice,
           price: this.editForm.value.price,
           stock: this.editForm.value.stock,
           comission: this.editForm.value.comission,

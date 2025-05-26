@@ -27,14 +27,14 @@ const routes: Routes = [
         title: 'Create new product',
         path: 'new',
         canActivate: [AuthRoleGuard],
-        data: { roles: [RoleEnum.Admin, RoleEnum.Sales] },
+        data: { roles: [RoleEnum.Admin, RoleEnum.Manager, RoleEnum.Sales] },
         component: CreateProductFormComponent,
       },
       {
         title: 'Product',
         path: ':id',
         canActivate: [AuthRoleGuard],
-        data: { roles: [RoleEnum.Admin] },
+        data: { roles: [RoleEnum.Admin, RoleEnum.Manager, RoleEnum.Sales] },
         component: ProductComponent,
       },
       {
