@@ -14,9 +14,16 @@
   </button>
   <span>{{ title.getTitle() }}</span>
   <span class="spacer"></span>
-  <div class="demo-section">
+  <button class="demo-section" mat-button [matMenuTriggerFor]="afterMenu">
     <mat-icon matBadge="5" matBadgePosition="after" matBadgeColor="accent">notifications</mat-icon>
-  </div>
+  </button>
+  <mat-menu #afterMenu="matMenu" xPosition="after">
+    <button mat-menu-item>New Order was placed #1</button>
+    <button mat-menu-item>New Order was placed #2</button>
+    <button mat-menu-item>5 products with low stock</button>
+    <button mat-menu-item>3 complaints are pending</button>
+    <button mat-menu-item>total 100 order completed</button>
+  </mat-menu>
   <span>{{
     (role$ | async) === 'sales' ? 'shopkeeper' : (role$ | async)
   }}</span>

@@ -9,6 +9,7 @@ import { HttpClientModule } from '@angular/common/http';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { MatToolbarModule } from '@angular/material/toolbar';
 import { MatBadgeModule } from '@angular/material/badge';
+import {MatMenuModule} from '@angular/material/menu';
 import { LayoutComponent } from './components/layout/layout.component';
 import { ToolbarComponent } from './components/toolbar/toolbar.component';
 import { MatIconModule } from '@angular/material/icon';
@@ -49,6 +50,7 @@ export const apiConfigFactory = () => {
     MatIconModule,
     MatToolbarModule,
     MatBadgeModule,
+    MatMenuModule,
     MatButtonModule,
     MatSidenavModule,
     MatListModule,
