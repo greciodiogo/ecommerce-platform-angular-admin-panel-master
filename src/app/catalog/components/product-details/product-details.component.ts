@@ -39,10 +39,10 @@ export class ProductDetailsComponent implements OnInit {
       nonNullable: true,
       validators: [Validators.required, Validators.min(1)],
     }),
-    comission: new FormControl(0, {
-      nonNullable: true,
-      validators: [Validators.required, Validators.min(0), Validators.max(100)],
-    }),
+    // comission: new FormControl(0, {
+    //   nonNullable: true,
+    //   validators: [Validators.required, Validators.min(0), Validators.max(100)],
+    // }),
     visible: new FormControl('true', {
       nonNullable: true,
     }),
@@ -74,7 +74,7 @@ export class ProductDetailsComponent implements OnInit {
       purchasePrice: this.product.purchasePrice,
       price: this.product.price,
       stock: this.product.stock,
-      comission: this.product.stock,
+      // comission: this.product.stock,
       visible: this.product.visible.toString(),
     });
   }
@@ -92,7 +92,7 @@ export class ProductDetailsComponent implements OnInit {
           purchasePrice: this.editForm.value.purchasePrice,
           price: this.editForm.value.price,
           stock: this.editForm.value.stock,
-          comission: this.editForm.value.comission,
+          // comission: this.editForm.value.comission,
           visible: this.editForm.value.visible === 'true',
         },
       }),
