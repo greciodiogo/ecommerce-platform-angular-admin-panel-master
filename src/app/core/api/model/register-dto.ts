@@ -10,11 +10,14 @@
  * Do not edit the class manually.
  */
 
+import { UserUpdateDto } from "./user-update-dto";
+
 
 export interface RegisterDto { 
     email: string;
     password: string;
     firstName?: string;
     lastName?: string;
+    role?: UserUpdateDto.RoleEnum
 }
 

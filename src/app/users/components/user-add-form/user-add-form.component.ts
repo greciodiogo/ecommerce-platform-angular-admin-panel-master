@@ -3,7 +3,9 @@ import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { Store } from '@ngrx/store';
 import { UsersActions } from '../../store';
 import { RegisterDto } from '../../../core/api';
+import RoleEnum = UserUpdateDto.RoleEnum;
 import { selectUsersError } from '../../store/selectors/status.selectors';
+import { UserUpdateDto } from './../../../core/api/model/user-update-dto';
 @Component({
   selector: 'app-user-add-form',
   templateUrl: './user-add-form.component.html',
@@ -26,6 +28,10 @@ export class UserAddFormComponent {
     lastName: new FormControl('', {
       nonNullable: false,
       validators: [],
+    }),
+    role: new FormControl<RoleEnum>('disabled', {
+      nonNullable: true,
+      validators: [Validators.required],
     }),
   });
   error$ = this.store.select(selectUsersError);
