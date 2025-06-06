@@ -119,7 +119,7 @@
           <h2>Weekly summary</h2>
 
           <ul>
-            <li>
+            <li *ngIf="(role$ | async) !== 'sales'">
               <a href="#" class="single_item">
                 <span>
                   <i style="color: white;" class="fa-solid fa-flask-round-potion mr-2"></i>
@@ -129,7 +129,7 @@
               </a>
               <span>{{configService.numberFormat(summary.totalSales)}}</span>
             </li>
-            <li>
+            <li *ngIf="(role$ | async) !== 'sales'">
               <a href="#" class="single_item">
                 <span>
                   <i style="color: white;" class="fa-solid fa-flask-round-potion mr-2"></i>
@@ -139,7 +139,7 @@
               </a>
               <span>{{configService.formatarQuantidade(summary.confirmedOrderWeek)}}</span>
             </li>
-            <li>
+            <li *ngIf="(role$ | async) !== 'sales'">
               <a href="#" class="single_item">
                 <span>
                   <i style="color: white;" class="fa-solid fa-flask-round-potion mr-2"></i>
@@ -149,7 +149,7 @@
               </a>
               <span>{{configService.formatarQuantidade(summary.completedDeliveriesWeek)}}</span>
             </li>
-            <li  *ngIf="(role$ | async) !== 'sales'">
+            <li *ngIf="(role$ | async) !== 'sales'">
               <a href="#" class="single_item">
                 <span>
                   <i style="color: white;" class="fa-solid fa-flask-round-potion mr-2"></i>
