@@ -10,14 +10,24 @@
  * Do not edit the class manually.
  */
 
-import { UserUpdateDto } from "./user-update-dto";
-
 
 export interface RegisterDto { 
     email: string;
     password: string;
     firstName?: string;
     lastName?: string;
-    role?: UserUpdateDto.RoleEnum
+    role?: RegisterDto.RoleEnum;
 }
+export namespace RegisterDto {
+    export type RoleEnum = 'customer' | 'sales' | 'shoper' | 'manager' | 'admin' | 'disabled';
+    export const RoleEnum = {
+        Customer: 'customer' as RoleEnum,
+        Sales: 'sales' as RoleEnum,
+        Shoper: 'shoper' as RoleEnum,
+        Manager: 'manager' as RoleEnum,
+        Admin: 'admin' as RoleEnum,
+        Disabled: 'disabled' as RoleEnum
+    };
+}
+
 

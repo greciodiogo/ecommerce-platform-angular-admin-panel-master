@@ -19,5 +19,6 @@ export interface ShopUpdateDto {
     nif?: string;
     contactPhone?: string;
     address?: string;
+    userId?: number;
 }
 
