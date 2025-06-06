@@ -70,6 +70,12 @@
           <app-product-photo [product]="product"></app-product-photo>
         </mat-cell>
       </ng-container>
+      <ng-container matColumnDef="shop">
+        <mat-header-cell *matHeaderCellDef mat-sort-header="shop"
+          >shopName</mat-header-cell
+        >
+        <mat-cell *matCellDef="let product">{{ product.shop.shopName }}</mat-cell>
+      </ng-container>
       <ng-container matColumnDef="name">
         <mat-header-cell *matHeaderCellDef mat-sort-header="name"
           >Name</mat-header-cell

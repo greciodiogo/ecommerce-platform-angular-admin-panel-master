@@ -53,8 +53,9 @@ export class ProductsListComponent implements OnInit, AfterViewInit, OnDestroy {
     this.displayedColumns = [
       'id',
       'photo',
+      'shop',
       'name',
-      'description',
+      ...(role === 'sales' ? ['description'] : []),  // 👈 adiciona 'price' só se não for sales
       'purchasePrice',
       ...(role !== 'sales' ? ['price'] : []),  // 👈 adiciona 'price' só se não for sales
       'stock',
