@@ -1,0 +1,105 @@
+<mat-card>
+  <mat-card-title> Customers </mat-card-title>
+  <mat-card-content>
+    <mat-table
+      [dataSource]="dataSource"
+      multiTemplateDataRows
+      matSort
+      matSortActive="id"
+      matSortDirection="asc"
+      (matSortChange)="expandedCustomer = null"
+    >
+      <ng-container matColumnDef="id">
+        <mat-header-cell *matHeaderCellDef mat-sort-header="id"
+          >ID</mat-header-cell
+        >
+        <mat-cell *matCellDef="let customer">{{ customer.id }}</mat-cell>
+      </ng-container>
+      <ng-container matColumnDef="email">
+        <mat-header-cell *matHeaderCellDef mat-sort-header="email"
+          >Email</mat-header-cell
+        >
+        <mat-cell *matCellDef="let customer">{{ customer.email }}</mat-cell>
+      </ng-container>
+      <ng-container matColumnDef="firstName">
+        <mat-header-cell *matHeaderCellDef mat-sort-header="firstName">
+          First name
+        </mat-header-cell>
+        <mat-cell *matCellDef="let customer">{{ customer.firstName }}</mat-cell>
+      </ng-container>
+      <ng-container matColumnDef="lastName">
+        <mat-header-cell *matHeaderCellDef mat-sort-header="LastName">
+          Last name
+        </mat-header-cell>
+        <mat-cell *matCellDef="let customer">{{ customer.lastName }}</mat-cell>
+      </ng-container>
+      <ng-container matColumnDef="expand">
+        <mat-header-cell *matHeaderCellDef aria-label="row actions">
+          &nbsp;
+        </mat-header-cell>
+        <mat-cell *matCellDef="let customer">
+          <button
+            mat-icon-button
+            aria-label="expand row"
+            (click)="
+              expandedCustomer = expandedCustomer === customer ? null : customer;
+              $event.stopPropagation()
+            "
+          >
+            <mat-icon *ngIf="expandedCustomer !== customer">
+              keyboard_arrow_down
+            </mat-icon>
+            <mat-icon *ngIf="expandedCustomer === customer">keyboard_arrow_up</mat-icon>
+          </button>
+        </mat-cell>
+      </ng-container>
+
+      <ng-container matColumnDef="expandedDetail">
+        <mat-cell *matCellDef="let customer" [attr.colspan]="7">
+          <div
+          style="width: 100%;"
+            *ngIf="expandedCustomer === customer"
+            class="customer-detail"
+            [@detailExpand]="
+              customer && customer === expandedCustomer ? 'expanded' : 'collapsed'
+            "
+          >
+            <app-customer-detail
+              [customer]="customer"
+              (cancel)="expandedCustomer = null"
+            ></app-customer-detail>
+          </div>
+        </mat-cell>
+      </ng-container>
+
+      <mat-header-row
+        *matHeaderRowDef="[
+          'id',
+          'email',
+          'firstName',
+          'lastName',
+          'expand'
+        ]"
+      ></mat-header-row>
+      <mat-row
+        *matRowDef="
+          let customer;
+          columns: ['id', 'email', 'firstName', 'lastName', 'expand']
+        "
+        class="customer-row"
+        [class.customer-expanded-row]="expandedCustomer === customer"
+        (click)="expandedCustomer = expandedCustomer === customer ? null : customer"
+      ></mat-row>
+      <mat-row
+        *matRowDef="let row; columns: ['expandedDetail']"
+        class="customer-detail-row"
+      ></mat-row>
+    </mat-table>
+    <mat-paginator
+      showFirstLastButtons
+      pageSize="50"
+      hidePageSize="true"
+      (page)="expandedCustomer = null"
+    ></mat-paginator>
+  </mat-card-content>
+</mat-card>

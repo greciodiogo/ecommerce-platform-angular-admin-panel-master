@@ -17,6 +17,7 @@ export const reducer = createReducer(
   initialState,
   on(
     UsersActions.loadUsers,
+    UsersActions.loadCustomers,
     UsersActions.addUser,
     UsersActions.updateUser,
     UsersActions.deleteUser,
@@ -28,6 +29,7 @@ export const reducer = createReducer(
   ),
   on(
     UsersActions.loadUsersSuccess,
+    UsersActions.loadCustomersSuccess,
     UsersActions.addUserSuccess,
     UsersActions.updateUserSuccess,
     UsersActions.deleteUserSuccess,
@@ -39,6 +41,7 @@ export const reducer = createReducer(
   ),
   on(
     UsersActions.loadUsersFailure,
+    UsersActions.loadCustomersFailure,
     UsersActions.addUserFailure,
     UsersActions.updateUserFailure,
     UsersActions.deleteUserFailure,

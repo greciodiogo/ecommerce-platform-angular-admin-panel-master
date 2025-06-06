@@ -1,0 +1,65 @@
+mat-card {
+  padding-bottom: 0;
+  overflow: hidden;
+}
+
+mat-card-content {
+  margin-left: -16px;
+  margin-right: -16px;
+}
+
+mat-row.user-detail-row {
+  min-height: 0;
+}
+
+mat-row.user-row:not(.user-detail-row):hover {
+  background: whitesmoke;
+}
+
+mat-row.user-row:not(.user-detail-row):active {
+  background: #efefef;
+}
+
+.user-row {
+  border-bottom-width: 0;
+}
+
+
+mat-row, mat-header-row {
+  gap: 16px;
+  padding-left: 16px;
+  padding-right: 16px;
+}
+
+.mat-column-id {
+  padding-left: 8px;
+  flex-basis: 48px;
+  flex-grow: 0.2;
+}
+.mat-column-email {
+  flex-grow: 1.5;
+}
+.mat-column-role {
+  flex-basis: 112px;
+  flex-grow: 0.2;
+  flex-shrink: 1;
+}
+.mat-column-expand {
+  flex-basis: 48px;
+  flex-grow: 0;
+}
+.mat-column-expandedDetail {
+  padding-left: 0 !important;
+  padding-right: 0 !important;
+}
+.user-detail {
+  overflow: hidden;
+  display: flex;
+  width: 100%;
+}
+
+
+mat-cell, mat-header-cell {
+  white-space: nowrap;
+}
+
