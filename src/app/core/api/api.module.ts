@@ -11,6 +11,7 @@ import { DefaultApiService } from './api/default-api.service';
 import { DeliveryMethodsApiService } from './api/delivery-methods-api.service';
 import { FaqsApiService } from './api/faqs-api.service';
 import { ImportExportApiService } from './api/import-export-api.service';
+import { NotificationsApiService } from './api/notifications-api.service';
 import { OrdersApiService } from './api/orders-api.service';
 import { PagesApiService } from './api/pages-api.service';
 import { PaymentMethodsApiService } from './api/payment-methods-api.service';
