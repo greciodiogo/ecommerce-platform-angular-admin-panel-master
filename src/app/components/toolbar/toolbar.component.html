@@ -25,7 +25,7 @@
   </button>
   <mat-menu #afterMenu="matMenu">
   <ng-container *ngIf="totalNotifications > 0; else noNotifications">
-    <button mat-menu-item *ngFor="let n of notifications">
+    <button mat-menu-item class="buttonMatMenu"  *ngFor="let n of notifications">
       {{ n.title }}
     </button>
   </ng-container>
