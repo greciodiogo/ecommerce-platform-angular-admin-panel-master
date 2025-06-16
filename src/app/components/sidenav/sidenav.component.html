@@ -71,6 +71,24 @@
         <mat-icon mat-list-icon>inventory_2</mat-icon>
         Products
       </a>
+      <!-- routerLink="/catalog/products"  -->
+      <!-- [ngClass]="{ active: router.url.startsWith('/catalog/products') }" -->
+      <a
+        mat-list-item
+        [appAuthRole]="['admin', 'manager']"
+      >
+        <mat-icon mat-list-icon>inventory_2</mat-icon>
+        Trending Products
+      </a>
+      <!-- routerLink="/catalog/products" -->
+      <!-- [ngClass]="{ active: router.url.startsWith('/catalog/products') }" -->
+      <a
+        mat-list-item
+        [appAuthRole]="['admin', 'manager']"
+      >
+        <mat-icon mat-list-icon>inventory_2</mat-icon>
+        Promotions
+      </a>
       <a
         mat-list-item
         routerLink="/catalog/products"
