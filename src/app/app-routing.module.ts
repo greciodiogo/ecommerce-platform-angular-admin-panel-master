@@ -27,6 +27,14 @@ const routes: Routes = [
           import('./users/users.module').then((m) => m.UsersModule),
       },
       {
+        title: 'Customers',
+        path: 'customers',
+        canActivate: [AuthRoleGuard],
+        data: { roles: [RoleEnum.Admin] },
+        loadChildren: () =>
+          import('./customers/customers.module').then((m) => m.CustomersModule),
+      },
+      {
         title: 'Settings',
         path: 'settings',
         canActivate: [AuthRoleGuard],

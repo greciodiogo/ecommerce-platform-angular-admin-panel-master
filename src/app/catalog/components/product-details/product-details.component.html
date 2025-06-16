@@ -34,12 +34,12 @@
       <input type="number" matInput required formControlName="comission" />
       <mat-error>Invalid comission</mat-error>
     </mat-form-field> -->
-    <mat-form-field appearance="outline" class="product-stock"  [appAuthRole]="['admin', 'sales']">
+    <mat-form-field appearance="outline" class="product-stock"  [appAuthRole]="['admin', 'manager', 'sales']">
       <mat-label>Stock</mat-label>
       <input type="number" matInput required formControlName="stock" />
       <mat-error>Invalid stock</mat-error>
     </mat-form-field>
-    <mat-form-field appearance="outline" class="product-visible"  [appAuthRole]="['admin']">
+    <mat-form-field appearance="outline" class="product-visible"  [appAuthRole]="['admin', 'manager', 'sales']">
       <mat-label>Visibility</mat-label>
       <mat-select formControlName="visible">
         <mat-option value="true">Visible</mat-option>

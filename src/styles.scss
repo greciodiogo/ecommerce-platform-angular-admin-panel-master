@@ -107,3 +107,24 @@ input.country-search {
 .mat-form-field.fill-container textarea {
   height: calc(100% - 25px);
 }
+
+  .buttonMatMenu > * {
+    font-size: 13px !important;
+  }
+  
+  .buttonMatMenu.mdc-list-item {
+    border-bottom: 1px solid #dbd8d8 !important;
+    font-size: 12px !important;
+  }
+  .buttonMatMenu.mdc-list-item:hover {
+    opacity: .85 !important;
+    font-size: 12px;
+  }
+  
+  .buttonMatMenu.mdc-list-item:last-of-type {
+    border: none !important;
+  }
+  .buttonMatMenu .mat-mdc-menu-panel {
+    max-width: 320px !important;
+    width: 100% !important;
+  }

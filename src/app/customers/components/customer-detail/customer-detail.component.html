@@ -22,19 +22,6 @@
       </mat-error>
     </mat-form-field>
     
-    <mat-form-field appearance="outline">
-      <mat-label>Role</mat-label>
-      <mat-select formControlName="role">
-        <!-- <mat-option value="customer">{{ 'customer' | roleName }}</mat-option> -->
-        <!-- <mat-option value="sales">{{ 'sales' | roleName }}</mat-option> -->
-        <mat-option value="manager">{{ 'manager' | roleName }}</mat-option>
-        <mat-option value="admin">{{ 'admin' | roleName }}</mat-option>
-        <mat-option value="disabled">{{ 'disabled' | roleName }}</mat-option>
-      </mat-select>
-      <mat-error *ngIf="editForm.controls.role.invalid">
-        Invalid role
-      </mat-error>
-    </mat-form-field>
   </div>
   <div class="user-actions">
     <button mat-flat-button color="warn" (click)="delete()" type="button">

@@ -11,14 +11,12 @@
  */
 
 
-export interface RegisterDto { 
-    email: string;
-    password: string;
-    firstName?: string;
-    lastName?: string;
-    role?: RegisterDto.RoleEnum;
+export interface NotifyUsersByRoleDto { 
+    title: string;
+    message: string;
+    role?: NotifyUsersByRoleDto.RoleEnum;
 }
-export namespace RegisterDto {
+export namespace NotifyUsersByRoleDto {
     export type RoleEnum = 'customer' | 'sales' | 'shoper' | 'manager' | 'admin' | 'disabled';
     export const RoleEnum = {
         Customer: 'customer' as RoleEnum,

@@ -11,6 +11,7 @@ api/default-api.service.ts
 api/delivery-methods-api.service.ts
 api/faqs-api.service.ts
 api/import-export-api.service.ts
+api/notifications-api.service.ts
 api/orders-api.service.ts
 api/pages-api.service.ts
 api/payment-methods-api.service.ts
@@ -41,6 +42,7 @@ model/category-update-dto.ts
 model/category.ts
 model/code-update-dto.ts
 model/code.ts
+model/create-notification-dto.ts
 model/dashboard-state.ts
 model/delivery-method-dto.ts
 model/delivery-method.ts
@@ -50,6 +52,8 @@ model/faq-update-dto.ts
 model/faq.ts
 model/login-dto.ts
 model/models.ts
+model/notification.ts
+model/notify-users-by-role-dto.ts
 model/order-create-dto.ts
 model/order-delivery-dto.ts
 model/order-delivery.ts

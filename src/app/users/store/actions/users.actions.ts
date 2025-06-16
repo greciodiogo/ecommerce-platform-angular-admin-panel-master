@@ -3,13 +3,25 @@ import { RegisterDto, User, UserUpdateDto } from '../../../core/api';
 
 export const loadUsers = createAction('[Users] Load Users');
 
+export const loadCustomers = createAction('[Users] Load Customers');
+
 export const loadUsersSuccess = createAction(
   '[Users] Load Users Success',
   props<{ users: User[] }>(),
 );
 
+export const loadCustomersSuccess = createAction(
+  '[Users] Load Customers Success',
+  props<{ users: User[] }>(),
+);
+
 export const loadUsersFailure = createAction(
   '[Users] Load Users Failure',
+  props<{ error: string }>(),
+);
+
+export const loadCustomersFailure = createAction(
+  '[Users] Load Customers Failure',
   props<{ error: string }>(),
 );
 

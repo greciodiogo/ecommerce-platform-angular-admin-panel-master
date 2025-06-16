@@ -15,15 +15,27 @@
   <span>{{ title.getTitle() }}</span>
   <span class="spacer"></span>
   <button class="demo-section" mat-button [matMenuTriggerFor]="afterMenu">
-    <mat-icon matBadge="5" matBadgePosition="after" matBadgeColor="accent">notifications</mat-icon>
+    <!-- [matBadge]="notifications.length > 0 ? notifications.length : null" -->
+    <mat-icon
+      [matBadge]="totalNotifications"
+      matBadgePosition="after"
+      matBadgeColor="accent"
+      >notifications</mat-icon
+    >
   </button>
-  <mat-menu #afterMenu="matMenu" xPosition="after">
-    <button mat-menu-item>New Order was placed #1</button>
-    <button mat-menu-item>New Order was placed #2</button>
-    <button mat-menu-item>5 products with low stock</button>
-    <button mat-menu-item>3 complaints are pending</button>
-    <button mat-menu-item>total 100 order completed</button>
-  </mat-menu>
+  <mat-menu #afterMenu="matMenu">
+  <ng-container *ngIf="totalNotifications > 0; else noNotifications">
+    <button mat-menu-item class="buttonMatMenu"  *ngFor="let n of notifications">
+      {{ n.title }}
+    </button>
+  </ng-container>
+
+  <ng-template #noNotifications>
+    <button mat-menu-item>
+      Nenhuma notificação no momento
+    </button>
+  </ng-template>
+</mat-menu>
   <span>{{
     (role$ | async) === 'sales' ? 'shopkeeper' : (role$ | async)
   }}</span>

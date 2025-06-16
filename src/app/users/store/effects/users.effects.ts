@@ -17,10 +17,24 @@ export class UsersEffects {
     return this.actions$.pipe(
       ofType(UsersActions.loadUsers),
       exhaustMap(() =>
-        this.usersApi.getUsers().pipe(
+        this.usersApi.getUsers('exclude-customers').pipe(
           map((users) => UsersActions.loadUsersSuccess({ users })),
           catchError(({ error }) =>
             of(UsersActions.loadUsersFailure({ error: error.message })),
+          ),
+        ),
+      ),
+    );
+  });
+
+    loadCustomers$ = createEffect(() => {
+    return this.actions$.pipe(
+      ofType(UsersActions.loadCustomers),
+      exhaustMap(() =>
+        this.usersApi.getUsers('customers').pipe(
+          map((users) => UsersActions.loadCustomersSuccess({ users })),
+          catchError(({ error }) =>
+            of(UsersActions.loadCustomersFailure({ error: error.message })),
           ),
         ),
       ),

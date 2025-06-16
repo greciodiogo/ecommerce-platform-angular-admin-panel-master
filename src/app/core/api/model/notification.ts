@@ -9,16 +9,15 @@
  * https://openapi-generator.tech
  * Do not edit the class manually.
  */
-import { ShopItemDto } from './shop-item-dto';
+import { User } from './user';
 
 
-export interface ShopUpdateDto { 
-    products?: Array<ShopItemDto>;
-    shopName?: string;
-    alvara?: string;
-    nif?: string;
-    contactPhone?: string;
-    address?: string;
-    userId?: number;
+export interface Notification { 
+    id: number;
+    title: string;
+    message: string;
+    isRead: boolean;
+    createdAt: string;
+    user: User;
 }
 

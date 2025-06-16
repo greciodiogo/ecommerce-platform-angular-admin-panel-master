@@ -20,6 +20,7 @@ export interface Order {
     id: number;
     created: string;
     updated: string;
+    order_number?: string;
     user?: User;
     items: Array<OrderItem>;
     status: Order.StatusEnum;

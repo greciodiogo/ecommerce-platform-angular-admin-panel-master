@@ -24,6 +24,9 @@ import { AuthModule } from './core/auth/auth.module';
 import { SettingsModule } from './settings/settings.module';
 import { MarkdownModule } from 'ngx-markdown';
 
+import * as fromCatalog from './catalog/store';
+import { NotificationsEffects } from './catalog/store/effects';
+
 export const apiConfigFactory = () => {
   const params: ConfigurationParameters = {
     basePath: environment.apiUrl,
@@ -55,11 +58,16 @@ export const apiConfigFactory = () => {
     MatSidenavModule,
     MatListModule,
     StoreModule.forRoot([], {}),
+    StoreModule.forFeature(
+      fromCatalog.catalogFeatureKey, 
+      fromCatalog.reducers,
+    ),   
     StoreDevtoolsModule.instrument({
       maxAge: 25,
       logOnly: environment.production,
     }),
     EffectsModule.forRoot([]),
+    EffectsModule.forFeature([NotificationsEffects]),
     MarkdownModule.forRoot(),
   ],
   providers: [],

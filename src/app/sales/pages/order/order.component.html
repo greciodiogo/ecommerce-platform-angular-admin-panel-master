@@ -3,7 +3,7 @@
     <mat-card-title>
       <a mat-button routerLink="/sales/orders">
         <mat-icon>arrow_back</mat-icon></a
-      >Order #{{ (order$ | async)?.id }}
+      >Order #{{ (order$ | async)?.order_number }}
     </mat-card-title>
   </mat-card-title-group>
   <mat-tab-group dynamicHeight>

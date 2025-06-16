@@ -6,8 +6,10 @@
     [opened]="(matchesMedium | async) === false"
   >
     <mat-nav-list>
-      <a mat-list-item routerLink="/"
-      [appAuthRole]="['admin', 'manager', 'sales']"
+      <a
+        mat-list-item
+        routerLink="/"
+        [appAuthRole]="['admin', 'manager', 'sales']"
       >
         <mat-icon mat-list-icon>home</mat-icon>
         Home
@@ -69,6 +71,33 @@
         <mat-icon mat-list-icon>inventory_2</mat-icon>
         Products
       </a>
+      <!-- routerLink="/catalog/products"  -->
+      <!-- [ngClass]="{ active: router.url.startsWith('/catalog/products') }" -->
+      <a
+        mat-list-item
+        [appAuthRole]="['admin', 'manager']"
+      >
+        <mat-icon mat-list-icon>inventory_2</mat-icon>
+        Trending Products
+      </a>
+      <!-- routerLink="/catalog/products" -->
+      <!-- [ngClass]="{ active: router.url.startsWith('/catalog/products') }" -->
+      <a
+        mat-list-item
+        [appAuthRole]="['admin', 'manager']"
+      >
+        <mat-icon mat-list-icon>inventory_2</mat-icon>
+        Promotions
+      </a>
+      <a
+        mat-list-item
+        routerLink="/catalog/products"
+        [appAuthRole]="['sales']"
+        [ngClass]="{ active: router.url.startsWith('/catalog/products') }"
+      >
+        <mat-icon mat-list-icon>inventory_2</mat-icon>
+        Sales
+      </a>
       <a
         mat-list-item
         routerLink="/catalog/categories"
@@ -117,6 +146,25 @@
       </a>
       <a
         mat-list-item
+        routerLink="/catalog/shops"
+        [appAuthRole]="['admin']"
+        [ngClass]="{ active: router.url.startsWith('/shops') }"
+      >
+        <mat-icon mat-list-icon>shopping_bag_speed</mat-icon>
+        Shops
+      </a>
+      <a
+        mat-list-item
+        [appAuthRole]="['admin', 'manager']"
+        [ngClass]="{ active: router.url.startsWith('/sales/deliveries') }"
+      >
+        <mat-icon mat-list-icon>group</mat-icon>
+        Deliveries
+      </a>
+
+      <mat-divider [appAuthRole]="['admin']"></mat-divider>
+      <a
+        mat-list-item
         routerLink="/users"
         [appAuthRole]="['admin']"
         [ngClass]="{ active: router.url.startsWith('/users') }"
@@ -126,21 +174,12 @@
       </a>
       <a
         mat-list-item
-        routerLink="/catalog/shops"
-        [appAuthRole]="['admin']"
-        [ngClass]="{ active: router.url.startsWith('/shops') }"
-      >
-        <mat-icon mat-list-icon>shopping_bag_speed</mat-icon>
-        Shops
-      </a>
-
-        <a
-        mat-list-item
+        routerLink="/customers"
         [appAuthRole]="['admin', 'manager']"
-        [ngClass]="{ active: router.url.startsWith('/sales/deliveries') }"
+        [ngClass]="{ active: router.url.startsWith('/customers') }"
       >
-        <mat-icon mat-list-icon>group</mat-icon>
-        Deliveries
+        <mat-icon mat-list-icon>person</mat-icon>
+        customers
       </a>
 
       <a

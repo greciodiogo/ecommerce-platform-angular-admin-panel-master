@@ -22,6 +22,13 @@ export const reducer = createReducer(
     }),
   ),
   on(
+    UsersActions.loadCustomersSuccess,
+    (state, { users }): State => ({
+      ...state,
+      list: users,
+    }),
+  ),
+  on(
     UsersActions.addUserSuccess,
     (state, { user }): State => ({
       ...state,
