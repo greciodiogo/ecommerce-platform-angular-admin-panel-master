@@ -16,6 +16,7 @@ import { FaqsComponent } from './pages/faqs/faqs.component';
 import { FaqComponent } from './pages/faq/faq.component';
 import { ReportsComponent } from './pages/reports/reports.component';
 import { ShopsComponent } from './pages/shops/shops.component';
+import { TrendingComponent } from './pages/trending/trending.component';
 
 const routes: Routes = [
   {
@@ -92,6 +93,13 @@ const routes: Routes = [
         canActivate: [AuthRoleGuard],
         data: { roles: [RoleEnum.Admin, RoleEnum.Manager] },
         component: CategoryComponent,
+      },
+      {
+        title: 'Trending Products',
+        path: ':id/trending',
+        canActivate: [AuthRoleGuard],
+        data: { roles: [RoleEnum.Admin, RoleEnum.Manager] },
+        component: TrendingComponent,
       },
     ],
   },

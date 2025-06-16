@@ -28,3 +28,10 @@ export const selectSelectedCategory = createSelector(
   (categories, selectedCategoryId) =>
     categories.find((c) => c.id === selectedCategoryId) ?? null,
 );
+
+export const selectSelectedTrending = createSelector(
+  selectCategoriesList,
+  selectSelectedCategoryId,
+  (categories, selectedCategoryId) =>
+    categories.find((c) => c.name === 'Trending') ?? null,
+);

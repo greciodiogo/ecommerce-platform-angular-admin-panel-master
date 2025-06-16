@@ -71,6 +71,7 @@ import { CreateShopFormComponent } from './pages/create-shop-form/create-shop-fo
 import { ShopDetailComponent } from './pages/shop-detail/shop-detail.component';
 import { MatSnackBarModule } from '@angular/material/snack-bar';
 import { DashboardEffects } from '../sales/store/effects';
+import { TrendingComponent } from './pages/trending/trending.component';
 
 @NgModule({
   declarations: [
@@ -105,6 +106,7 @@ import { DashboardEffects } from '../sales/store/effects';
     ShopsListComponent,
     CreateShopFormComponent,
     ShopDetailComponent,
+    TrendingComponent,
   ],
   imports: [
     CommonModule,
