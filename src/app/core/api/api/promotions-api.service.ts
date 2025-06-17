@@ -19,11 +19,11 @@ import { CustomHttpParameterCodec }                          from '../encoder';
 import { Observable }                                        from 'rxjs';
 
 // @ts-ignore
-import { Order } from '../model/order';
+import { Promotion } from '../model/promotion';
 // @ts-ignore
-import { OrderCreateDto } from '../model/order-create-dto';
+import { PromotionCreateDto } from '../model/promotion-create-dto';
 // @ts-ignore
-import { OrderUpdateDto } from '../model/order-update-dto';
+import { PromotionUpdateDto } from '../model/promotion-update-dto';
 
 // @ts-ignore
 import { BASE_PATH, COLLECTION_FORMATS }                     from '../variables';
@@ -34,7 +34,7 @@ import { Configuration }                                     from '../configurat
 @Injectable({
   providedIn: 'root'
 })
-export class OrdersApiService {
+export class PromotionsApiService {
 
     protected basePath = 'http://localhost';
     public defaultHeaders = new HttpHeaders();
@@ -92,16 +92,16 @@ export class OrdersApiService {
     }
 
     /**
-     * @param orderCreateDto 
+     * @param promotionCreateDto 
      * @param observe set whether or not to return the data Observable as the body, response or events. defaults to returning the body.
      * @param reportProgress flag to report request and response progress.
      */
-    public createOrder(orderCreateDto: OrderCreateDto, observe?: 'body', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<Order>;
-    public createOrder(orderCreateDto: OrderCreateDto, observe?: 'response', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<HttpResponse<Order>>;
-    public createOrder(orderCreateDto: OrderCreateDto, observe?: 'events', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<HttpEvent<Order>>;
-    public createOrder(orderCreateDto: OrderCreateDto, observe: any = 'body', reportProgress: boolean = false, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<any> {
-        if (orderCreateDto === null || orderCreateDto === undefined) {
-            throw new Error('Required parameter orderCreateDto was null or undefined when calling createOrder.');
+    public createPromotion(promotionCreateDto: PromotionCreateDto, observe?: 'body', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<Promotion>;
+    public createPromotion(promotionCreateDto: PromotionCreateDto, observe?: 'response', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<HttpResponse<Promotion>>;
+    public createPromotion(promotionCreateDto: PromotionCreateDto, observe?: 'events', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<HttpEvent<Promotion>>;
+    public createPromotion(promotionCreateDto: PromotionCreateDto, observe: any = 'body', reportProgress: boolean = false, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<any> {
+        if (promotionCreateDto === null || promotionCreateDto === undefined) {
+            throw new Error('Required parameter promotionCreateDto was null or undefined when calling createPromotion.');
         }
 
         let localVarHeaders = this.defaultHeaders;
@@ -144,8 +144,8 @@ export class OrdersApiService {
             }
         }
 
-        return this.httpClient.post<Order>(`${this.configuration.basePath}/orders`,
-            orderCreateDto,
+        return this.httpClient.post<Promotion>(`${this.configuration.basePath}/promotions`,
+            promotionCreateDto,
             {
                 context: localVarHttpContext,
                 responseType: <any>responseType_,
@@ -162,12 +162,12 @@ export class OrdersApiService {
      * @param observe set whether or not to return the data Observable as the body, response or events. defaults to returning the body.
      * @param reportProgress flag to report request and response progress.
      */
-    public getOrder(id: number, observe?: 'body', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<Order>;
-    public getOrder(id: number, observe?: 'response', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<HttpResponse<Order>>;
-    public getOrder(id: number, observe?: 'events', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<HttpEvent<Order>>;
-    public getOrder(id: number, observe: any = 'body', reportProgress: boolean = false, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<any> {
+    public deletePromotion(id: number, observe?: 'body', reportProgress?: boolean, options?: {httpHeaderAccept?: undefined, context?: HttpContext}): Observable<any>;
+    public deletePromotion(id: number, observe?: 'response', reportProgress?: boolean, options?: {httpHeaderAccept?: undefined, context?: HttpContext}): Observable<HttpResponse<any>>;
+    public deletePromotion(id: number, observe?: 'events', reportProgress?: boolean, options?: {httpHeaderAccept?: undefined, context?: HttpContext}): Observable<HttpEvent<any>>;
+    public deletePromotion(id: number, observe: any = 'body', reportProgress: boolean = false, options?: {httpHeaderAccept?: undefined, context?: HttpContext}): Observable<any> {
         if (id === null || id === undefined) {
-            throw new Error('Required parameter id was null or undefined when calling getOrder.');
+            throw new Error('Required parameter id was null or undefined when calling deletePromotion.');
         }
 
         let localVarHeaders = this.defaultHeaders;
@@ -176,7 +176,6 @@ export class OrdersApiService {
         if (localVarHttpHeaderAcceptSelected === undefined) {
             // to determine the Accept header
             const httpHeaderAccepts: string[] = [
-                'application/json'
             ];
             localVarHttpHeaderAcceptSelected = this.configuration.selectHeaderAccept(httpHeaderAccepts);
         }
@@ -201,7 +200,7 @@ export class OrdersApiService {
             }
         }
 
-        return this.httpClient.get<Order>(`${this.configuration.basePath}/orders/${encodeURIComponent(String(id))}`,
+        return this.httpClient.delete<any>(`${this.configuration.basePath}/promotions/${encodeURIComponent(String(id))}`,
             {
                 context: localVarHttpContext,
                 responseType: <any>responseType_,
@@ -217,10 +216,10 @@ export class OrdersApiService {
      * @param observe set whether or not to return the data Observable as the body, response or events. defaults to returning the body.
      * @param reportProgress flag to report request and response progress.
      */
-    public getOrders(observe?: 'body', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<Array<Order>>;
-    public getOrders(observe?: 'response', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<HttpResponse<Array<Order>>>;
-    public getOrders(observe?: 'events', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<HttpEvent<Array<Order>>>;
-    public getOrders(observe: any = 'body', reportProgress: boolean = false, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<any> {
+    public getActivePromotions(observe?: 'body', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<Array<Promotion>>;
+    public getActivePromotions(observe?: 'response', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<HttpResponse<Array<Promotion>>>;
+    public getActivePromotions(observe?: 'events', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<HttpEvent<Array<Promotion>>>;
+    public getActivePromotions(observe: any = 'body', reportProgress: boolean = false, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<any> {
 
         let localVarHeaders = this.defaultHeaders;
 
@@ -253,7 +252,63 @@ export class OrdersApiService {
             }
         }
 
-        return this.httpClient.get<Array<Order>>(`${this.configuration.basePath}/orders`,
+        return this.httpClient.get<Array<Promotion>>(`${this.configuration.basePath}/promotions/active`,
+            {
+                context: localVarHttpContext,
+                responseType: <any>responseType_,
+                withCredentials: this.configuration.withCredentials,
+                headers: localVarHeaders,
+                observe: observe,
+                reportProgress: reportProgress
+            }
+        );
+    }
+
+    /**
+     * @param id 
+     * @param observe set whether or not to return the data Observable as the body, response or events. defaults to returning the body.
+     * @param reportProgress flag to report request and response progress.
+     */
+    public getPromotion(id: number, observe?: 'body', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<Promotion>;
+    public getPromotion(id: number, observe?: 'response', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<HttpResponse<Promotion>>;
+    public getPromotion(id: number, observe?: 'events', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<HttpEvent<Promotion>>;
+    public getPromotion(id: number, observe: any = 'body', reportProgress: boolean = false, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<any> {
+        if (id === null || id === undefined) {
+            throw new Error('Required parameter id was null or undefined when calling getPromotion.');
+        }
+
+        let localVarHeaders = this.defaultHeaders;
+
+        let localVarHttpHeaderAcceptSelected: string | undefined = options && options.httpHeaderAccept;
+        if (localVarHttpHeaderAcceptSelected === undefined) {
+            // to determine the Accept header
+            const httpHeaderAccepts: string[] = [
+                'application/json'
+            ];
+            localVarHttpHeaderAcceptSelected = this.configuration.selectHeaderAccept(httpHeaderAccepts);
+        }
+        if (localVarHttpHeaderAcceptSelected !== undefined) {
+            localVarHeaders = localVarHeaders.set('Accept', localVarHttpHeaderAcceptSelected);
+        }
+
+        let localVarHttpContext: HttpContext | undefined = options && options.context;
+        if (localVarHttpContext === undefined) {
+            localVarHttpContext = new HttpContext();
+        }
+
+
+        let responseType_: 'text' | 'json' | 'blob' = 'json';
+        if (localVarHttpHeaderAcceptSelected) {
+            if (localVarHttpHeaderAcceptSelected.startsWith('text')) {
+                responseType_ = 'text';
+            } else if (this.configuration.isJsonMime(localVarHttpHeaderAcceptSelected)) {
+                responseType_ = 'json';
+            } else {
+                responseType_ = 'blob';
+            }
+        }
+
+        return this.httpClient.get<Promotion>(`${this.configuration.basePath}/promotions/${encodeURIComponent(String(id))}`,
             {
                 context: localVarHttpContext,
                 responseType: <any>responseType_,
@@ -269,10 +324,10 @@ export class OrdersApiService {
      * @param observe set whether or not to return the data Observable as the body, response or events. defaults to returning the body.
      * @param reportProgress flag to report request and response progress.
      */
-    public getSales(observe?: 'body', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<Array<Order>>;
-    public getSales(observe?: 'response', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<HttpResponse<Array<Order>>>;
-    public getSales(observe?: 'events', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<HttpEvent<Array<Order>>>;
-    public getSales(observe: any = 'body', reportProgress: boolean = false, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<any> {
+    public getPromotions(observe?: 'body', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<Array<Promotion>>;
+    public getPromotions(observe?: 'response', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<HttpResponse<Array<Promotion>>>;
+    public getPromotions(observe?: 'events', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<HttpEvent<Array<Promotion>>>;
+    public getPromotions(observe: any = 'body', reportProgress: boolean = false, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<any> {
 
         let localVarHeaders = this.defaultHeaders;
 
@@ -305,7 +360,7 @@ export class OrdersApiService {
             }
         }
 
-        return this.httpClient.get<Array<Order>>(`${this.configuration.basePath}/orders/sales`,
+        return this.httpClient.get<Array<Promotion>>(`${this.configuration.basePath}/promotions`,
             {
                 context: localVarHttpContext,
                 responseType: <any>responseType_,
@@ -318,13 +373,17 @@ export class OrdersApiService {
     }
 
     /**
+     * @param categoryId 
      * @param observe set whether or not to return the data Observable as the body, response or events. defaults to returning the body.
      * @param reportProgress flag to report request and response progress.
      */
-    public getUserOrders(observe?: 'body', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<Array<Order>>;
-    public getUserOrders(observe?: 'response', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<HttpResponse<Array<Order>>>;
-    public getUserOrders(observe?: 'events', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<HttpEvent<Array<Order>>>;
-    public getUserOrders(observe: any = 'body', reportProgress: boolean = false, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<any> {
+    public getPromotionsByCategory(categoryId: number, observe?: 'body', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<Array<Promotion>>;
+    public getPromotionsByCategory(categoryId: number, observe?: 'response', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<HttpResponse<Array<Promotion>>>;
+    public getPromotionsByCategory(categoryId: number, observe?: 'events', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<HttpEvent<Array<Promotion>>>;
+    public getPromotionsByCategory(categoryId: number, observe: any = 'body', reportProgress: boolean = false, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<any> {
+        if (categoryId === null || categoryId === undefined) {
+            throw new Error('Required parameter categoryId was null or undefined when calling getPromotionsByCategory.');
+        }
 
         let localVarHeaders = this.defaultHeaders;
 
@@ -357,7 +416,7 @@ export class OrdersApiService {
             }
         }
 
-        return this.httpClient.get<Array<Order>>(`${this.configuration.basePath}/orders/my`,
+        return this.httpClient.get<Array<Promotion>>(`${this.configuration.basePath}/promotions/category/${encodeURIComponent(String(categoryId))}`,
             {
                 context: localVarHttpContext,
                 responseType: <any>responseType_,
@@ -370,13 +429,17 @@ export class OrdersApiService {
     }
 
     /**
+     * @param id 
      * @param observe set whether or not to return the data Observable as the body, response or events. defaults to returning the body.
      * @param reportProgress flag to report request and response progress.
      */
-    public notifyShopkeepersOnOrder(observe?: 'body', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<Order>;
-    public notifyShopkeepersOnOrder(observe?: 'response', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<HttpResponse<Order>>;
-    public notifyShopkeepersOnOrder(observe?: 'events', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<HttpEvent<Order>>;
-    public notifyShopkeepersOnOrder(observe: any = 'body', reportProgress: boolean = false, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<any> {
+    public togglePromotionStatus(id: number, observe?: 'body', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<Promotion>;
+    public togglePromotionStatus(id: number, observe?: 'response', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<HttpResponse<Promotion>>;
+    public togglePromotionStatus(id: number, observe?: 'events', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<HttpEvent<Promotion>>;
+    public togglePromotionStatus(id: number, observe: any = 'body', reportProgress: boolean = false, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<any> {
+        if (id === null || id === undefined) {
+            throw new Error('Required parameter id was null or undefined when calling togglePromotionStatus.');
+        }
 
         let localVarHeaders = this.defaultHeaders;
 
@@ -409,7 +472,7 @@ export class OrdersApiService {
             }
         }
 
-        return this.httpClient.post<Order>(`${this.configuration.basePath}/orders/notifyShopkeepersOnOrder`,
+        return this.httpClient.patch<Promotion>(`${this.configuration.basePath}/promotions/${encodeURIComponent(String(id))}/toggle`,
             null,
             {
                 context: localVarHttpContext,
@@ -424,19 +487,19 @@ export class OrdersApiService {
 
     /**
      * @param id 
-     * @param orderUpdateDto 
+     * @param promotionUpdateDto 
      * @param observe set whether or not to return the data Observable as the body, response or events. defaults to returning the body.
      * @param reportProgress flag to report request and response progress.
      */
-    public updateOrder(id: number, orderUpdateDto: OrderUpdateDto, observe?: 'body', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<Order>;
-    public updateOrder(id: number, orderUpdateDto: OrderUpdateDto, observe?: 'response', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<HttpResponse<Order>>;
-    public updateOrder(id: number, orderUpdateDto: OrderUpdateDto, observe?: 'events', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<HttpEvent<Order>>;
-    public updateOrder(id: number, orderUpdateDto: OrderUpdateDto, observe: any = 'body', reportProgress: boolean = false, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<any> {
+    public updatePromotion(id: number, promotionUpdateDto: PromotionUpdateDto, observe?: 'body', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<Promotion>;
+    public updatePromotion(id: number, promotionUpdateDto: PromotionUpdateDto, observe?: 'response', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<HttpResponse<Promotion>>;
+    public updatePromotion(id: number, promotionUpdateDto: PromotionUpdateDto, observe?: 'events', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<HttpEvent<Promotion>>;
+    public updatePromotion(id: number, promotionUpdateDto: PromotionUpdateDto, observe: any = 'body', reportProgress: boolean = false, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<any> {
         if (id === null || id === undefined) {
-            throw new Error('Required parameter id was null or undefined when calling updateOrder.');
+            throw new Error('Required parameter id was null or undefined when calling updatePromotion.');
         }
-        if (orderUpdateDto === null || orderUpdateDto === undefined) {
-            throw new Error('Required parameter orderUpdateDto was null or undefined when calling updateOrder.');
+        if (promotionUpdateDto === null || promotionUpdateDto === undefined) {
+            throw new Error('Required parameter promotionUpdateDto was null or undefined when calling updatePromotion.');
         }
 
         let localVarHeaders = this.defaultHeaders;
@@ -479,8 +542,8 @@ export class OrdersApiService {
             }
         }
 
-        return this.httpClient.patch<Order>(`${this.configuration.basePath}/orders/${encodeURIComponent(String(id))}`,
-            orderUpdateDto,
+        return this.httpClient.patch<Promotion>(`${this.configuration.basePath}/promotions/${encodeURIComponent(String(id))}`,
+            promotionUpdateDto,
             {
                 context: localVarHttpContext,
                 responseType: <any>responseType_,

@@ -17,6 +17,7 @@ api/pages-api.service.ts
 api/payment-methods-api.service.ts
 api/product-ratings-api.service.ts
 api/products-api.service.ts
+api/promotions-api.service.ts
 api/returns-api.service.ts
 api/settings-api.service.ts
 api/shops-api.service.ts
@@ -78,6 +79,9 @@ model/product-rating-photo.ts
 model/product-rating.ts
 model/product-update-dto.ts
 model/product.ts
+model/promotion-create-dto.ts
+model/promotion-update-dto.ts
+model/promotion.ts
 model/register-dto.ts
 model/return-create-dto.ts
 model/return-update-dto.ts
