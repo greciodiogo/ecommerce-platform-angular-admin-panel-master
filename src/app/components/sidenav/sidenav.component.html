@@ -89,9 +89,10 @@
         <mat-icon mat-list-icon>numbers</mat-icon>
         Trending Products
       </a>
-      <!-- routerLink="/catalog/products" -->
-      <!-- [ngClass]="{ active: router.url.startsWith('/catalog/products') }" -->
-      <a mat-list-item [appAuthRole]="['admin', 'manager']">
+      <a 
+      routerLink="/catalog/promotions"
+      [ngClass]="{ active: router.url.startsWith('/catalog/promotions') }"
+      mat-list-item [appAuthRole]="['admin', 'manager']">
         <mat-icon mat-list-icon>star</mat-icon>
         Promotions
       </a>

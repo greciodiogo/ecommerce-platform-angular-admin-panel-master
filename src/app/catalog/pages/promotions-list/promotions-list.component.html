@@ -1,0 +1,181 @@
+<mat-card>
+  <mat-card-title>Promotions</mat-card-title>
+  <mat-card-content>
+    <mat-table
+      [dataSource]="dataSource"
+      multiTemplateDataRows
+      matSort
+      matSortActive="id"
+      matSortDirection="asc"
+    >
+      <ng-container matColumnDef="id">
+        <mat-header-cell *matHeaderCellDef mat-sort-header="id"
+          >ID</mat-header-cell
+        >
+        <mat-cell *matCellDef="let order"
+          >{{ order.id }}<a [routerLink]="['/catalog/promotions', order.id]"></a
+        ></mat-cell>
+      </ng-container>
+      <ng-container matColumnDef="startDate">
+        <mat-header-cell *matHeaderCellDef mat-sort-header="startDate">
+          Start Date
+        </mat-header-cell>
+        <mat-cell *matCellDef="let order">
+          {{ order.created | date : 'd MMM yyyy, HH:mm' }}
+        </mat-cell>
+      </ng-container>
+      <ng-container matColumnDef="endDate">
+        <mat-header-cell *matHeaderCellDef mat-sort-header="endDate">
+          End Date
+        </mat-header-cell>
+        <mat-cell *matCellDef="let order">
+          {{ order.created | date : 'd MMM yyyy, HH:mm' }}
+        </mat-cell>
+      </ng-container>
+      <ng-container matColumnDef="status">
+        <mat-header-cell *matHeaderCellDef mat-sort-header="status">
+          Status
+        </mat-header-cell>
+        <mat-cell *matCellDef="let order">{{ order.status }}</mat-cell>
+      </ng-container>
+      <ng-container matColumnDef="itemsCount">
+        <mat-header-cell
+          *matHeaderCellDef
+          mat-sort-header="itemsCount"
+          arrowPosition="before"
+        >
+          Categories
+        </mat-header-cell>
+        <mat-cell *matCellDef="let order">
+          {{ order.itemsCount }}
+        </mat-cell>
+      </ng-container>
+      <ng-container matColumnDef="itemsTotal">
+        <mat-header-cell
+          *matHeaderCellDef
+          mat-sort-header="itemsTotal"
+          arrowPosition="before"
+        >
+          Discount %
+        </mat-header-cell>
+        <mat-cell *matCellDef="let order">
+          {{
+            order.itemsTotal +
+              order.delivery.method.price +
+              order.payment.method.price | formatCurrency
+          }}
+        </mat-cell>
+      </ng-container>
+      <ng-container matColumnDef="name">
+        <mat-header-cell *matHeaderCellDef mat-sort-header="name">
+          Name
+        </mat-header-cell>
+        <mat-cell *matCellDef="let order">{{ order.fullName }}</mat-cell>
+      </ng-container>
+      <ng-container matColumnDef="delivery">
+        <mat-header-cell *matHeaderCellDef mat-sort-header="delivery">
+          Start Date
+        </mat-header-cell>
+        <mat-cell *matCellDef="let order">
+          {{ order.created | date : 'd MMM yyyy, HH:mm' }}
+        </mat-cell>
+      </ng-container>
+      <ng-container matColumnDef="payment">
+        <mat-header-cell *matHeaderCellDef mat-sort-header="payment">
+          End Date
+        </mat-header-cell>
+        <mat-cell *matCellDef="let order">
+          {{ order.created | date : 'd MMM yyyy, HH:mm' }}
+        </mat-cell>
+      </ng-container>
+
+      <mat-header-row
+        *matHeaderRowDef="[
+          'id',
+          'name',
+          'itemsCount',
+          'itemsTotal',
+          'startDate',
+          'endDate',
+          'status'
+        ]"
+      ></mat-header-row>
+      <mat-row
+        *matRowDef="
+          let order;
+          columns: [
+            'id',
+            'name',
+            'itemsCount',
+            'itemsTotal',
+            'startDate',
+            'endDate',
+            'status'
+          ]
+        "
+        class="order-row"
+      ></mat-row>
+    </mat-table>
+    <span *ngIf="(orders$ | async)?.length === 0" class="empty-placeholder">
+      No Promotions found
+    </span>
+    <mat-paginator
+      hidePageSize
+      pageSize="50"
+      showFirstLastButtons
+    ></mat-paginator>
+  </mat-card-content>
+  <a
+    class="add-button"
+    mat-fab
+    color="primary"
+    routerLink="/catalog/promotions/new"
+    [ngClass]="{
+    'admin_color': (role$ | async) === 'admin',
+    'sales_color': (role$ | async) === 'sales',
+    'manager_color': (role$ | async) === 'manager',
+}"
+  >
+    <mat-icon>add</mat-icon>
+  </a>
+</mat-card>
+
+<app-filter-helper>
+  <h2>Filter</h2>
+  <mat-form-field appearance="outline" class="faq-visible">
+    <mat-label>Status</mat-label>
+    <mat-select>
+      <mat-option value="pending">Pending</mat-option>
+      <mat-option value="failed">Failed</mat-option>
+      <mat-option value="confirmed">Confirmed</mat-option>
+      <mat-option value="open">Open</mat-option>
+      <mat-option value="cancelled">Cancelled</mat-option>
+      <mat-option value="delivered">Delivered</mat-option>
+      <mat-option value="refunded">Refunded</mat-option>
+    </mat-select>
+  </mat-form-field>
+
+  <mat-form-field appearance="outline" class="faq-visible">
+    <mat-label>Delivery</mat-label>
+    <mat-select>
+      <mat-option
+        *ngFor="let method of deliveryMethods$ | async"
+        [value]="method.id"
+      >
+        {{ method.name }}
+      </mat-option>
+    </mat-select>
+  </mat-form-field>
+
+  <mat-form-field appearance="outline" class="faq-visible">
+    <mat-label>Payment</mat-label>
+    <mat-select>
+      <mat-option
+        *ngFor="let method of paymentMethods$ | async"
+        [value]="method.id"
+      >
+        {{ method.name }}
+      </mat-option>
+    </mat-select>
+  </mat-form-field>
+</app-filter-helper>

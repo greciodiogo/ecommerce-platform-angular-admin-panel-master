@@ -1,0 +1,55 @@
+import {
+  AfterViewInit,
+  Component,
+  OnDestroy,
+  OnInit,
+  ViewChild,
+} from '@angular/core';
+import { Store } from '@ngrx/store';
+// import { OrdersActions, selectDeliveryMethodsList, selectOrdersListWithItems, selectPaymentMethodsList } from '../../store';
+import { MatTableDataSource } from '@angular/material/table';
+import { Order } from '../../../core/api';
+import { firstValueFrom, Subscription } from 'rxjs';
+import { MatSort } from '@angular/material/sort';
+import { ProductsActions } from '../../../catalog/store';
+import { MatPaginator } from '@angular/material/paginator';
+import { selectUserRole } from 'src/app/core/auth/store';
+import { OrdersActions, selectDeliveryMethodsList, selectOrdersListWithItems, selectPaymentMethodsList } from 'src/app/sales/store';
+@Component({
+  selector: 'app-promotions-list',
+  templateUrl: './promotions-list.component.html',
+  styleUrls: ['./promotions-list.component.scss'],
+})
+export class PromotionsListComponent implements OnInit, AfterViewInit, OnDestroy {
+  orders$ = this.store.select(selectOrdersListWithItems);
+  dataSource = new MatTableDataSource<Order>();
+  subscription!: Subscription;
+  role$ = this.store.select(selectUserRole);
+
+    deliveryMethods$ = this.store.select(selectDeliveryMethodsList);
+    paymentMethods$ = this.store.select(selectPaymentMethodsList);
+
+  @ViewChild(MatSort) sort!: MatSort;
+  @ViewChild(MatPaginator) paginator!: MatPaginator;
+
+  constructor(private store: Store) {}
+
+  ngOnInit() {
+    this.dataSource.data = [];
+    this.store.dispatch(ProductsActions.loadProducts());
+  }
+
+  ngOnDestroy() {
+    this.subscription?.unsubscribe();
+  }
+
+  async ngAfterViewInit() {
+    this.dataSource.data = await firstValueFrom(this.orders$);
+    this.subscription = this.orders$.subscribe((orders) => {
+      this.dataSource.data = orders;
+    });
+    this.store.dispatch(OrdersActions.loadOrders());
+    this.dataSource.sort = this.sort;
+    this.dataSource.paginator = this.paginator;
+  }
+}

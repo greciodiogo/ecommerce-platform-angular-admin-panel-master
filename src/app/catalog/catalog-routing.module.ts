@@ -17,6 +17,10 @@ import { FaqComponent } from './pages/faq/faq.component';
 import { ReportsComponent } from './pages/reports/reports.component';
 import { ShopsComponent } from './pages/shops/shops.component';
 import { TrendingComponent } from './pages/trending/trending.component';
+import { PromotionsComponent } from './pages/promotions/promotions.component';
+import { PromotionComponent } from './pages/promotion/promotion.component';
+import { PromotionsListComponent } from './pages/promotions-list/promotions-list.component';
+import { CreatePromotionFormComponent } from './pages/create-promotion-form/create-promotion-form.component';
 
 const routes: Routes = [
   {
@@ -72,6 +76,30 @@ const routes: Routes = [
         canActivate: [AuthRoleGuard],
         data: { roles: [RoleEnum.Admin, RoleEnum.Manager, RoleEnum.Sales] },
         component: FaqsListComponent,
+      },
+    ],
+  },
+    {
+    title: 'Promotions',
+    path: 'promotions',
+    canActivate: [AuthRoleGuard],
+    data: { roles: [RoleEnum.Admin, RoleEnum.Manager, RoleEnum.Sales] },
+    component: PromotionsComponent,
+    children: [
+      {
+        title: 'Create new order',
+        path: 'new',
+        component: CreatePromotionFormComponent,
+      },
+      {
+        title: 'Promotion',
+        path: ':id',
+        component: PromotionComponent,
+      },
+      {
+        title: 'Promotions',
+        path: '',
+        component: PromotionsListComponent,
       },
     ],
   },
