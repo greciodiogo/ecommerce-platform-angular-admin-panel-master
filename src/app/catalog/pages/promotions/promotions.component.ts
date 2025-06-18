@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Store } from '@ngrx/store';
-import { OrdersActions } from 'src/app/sales/store';
+import * as PromotionsActions from '../../store/actions/promotions.actions';
 
 @Component({
   selector: 'app-promotions',
@@ -11,6 +11,6 @@ export class PromotionsComponent implements OnInit {
   constructor(private store: Store) {}
 
   ngOnInit() {
-    this.store.dispatch(OrdersActions.loadOrders());
+    this.store.dispatch(PromotionsActions.loadPromotions());
   }
 }

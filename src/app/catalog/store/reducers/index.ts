@@ -6,6 +6,7 @@ import * as fromProductRatings from './product-ratings.reducer';
 import * as fromStatus from './status.reducer';
 import * as fromShops from './shops.reducer';
 import * as fromNotifications from './notifications.reducer';
+import * as fromPromotions from './promotions.reducer';
 import * as fromRoot from '../../../core/store';
 import { Action, combineReducers } from '@ngrx/store';
 
@@ -20,6 +21,7 @@ export interface CatalogState {
   [fromStatus.statusFeatureKey]: fromStatus.State;
   [fromShops.shopsFeatureKey]: fromShops.State;
   [fromNotifications.notificationsFeatureKey]: fromNotifications.State;
+  [fromPromotions.promotionsFeatureKey]: fromPromotions.PromotionState;
 }
 
 export interface State extends fromRoot.State {
@@ -35,5 +37,6 @@ export const reducers = (state: CatalogState | undefined, action: Action) =>
     [fromProductRatings.productRatingsFeatureKey]: fromProductRatings.reducer,
     [fromStatus.statusFeatureKey]: fromStatus.reducer,
     [fromShops.shopsFeatureKey]: fromShops.reducer,
-    [fromNotifications.notificationsFeatureKey]: fromNotifications.reducer
+    [fromNotifications.notificationsFeatureKey]: fromNotifications.reducer,
+    [fromPromotions.promotionsFeatureKey]: fromPromotions.reducer
   })(state, action);

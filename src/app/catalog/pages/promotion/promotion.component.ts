@@ -1,7 +1,8 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { Store } from '@ngrx/store';
-import { OrdersActions, selectSelectedOrder } from 'src/app/sales/store';
+import * as PromotionsActions from '../../store/actions/promotions.actions';
+import { selectSelectedPromotion } from '../../store/selectors/promotions.selectors';
 
 @Component({
   selector: 'app-promotion',
@@ -9,20 +10,19 @@ import { OrdersActions, selectSelectedOrder } from 'src/app/sales/store';
   styleUrls: ['./promotion.component.scss'],
 })
 export class PromotionComponent implements OnInit, OnDestroy {
-  order$ = this.store.select(selectSelectedOrder);
+  promotion$ = this.store.select(selectSelectedPromotion);
 
   constructor(private store: Store, private route: ActivatedRoute) {}
 
   ngOnInit() {
-    this.store.dispatch(
-      OrdersActions.selectOrder({
-        orderId:
-          parseInt(this.route.snapshot.paramMap.get('id') ?? '0') || null,
-      }),
-    );
+    const id = parseInt(this.route.snapshot.paramMap.get('id') ?? '0') || null;
+    if (id) {
+      this.store.dispatch(PromotionsActions.selectPromotion({ promotionId: id }));
+      this.store.dispatch(PromotionsActions.getPromotion({ promotionId: id }));
+    }
   }
 
   ngOnDestroy() {
-    this.store.dispatch(OrdersActions.selectOrder({ orderId: null }));
+    this.store.dispatch(PromotionsActions.selectPromotion({ promotionId: null }));
   }
 }

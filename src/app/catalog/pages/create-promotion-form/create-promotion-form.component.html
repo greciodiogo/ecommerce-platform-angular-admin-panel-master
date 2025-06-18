@@ -14,39 +14,33 @@
       </div>
 
       <div class="contact">
-        <h2>Contact data</h2>
+        <h2>Promotion data</h2>
         <mat-form-field appearance="outline">
-          <mat-label> Contact Email </mat-label>
-          <input matInput type="email" formControlName="contactEmail" />
-          <mat-error *ngIf="createForm.controls.contactEmail.invalid">
-            Invalid email
+          <mat-label>Name </mat-label>
+          <input matInput type="text" formControlName="name" />
+          <mat-error *ngIf="createForm.controls.name.invalid">
+            Invalid name
           </mat-error>
         </mat-form-field>
         <mat-form-field appearance="outline">
-          <mat-label> Contact Phone number </mat-label>
-          <ngx-mat-intl-tel-input
-            formControlName="contactPhone"
-            [enableSearch]="true"
-            [preferredCountries]="['us']"
-          ></ngx-mat-intl-tel-input>
-          <mat-error *ngIf="createForm.controls.contactPhone.invalid">
-            Invalid phone number
+          <mat-label>Description </mat-label>
+          <input matInput type="text" formControlName="description" />
+          <mat-error *ngIf="createForm.controls.description.invalid">
+            Invalid description
           </mat-error>
         </mat-form-field>
-        <mat-form-field appearance="outline">
-          <mat-label> Full name </mat-label>
-          <input matInput type="text" formControlName="fullName" />
-          <mat-error *ngIf="createForm.controls.fullName.invalid">
-            Invalid full name
-          </mat-error>
+        <mat-form-field appearance="outline" class="discount"  [appAuthRole]="['admin', 'sales']">
+          <mat-label>Discount</mat-label>
+          <input type="number" matInput required formControlName="discount" />
+          <mat-error>Invalid discount</mat-error>
         </mat-form-field>
-        <mat-form-field appearance="outline">
+        <!-- <mat-form-field appearance="outline">
           <mat-label> Message </mat-label>
           <textarea matInput formControlName="message"></textarea>
           <mat-error *ngIf="createForm.controls.message.invalid">
             Invalid message
           </mat-error>
-        </mat-form-field>
+        </mat-form-field> -->
       </div>
 
       <div class="details">

@@ -50,22 +50,6 @@
           {{ order.itemsCount }}
         </mat-cell>
       </ng-container>
-      <ng-container matColumnDef="itemsTotal">
-        <mat-header-cell
-          *matHeaderCellDef
-          mat-sort-header="itemsTotal"
-          arrowPosition="before"
-        >
-          Discount %
-        </mat-header-cell>
-        <mat-cell *matCellDef="let order">
-          {{
-            order.itemsTotal +
-              order.delivery.method.price +
-              order.payment.method.price | formatCurrency
-          }}
-        </mat-cell>
-      </ng-container>
       <ng-container matColumnDef="name">
         <mat-header-cell *matHeaderCellDef mat-sort-header="name">
           Name
@@ -93,11 +77,8 @@
         *matHeaderRowDef="[
           'id',
           'name',
-          'itemsCount',
-          'itemsTotal',
           'startDate',
           'endDate',
-          'status'
         ]"
       ></mat-header-row>
       <mat-row
@@ -106,17 +87,14 @@
           columns: [
             'id',
             'name',
-            'itemsCount',
-            'itemsTotal',
             'startDate',
             'endDate',
-            'status'
           ]
         "
         class="order-row"
       ></mat-row>
     </mat-table>
-    <span *ngIf="(orders$ | async)?.length === 0" class="empty-placeholder">
+    <span *ngIf="(promotions$ | async)?.length === 0" class="empty-placeholder">
       No Promotions found
     </span>
     <mat-paginator
@@ -155,27 +133,4 @@
     </mat-select>
   </mat-form-field>
 
-  <mat-form-field appearance="outline" class="faq-visible">
-    <mat-label>Delivery</mat-label>
-    <mat-select>
-      <mat-option
-        *ngFor="let method of deliveryMethods$ | async"
-        [value]="method.id"
-      >
-        {{ method.name }}
-      </mat-option>
-    </mat-select>
-  </mat-form-field>
-
-  <mat-form-field appearance="outline" class="faq-visible">
-    <mat-label>Payment</mat-label>
-    <mat-select>
-      <mat-option
-        *ngFor="let method of paymentMethods$ | async"
-        [value]="method.id"
-      >
-        {{ method.name }}
-      </mat-option>
-    </mat-select>
-  </mat-form-field>
 </app-filter-helper>

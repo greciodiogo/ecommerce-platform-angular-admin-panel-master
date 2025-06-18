@@ -3,7 +3,7 @@
     <mat-card-title>
       <a mat-button routerLink="/catalog/promotions">
         <mat-icon>arrow_back</mat-icon></a
-      >Promotion #{{ (order$ | async)?.order_number }}
+      >Promotion #{{ (promotion$ | async)?.id }}
     </mat-card-title>
   </mat-card-title-group>
   <mat-tab-group dynamicHeight>
