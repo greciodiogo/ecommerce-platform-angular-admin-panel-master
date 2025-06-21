@@ -16,6 +16,7 @@ import { MatPaginator } from '@angular/material/paginator';
 import { selectUserRole } from 'src/app/core/auth/store';
 import { FnService } from 'src/app/services/fn.helper.service';
 import { DashboardActions, selectDashboardItems } from 'src/app/sales/store';
+import { FormControl } from '@angular/forms';
 
 @Component({
   selector: 'app-products-list',
@@ -23,6 +24,8 @@ import { DashboardActions, selectDashboardItems } from 'src/app/sales/store';
   styleUrls: ['./products-list.component.scss', '../../../home/pages/main/main.component.css'],
 })
 export class ProductsListComponent implements OnInit, AfterViewInit, OnDestroy {
+  periodControl = new FormControl<'weekly' | 'monthly' | 'yearly'>('monthly');
+  
   products$ = this.store.select(selectProductsList);
   role$ = this.store.select(selectUserRole);
   dataSource = new MatTableDataSource<Product>();
@@ -48,7 +51,7 @@ export class ProductsListComponent implements OnInit, AfterViewInit, OnDestroy {
 
   ngOnInit() {
     this.dataSource.data = [];
-    this.store.dispatch(DashboardActions.loadDashboard());
+    this.store.dispatch(DashboardActions.loadDashboard({ period: this.periodControl.value }));
      this.role$.subscribe(role => {
     this.displayedColumns = [
       'id',

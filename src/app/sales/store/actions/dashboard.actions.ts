@@ -2,7 +2,10 @@ import { createAction, props } from '@ngrx/store';
 import { DashboardState } from '../../../core/api';
 
 // Ação para carregar o dashboard
-export const loadDashboard = createAction('[Dashboard] Load Dashboard');
+export const loadDashboard = createAction(
+  '[Dashboard] Load Dashboard',
+  props<{period: 'weekly' | 'monthly' | 'yearly'}>()
+);
 
 // Ação de sucesso ao carregar o dashboard
 export const loadDashboardSuccess = createAction(
