@@ -1,6 +1,7 @@
 .gitignore
 README.md
 api.module.ts
+api/address-api.service.ts
 api/api.ts
 api/attribute-types-api.service.ts
 api/auth-api.service.ts
@@ -28,6 +29,7 @@ encoder.ts
 git_push.sh
 index.ts
 model/add-category-product-request.ts
+model/address.ts
 model/attribute-dto.ts
 model/attribute-type-dto.ts
 model/attribute-type.ts
@@ -43,6 +45,7 @@ model/category-update-dto.ts
 model/category.ts
 model/code-update-dto.ts
 model/code.ts
+model/create-address-dto.ts
 model/create-notification-dto.ts
 model/dashboard-state.ts
 model/delivery-method-dto.ts
@@ -95,6 +98,7 @@ model/shop-item-dto.ts
 model/shop-item.ts
 model/shop-update-dto.ts
 model/shop.ts
+model/update-address-dto.ts
 model/user-update-dto.ts
 model/user.ts
 model/wishlist-create-dto.ts

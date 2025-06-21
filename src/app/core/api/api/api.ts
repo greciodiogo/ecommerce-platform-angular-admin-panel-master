@@ -1,3 +1,5 @@
+export * from './address-api.service';
+import { AddressApiService } from './address-api.service';
 export * from './attribute-types-api.service';
 import { AttributeTypesApiService } from './attribute-types-api.service';
 export * from './auth-api.service';
@@ -40,4 +42,4 @@ export * from './users-api.service';
 import { UsersApiService } from './users-api.service';
 export * from './wishlists-api.service';
 import { WishlistsApiService } from './wishlists-api.service';
-export const APIS = [AttributeTypesApiService, AuthApiService, CartsApiService, CategoriesApiService, CodesApiService, DefaultApiService, DeliveryMethodsApiService, FaqsApiService, ImportExportApiService, NotificationsApiService, OrdersApiService, PagesApiService, PaymentMethodsApiService, ProductRatingsApiService, ProductsApiService, PromotionsApiService, ReturnsApiService, SettingsApiService, ShopsApiService, UsersApiService, WishlistsApiService];
+export const APIS = [AddressApiService, AttributeTypesApiService, AuthApiService, CartsApiService, CategoriesApiService, CodesApiService, DefaultApiService, DeliveryMethodsApiService, FaqsApiService, ImportExportApiService, NotificationsApiService, OrdersApiService, PagesApiService, PaymentMethodsApiService, ProductRatingsApiService, ProductsApiService, PromotionsApiService, ReturnsApiService, SettingsApiService, ShopsApiService, UsersApiService, WishlistsApiService];

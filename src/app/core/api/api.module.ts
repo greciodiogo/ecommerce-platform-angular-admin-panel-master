@@ -2,6 +2,7 @@ import { NgModule, ModuleWithProviders, SkipSelf, Optional } from '@angular/core
 import { Configuration } from './configuration';
 import { HttpClient } from '@angular/common/http';
 
+import { AddressApiService } from './api/address-api.service';
 import { AttributeTypesApiService } from './api/attribute-types-api.service';
 import { AuthApiService } from './api/auth-api.service';
 import { CartsApiService } from './api/carts-api.service';
