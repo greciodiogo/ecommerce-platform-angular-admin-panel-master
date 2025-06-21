@@ -37,7 +37,7 @@ export class ReturnAddDialogComponent implements OnInit {
   ) {}
 
   ngOnInit(): void {
-    this.store.dispatch(OrdersActions.loadOrders());
+    this.store.dispatch(OrdersActions.loadOrders({}));
     this.orderId = this.data.orderId;
   }
 

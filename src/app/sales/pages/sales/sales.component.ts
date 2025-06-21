@@ -11,6 +11,6 @@ export class SalesComponent implements OnInit {
   constructor(private store: Store) {}
 
   ngOnInit() {
-    this.store.dispatch(OrdersActions.loadOrders());
+    this.store.dispatch(OrdersActions.loadOrders({}));
   }
 }

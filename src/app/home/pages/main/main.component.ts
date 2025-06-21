@@ -57,7 +57,7 @@ export class MainComponent implements OnInit, OnDestroy {
   ngOnInit() {
     this.dataSource.data = [];
     this.store.dispatch(ProductsActions.loadProducts());
-    this.store.dispatch(OrdersActions.loadOrders());
+    this.store.dispatch(OrdersActions.loadOrders({}));
     this.store.dispatch(DashboardActions.loadDashboard({ period: this.periodControl.value }));
     this.store.dispatch(ShopsActions.loadShops());
     this.view()

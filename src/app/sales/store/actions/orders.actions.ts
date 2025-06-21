@@ -1,7 +1,10 @@
 import { createAction, props } from '@ngrx/store';
 import { Order, OrderCreateDto, OrderUpdateDto } from '../../../core/api';
 
-export const loadOrders = createAction('[Orders] Load Orders');
+export const loadOrders = createAction(
+  '[Orders] Load Orders',
+  props<{ filters?: { orderNumber?: string; date?: string; shopName?: string } }>(),
+);
 
 export const loadSales = createAction('[Orders] Load Sales');
 

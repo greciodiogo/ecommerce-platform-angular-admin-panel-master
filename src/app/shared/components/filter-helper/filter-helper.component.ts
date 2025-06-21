@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, EventEmitter, Output } from '@angular/core';
 import { Store } from '@ngrx/store';
 import { selectUserRole } from 'src/app/core/auth/store';
 
@@ -9,6 +9,7 @@ import { selectUserRole } from 'src/app/core/auth/store';
 
 })
 export class FilterHelper  {
+    @Output() close = new EventEmitter<void>();
     role$ = this.store.select(selectUserRole);
     public openModal: boolean = false
 
@@ -16,6 +17,11 @@ export class FilterHelper  {
     
 
     public handleClick = () => {
-      this.openModal = true
+      this.openModal = !this.openModal
+    }
+
+    public handleClose = () => {
+      this.openModal = false;
+      this.close.emit();
     }
 }

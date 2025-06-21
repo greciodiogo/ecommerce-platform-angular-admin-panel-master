@@ -61,6 +61,8 @@ import { ComplaintsListComponent } from './pages/complaints-list/complaints-list
 import { ComplaintsComponent } from './pages/complaints/complaints.component';
 import { ComplaintDetailsComponent } from './components/complaint-details/complaint-details.component';
 import { EditComplaintFormComponent } from './components/edit-complaint-form/edit-complaint-form.component';
+import { MatDatepickerModule } from '@angular/material/datepicker';
+import { MatNativeDateModule } from '@angular/material/core';
 
 @NgModule({
   declarations: [
@@ -126,6 +128,8 @@ import { EditComplaintFormComponent } from './components/edit-complaint-form/edi
     MatPaginatorModule,
     HttpClientModule,
     NgxMatIntlTelInputComponent,
+    MatDatepickerModule,
+    MatNativeDateModule,
   ],
 })
 export class SalesModule {}
