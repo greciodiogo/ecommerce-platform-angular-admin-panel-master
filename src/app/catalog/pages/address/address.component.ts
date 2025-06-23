@@ -7,7 +7,7 @@ import { ActivatedRoute } from '@angular/router';
 @Component({
   selector: 'app-address',
   templateUrl: './address.component.html',
-  styleUrls: ['./address.component.scss'],
+  // styleUrls: ['./address.component.scss'],
 })
 export class AddressComponent implements OnInit, OnDestroy {
   address$ = this.store.select(fromAddresses.selectSelectedAddress);
