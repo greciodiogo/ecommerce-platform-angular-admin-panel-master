@@ -5,100 +5,91 @@ import {
   OnInit,
   ViewChild,
 } from '@angular/core';
-import { Store } from '@ngrx/store';
-import { ProductsActions, selectProductsList } from '../../store';
-import { Product } from '../../../core/api';
-import { MatTableDataSource } from '@angular/material/table';
-import { combineLatest, firstValueFrom, Subscription } from 'rxjs';
-import { MatSort } from '@angular/material/sort';
-import { Router } from '@angular/router';
+import { FormBuilder, FormGroup } from '@angular/forms';
 import { MatPaginator } from '@angular/material/paginator';
+import { MatSort } from '@angular/material/sort';
+import { MatTableDataSource } from '@angular/material/table';
+import { Router } from '@angular/router';
+import { Store } from '@ngrx/store';
+import { Subscription } from 'rxjs';
+import { Product } from 'src/app/core/api';
 import { selectUserRole } from 'src/app/core/auth/store';
 import { FnService } from 'src/app/services/fn.helper.service';
-import { DashboardActions, selectDashboardItems } from 'src/app/sales/store';
-import { FormControl } from '@angular/forms';
+import { ProductsActions, selectProductsList } from '../../store';
 
 @Component({
   selector: 'app-products-list',
   templateUrl: './products-list.component.html',
-  styleUrls: ['./products-list.component.scss', '../../../home/pages/main/main.component.css'],
+  styleUrls: ['./products-list.component.scss'],
 })
 export class ProductsListComponent implements OnInit, AfterViewInit, OnDestroy {
-  periodControl = new FormControl<'weekly' | 'monthly' | 'yearly'>('monthly');
-  
-  products$ = this.store.select(selectProductsList);
-  role$ = this.store.select(selectUserRole);
-  dataSource = new MatTableDataSource<Product>();
-  subscription!: Subscription;
-
-  dashboard$ = this.store.select(selectDashboardItems);
-  displayedColumns: string[] = [];
-  public dashboard_: any 
-
-  public summary = {
-  confirmedToday: 0,
-  confirmedOrderWeek: 0,
-  completedDeliveriesWeek: 0,
-  newUsers: 0,
-  totalSales: 0,
-  lowStockProductsCount: 0,
-}
-
   @ViewChild(MatSort) sort!: MatSort;
   @ViewChild(MatPaginator) paginator!: MatPaginator;
 
-  constructor(public configService: FnService, private store: Store, public router: Router) {}
+  products$ = this.store.select(selectProductsList);
+  role$ = this.store.select(selectUserRole);
+
+  dataSource = new MatTableDataSource<Product>();
+  private subscription!: Subscription;
+
+  filterForm: FormGroup;
+  displayedColumns: string[] = [
+    'id',
+    'photo',
+    'shop',
+    'name',
+    'purchasePrice',
+    'price',
+    'stock',
+    'visible',
+  ];
+
+  constructor(
+    public configService: FnService,
+    private store: Store,
+    public router: Router,
+    private fb: FormBuilder,
+  ) {
+    this.filterForm = this.fb.group({
+      id: [''],
+      name: [''],
+      shopName: [''],
+      withVisible: [null],
+    });
+  }
 
   ngOnInit() {
-    this.dataSource.data = [];
-    this.store.dispatch(DashboardActions.loadDashboard({ period: this.periodControl.value }));
-     this.role$.subscribe(role => {
-    this.displayedColumns = [
-      'id',
-      'photo',
-      'shop',
-      'name',
-      ...(role === 'sales' ? ['description'] : []),  // 👈 adiciona 'price' só se não for sales
-      'purchasePrice',
-      ...(role !== 'sales' ? ['price'] : []),  // 👈 adiciona 'price' só se não for sales
-      'stock',
-      'visible',
-    ];
-  });
-    this.view()
+    this.store.dispatch(ProductsActions.loadProducts({ filters: {} }));
+
+    this.subscription = this.products$.subscribe((products) => {
+      this.dataSource.data = products;
+    });
+
+    this.role$.subscribe((role) => {
+      if (role === 'sales') {
+        this.displayedColumns = this.displayedColumns.filter(
+          (c) => c !== 'price',
+        );
+      }
+    });
+  }
+
+  ngAfterViewInit() {
+    this.dataSource.sort = this.sort;
+    this.dataSource.paginator = this.paginator;
   }
 
   ngOnDestroy() {
     this.subscription?.unsubscribe();
   }
 
-  async ngAfterViewInit() {
-    this.dataSource.data = await firstValueFrom(this.products$);
-    this.subscription = this.products$.subscribe((products) => {
-      this.dataSource.data = products;
-    });
-    this.store.dispatch(ProductsActions.loadProducts());
-    this.dataSource.sort = this.sort;
-    this.dataSource.paginator = this.paginator;
-  }
+  applyFilters() {
+    const filters = { ...this.filterForm.value };
 
-    async view() {
-      this.subscription = combineLatest([
-        this.products$,
-        this.dashboard$,
-      ]).subscribe(([products, dashboard]) => {
-        this.dashboard_ = {
-          totalProducts: products?.length || 0,
-          lowStockProductsCount: dashboard?.lowStockProductsCount || 0
-        };
-        this.summary = {
-          confirmedToday: dashboard.confirmedToday,
-          confirmedOrderWeek: dashboard.confirmedOrderWeek,
-          completedDeliveriesWeek: dashboard.completedDeliveriesWeek,
-          newUsers: dashboard.newUsers,
-          totalSales: dashboard.totalSales,
-          lowStockProductsCount: dashboard.lowStockProductsCount
-        }
-      });
-    }
+    const cleanFilters = Object.fromEntries(
+      Object.entries(filters).filter(([_, value]) => value !== null && value !== ''),
+    );
+
+    this.store.dispatch(ProductsActions.loadProducts({ filters: cleanFilters }));
+  }
 }

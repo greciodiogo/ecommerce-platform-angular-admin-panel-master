@@ -36,7 +36,7 @@ export class ComplaintsListComponent implements OnInit, AfterViewInit, OnDestroy
 
   ngOnInit() {
     this.dataSource.data = [];
-    this.store.dispatch(ProductsActions.loadProducts());
+    this.store.dispatch(ProductsActions.loadProducts({}));
   }
 
   ngOnDestroy() {

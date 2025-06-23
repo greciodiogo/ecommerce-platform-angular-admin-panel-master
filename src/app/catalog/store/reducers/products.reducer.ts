@@ -22,7 +22,10 @@ export const reducer = createReducer(
     ProductsActions.loadProductsSuccess,
     (state, { products }): State => ({
       ...state,
-      list: products,
+      list: (products ?? []).map(p => ({
+        ...p,
+        photos: Array.isArray(p.photos) ? p.photos : [],
+      })),
     }),
   ),
   on(
@@ -70,10 +73,10 @@ export const reducer = createReducer(
   on(
     ProductsActions.addProductPhotoSuccess,
     (state, { productId, data, product, photosOrder }): State => {
-      const oldProduct = state.list.find((p) => p.id === productId);
-      const photoId = product.photos.find(
-        (p) => !oldProduct?.photos.find((ph) => ph.id === p.id),
-      )?.id;
+      const oldProduct = Array.isArray(state.list) ? state.list.find((p) => p.id === productId) : undefined;
+      const photoId = Array.isArray(product.photos)
+        ? product.photos.find((p) => !Array.isArray(oldProduct?.photos) ? true : !oldProduct.photos.find((ph) => ph.id === p.id))?.id
+        : undefined;
       return {
         ...state,
         photos: [...state.photos, { id: photoId ?? -1, data }],

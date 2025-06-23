@@ -7,7 +7,17 @@ import {
   ProductUpdateDto,
 } from '../../../core/api';
 
-export const loadProducts = createAction('[Products] Load Products');
+export const loadProducts = createAction(
+  '[Products] Load Products',
+  props<{
+    filters?: {
+      id?: string;
+      name?: string;
+      shopName?: string;
+      withVisible?: boolean;
+    };
+  }>(),
+);
 
 export const loadProductsSuccess = createAction(
   '[Products] Load Products Success',

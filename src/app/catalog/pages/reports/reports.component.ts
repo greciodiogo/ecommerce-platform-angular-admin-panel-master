@@ -74,7 +74,7 @@ export class ReportsComponent implements OnInit, AfterViewInit, OnDestroy {
     this.subscription = this.products$.subscribe((products) => {
       this.dataSource.data = products;
     });
-    this.store.dispatch(ProductsActions.loadProducts());
+    this.store.dispatch(ProductsActions.loadProducts({}));
     this.dataSource.sort = this.sort;
     this.dataSource.paginator = this.paginator;
   }
