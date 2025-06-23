@@ -12,3 +12,4 @@ export * from './actions/promotions.actions';
 export * from './reducers/promotions.reducer';
 export * from './effects/promotions.effects';
 export * from './selectors/promotions.selectors';
+export * from './selectors/addresses.selectors';

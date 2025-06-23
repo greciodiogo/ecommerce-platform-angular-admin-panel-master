@@ -1,0 +1,29 @@
+form {
+  padding-bottom: 36px;
+}
+
+.address-name {
+  width: 100%;
+}
+
+.address-slug {
+  width: 100%;
+}
+
+.address-visible {
+  width: 100%;
+}
+
+div {
+  position: absolute;
+  left: 16px;
+  bottom: 16px;
+  right: 16px;
+  button:first-child {
+    float: left;
+  }
+  button {
+    float: right;
+  }
+}
+

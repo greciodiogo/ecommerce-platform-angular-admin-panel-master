@@ -153,6 +153,15 @@
       </a>
       <a
         mat-list-item
+        routerLink="/catalog/addresses"
+        [appAuthRole]="['admin', 'manager']"
+        [ngClass]="{ active: router.url.startsWith('/catalog/addresses') }"
+      >
+        <mat-icon mat-list-icon>location_on</mat-icon>
+        Addresses
+      </a>
+      <a
+        mat-list-item
         [appAuthRole]="['admin', 'manager']"
         [ngClass]="{ active: router.url.startsWith('/sales/deliveries') }"
       >

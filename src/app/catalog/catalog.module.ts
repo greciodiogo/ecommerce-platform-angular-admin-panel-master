@@ -9,6 +9,7 @@ import * as fromCatalog from './store/reducers';
 import { ProductsComponent } from './pages/products/products.component';
 import { EffectsModule } from '@ngrx/effects';
 import {
+  AddressesEffects,
   AttributeTypesEffects,
   CategoriesEffects,
   FaqsEffects,
@@ -77,6 +78,10 @@ import { PromotionsComponent } from './pages/promotions/promotions.component';
 import { PromotionComponent } from './pages/promotion/promotion.component';
 import { CreatePromotionFormComponent } from './pages/create-promotion-form/create-promotion-form.component';
 import { NgxMatIntlTelInputComponent } from 'ngx-mat-intl-tel-input';
+import { AddressesTreeComponent } from './pages/addresses-tree/addresses-tree.component';
+import { AddressDetailsComponent } from './components/address-details/address-details.component';
+import { AddressesComponent } from './pages/addresses/addresses.component';
+import { AddressComponent } from './pages/address/address.component';
 
 @NgModule({
   declarations: [
@@ -115,7 +120,11 @@ import { NgxMatIntlTelInputComponent } from 'ngx-mat-intl-tel-input';
     PromotionsListComponent,
     PromotionsComponent,
     PromotionComponent,
-    CreatePromotionFormComponent
+    CreatePromotionFormComponent,
+    AddressesComponent,
+    AddressesTreeComponent,
+    AddressDetailsComponent,
+    AddressComponent,
   ],
   imports: [
     CommonModule,
@@ -128,7 +137,8 @@ import { NgxMatIntlTelInputComponent } from 'ngx-mat-intl-tel-input';
       CategoriesEffects,
       AttributeTypesEffects,
       ProductRatingsEffects,
-      DashboardEffects
+      DashboardEffects,
+      AddressesEffects
       
     ]),
     MatCardModule,
@@ -138,6 +148,7 @@ import { NgxMatIntlTelInputComponent } from 'ngx-mat-intl-tel-input';
     MatIconModule,
     MatFormFieldModule,
     MatInputModule,
+    MatCardModule,
     MatSelectModule,
     MaterialFileInputModule,
     ReactiveFormsModule,
@@ -157,6 +168,6 @@ import { NgxMatIntlTelInputComponent } from 'ngx-mat-intl-tel-input';
     MatSnackBarModule,
     NgxMatIntlTelInputComponent,
   ],
-  exports: [ProductPhotoComponent],
+  exports: [ProductPhotoComponent, AddressComponent],
 })
 export class CatalogModule {}

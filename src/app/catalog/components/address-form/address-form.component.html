@@ -1,0 +1,26 @@
+<mat-card>
+  <form [formGroup]="form" (ngSubmit)="submit()">
+    <mat-form-field appearance="outline" class="address-name">
+      <mat-label>Address name</mat-label>
+      <input matInput type="text" formControlName="name" />
+      <!-- <mat-error *ngIf="form.controls.name.invalid && form.controls.name.touched">Name is required</mat-error> -->
+    </mat-form-field>
+    <mat-form-field appearance="outline" class="address-slug">
+      <mat-label>Address slug</mat-label>
+      <input matInput type="text" formControlName="slug" />
+    </mat-form-field>
+    <mat-form-field appearance="outline" class="address-parent">
+      <mat-label>Parent Address</mat-label>
+      <mat-select formControlName="parentAddressId">
+        <mat-option [value]="null">None</mat-option>
+        <mat-option *ngFor="let addr of addresses" [value]="addr.id">{{ addr.name }}</mat-option>
+      </mat-select>
+    </mat-form-field>
+    <mat-checkbox formControlName="visible">Visible</mat-checkbox>
+    <div class="address-form-actions">
+      <button mat-flat-button type="button" color="warn" *ngIf="allowDelete" (click)="onDelete()">Delete</button>
+      <button mat-flat-button type="submit" color="primary" [disabled]="form.invalid || !form.dirty">Save</button>
+      <button mat-button type="button" (click)="resetValues()" color="primary">Cancel</button>
+    </div>
+  </form>
+</mat-card> 

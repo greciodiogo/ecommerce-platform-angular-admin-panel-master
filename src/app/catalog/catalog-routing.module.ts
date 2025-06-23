@@ -21,7 +21,9 @@ import { PromotionsComponent } from './pages/promotions/promotions.component';
 import { PromotionComponent } from './pages/promotion/promotion.component';
 import { PromotionsListComponent } from './pages/promotions-list/promotions-list.component';
 import { CreatePromotionFormComponent } from './pages/create-promotion-form/create-promotion-form.component';
-
+import { AddressesComponent } from './pages/addresses/addresses.component';
+import { AddressesTreeComponent } from './pages/addresses-tree/addresses-tree.component';
+import { AddressComponent } from './pages/address/address.component';
 const routes: Routes = [
   {
     title: 'Products',
@@ -144,6 +146,27 @@ const routes: Routes = [
     canActivate: [AuthRoleGuard],
     data: { roles: [RoleEnum.Admin] },
     component: ShopsComponent,
+  },
+  {
+    title: 'Addresses',
+    path: 'addresses',
+    component: AddressesComponent,
+    children: [
+      {
+        title: 'Addresses',
+        path: '',
+        canActivate: [AuthRoleGuard],
+        data: { roles: [RoleEnum.Admin, RoleEnum.Manager] },
+        component: AddressesTreeComponent,
+      },
+      {
+        title: 'Address',
+        path: ':id',
+        canActivate: [AuthRoleGuard],
+        data: { roles: [RoleEnum.Admin, RoleEnum.Manager] },
+        component: AddressComponent,
+      },
+    ],
   },
   {
     path: '',
