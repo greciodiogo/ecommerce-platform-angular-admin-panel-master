@@ -14,14 +14,23 @@ export class ProductsEffects {
 
   loadProducts$ = createEffect(() => {
     return this.actions$.pipe(
-      ofType(ProductsActions.loadProducts, CategoriesActions.loadCategories),
-      exhaustMap(() =>
-        this.productsApi.getProducts().pipe(
-          map((products) => ProductsActions.loadProductsSuccess({ products })),
-          catchError(({ error }) =>
-            of(ProductsActions.loadProductsFailure({ error: error.message })),
+      ofType(ProductsActions.loadProducts),
+      exhaustMap((action) =>
+        this.productsApi
+          .getProducts(
+            action.filters?.id,
+            action.filters?.name,
+            action.filters?.shopName,
+            action.filters?.withVisible,
+          )
+          .pipe(
+            map((products) =>
+              ProductsActions.loadProductsSuccess({ products }),
+            ),
+            catchError(({ error }) =>
+              of(ProductsActions.loadProductsFailure({ error: error.message })),
+            ),
           ),
-        ),
       ),
     );
   });
@@ -31,7 +40,7 @@ export class ProductsEffects {
       ofType(ProductsActions.loadProductsSuccess),
       mergeMap(({ products }) =>
         combineLatest(
-          products
+              products
             .flatMap((product) =>
               product.photos.map((photo) => ({
                 ...photo,

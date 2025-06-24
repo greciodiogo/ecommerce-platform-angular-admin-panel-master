@@ -88,13 +88,20 @@ export class DefaultApiService {
     }
 
     /**
+     * @param period 
      * @param observe set whether or not to return the data Observable as the body, response or events. defaults to returning the body.
      * @param reportProgress flag to report request and response progress.
      */
-    public getDashboard(observe?: 'body', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<DashboardState>;
-    public getDashboard(observe?: 'response', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<HttpResponse<DashboardState>>;
-    public getDashboard(observe?: 'events', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<HttpEvent<DashboardState>>;
-    public getDashboard(observe: any = 'body', reportProgress: boolean = false, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<any> {
+    public getDashboard(period?: 'weekly' | 'monthly' | 'yearly', observe?: 'body', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<DashboardState>;
+    public getDashboard(period?: 'weekly' | 'monthly' | 'yearly', observe?: 'response', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<HttpResponse<DashboardState>>;
+    public getDashboard(period?: 'weekly' | 'monthly' | 'yearly', observe?: 'events', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<HttpEvent<DashboardState>>;
+    public getDashboard(period?: 'weekly' | 'monthly' | 'yearly', observe: any = 'body', reportProgress: boolean = false, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<any> {
+
+        let localVarQueryParameters = new HttpParams({encoder: this.encoder});
+        if (period !== undefined && period !== null) {
+          localVarQueryParameters = this.addToHttpParams(localVarQueryParameters,
+            <any>period, 'period');
+        }
 
         let localVarHeaders = this.defaultHeaders;
 
@@ -130,6 +137,7 @@ export class DefaultApiService {
         return this.httpClient.get<DashboardState>(`${this.configuration.basePath}/dashboard`,
             {
                 context: localVarHttpContext,
+                params: localVarQueryParameters,
                 responseType: <any>responseType_,
                 withCredentials: this.configuration.withCredentials,
                 headers: localVarHeaders,

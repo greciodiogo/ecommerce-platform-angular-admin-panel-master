@@ -5,6 +5,8 @@ import * as AttributeTypesActions from './attribute-types.actions';
 import * as ProductRatingsActions from './product-ratings.actions';
 import * as ShopsActions from './shops.actions';
 import * as NotificationsActions from './notifications.actions';
+import * as PromotionsActions from './notifications.actions';
+import * as AddressActions from './addresses.actions';
 
 export {
   FaqsActions,
@@ -13,5 +15,7 @@ export {
   AttributeTypesActions,
   ProductRatingsActions,
   ShopsActions,
-  NotificationsActions
+  NotificationsActions,
+  PromotionsActions,
+  AddressActions
 };

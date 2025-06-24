@@ -36,7 +36,7 @@ export class ComplaintsListComponent implements OnInit, AfterViewInit, OnDestroy
 
   ngOnInit() {
     this.dataSource.data = [];
-    this.store.dispatch(ProductsActions.loadProducts());
+    this.store.dispatch(ProductsActions.loadProducts({}));
   }
 
   ngOnDestroy() {
@@ -49,7 +49,7 @@ export class ComplaintsListComponent implements OnInit, AfterViewInit, OnDestroy
       // this.dataSource.data = orders;
       this.dataSource.data = [];
     });
-    this.store.dispatch(OrdersActions.loadOrders());
+    this.store.dispatch(OrdersActions.loadOrders({}));
     this.dataSource.sort = this.sort;
     this.dataSource.paginator = this.paginator;
   }

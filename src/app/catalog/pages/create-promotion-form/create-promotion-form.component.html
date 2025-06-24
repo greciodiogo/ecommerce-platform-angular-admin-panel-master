@@ -1,0 +1,68 @@
+<mat-card>
+  <mat-card-title-group>
+    <mat-card-title>
+      <a mat-button routerLink="/catalog/promotions">
+        <mat-icon>arrow_back</mat-icon></a
+      >Create new Promotion
+    </mat-card-title>
+  </mat-card-title-group>
+  <mat-card-content>
+    <form [formGroup]="createForm" (submit)="save()">
+      <div class="items">
+        <h2>Items</h2>
+        <!-- <app-order-items-input></app-order-items-input> -->
+      </div>
+
+      <div class="contact">
+        <h2>Promotion data</h2>
+        <mat-form-field appearance="outline">
+          <mat-label>Name </mat-label>
+          <input matInput type="text" formControlName="name" />
+          <mat-error *ngIf="createForm.controls.name.invalid">
+            Invalid name
+          </mat-error>
+        </mat-form-field>
+        <mat-form-field appearance="outline">
+          <mat-label>Description </mat-label>
+          <input matInput type="text" formControlName="description" />
+          <mat-error *ngIf="createForm.controls.description.invalid">
+            Invalid description
+          </mat-error>
+        </mat-form-field>
+        <mat-form-field appearance="outline" class="discount"  [appAuthRole]="['admin', 'sales']">
+          <mat-label>Discount</mat-label>
+          <input type="number" matInput required formControlName="discount" />
+          <mat-error>Invalid discount</mat-error>
+        </mat-form-field>
+        <!-- <mat-form-field appearance="outline">
+          <mat-label> Message </mat-label>
+          <textarea matInput formControlName="message"></textarea>
+          <mat-error *ngIf="createForm.controls.message.invalid">
+            Invalid message
+          </mat-error>
+        </mat-form-field> -->
+      </div>
+
+      <div class="details">
+        <div class="buttons">
+          <button
+            mat-button
+            type="button"
+            routerLink="/catalog/promotions"
+            color="primary"
+          >
+            Cancel
+          </button>
+          <button
+            mat-flat-button
+            type="submit"
+            [disabled]="!createForm.valid || !createForm.dirty"
+            color="primary"
+          >
+            Create
+          </button>
+        </div>
+      </div>
+    </form>
+  </mat-card-content>
+</mat-card>

@@ -16,7 +16,7 @@ export interface ExportDto {
     format: ExportDto.FormatEnum;
 }
 export namespace ExportDto {
-    export type DataEnum = 'settings' | 'pages' | 'users' | 'attributeTypes' | 'products' | 'productPhotos' | 'categories' | 'wishlists' | 'deliveryMethods' | 'paymentMethods' | 'orders' | 'returns';
+    export type DataEnum = 'settings' | 'pages' | 'users' | 'attributeTypes' | 'products' | 'productPhotos' | 'categories' | 'wishlists' | 'deliveryMethods' | 'paymentMethods' | 'orders' | 'returns' | 'promotions';
     export const DataEnum = {
         Settings: 'settings' as DataEnum,
         Pages: 'pages' as DataEnum,
@@ -29,7 +29,8 @@ export namespace ExportDto {
         DeliveryMethods: 'deliveryMethods' as DataEnum,
         PaymentMethods: 'paymentMethods' as DataEnum,
         Orders: 'orders' as DataEnum,
-        Returns: 'returns' as DataEnum
+        Returns: 'returns' as DataEnum,
+        Promotions: 'promotions' as DataEnum
     };
     export type FormatEnum = 'json' | 'csv' | 'xlsx';
     export const FormatEnum = {

@@ -16,8 +16,8 @@ export class DashboardEffects {
   loadDashboard$ = createEffect(() => {
     return this.actions$.pipe(
       ofType(DashboardActions.loadDashboard), // Ação disparada para carregar o dashboard
-      exhaustMap(() =>
-        this.dashboardApi.getDashboard().pipe( // Chamada da API
+      exhaustMap((action) =>
+        this.dashboardApi.getDashboard(action.period).pipe( // Chamada da API
           map((dashboard) => 
             DashboardActions.loadDashboardSuccess({ dashboard }) // Se a requisição for bem-sucedida
           ),

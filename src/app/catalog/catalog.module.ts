@@ -9,6 +9,7 @@ import * as fromCatalog from './store/reducers';
 import { ProductsComponent } from './pages/products/products.component';
 import { EffectsModule } from '@ngrx/effects';
 import {
+  AddressesEffects,
   AttributeTypesEffects,
   CategoriesEffects,
   FaqsEffects,
@@ -72,6 +73,15 @@ import { ShopDetailComponent } from './pages/shop-detail/shop-detail.component';
 import { MatSnackBarModule } from '@angular/material/snack-bar';
 import { DashboardEffects } from '../sales/store/effects';
 import { TrendingComponent } from './pages/trending/trending.component';
+import { PromotionsListComponent } from './pages/promotions-list/promotions-list.component';
+import { PromotionsComponent } from './pages/promotions/promotions.component';
+import { PromotionComponent } from './pages/promotion/promotion.component';
+import { CreatePromotionFormComponent } from './pages/create-promotion-form/create-promotion-form.component';
+import { NgxMatIntlTelInputComponent } from 'ngx-mat-intl-tel-input';
+import { AddressesTreeComponent } from './pages/addresses-tree/addresses-tree.component';
+import { AddressDetailsComponent } from './components/address-details/address-details.component';
+import { AddressesComponent } from './pages/addresses/addresses.component';
+import { AddressComponent } from './pages/address/address.component';
 
 @NgModule({
   declarations: [
@@ -107,6 +117,14 @@ import { TrendingComponent } from './pages/trending/trending.component';
     CreateShopFormComponent,
     ShopDetailComponent,
     TrendingComponent,
+    PromotionsListComponent,
+    PromotionsComponent,
+    PromotionComponent,
+    CreatePromotionFormComponent,
+    AddressesComponent,
+    AddressesTreeComponent,
+    AddressDetailsComponent,
+    AddressComponent,
   ],
   imports: [
     CommonModule,
@@ -119,7 +137,8 @@ import { TrendingComponent } from './pages/trending/trending.component';
       CategoriesEffects,
       AttributeTypesEffects,
       ProductRatingsEffects,
-      DashboardEffects
+      DashboardEffects,
+      AddressesEffects
       
     ]),
     MatCardModule,
@@ -129,6 +148,7 @@ import { TrendingComponent } from './pages/trending/trending.component';
     MatIconModule,
     MatFormFieldModule,
     MatInputModule,
+    MatCardModule,
     MatSelectModule,
     MaterialFileInputModule,
     ReactiveFormsModule,
@@ -145,8 +165,9 @@ import { TrendingComponent } from './pages/trending/trending.component';
     MatChipsModule,
     MatAutocompleteModule,
     DragDropModule,
-    MatSnackBarModule
+    MatSnackBarModule,
+    NgxMatIntlTelInputComponent,
   ],
-  exports: [ProductPhotoComponent],
+  exports: [ProductPhotoComponent, AddressComponent],
 })
 export class CatalogModule {}

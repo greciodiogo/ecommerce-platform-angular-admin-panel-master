@@ -9,6 +9,7 @@ import { Order } from 'src/app/core/api';
 import { selectUsername, selectUserRole } from 'src/app/core/auth/store';
 import { DashboardActions, OrdersActions, selectDashboardItems, selectOrdersListWithItems } from 'src/app/sales/store';
 import { FnService } from 'src/app/services/fn.helper.service';
+import { FormControl } from '@angular/forms';
 
 @Component({
   selector: 'app-index',
@@ -16,6 +17,8 @@ import { FnService } from 'src/app/services/fn.helper.service';
   styleUrls: ['./main.component.css'],
 })
 export class MainComponent implements OnInit, OnDestroy {
+    periodControl = new FormControl<'weekly' | 'monthly' | 'yearly'>('monthly');
+
     // Dados do Dashboard
     dashboard$ = this.store.select(selectDashboardItems);
 
@@ -53,13 +56,17 @@ export class MainComponent implements OnInit, OnDestroy {
 
   ngOnInit() {
     this.dataSource.data = [];
-    this.store.dispatch(ProductsActions.loadProducts());
-    this.store.dispatch(OrdersActions.loadOrders());
-    this.store.dispatch(DashboardActions.loadDashboard());
+    this.store.dispatch(ProductsActions.loadProducts({}));
+    this.store.dispatch(OrdersActions.loadOrders({}));
+    this.store.dispatch(DashboardActions.loadDashboard({ period: this.periodControl.value }));
     this.store.dispatch(ShopsActions.loadShops());
     this.view()
 
     this.shopperDashboard()
+
+    this.periodControl.valueChanges.subscribe((period) => {
+        this.store.dispatch(DashboardActions.loadDashboard({ period }));
+    });
   }
 
 

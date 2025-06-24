@@ -6,14 +6,14 @@ import {
   ViewChild,
 } from '@angular/core';
 import { Store } from '@ngrx/store';
-import { OrdersActions, selectDeliveryMethodsList, selectOrdersListWithItems, selectPaymentMethodsList } from '../../store';
+import { OrdersActions, selectOrdersListWithItems } from '../../store';
 import { MatTableDataSource } from '@angular/material/table';
 import { Order } from '../../../core/api';
 import { firstValueFrom, Subscription } from 'rxjs';
 import { MatSort } from '@angular/material/sort';
-import { ProductsActions } from '../../../catalog/store';
 import { MatPaginator } from '@angular/material/paginator';
 import { selectUserRole } from 'src/app/core/auth/store';
+import { FormBuilder, FormGroup } from '@angular/forms';
 
 @Component({
   selector: 'app-orders-list',
@@ -23,32 +23,64 @@ import { selectUserRole } from 'src/app/core/auth/store';
 export class OrdersListComponent implements OnInit, AfterViewInit, OnDestroy {
   orders$ = this.store.select(selectOrdersListWithItems);
   dataSource = new MatTableDataSource<Order>();
-  subscription!: Subscription;
+  private subscription!: Subscription;
   role$ = this.store.select(selectUserRole);
-
-    deliveryMethods$ = this.store.select(selectDeliveryMethodsList);
-    paymentMethods$ = this.store.select(selectPaymentMethodsList);
+  filterForm: FormGroup;
 
   @ViewChild(MatSort) sort!: MatSort;
   @ViewChild(MatPaginator) paginator!: MatPaginator;
 
-  constructor(private store: Store) {}
+  displayedColumns: string[] = [
+    'id',
+    'created',
+    'status',
+    'itemsCount',
+    'itemsTotal',
+    'fullName',
+    'delivery',
+    'payment',
+  ];
+
+  constructor(private store: Store, private fb: FormBuilder) {
+    this.filterForm = this.fb.group({
+      orderNumber: [''],
+      date: [''],
+      shopName: [''],
+    });
+  }
 
   ngOnInit() {
-    this.dataSource.data = [];
-    this.store.dispatch(ProductsActions.loadProducts());
+    this.store.dispatch(OrdersActions.loadOrders({ filters: {} }));
+
+    this.subscription = this.orders$.subscribe((orders) => {
+      this.dataSource.data = orders;
+    });
+  }
+
+  applyFilters() {
+    const filters = { ...this.filterForm.value };
+
+    if (filters.date instanceof Date) {
+      const date = filters.date as Date;
+      // Manually construct the date string in YYYY-MM-DD format to avoid timezone issues.
+      const year = date.getFullYear();
+      const month = (date.getMonth() + 1).toString().padStart(2, '0');
+      const day = date.getDate().toString().padStart(2, '0');
+      filters.date = `${year}-${month}-${day}`;
+    }
+
+    const cleanFilters = Object.fromEntries(
+      Object.entries(filters).filter(([_, value]) => value)
+    );
+      
+    this.store.dispatch(OrdersActions.loadOrders({ filters: cleanFilters }));
   }
 
   ngOnDestroy() {
     this.subscription?.unsubscribe();
   }
 
-  async ngAfterViewInit() {
-    this.dataSource.data = await firstValueFrom(this.orders$);
-    this.subscription = this.orders$.subscribe((orders) => {
-      this.dataSource.data = orders;
-    });
-    this.store.dispatch(OrdersActions.loadOrders());
+  ngAfterViewInit() {
     this.dataSource.sort = this.sort;
     this.dataSource.paginator = this.paginator;
   }

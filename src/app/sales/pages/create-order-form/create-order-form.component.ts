@@ -66,7 +66,7 @@ export class CreateOrderFormComponent implements OnInit {
   constructor(private store: Store, private router: Router) {}
 
   ngOnInit() {
-    this.store.dispatch(ProductsActions.loadProducts());
+    this.store.dispatch(ProductsActions.loadProducts({}));
   }
 
   async save() {

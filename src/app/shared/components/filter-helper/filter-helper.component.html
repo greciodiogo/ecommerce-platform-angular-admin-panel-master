@@ -1,7 +1,7 @@
 
 <div class="faq-helper">
 
-  <a routerLink="/faqs" (click)="handleClick()" routerLinkActive="active" class="apoio-cliente" [ngClass]="{
+  <a (click)="handleClick()" class="apoio-cliente" [ngClass]="{
     'admin_color': (role$ | async) === 'admin',
     'sales_color': (role$ | async) === 'sales',
     'manager_color': (role$ | async) === 'manager',
@@ -11,6 +11,6 @@
   </a>
 </div>
 
-<app-aside-right [isOpen]="openModal">
+<app-aside-right [isOpen]="openModal" (close)="handleClose()">
   <ng-content></ng-content>
 </app-aside-right>

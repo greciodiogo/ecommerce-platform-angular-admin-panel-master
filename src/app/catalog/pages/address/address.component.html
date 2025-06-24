@@ -1,0 +1,23 @@
+<mat-card>
+  <mat-card-title-group>
+    <mat-card-title>
+      <a mat-button routerLink="/catalog/addresses">
+        <mat-icon>arrow_back</mat-icon></a
+      >{{ (address$ | async)?.name }}
+    </mat-card-title>
+  </mat-card-title-group>
+  <mat-tab-group dynamicHeight>
+    <mat-tab>
+      <ng-template mat-tab-label>
+        <mat-icon class="mat-tab-icon">info</mat-icon>
+        General
+      </ng-template>
+      <mat-card-content>
+        <app-address-details
+          *ngIf="address$ | async"
+          [address]="(address$ | async) ?? null"
+        ></app-address-details>
+      </mat-card-content>
+    </mat-tab>
+  </mat-tab-group>
+</mat-card> 

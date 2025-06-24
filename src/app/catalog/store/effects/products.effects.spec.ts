@@ -31,7 +31,7 @@ describe('ProductsEffects', () => {
 
   describe('loadProducts$', () => {
     it('should return a loadProductsSuccess action', (done) => {
-      actions$ = of(ProductsActions.loadProducts());
+      actions$ = of(ProductsActions.loadProducts({}));
 
       effects.loadProducts$.subscribe((result) => {
         expect(result).toEqual(
@@ -44,7 +44,7 @@ describe('ProductsEffects', () => {
     });
 
     it('should return a loadProductsFailure action', (done) => {
-      actions$ = of(ProductsActions.loadProducts());
+      actions$ = of(ProductsActions.loadProducts({}));
 
       effects.loadProducts$.subscribe((result) => {
         expect(result).toEqual(

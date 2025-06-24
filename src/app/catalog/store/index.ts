@@ -8,3 +8,8 @@ export * from './selectors/product-ratings.selectors';
 export * from './selectors/status.selectors';
 export * from './selectors/faqs.selectors';
 export * from './selectors/shops.selectors';
+export * from './actions/promotions.actions';
+export * from './reducers/promotions.reducer';
+export * from './effects/promotions.effects';
+export * from './selectors/promotions.selectors';
+export * from './selectors/addresses.selectors';

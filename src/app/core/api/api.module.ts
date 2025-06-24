@@ -2,6 +2,7 @@ import { NgModule, ModuleWithProviders, SkipSelf, Optional } from '@angular/core
 import { Configuration } from './configuration';
 import { HttpClient } from '@angular/common/http';
 
+import { AddressApiService } from './api/address-api.service';
 import { AttributeTypesApiService } from './api/attribute-types-api.service';
 import { AuthApiService } from './api/auth-api.service';
 import { CartsApiService } from './api/carts-api.service';
@@ -17,6 +18,7 @@ import { PagesApiService } from './api/pages-api.service';
 import { PaymentMethodsApiService } from './api/payment-methods-api.service';
 import { ProductRatingsApiService } from './api/product-ratings-api.service';
 import { ProductsApiService } from './api/products-api.service';
+import { PromotionsApiService } from './api/promotions-api.service';
 import { ReturnsApiService } from './api/returns-api.service';
 import { SettingsApiService } from './api/settings-api.service';
 import { ShopsApiService } from './api/shops-api.service';

@@ -9,7 +9,7 @@ export class CustomHttpParameterCodec implements HttpParameterCodec {
         return encodeURIComponent(k);
     }
     encodeValue(v: string): string {
-        return encodeURIComponent(v);
+        return encodeURIComponent(v).replace(/%2F/gi, '/');
     }
     decodeKey(k: string): string {
         return decodeURIComponent(k);

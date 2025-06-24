@@ -66,7 +66,7 @@
         mat-list-item
         routerLink="/catalog/categories"
         [appAuthRole]="['admin', 'manager']"
-        [ngClass]="{ active: router.url.startsWith('/catalog/categories') }"
+        [ngClass]="{ active: router.url.endsWith('/catalog/categories') }"
       >
         <mat-icon mat-list-icon>local_offer</mat-icon>
         Categories
@@ -80,18 +80,19 @@
         <mat-icon mat-list-icon>inventory_2</mat-icon>
         Products
       </a>
-      <!-- [ngClass]="{ active: router.url.startsWith('/catalog/products') }" -->
       <a
-        routerLink="/catalog/categories/2/trending"
-        mat-list-item
-        [appAuthRole]="['admin', 'manager']"
+      routerLink="/catalog/categories/2/trending"
+      mat-list-item
+      [appAuthRole]="['admin', 'manager']"
+      [ngClass]="{ active: router.url.endsWith('/trending') }"
       >
         <mat-icon mat-list-icon>numbers</mat-icon>
         Trending Products
       </a>
-      <!-- routerLink="/catalog/products" -->
-      <!-- [ngClass]="{ active: router.url.startsWith('/catalog/products') }" -->
-      <a mat-list-item [appAuthRole]="['admin', 'manager']">
+      <a 
+      routerLink="/catalog/promotions"
+      [ngClass]="{ active: router.url.startsWith('/catalog/promotions') }"
+      mat-list-item [appAuthRole]="['admin', 'manager']">
         <mat-icon mat-list-icon>star</mat-icon>
         Promotions
       </a>
@@ -149,6 +150,15 @@
       >
         <mat-icon mat-list-icon>shopping_bag_speed</mat-icon>
         Shops
+      </a>
+      <a
+        mat-list-item
+        routerLink="/catalog/addresses"
+        [appAuthRole]="['admin', 'manager']"
+        [ngClass]="{ active: router.url.startsWith('/catalog/addresses') }"
+      >
+        <mat-icon mat-list-icon>location_on</mat-icon>
+        Addresses
       </a>
       <a
         mat-list-item

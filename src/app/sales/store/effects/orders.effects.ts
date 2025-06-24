@@ -12,8 +12,8 @@ export class OrdersEffects {
   loadOrders$ = createEffect(() => {
     return this.actions$.pipe(
       ofType(OrdersActions.loadOrders),
-      exhaustMap(() =>
-        this.ordersApi.getOrders().pipe(
+      exhaustMap((action) =>
+        this.ordersApi.getOrders(action.filters?.orderNumber, action.filters?.date, action.filters?.shopName).pipe(
           map((orders) => OrdersActions.loadOrdersSuccess({ orders })),
           catchError(({ error }) =>
             of(OrdersActions.loadOrdersFailure({ error: error.message })),
