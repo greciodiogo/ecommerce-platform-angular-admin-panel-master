@@ -6,10 +6,11 @@ mat-card-content {
   margin-right: -16px;
 }
 
-mat-row.order-row:hover {
+tr[mat-row]:hover {
   background: whitesmoke;
+  cursor: pointer;
 }
-mat-row.order-row:active {
+mat-row.product-row:active {
   background: #efefef;
 }
 mat-row, mat-header-row {
@@ -30,15 +31,16 @@ mat-header-row {
 }
 
 .mat-column-id {
-  padding-left: 8px;
+   padding-left: 25px;
   flex-basis: 48px;
   flex-grow: 0.1;
   a {
-    position: absolute;
-    width: 100%;
-    height: 100%;
-    left: 0;
-    top: 0;
+    padding-left: 10px;
+    color: black;
+    text-decoration: underline;
+    cursor: pointer;
+    display: inline-block;
+    font-weight: 500;
   }
 }
 // .mat-column-created, {
@@ -52,10 +54,12 @@ mat-header-row {
 .mat-column-itemsCount {
   flex-basis: 48px;
   flex-grow: 0.2;
+  text-align: left;
 }
 .mat-column-itemsTotal {
   flex-basis: 64px;
   flex-grow: 0.4;
+  text-align: left;
 }
 .mat-column-fullName {
   flex-basis: 120px;
