@@ -15,7 +15,7 @@ import { Router } from '@angular/router';
 import { MatPaginator } from '@angular/material/paginator';
 import * as moment from 'moment';
 import { ExportExcelService } from 'src/app/settings/services/export-excel.service';
-import { FormService } from 'src/app/services/form.service';
+import { FormBuilder, FormGroup } from '@angular/forms';
 
 @Component({
   selector: 'app-reports',
@@ -23,33 +23,20 @@ import { FormService } from 'src/app/services/form.service';
   styleUrls: ['./reports.component.scss'],
 })
 export class ReportsComponent implements OnInit, AfterViewInit, OnDestroy {
-  reportsTypes = [
-    {
-      url: '/report/monthly-products-report',
-      name: 'Monthly Products Report',
-      icon: 'calendar_view_month',
-      color: 'primary',
-      status: 'active'
-    },
-    {
-      url: '/report/monthly-orders-report',
-      name: 'Monthly Orders Report',
-      icon: 'calendar_view_month',
-      color: 'primary',
-      status: 'disable'
-    },
-  ];
-  filter = {
-    provincie: 'LUANDA',
-    shops: ' ALL',
-    products: 'ALL',
-    categories: 'ALL',
-    year: 2025
-  }
-
+  filterForm: FormGroup;
   products$ = this.store.select(selectProductsList);
   dataSource = new MatTableDataSource<Product>();
   subscription!: Subscription;
+  loading = false;
+  displayedColumns: string[] = [
+    'id',
+    'name',
+    'category',
+    'price',
+    'stock',
+    'shop',
+    'created',
+  ];
 
   @ViewChild(MatSort) sort!: MatSort;
   @ViewChild(MatPaginator) paginator!: MatPaginator;
@@ -57,9 +44,19 @@ export class ReportsComponent implements OnInit, AfterViewInit, OnDestroy {
   constructor(
     private store: Store,
     public router: Router,
-    public formService: FormService,
-    public exportExcelService: ExportExcelService, // private configService: ConfigService, //private excelService: ExcelService, //private ReportFacturacaoDiariaGlobalService: ReportFacturacaoDiariaGlobalService
-  ) {}
+    private fb: FormBuilder,
+    public exportExcelService: ExportExcelService,
+  ) {
+    this.filterForm = this.fb.group({
+      productName: [''],
+      category: [''],
+      shop: [''],
+      minPrice: [''],
+      maxPrice: [''],
+      minStock: [''],
+      maxStock: [''],
+    });
+  }
 
   ngOnInit() {
     this.dataSource.data = [];
@@ -70,77 +67,60 @@ export class ReportsComponent implements OnInit, AfterViewInit, OnDestroy {
   }
 
   async ngAfterViewInit() {
-    this.dataSource.data = await firstValueFrom(this.products$);
-    this.subscription = this.products$.subscribe((products) => {
-      this.dataSource.data = products;
-    });
-    this.store.dispatch(ProductsActions.loadProducts({}));
-    this.dataSource.sort = this.sort;
-    this.dataSource.paginator = this.paginator;
+    this.fetchData();
   }
 
-  generateReport(report: any) {
-    this.exportAsXLSX();
+  async fetchData() {
+    this.loading = true;
+    try {
+      this.dataSource.data = await firstValueFrom(this.products$);
+      this.subscription = this.products$.subscribe((products) => {
+        this.dataSource.data = products;
+      });
+      this.store.dispatch(ProductsActions.loadProducts({}));
+      this.dataSource.sort = this.sort;
+      this.dataSource.paginator = this.paginator;
+    } catch (e) {
+      console.error('Failed to fetch products report data:', e);
+    } finally {
+      this.loading = false;
+    }
+  }
+
+  applyFilters() {
+    this.fetchData();
   }
 
   public exportAsXLSX() {
-
-    var filtros = this.formService.getFilterExcel(this.filter);
-
-    
-    var movimentosExcel = JSON.parse(JSON.stringify(this.dataSource.data));
-
-    for (let i = 0; i < movimentosExcel?.length; i++) {
-      movimentosExcel[i].filial_nome = 'default'
-      movimentosExcel[i].type_shop = 'default'
-      movimentosExcel[i].commission = 0;
-      movimentosExcel[i].delivery_tax = 0;
-      movimentosExcel[i].filial_nome = 'default'
-      movimentosExcel[i].total = movimentosExcel[i].price * movimentosExcel[i].stock
-  }
-
-    var CurrentDate = new Date();
-    var keys = [
-      { key: 'filial_nome', width: 40 },
-      { key: 'type_shop', width: 35 },
-      { key: 'category', width: 45 },
+    const data = this.dataSource.data;
+    const keys = [
+      { key: 'id', width: 15 },
       { key: 'name', width: 40 },
-      { key: 'stock', width: 20 },
-      { key: 'price', width: 25 },
-      { key: 'delivery_tax', width: 20 },
-      { key: 'service_fee', width: 20 },
-      { key: 'commission', width: 25 },
-      { key: 'total', width: 25, style: { font: { name: 'Calibri' } } },
+      { key: 'category', width: 30 },
+      { key: 'price', width: 20 },
+      { key: 'stock', width: 15 },
+      { key: 'shop', width: 30 },
+      { key: 'created', width: 25 },
     ];
 
-    // var Cols = ['DATE', 'REPORT NUMBER', 'SHOP ID & NAME', 'PRODUCT', 'QUANTITY', 'PRICE', 'AMOUNT'];
-    var Cols = ['SHOP ID & NAME', 'TYPES OF SHOPS', 'CATEGORY OF PRODUCT', 'PRODUCT', 'QUANTITY', 'PRICE OF SHOP', 'DELIVERY TAX', 'SERVICE FEE', 'COMMISSION', 'TOTAL AMOUNT'];
-
-    var title = 'Monthly Stores Report ';
-    var nameFile =
-      'Monthly Stores Report [' +
-      moment(CurrentDate).format('DD') +
-      '-' +
-      moment(CurrentDate).format('MM') +
-      '-' +
-      moment(CurrentDate).format('YYYY') +
-      ' ]' +
-      moment(CurrentDate).format('H') +
-      ':' +
-      moment(CurrentDate).format('m');
+    const cols = ['Product ID', 'Product Name', 'Category', 'Price', 'Stock', 'Shop', 'Created Date'];
+    const title = 'Products Report';
+    const nameFile =
+      'Products Report [' + moment().format('DD-MM-YYYY_HH-mm') + ']';
+    
     this.exportExcelService.excels(
-      movimentosExcel,
+      data,
       nameFile,
       keys,
-      Cols,
+      cols,
       title,
-      15,
-      10,
-      40,
+      5,
+      5,
+      20,
       3,
       [1],
       false,
-      filtros,
+      []
     );
   }
 }

@@ -82,6 +82,9 @@ import { AddressesTreeComponent } from './pages/addresses-tree/addresses-tree.co
 import { AddressDetailsComponent } from './components/address-details/address-details.component';
 import { AddressesComponent } from './pages/addresses/addresses.component';
 import { AddressComponent } from './pages/address/address.component';
+import { MatProgressBarModule } from '@angular/material/progress-bar';
+import { MatDatepickerModule } from '@angular/material/datepicker';
+import { MatNativeDateModule } from '@angular/material/core';
 
 @NgModule({
   declarations: [
@@ -167,6 +170,9 @@ import { AddressComponent } from './pages/address/address.component';
     DragDropModule,
     MatSnackBarModule,
     NgxMatIntlTelInputComponent,
+    MatProgressBarModule,
+    MatDatepickerModule,
+    MatNativeDateModule,
   ],
   exports: [ProductPhotoComponent, AddressComponent],
 })

@@ -8,19 +8,43 @@ mat-card-actions {
   justify-content: flex-end;
 }
 
+.filter-form {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+  gap: 16px;
+  margin-bottom: 24px;
+  align-items: end;
 
-mat-row.product-row:hover {
+  button {
+    height: 56px;
+    margin-top: 8px;
+  }
+}
+
+mat-progress-bar {
+  margin-bottom: 16px;
+}
+
+table {
+  width: 100%;
+  margin-bottom: 16px;
+}
+
+mat-row:hover {
   background: whitesmoke;
 }
-mat-row.product-row:active {
+
+mat-row:active {
   background: #efefef;
 }
+
 mat-row, mat-header-row {
   gap: 16px;
   padding-left: 16px;
   padding-right: 16px;
   position: relative;
 }
+
 mat-header-row {
   position: sticky;
   top: -24px;
@@ -29,6 +53,10 @@ mat-header-row {
 
 mat-cell, mat-header-cell {
   white-space: nowrap;
+}
+
+mat-paginator {
+  margin-top: 16px;
 }
 
 .reports-container {
