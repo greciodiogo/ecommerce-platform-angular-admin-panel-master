@@ -90,6 +90,15 @@
         Shopkeeper Sales
       </a>
       <a
+        mat-list-item
+        routerLink="/sales/sales-report"
+        [appAuthRole]="['sales']"
+        [ngClass]="{ active: router.url.startsWith('/sales/sales-report') }"
+      >
+        <mat-icon mat-list-icon>bar_chart</mat-icon>
+        Sales Report
+      </a>
+      <a
       routerLink="/catalog/categories/2/trending"
       mat-list-item
       [appAuthRole]="['admin', 'manager']"

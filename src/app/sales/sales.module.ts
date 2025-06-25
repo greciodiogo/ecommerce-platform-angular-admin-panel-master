@@ -69,6 +69,8 @@ import { ShopkeeperSalesComponent } from './pages/shopkeepersales/shopkeepersale
 import { CreateShopkeeperSaleFormComponent } from './pages/create-shopkeepersale-form/create-shopkeepersale-form.component';
 import { ShopkeeperSaleDetailsComponent } from './components/shopkeepersale-details/shopkeepersale-details.component';
 import { ShopkeeperSaleComponent } from './pages/shopkeepersale/shopkeepersale.component';
+import { SalesReportComponent } from './pages/sales-report/sales-report.component';
+import { MatProgressBarModule } from '@angular/material/progress-bar';
 
 @NgModule({
   declarations: [
@@ -107,6 +109,7 @@ import { ShopkeeperSaleComponent } from './pages/shopkeepersale/shopkeepersale.c
     CreateShopkeeperSaleFormComponent,
     ShopkeeperSaleDetailsComponent,
     ShopkeeperSaleComponent,
+    SalesReportComponent,
   ],
   imports: [
     CommonModule,
@@ -142,6 +145,7 @@ import { ShopkeeperSaleComponent } from './pages/shopkeepersale/shopkeepersale.c
     NgxMatIntlTelInputComponent,
     MatDatepickerModule,
     MatNativeDateModule,
+    MatProgressBarModule,
   ],
 })
 export class SalesModule {}
