@@ -4,6 +4,7 @@ import * as DashboardActions from './dashboard.actions';
 import * as ReturnsActions from './returns.actions';
 import * as PaymentMethodsActions from './payment-methods.actions';
 import * as DeliveryMethodsActions from './delivery-methods.actions';
+import * as ShopkeeperSalesActions from './shopkeepersales.actions';
 
 export {
   FaqsActions,
@@ -12,4 +13,5 @@ export {
   ReturnsActions,
   PaymentMethodsActions,
   DeliveryMethodsActions,
+  ShopkeeperSalesActions,
 };

@@ -92,4 +92,8 @@ export class ProductsListComponent implements OnInit, AfterViewInit, OnDestroy {
 
     this.store.dispatch(ProductsActions.loadProducts({ filters: cleanFilters }));
   }
+
+  onRowClick(product: Product) {
+    this.router.navigate(['/catalog/products', product.id]);
+  }
 }

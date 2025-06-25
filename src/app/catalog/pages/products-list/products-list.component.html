@@ -1,4 +1,3 @@
-
 <div class="products-list-container mat-elevation-z8">
   <div class="products-list-header">
     <h2 class="products-list-title">Products</h2>
@@ -7,17 +6,23 @@
         <h3>Filter Products</h3>
         <mat-form-field appearance="outline">
           <mat-label>ID</mat-label>
-          <input matInput formControlName="id">
+          <input matInput formControlName="id" />
         </mat-form-field>
         <mat-form-field appearance="outline">
           <mat-label>Name</mat-label>
-          <input matInput formControlName="name">
+          <input matInput formControlName="name" />
         </mat-form-field>
-        <mat-form-field appearance="outline">
+        <mat-form-field
+          appearance="outline"
+          [appAuthRole]="['admin', 'manager']"
+        >
           <mat-label>Shop Name</mat-label>
-          <input matInput formControlName="shopName">
+          <input matInput formControlName="shopName" />
         </mat-form-field>
-        <mat-form-field appearance="outline">
+        <mat-form-field
+          appearance="outline"
+          [appAuthRole]="['admin', 'manager']"
+        >
           <mat-label>Visibility</mat-label>
           <mat-select formControlName="withVisible">
             <mat-option [value]="null">All</mat-option>
@@ -25,7 +30,16 @@
             <mat-option [value]="false">Hidden</mat-option>
           </mat-select>
         </mat-form-field>
-        <button mat-raised-button color="primary" type="submit">Apply Filters</button>
+        <button
+          mat-raised-button
+          color="primary"
+          type="submit"
+          [ngClass]="{ 'admin_color': (role$ | async) === 'admin',
+          'sales_color': (role$ | async) === 'sales', 'manager_color': (role$ |
+          async) === 'manager', }"
+        >
+          Apply Filters
+        </button>
       </form>
     </app-filter-helper>
   </div>
@@ -35,7 +49,7 @@
     <ng-container matColumnDef="id">
       <th mat-header-cell *matHeaderCellDef mat-sort-header>ID</th>
       <td mat-cell *matCellDef="let product">
-        <a [routerLink]="['/catalog/products', product.id]">{{ product.id }}</a>
+        {{ product.id }}
       </td>
     </ng-container>
     <ng-container matColumnDef="photo">
@@ -54,11 +68,15 @@
     </ng-container>
     <ng-container matColumnDef="purchasePrice">
       <th mat-header-cell *matHeaderCellDef mat-sort-header>Purchase Price</th>
-      <td mat-cell *matCellDef="let product">{{ product.purchasePrice | formatCurrency }}</td>
+      <td mat-cell *matCellDef="let product">
+        {{ product.purchasePrice | formatCurrency }}
+      </td>
     </ng-container>
     <ng-container matColumnDef="price">
       <th mat-header-cell *matHeaderCellDef mat-sort-header>Price</th>
-      <td mat-cell *matCellDef="let product">{{ product.price | formatCurrency }}</td>
+      <td mat-cell *matCellDef="let product">
+        {{ product.price | formatCurrency }}
+      </td>
     </ng-container>
     <ng-container matColumnDef="stock">
       <th mat-header-cell *matHeaderCellDef mat-sort-header>Stock</th>
@@ -66,12 +84,18 @@
     </ng-container>
     <ng-container matColumnDef="visible">
       <th mat-header-cell *matHeaderCellDef mat-sort-header>Visible</th>
-      <td mat-cell *matCellDef="let product">{{ product.visible | booleanText }}</td>
+      <td mat-cell *matCellDef="let product">
+        {{ product.visible | booleanText }}
+      </td>
     </ng-container>
 
     <!-- Header and Row Declarations -->
     <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
-    <tr mat-row *matRowDef="let row; columns: displayedColumns"></tr>
+    <tr
+      mat-row
+      *matRowDef="let row; columns: displayedColumns"
+      (click)="onRowClick(row)"
+    ></tr>
   </table>
 
   <div *ngIf="dataSource.data.length === 0" class="empty-placeholder">
@@ -89,6 +113,12 @@
   mat-fab
   color="primary"
   routerLink="/catalog/products/new"
+  [ngClass]="{
+    'admin_color': (role$ | async) === 'admin',
+    'sales_color': (role$ | async) === 'sales',
+    'manager_color': (role$ | async) === 'manager',
+}"
+  [appAuthRole]="['sales']"
 >
   <mat-icon>add</mat-icon>
 </a>

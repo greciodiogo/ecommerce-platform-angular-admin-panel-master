@@ -7,3 +7,4 @@ export * from './selectors/returns.selectors';
 export * from './selectors/payment-methods.selectors';
 export * from './selectors/delivery-methods.selectors';
 export * from './selectors/status.selectors';
+export * from './selectors/shopkeepersales.selectors';
