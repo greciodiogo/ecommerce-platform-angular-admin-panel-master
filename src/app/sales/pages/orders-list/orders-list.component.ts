@@ -14,6 +14,7 @@ import { MatSort } from '@angular/material/sort';
 import { MatPaginator } from '@angular/material/paginator';
 import { selectUserRole } from 'src/app/core/auth/store';
 import { FormBuilder, FormGroup } from '@angular/forms';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-orders-list',
@@ -41,7 +42,8 @@ export class OrdersListComponent implements OnInit, AfterViewInit, OnDestroy {
     'payment',
   ];
 
-  constructor(private store: Store, private fb: FormBuilder) {
+  constructor(private store: Store, private fb: FormBuilder,
+    public router: Router,) {
     this.filterForm = this.fb.group({
       orderNumber: [''],
       date: [''],
@@ -72,7 +74,7 @@ export class OrdersListComponent implements OnInit, AfterViewInit, OnDestroy {
     const cleanFilters = Object.fromEntries(
       Object.entries(filters).filter(([_, value]) => value)
     );
-      
+
     this.store.dispatch(OrdersActions.loadOrders({ filters: cleanFilters }));
   }
 
@@ -83,5 +85,9 @@ export class OrdersListComponent implements OnInit, AfterViewInit, OnDestroy {
   ngAfterViewInit() {
     this.dataSource.sort = this.sort;
     this.dataSource.paginator = this.paginator;
+  }
+
+  onRowClick(order: Order) {
+    this.router.navigate(['/sales/orders', order.id]);
   }
 }

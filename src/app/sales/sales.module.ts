@@ -71,6 +71,7 @@ import { ShopkeeperSaleDetailsComponent } from './components/shopkeepersale-deta
 import { ShopkeeperSaleComponent } from './pages/shopkeepersale/shopkeepersale.component';
 import { SalesReportComponent } from './pages/sales-report/sales-report.component';
 import { MatProgressBarModule } from '@angular/material/progress-bar';
+import { OrdersReportComponent } from './pages/orders-report/orders-report.component';
 
 @NgModule({
   declarations: [
@@ -110,6 +111,7 @@ import { MatProgressBarModule } from '@angular/material/progress-bar';
     ShopkeeperSaleDetailsComponent,
     ShopkeeperSaleComponent,
     SalesReportComponent,
+    OrdersReportComponent,
   ],
   imports: [
     CommonModule,
