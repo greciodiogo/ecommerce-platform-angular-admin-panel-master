@@ -96,14 +96,14 @@ export class ReportsComponent implements OnInit, AfterViewInit, OnDestroy {
     const keys = [
       { key: 'id', width: 15 },
       { key: 'name', width: 40 },
-      { key: 'category', width: 30 },
-      { key: 'price', width: 20 },
-      { key: 'stock', width: 15 },
       { key: 'shop', width: 30 },
+      // { key: 'category', width: 30 },
+      { key: 'stock', width: 15 },
+      { key: 'price', width: 20 },
       { key: 'created', width: 25 },
     ];
 
-    const cols = ['Product ID', 'Product Name', 'Category', 'Price', 'Stock', 'Shop', 'Created Date'];
+    const cols = ['Product ID', 'Product Name', 'Shop', 'Stock', 'Price', 'Created Date'];
     const title = 'Products Report';
     const nameFile =
       'Products Report [' + moment().format('DD-MM-YYYY_HH-mm') + ']';
@@ -115,7 +115,7 @@ export class ReportsComponent implements OnInit, AfterViewInit, OnDestroy {
       cols,
       title,
       5,
-      5,
+      6,
       20,
       3,
       [1],
