@@ -46,35 +46,40 @@ export class SalesReportComponent implements OnInit {
 
   async fetchData() {
     this.loading = true;
-    const filters = this.filterForm.value;
-    const dateStr = filters.date instanceof Date
-      ? moment(filters.date).format('YYYY-MM-DD')
-      : filters.date;
-    const sales = await this.salesApi
-      .findMySales(
-        filters.orderNumber || undefined,
-        filters.productName || undefined,
-        filters.productId || undefined,
-        dateStr || undefined
-      )
-      .toPromise();
-    // Flatten products for report rows
-    const rows = [];
-    for (const sale of sales) {
-      for (const product of sale.products) {
-        rows.push({
-          order_number: sale.order_number,
-          productId: product.id,
-          productName: product.name,
-          quantity: sale.quantity,
-          date: sale.created,
-        });
+    try {
+      const filters = this.filterForm.value;
+      const dateStr = filters.date instanceof Date
+        ? moment(filters.date).format('YYYY-MM-DD')
+        : filters.date;
+      const sales = await this.salesApi
+        .findMySales(
+          filters.orderNumber || undefined,
+          filters.productName || undefined,
+          filters.productId || undefined,
+          dateStr || undefined
+        )
+        .toPromise();
+      // Flatten products for report rows
+      const rows = [];
+      for (const sale of sales) {
+        for (const product of sale.products) {
+          rows.push({
+            order_number: sale.order_number,
+            productId: product.id,
+            productName: product.name,
+            quantity: sale.quantity,
+            date: sale.created,
+          });
+        }
       }
+      this.dataSource.data = rows;
+      if (this.sort) this.dataSource.sort = this.sort;
+      if (this.paginator) this.dataSource.paginator = this.paginator;
+    } catch (e) {
+      console.error('Failed to fetch sales report data:', e);
+    } finally {
+      this.loading = false;
     }
-    this.dataSource.data = rows;
-    this.loading = false;
-    if (this.sort) this.dataSource.sort = this.sort;
-    if (this.paginator) this.dataSource.paginator = this.paginator;
   }
 
   applyFilters() {
