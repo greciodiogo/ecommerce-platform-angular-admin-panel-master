@@ -46,6 +46,7 @@ export class ShopkeeperSalesListComponent
   constructor(private store: Store, private fb: FormBuilder) {
     this.filterForm = this.fb.group({
       orderNumber: [''],
+      productName: [''],
       date: [''],
       shopName: [''],
     });

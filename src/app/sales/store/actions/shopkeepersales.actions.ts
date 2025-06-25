@@ -8,7 +8,7 @@ import {
 export const loadShopkeeperSales = createAction(
   '[ShopkeeperSales] Load ShopkeeperSales',
   props<{
-    filters?: { orderNumber?: string; date?: string; shopName?: string };
+    filters?: { orderNumber?: string; productName?: string; date?: string; shopName?: string };
   }>(),
 );
 

@@ -16,7 +16,12 @@ export class ShopkeeperSalesEffects {
     return this.actions$.pipe(
       ofType(ShopkeeperSalesActions.loadShopkeeperSales),
       exhaustMap((action) =>
-        this.shopkeeperSalesApi.findAll().pipe(
+        this.shopkeeperSalesApi.findMySales(
+          action.filters?.orderNumber,
+          action.filters?.productName,
+          undefined,
+          action.filters?.date
+        ).pipe(
           map((shopkeeperSales) =>
             ShopkeeperSalesActions.loadShopkeeperSalesSuccess({
               shopkeeperSales,
@@ -68,7 +73,7 @@ export class ShopkeeperSalesEffects {
     return this.actions$.pipe(
       ofType(ShopkeeperSalesActions.createShopkeeperSale),
       exhaustMap(({ data }) =>
-        this.shopkeeperSalesApi.create(data).pipe(
+        this.shopkeeperSalesApi.createForUser(data).pipe(
           map((newShopkeeperSale) =>
             ShopkeeperSalesActions.createShopkeeperSaleSuccess({
               shopkeeperSale: newShopkeeperSale,
