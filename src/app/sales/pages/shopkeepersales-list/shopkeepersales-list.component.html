@@ -21,7 +21,11 @@
           <mat-label>Shop Name</mat-label>
           <input matInput formControlName="shopName" />
         </mat-form-field>
-        <button mat-raised-button color="primary" type="submit">
+        <button mat-raised-button color="primary" type="submit"
+        [ngClass]="{ 'admin_color': (role$ | async) === 'admin',
+        'sales_color': (role$ | async) === 'sales', 'manager_color': (role$ |
+        async) === 'manager', }"
+        >
           Apply Filters
         </button>
       </form>
@@ -79,6 +83,10 @@
   mat-fab
   color="primary"
   routerLink="/sales/shopkeepersales/new"
+  [ngClass]="{ 'admin_color': (role$ | async) === 'admin',
+  'sales_color': (role$ | async) === 'sales', 'manager_color': (role$ |
+  async) === 'manager' }"
+  [appAuthRole]="['sales']"
 >
   <mat-icon>add</mat-icon>
 </a> 

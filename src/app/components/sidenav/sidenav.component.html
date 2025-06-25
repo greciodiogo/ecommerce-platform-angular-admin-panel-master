@@ -26,15 +26,6 @@
       </a>
       <a
         mat-list-item
-        routerLink="/sales/shopkeepersales"
-        [appAuthRole]="['admin', 'manager']"
-        [ngClass]="{ active: router.url.startsWith('/sales/shopkeepersales') }"
-      >
-        <mat-icon mat-list-icon>store</mat-icon>
-        Shopkeeper Sales
-      </a>
-      <a
-        mat-list-item
         routerLink="/sales/orders"
         [appAuthRole]="['admin', 'manager']"
         [ngClass]="{ active: router.url.startsWith('/sales/orders') }"
@@ -84,10 +75,19 @@
         mat-list-item
         routerLink="/catalog/products"
         [appAuthRole]="['admin', 'manager', 'sales']"
-        [ngClass]="{ active: router.url.startsWith('/catalog/products') }"
+        [ngClass]="{ active: router.url.endsWith('/catalog/products') }"
       >
         <mat-icon mat-list-icon>inventory_2</mat-icon>
         Products
+      </a>
+      <a
+        mat-list-item
+        routerLink="/sales/shopkeepersales"
+        [appAuthRole]="['sales']"
+        [ngClass]="{ active: router.url.startsWith('/sales/shopkeepersales') }"
+      >
+        <mat-icon mat-list-icon>store</mat-icon>
+        Shopkeeper Sales
       </a>
       <a
       routerLink="/catalog/categories/2/trending"
@@ -104,15 +104,6 @@
       mat-list-item [appAuthRole]="['admin', 'manager']">
         <mat-icon mat-list-icon>star</mat-icon>
         Promotions
-      </a>
-      <a
-        mat-list-item
-        routerLink="/catalog/products"
-        [appAuthRole]="['sales']"
-        [ngClass]="{ active: router.url.startsWith('/catalog/products') }"
-      >
-        <mat-icon mat-list-icon>inventory_2</mat-icon>
-        Sales
       </a>
       <a
         mat-list-item

@@ -16,6 +16,7 @@ import { Subscription } from 'rxjs';
 import { MatSort } from '@angular/material/sort';
 import { MatPaginator } from '@angular/material/paginator';
 import { FormBuilder, FormGroup } from '@angular/forms';
+import { selectUserRole } from 'src/app/core/auth/store';
 
 @Component({
   selector: 'app-shopkeepersales-list',
@@ -27,6 +28,7 @@ export class ShopkeeperSalesListComponent
 {
   shopkeeperSales$ = this.store.select(selectShopkeeperSalesList);
   dataSource = new MatTableDataSource<ShopkeeperSale>();
+  role$ = this.store.select(selectUserRole);
   private subscription!: Subscription;
   filterForm: FormGroup;
 
@@ -36,12 +38,9 @@ export class ShopkeeperSalesListComponent
   displayedColumns: string[] = [
     'id',
     'created',
-    'status',
-    'itemsCount',
-    'itemsTotal',
-    'fullName',
-    'delivery',
-    'payment',
+    'order_number',
+    'shop',
+    'quantity',
   ];
 
   constructor(private store: Store, private fb: FormBuilder) {

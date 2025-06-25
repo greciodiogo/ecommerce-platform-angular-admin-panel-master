@@ -9,6 +9,7 @@ import { Router } from '@angular/router';
 import { first, take } from 'rxjs';
 import { ShopsActions, selectShopsList } from '../../../catalog/store';
 import { ProductsActions, selectProductsList } from '../../../catalog/store';
+import { selectUserRole } from 'src/app/core/auth/store';
 
 @Component({
   selector: 'app-create-shopkeepersale-form',
@@ -16,6 +17,7 @@ import { ProductsActions, selectProductsList } from '../../../catalog/store';
   styleUrls: ['./create-shopkeepersale-form.component.scss'],
 })
 export class CreateShopkeeperSaleFormComponent implements OnInit {
+  role$ = this.store.select(selectUserRole);
   createForm = new FormGroup({
     order_number: new FormControl('', {
       nonNullable: true,
