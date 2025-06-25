@@ -11,6 +11,7 @@ api/codes-api.service.ts
 api/default-api.service.ts
 api/delivery-methods-api.service.ts
 api/faqs-api.service.ts
+api/feedback-api.service.ts
 api/import-export-api.service.ts
 api/notifications-api.service.ts
 api/orders-api.service.ts
@@ -21,6 +22,7 @@ api/products-api.service.ts
 api/promotions-api.service.ts
 api/returns-api.service.ts
 api/settings-api.service.ts
+api/shopkeepersales-api.service.ts
 api/shops-api.service.ts
 api/users-api.service.ts
 api/wishlists-api.service.ts
@@ -54,6 +56,7 @@ model/export-dto.ts
 model/faq-create-dto.ts
 model/faq-update-dto.ts
 model/faq.ts
+model/feedback-dto.ts
 model/login-dto.ts
 model/models.ts
 model/notification.ts
@@ -98,6 +101,9 @@ model/shop-item-dto.ts
 model/shop-item.ts
 model/shop-update-dto.ts
 model/shop.ts
+model/shopkeeper-sale-create-dto.ts
+model/shopkeeper-sale-update-dto.ts
+model/shopkeeper-sale.ts
 model/update-address-dto.ts
 model/user-update-dto.ts
 model/user.ts
