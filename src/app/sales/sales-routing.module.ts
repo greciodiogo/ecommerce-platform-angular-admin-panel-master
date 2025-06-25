@@ -19,8 +19,36 @@ import { ComplaintComponent } from './pages/complaint/complaint.component';
 import { ComplaintsListComponent } from './pages/complaints-list/complaints-list.component';
 import { ComplaintsComponent } from './pages/complaints/complaints.component';
 import { CreateComplaintFormComponent } from './pages/create-complaint-form/create-complaint-form.component';
+import { ShopkeeperSalesComponent } from './pages/shopkeepersales/shopkeepersales.component';
+import { ShopkeeperSalesListComponent } from './pages/shopkeepersales-list/shopkeepersales-list.component';
+import { CreateShopkeeperSaleFormComponent } from './pages/create-shopkeepersale-form/create-shopkeepersale-form.component';
+import { ShopkeeperSaleComponent } from './pages/shopkeepersale/shopkeepersale.component';
 
 const routes: Routes = [
+  {
+    title: 'Shopkeeper Sales',
+    path: 'shopkeepersales',
+    canActivate: [AuthRoleGuard],
+    data: { roles: [RoleEnum.Admin, RoleEnum.Manager, RoleEnum.Sales] },
+    component: ShopkeeperSalesComponent,
+    children: [
+      {
+        title: 'Create new Shopkeeper Sale',
+        path: 'new',
+        component: CreateShopkeeperSaleFormComponent,
+      },
+      {
+        title: 'Shopkeeper Sale',
+        path: ':id',
+        component: ShopkeeperSaleComponent,
+      },
+      {
+        title: 'Shopkeeper Sales',
+        path: '',
+        component: ShopkeeperSalesListComponent,
+      },
+    ],
+  },
   {
     title: 'Orders',
     path: 'orders',

@@ -26,6 +26,15 @@
       </a>
       <a
         mat-list-item
+        routerLink="/sales/shopkeepersales"
+        [appAuthRole]="['admin', 'manager']"
+        [ngClass]="{ active: router.url.startsWith('/sales/shopkeepersales') }"
+      >
+        <mat-icon mat-list-icon>store</mat-icon>
+        Shopkeeper Sales
+      </a>
+      <a
+        mat-list-item
         routerLink="/sales/orders"
         [appAuthRole]="['admin', 'manager']"
         [ngClass]="{ active: router.url.startsWith('/sales/orders') }"

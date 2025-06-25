@@ -1,0 +1,30 @@
+<div *ngIf="sale$ | async as sale" class="sale-details">
+  <h2>Details</h2>
+  <div class="detail-item">
+    <strong>ID:</strong>
+    <span>{{ sale.id }}</span>
+  </div>
+  <div class="detail-item">
+    <strong>Order Number:</strong>
+    <span>{{ sale.order_number }}</span>
+  </div>
+  <div class="detail-item">
+    <strong>Shop:</strong>
+    <span>{{ sale.shop?.shopName }}</span>
+  </div>
+  <div class="detail-item">
+    <strong>Quantity:</strong>
+    <span>{{ sale.quantity }}</span>
+  </div>
+  <div class="detail-item">
+    <strong>Created:</strong>
+    <span>{{ sale.created | date: 'd MMM yyyy, HH:mm' }}</span>
+  </div>
+
+  <h2>Products</h2>
+  <ul>
+    <li *ngFor="let product of sale.products">
+      {{ product.name }}
+    </li>
+  </ul>
+</div> 

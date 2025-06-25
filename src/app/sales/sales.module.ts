@@ -11,6 +11,7 @@ import {
   OrdersEffects,
   PaymentMethodsEffects,
   ReturnsEffects,
+  ShopkeeperSalesEffects,
 } from './store/effects';
 import { OrdersComponent } from './pages/orders/orders.component';
 import { ReturnsComponent } from './pages/returns/returns.component';
@@ -63,6 +64,11 @@ import { ComplaintDetailsComponent } from './components/complaint-details/compla
 import { EditComplaintFormComponent } from './components/edit-complaint-form/edit-complaint-form.component';
 import { MatDatepickerModule } from '@angular/material/datepicker';
 import { MatNativeDateModule } from '@angular/material/core';
+import { ShopkeeperSalesListComponent } from './pages/shopkeepersales-list/shopkeepersales-list.component';
+import { ShopkeeperSalesComponent } from './pages/shopkeepersales/shopkeepersales.component';
+import { CreateShopkeeperSaleFormComponent } from './pages/create-shopkeepersale-form/create-shopkeepersale-form.component';
+import { ShopkeeperSaleDetailsComponent } from './components/shopkeepersale-details/shopkeepersale-details.component';
+import { ShopkeeperSaleComponent } from './pages/shopkeepersale/shopkeepersale.component';
 
 @NgModule({
   declarations: [
@@ -96,6 +102,11 @@ import { MatNativeDateModule } from '@angular/material/core';
     ComplaintsListComponent,
     ComplaintDetailsComponent,
     EditComplaintFormComponent,
+    ShopkeeperSalesListComponent,
+    ShopkeeperSalesComponent,
+    CreateShopkeeperSaleFormComponent,
+    ShopkeeperSaleDetailsComponent,
+    ShopkeeperSaleComponent,
   ],
   imports: [
     CommonModule,
@@ -107,6 +118,7 @@ import { MatNativeDateModule } from '@angular/material/core';
       ReturnsEffects,
       PaymentMethodsEffects,
       DeliveryMethodsEffects,
+      ShopkeeperSalesEffects,
     ]),
     MatButtonModule,
     AuthModule,
