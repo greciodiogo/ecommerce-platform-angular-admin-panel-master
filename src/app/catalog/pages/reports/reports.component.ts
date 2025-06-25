@@ -15,7 +15,7 @@ import { Router } from '@angular/router';
 import { MatPaginator } from '@angular/material/paginator';
 import * as moment from 'moment';
 import { ExportExcelService } from 'src/app/settings/services/export-excel.service';
-import { FormBuilder, FormGroup } from '@angular/forms';
+import { FormService } from 'src/app/services/form.service';
 
 @Component({
   selector: 'app-reports',
@@ -23,20 +23,33 @@ import { FormBuilder, FormGroup } from '@angular/forms';
   styleUrls: ['./reports.component.scss'],
 })
 export class ReportsComponent implements OnInit, AfterViewInit, OnDestroy {
-  filterForm: FormGroup;
+  reportsTypes = [
+    {
+      url: '/catalog/reports/products',
+      name: 'Products Report',
+      icon: 'inventory_2',
+      color: 'primary',
+      status: 'active'
+    },
+    {
+      url: '/sales/orders-report',
+      name: 'Orders Report',
+      icon: 'receipt_long',
+      color: 'accent',
+      status: 'active'
+    },
+    {
+      url: '/sales/sales-report',
+      name: 'Sales Report',
+      icon: 'trending_up',
+      color: 'warn',
+      status: 'active'
+    },
+  ];
+
   products$ = this.store.select(selectProductsList);
   dataSource = new MatTableDataSource<Product>();
   subscription!: Subscription;
-  loading = false;
-  displayedColumns: string[] = [
-    'id',
-    'name',
-    'category',
-    'price',
-    'stock',
-    'shop',
-    'created',
-  ];
 
   @ViewChild(MatSort) sort!: MatSort;
   @ViewChild(MatPaginator) paginator!: MatPaginator;
@@ -44,19 +57,9 @@ export class ReportsComponent implements OnInit, AfterViewInit, OnDestroy {
   constructor(
     private store: Store,
     public router: Router,
-    private fb: FormBuilder,
+    public formService: FormService,
     public exportExcelService: ExportExcelService,
-  ) {
-    this.filterForm = this.fb.group({
-      productName: [''],
-      category: [''],
-      shop: [''],
-      minPrice: [''],
-      maxPrice: [''],
-      minStock: [''],
-      maxStock: [''],
-    });
-  }
+  ) {}
 
   ngOnInit() {
     this.dataSource.data = [];
@@ -67,60 +70,16 @@ export class ReportsComponent implements OnInit, AfterViewInit, OnDestroy {
   }
 
   async ngAfterViewInit() {
-    this.fetchData();
+    this.dataSource.data = await firstValueFrom(this.products$);
+    this.subscription = this.products$.subscribe((products) => {
+      this.dataSource.data = products;
+    });
+    this.store.dispatch(ProductsActions.loadProducts({}));
+    this.dataSource.sort = this.sort;
+    this.dataSource.paginator = this.paginator;
   }
 
-  async fetchData() {
-    this.loading = true;
-    try {
-      this.dataSource.data = await firstValueFrom(this.products$);
-      this.subscription = this.products$.subscribe((products) => {
-        this.dataSource.data = products;
-      });
-      this.store.dispatch(ProductsActions.loadProducts({}));
-      this.dataSource.sort = this.sort;
-      this.dataSource.paginator = this.paginator;
-    } catch (e) {
-      console.error('Failed to fetch products report data:', e);
-    } finally {
-      this.loading = false;
-    }
-  }
-
-  applyFilters() {
-    this.fetchData();
-  }
-
-  public exportAsXLSX() {
-    const data = this.dataSource.data;
-    const keys = [
-      { key: 'id', width: 15 },
-      { key: 'name', width: 40 },
-      { key: 'shop', width: 30 },
-      // { key: 'category', width: 30 },
-      { key: 'stock', width: 15 },
-      { key: 'price', width: 20 },
-      { key: 'created', width: 25 },
-    ];
-
-    const cols = ['Product ID', 'Product Name', 'Shop', 'Stock', 'Price', 'Created Date'];
-    const title = 'Products Report';
-    const nameFile =
-      'Products Report [' + moment().format('DD-MM-YYYY_HH-mm') + ']';
-    
-    this.exportExcelService.excels(
-      data,
-      nameFile,
-      keys,
-      cols,
-      title,
-      5,
-      6,
-      20,
-      3,
-      [1],
-      false,
-      []
-    );
+  navigateToReport(report: any) {
+    this.router.navigate([report.url]);
   }
 }

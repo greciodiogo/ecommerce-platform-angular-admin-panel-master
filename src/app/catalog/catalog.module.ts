@@ -85,6 +85,7 @@ import { AddressComponent } from './pages/address/address.component';
 import { MatProgressBarModule } from '@angular/material/progress-bar';
 import { MatDatepickerModule } from '@angular/material/datepicker';
 import { MatNativeDateModule } from '@angular/material/core';
+import { ProductsReportComponent } from './pages/products-report/products-report.component';
 
 @NgModule({
   declarations: [
@@ -128,6 +129,7 @@ import { MatNativeDateModule } from '@angular/material/core';
     AddressesTreeComponent,
     AddressDetailsComponent,
     AddressComponent,
+    ProductsReportComponent,
   ],
   imports: [
     CommonModule,

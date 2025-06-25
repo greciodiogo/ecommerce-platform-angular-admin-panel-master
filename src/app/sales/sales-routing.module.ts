@@ -24,6 +24,7 @@ import { ShopkeeperSalesListComponent } from './pages/shopkeepersales-list/shopk
 import { CreateShopkeeperSaleFormComponent } from './pages/create-shopkeepersale-form/create-shopkeepersale-form.component';
 import { ShopkeeperSaleComponent } from './pages/shopkeepersale/shopkeepersale.component';
 import { SalesReportComponent } from './pages/sales-report/sales-report.component';
+import { OrdersReportComponent } from './pages/orders-report/orders-report.component';
 
 const routes: Routes = [
   {
@@ -161,6 +162,13 @@ const routes: Routes = [
     canActivate: [AuthRoleGuard],
     data: { roles: [RoleEnum.Sales] },
     component: SalesReportComponent,
+  },
+  {
+    title: 'Orders Report',
+    path: 'orders-report',
+    canActivate: [AuthRoleGuard],
+    data: { roles: [RoleEnum.Sales] },
+    component: OrdersReportComponent,
   },
 ];
 

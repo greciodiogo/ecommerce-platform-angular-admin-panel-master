@@ -24,6 +24,8 @@ import { CreatePromotionFormComponent } from './pages/create-promotion-form/crea
 import { AddressesComponent } from './pages/addresses/addresses.component';
 import { AddressesTreeComponent } from './pages/addresses-tree/addresses-tree.component';
 import { AddressComponent } from './pages/address/address.component';
+import { ProductsReportComponent } from './pages/products-report/products-report.component';
+
 const routes: Routes = [
   {
     title: 'Products',
@@ -139,6 +141,13 @@ const routes: Routes = [
     canActivate: [AuthRoleGuard],
     data: { roles: [RoleEnum.Admin] },
     component: ReportsComponent,
+  },
+  {
+    title: 'Products Report',
+    path: 'reports/products',
+    canActivate: [AuthRoleGuard],
+    data: { roles: [RoleEnum.Admin] },
+    component: ProductsReportComponent,
   },
   {
     title: 'Lojas',
