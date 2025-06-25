@@ -1,0 +1,84 @@
+<div class="shopkeepersales-list-container mat-elevation-z8">
+  <div class="shopkeepersales-list-header">
+    <h2 class="shopkeepersales-list-title">Shopkeeper Sales</h2>
+    <app-filter-helper>
+      <form [formGroup]="filterForm" (ngSubmit)="applyFilters()">
+        <h3>Filter Shopkeeper Sales</h3>
+        <mat-form-field appearance="outline">
+          <mat-label>Order Number</mat-label>
+          <input matInput formControlName="orderNumber" />
+        </mat-form-field>
+        <mat-form-field appearance="outline">
+          <mat-label>Date</mat-label>
+          <input matInput [matDatepicker]="picker" formControlName="date" />
+          <mat-datepicker-toggle
+            matSuffix
+            [for]="picker"
+          ></mat-datepicker-toggle>
+          <mat-datepicker #picker></mat-datepicker>
+        </mat-form-field>
+        <mat-form-field appearance="outline">
+          <mat-label>Shop Name</mat-label>
+          <input matInput formControlName="shopName" />
+        </mat-form-field>
+        <button mat-raised-button color="primary" type="submit">
+          Apply Filters
+        </button>
+      </form>
+    </app-filter-helper>
+  </div>
+
+  <table mat-table [dataSource]="dataSource" matSort>
+    <!-- Column Definitions -->
+    <ng-container matColumnDef="id">
+      <th mat-header-cell *matHeaderCellDef mat-sort-header>ID</th>
+      <td mat-cell *matCellDef="let sale">
+        <a [routerLink]="['/sales/shopkeepersales', sale.id]">{{ sale.id }}</a>
+      </td>
+    </ng-container>
+    <ng-container matColumnDef="created">
+      <th mat-header-cell *matHeaderCellDef mat-sort-header>Created</th>
+      <td mat-cell *matCellDef="let sale">
+        {{ sale.created | date: 'd MMM yyyy, HH:mm' }}
+      </td>
+    </ng-container>
+    <ng-container matColumnDef="order_number">
+      <th mat-header-cell *matHeaderCellDef mat-sort-header>Order Number</th>
+      <td mat-cell *matCellDef="let sale">{{ sale.order_number }}</td>
+    </ng-container>
+    <ng-container matColumnDef="shop">
+      <th mat-header-cell *matHeaderCellDef mat-sort-header>Shop</th>
+      <td mat-cell *matCellDef="let sale">{{ sale.shop?.shopName }}</td>
+    </ng-container>
+    <ng-container matColumnDef="quantity">
+      <th mat-header-cell *matHeaderCellDef mat-sort-header>Quantity</th>
+      <td mat-cell *matCellDef="let sale">{{ sale.quantity }}</td>
+    </ng-container>
+
+    <!-- Header and Row Declarations -->
+    <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+    <tr
+      mat-row
+      *matRowDef="let row; columns: displayedColumns"
+      class="sale-row"
+    ></tr>
+  </table>
+
+  <div *ngIf="dataSource.data.length === 0" class="empty-placeholder">
+    No shopkeeper sales found.
+  </div>
+
+  <mat-paginator
+    [pageSizeOptions]="[10, 25, 50]"
+    showFirstLastButtons
+  ></mat-paginator>
+</div>
+
+<a
+  class="add-button"
+  mat-fab
+  color="primary"
+  routerLink="/sales/shopkeepersales/new"
+>
+  <mat-icon>add</mat-icon>
+</a> 

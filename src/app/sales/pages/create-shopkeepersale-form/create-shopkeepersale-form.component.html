@@ -1,0 +1,76 @@
+<mat-card>
+  <mat-card-title-group>
+    <mat-card-title>
+      <a mat-button routerLink="/sales/shopkeepersales">
+        <mat-icon>arrow_back</mat-icon></a
+      >Create new Shopkeeper Sale
+    </mat-card-title>
+  </mat-card-title-group>
+  <mat-card-content>
+    <form [formGroup]="createForm" (submit)="save()">
+      <div class="form-fields">
+        <mat-form-field appearance="outline">
+          <mat-label>Order Number</mat-label>
+          <input matInput formControlName="order_number" />
+          <mat-error *ngIf="createForm.controls.order_number.invalid">
+            Order number is required
+          </mat-error>
+        </mat-form-field>
+
+        <mat-form-field appearance="outline">
+          <mat-label>Shop</mat-label>
+          <mat-select formControlName="shopId">
+            <mat-option *ngFor="let shop of shops$ | async" [value]="shop.id">
+              {{ shop.shopName }}
+            </mat-option>
+          </mat-select>
+          <mat-error *ngIf="createForm.controls.shopId.invalid">
+            Shop is required
+          </mat-error>
+        </mat-form-field>
+
+        <mat-form-field appearance="outline">
+          <mat-label>Products</mat-label>
+          <mat-select formControlName="productIds" multiple>
+            <mat-option
+              *ngFor="let product of products$ | async"
+              [value]="product.id"
+            >
+              {{ product.name }}
+            </mat-option>
+          </mat-select>
+          <mat-error *ngIf="createForm.controls.productIds.invalid">
+            At least one product is required
+          </mat-error>
+        </mat-form-field>
+
+        <mat-form-field appearance="outline">
+          <mat-label>Quantity</mat-label>
+          <input matInput type="number" formControlName="quantity" />
+          <mat-error *ngIf="createForm.controls.quantity.invalid">
+            Quantity must be at least 1
+          </mat-error>
+        </mat-form-field>
+      </div>
+
+      <div class="buttons">
+        <button
+          mat-button
+          type="button"
+          routerLink="/sales/shopkeepersales"
+          color="primary"
+        >
+          Cancel
+        </button>
+        <button
+          mat-flat-button
+          type="submit"
+          [disabled]="!createForm.valid || !createForm.dirty"
+          color="primary"
+        >
+          Create
+        </button>
+      </div>
+    </form>
+  </mat-card-content>
+</mat-card> 

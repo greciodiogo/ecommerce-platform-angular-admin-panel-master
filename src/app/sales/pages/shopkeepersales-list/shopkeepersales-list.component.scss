@@ -1,0 +1,21 @@
+.shopkeepersales-list-container {
+  /* Add your styles here */
+}
+
+.shopkeepersales-list-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 1rem;
+}
+
+.shopkeepersales-list-title {
+  margin: 0;
+}
+
+mat-row.sale-row:hover {
+  background: whitesmoke;
+}
+mat-row.sale-row:active {
+  background: #efefef;
+} 
