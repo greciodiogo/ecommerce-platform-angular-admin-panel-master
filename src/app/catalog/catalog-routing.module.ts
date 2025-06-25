@@ -139,7 +139,7 @@ const routes: Routes = [
     title: 'Relatórios',
     path: 'reports',
     canActivate: [AuthRoleGuard],
-    data: { roles: [RoleEnum.Admin] },
+    data: { roles: [RoleEnum.Admin, RoleEnum.Manager, RoleEnum.Sales] },
     component: ReportsComponent,
   },
   {

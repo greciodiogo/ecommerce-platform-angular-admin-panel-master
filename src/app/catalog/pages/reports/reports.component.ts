@@ -38,13 +38,13 @@ export class ReportsComponent implements OnInit, AfterViewInit, OnDestroy {
       color: 'accent',
       status: 'active'
     },
-    {
-      url: '/sales/sales-report',
-      name: 'Sales Report',
-      icon: 'trending_up',
-      color: 'warn',
-      status: 'active'
-    },
+    // {
+    //   url: '/sales/sales-report',
+    //   name: 'Sales Report',
+    //   icon: 'trending_up',
+    //   color: 'warn',
+    //   status: 'active'
+    // },
   ];
 
   products$ = this.store.select(selectProductsList);
@@ -80,6 +80,7 @@ export class ReportsComponent implements OnInit, AfterViewInit, OnDestroy {
   }
 
   navigateToReport(report: any) {
-    this.router.navigate([report.url]);
+    console.log('Navigating to:', report.url);
+    this.router.navigateByUrl(report.url);
   }
 }
