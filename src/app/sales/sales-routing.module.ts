@@ -23,6 +23,7 @@ import { ShopkeeperSalesComponent } from './pages/shopkeepersales/shopkeepersale
 import { ShopkeeperSalesListComponent } from './pages/shopkeepersales-list/shopkeepersales-list.component';
 import { CreateShopkeeperSaleFormComponent } from './pages/create-shopkeepersale-form/create-shopkeepersale-form.component';
 import { ShopkeeperSaleComponent } from './pages/shopkeepersale/shopkeepersale.component';
+import { SalesReportComponent } from './pages/sales-report/sales-report.component';
 
 const routes: Routes = [
   {
@@ -153,6 +154,13 @@ const routes: Routes = [
     canActivate: [AuthRoleGuard],
     data: { roles: [RoleEnum.Admin] },
     component: DeliveryMethodsComponent,
+  },
+  {
+    title: 'Sales Report',
+    path: 'sales-report',
+    canActivate: [AuthRoleGuard],
+    data: { roles: [RoleEnum.Sales] },
+    component: SalesReportComponent,
   },
 ];
 

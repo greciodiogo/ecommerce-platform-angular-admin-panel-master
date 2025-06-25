@@ -1,0 +1,15 @@
+.filter-form {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 1rem;
+  margin-bottom: 1.5rem;
+  align-items: flex-end;
+}
+
+mat-card-content {
+  padding-bottom: 2rem;
+}
+
+button {
+  min-width: 120px;
+} 
