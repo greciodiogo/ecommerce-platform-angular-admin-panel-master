@@ -16,5 +16,6 @@ export interface UpdateAddressDto {
     slug?: string;
     visible?: boolean;
     parentAddressId?: number;
+    price?: number;
 }
 

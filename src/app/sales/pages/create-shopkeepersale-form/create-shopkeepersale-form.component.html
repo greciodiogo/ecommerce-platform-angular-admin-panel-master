@@ -2,13 +2,13 @@
   <mat-card-title-group>
     <mat-card-title>
       <a mat-button routerLink="/sales/shopkeepersales">
-        <mat-icon>arrow_back</mat-icon></a
-      >Create new Shopkeeper Sale
+        <mat-icon>arrow_back</mat-icon></a>
+      <span class="mat-headline">Create new Shopkeeper Sale</span>
     </mat-card-title>
   </mat-card-title-group>
   <mat-card-content>
     <form [formGroup]="createForm" (submit)="save()">
-      <div class="form-fields">
+      <div class="form-fields" style="display: flex; flex-direction: column; gap: 24px;">
         <mat-form-field appearance="outline">
           <mat-label>Order Number</mat-label>
           <input matInput formControlName="order_number" />
@@ -40,32 +40,53 @@
         <mat-form-field appearance="outline" class="full-width">
           <mat-label>Products</mat-label>
           <input
+            type="text"
             matInput
             placeholder="Type product ID or name"
             [formControl]="productInputCtrl"
+            [matAutocomplete]="auto"
             (keyup.enter)="addProductFromInputSimple()"
           />
-          <mat-error *ngIf="createForm.controls.productIds.invalid">
-            At least one product is required
-          </mat-error>
+          <mat-autocomplete #auto="matAutocomplete" (optionSelected)="selectProduct($event)">
+            <mat-option *ngFor="let product of filteredProducts$ | async" [value]="product">
+              <div style="display: flex; align-items: center; justify-content: space-between;">
+                <span>{{ product.id }} - {{ product.name }}</span>
+                <span class="mat-caption" style="margin-left: 16px; color: #888;">{{ product.price | currency }}</span>
+              </div>
+            </mat-option>
+          </mat-autocomplete>
+          <mat-error *ngIf="productInputError">{{ productInputError }}</mat-error>
         </mat-form-field>
-        <ul>
-          <li *ngFor="let product of selectedProducts">
-            {{ product.id + ' - ' + product.name }}
-            <button type="button" (click)="removeProduct(product)">Remove</button>
-          </li>
-        </ul>
 
-        <mat-form-field appearance="outline">
-          <mat-label>Quantity</mat-label>
-          <input matInput type="number" formControlName="quantity" />
-          <mat-error *ngIf="createForm.controls.quantity.invalid">
-            Quantity must be at least 1
-          </mat-error>
-        </mat-form-field>
+        <mat-card *ngIf="selectedProducts.length > 0" style="background: #fafbfc; box-shadow: none; margin-top: 8px;">
+          <mat-card-header>
+            <mat-card-title class="mat-subheading-2">Selected Products</mat-card-title>
+          </mat-card-header>
+          <mat-divider></mat-divider>
+          <div *ngFor="let p of selectedProducts; let i = index" style="display: flex; align-items: center; padding: 12px 0; gap: 16px;">
+            <div style="flex: 1; display: flex; flex-direction: column;">
+              <span class="mat-body-1">{{ p.product.id }} - {{ p.product.name }}</span>
+              <span class="mat-caption" style="color: #888;">{{ p.product.price | currency }}</span>
+            </div>
+            <mat-form-field appearance="outline" style="width: 80px; margin: 0 8px;">
+              <mat-label>Qty</mat-label>
+              <input matInput type="number" min="1" [(ngModel)]="p.quantity" (ngModelChange)="validateQuantity(p)" />
+              <mat-error *ngIf="p.quantity < 1">Min 1</mat-error>
+            </mat-form-field>
+            <button mat-icon-button color="warn" matTooltip="Remove product" (click)="removeProduct(p)">
+              <mat-icon>delete</mat-icon>
+            </button>
+            <mat-divider *ngIf="i < selectedProducts.length - 1" vertical style="height: 40px;"></mat-divider>
+          </div>
+        </mat-card>
+        <div *ngIf="selectedProducts.length === 0" style="text-align: center; color: #aaa; margin: 24px 0;">
+          <mat-icon style="font-size: 48px;">inventory_2</mat-icon>
+          <div class="mat-caption">No products added yet</div>
+        </div>
+        <mat-error *ngIf="formError">{{ formError }}</mat-error>
       </div>
 
-      <div class="buttons">
+      <div class="buttons" style="display: flex; justify-content: flex-end; gap: 16px; margin-top: 32px;">
         <button
           mat-button
           type="button"

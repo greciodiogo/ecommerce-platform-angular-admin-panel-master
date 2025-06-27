@@ -74,6 +74,7 @@ import { MatProgressBarModule } from '@angular/material/progress-bar';
 import { OrdersReportComponent } from './pages/orders-report/orders-report.component';
 import { MatChipsModule } from '@angular/material/chips';
 import { MatAutocompleteModule } from '@angular/material/autocomplete';
+import { MatListModule } from '@angular/material/list';
 
 @NgModule({
   declarations: [
@@ -152,6 +153,7 @@ import { MatAutocompleteModule } from '@angular/material/autocomplete';
     MatProgressBarModule,
     MatChipsModule,
     MatAutocompleteModule,
+    MatListModule,
   ],
 })
 export class SalesModule {}

@@ -31,22 +31,24 @@ export class CreateShopkeeperSaleFormComponent implements OnInit {
     //   nonNullable: true,
     //   validators: [Validators.required],
     // }),
-    productIds: new FormControl<number[]>([], {
-      nonNullable: true,
-      validators: [Validators.required],
-    }),
-    quantity: new FormControl(0, {
-      nonNullable: true,
-      validators: [Validators.required, Validators.min(1)],
-    }),
+    // productIds: new FormControl<number[]>([], {
+    //   nonNullable: true,
+    //   validators: [Validators.required],
+    // }),
+    // quantity: new FormControl(0, {
+    //   nonNullable: true,
+    //   validators: [Validators.required, Validators.min(1)],
+    // }),
   });
 
   shops$ = this.store.select(selectShopsList);
   products$ = this.store.select(selectProductsList);
 
   productInputCtrl = new FormControl('');
-  selectedProducts: any[] = [];
+  selectedProducts: { product: any, quantity: number }[] = [];
   filteredProducts$: Observable<any[]>;
+  productInputError: string = '';
+  formError: string = '';
 
   constructor(private store: Store, private router: Router) {}
 
@@ -65,21 +67,25 @@ export class CreateShopkeeperSaleFormComponent implements OnInit {
             product.id.toString().includes(filterValue) ||
             product.name.toLowerCase().includes(filterValue)
           )
-          .filter((product: any) => !this.selectedProducts.some(p => p.id === product.id));
+          .filter((product: any) => !this.selectedProducts.some(p => p.product.id === product.id));
       })
     );
   }
 
   selectProduct(event: MatAutocompleteSelectedEvent) {
     const product = event.option.value;
-    this.selectedProducts.push(product);
-    this.createForm.controls.productIds.setValue(this.selectedProducts.map(p => p.id));
+    if (this.selectedProducts.some(p => p.product.id === product.id)) {
+      this.productInputError = 'Product already added.';
+      this.productInputCtrl.setValue('');
+      return;
+    }
+    this.selectedProducts.push({ product, quantity: 1 });
     this.productInputCtrl.setValue('');
+    this.productInputError = '';
   }
 
-  removeProduct(product: any) {
-    this.selectedProducts = this.selectedProducts.filter(p => p.id !== product.id);
-    this.createForm.controls.productIds.setValue(this.selectedProducts.map(p => p.id));
+  removeProduct(p: any) {
+    this.selectedProducts = this.selectedProducts.filter(x => x.product.id !== p.product.id);
   }
 
   addProductFromInput(event: MatChipInputEvent) {
@@ -93,22 +99,42 @@ export class CreateShopkeeperSaleFormComponent implements OnInit {
       const found = products.find((product: any) =>
         product.id.toString() === input || product.name.toLowerCase() === input
       );
-      if (found && !this.selectedProducts.some((p: any) => p.id === found.id)) {
-        this.selectedProducts.push(found);
-        this.createForm.controls.productIds.setValue(this.selectedProducts.map((p: any) => p.id));
+      if (!found) {
+        this.productInputError = 'Product not found.';
+      } else if (this.selectedProducts.some((p: any) => p.product.id === found.id)) {
+        this.productInputError = 'Product already added.';
+      } else {
+        this.selectedProducts.push({ product: found, quantity: 1 });
+        this.productInputError = '';
       }
       this.productInputCtrl.setValue('');
     });
   }
 
+  validateQuantity(p: { product: any, quantity: number }) {
+    if (p.quantity < 1) {
+      p.quantity = 1;
+    }
+  }
+
   async save() {
+    this.formError = '';
+    if (this.selectedProducts.length === 0) {
+      this.formError = 'At least one product is required.';
+      return;
+    }
+    if (this.selectedProducts.some(p => !p.quantity || p.quantity < 1)) {
+      this.formError = 'All quantities must be at least 1.';
+      return;
+    }
     this.store.dispatch(
       ShopkeeperSalesActions.createShopkeeperSale({
         data: {
           order_number: this.createForm.controls.order_number.value,
-          // shopId: this.createForm.controls.shopId.value,
-          productIds: this.createForm.controls.productIds.value,
-          quantity: this.createForm.controls.quantity.value,
+          products: this.selectedProducts.map(p => ({
+            productId: p.product.id,
+            quantity: p.quantity
+          })),
         },
       }),
     );
