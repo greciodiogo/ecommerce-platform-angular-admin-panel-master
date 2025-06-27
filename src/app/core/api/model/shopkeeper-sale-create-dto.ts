@@ -13,7 +13,7 @@
 
 export interface ShopkeeperSaleCreateDto { 
     order_number: string;
-    shopId: number;
+    shopId?: number;
     productIds: Array<number>;
     quantity: number;
 }

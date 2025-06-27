@@ -17,7 +17,15 @@
           </mat-error>
         </mat-form-field>
 
-        <mat-form-field appearance="outline">
+        <!-- <mat-form-field appearance="outline">
+          <mat-label>Products</mat-label>
+          <input matInput formControlName="productIds" />
+          <mat-error *ngIf="createForm.controls.productIds.invalid">
+            At least one product is required
+          </mat-error>
+        </mat-form-field> -->
+
+        <!-- <mat-form-field appearance="outline">
           <mat-label>Shop</mat-label>
           <mat-select formControlName="shopId">
             <mat-option *ngFor="let shop of shops$ | async" [value]="shop.id">
@@ -27,22 +35,26 @@
           <mat-error *ngIf="createForm.controls.shopId.invalid">
             Shop is required
           </mat-error>
-        </mat-form-field>
+        </mat-form-field> -->
 
-        <mat-form-field appearance="outline">
+        <mat-form-field appearance="outline" class="full-width">
           <mat-label>Products</mat-label>
-          <mat-select formControlName="productIds" multiple>
-            <mat-option
-              *ngFor="let product of products$ | async"
-              [value]="product.id"
-            >
-              {{ product.name }}
-            </mat-option>
-          </mat-select>
+          <input
+            matInput
+            placeholder="Type product ID or name"
+            [formControl]="productInputCtrl"
+            (keyup.enter)="addProductFromInputSimple()"
+          />
           <mat-error *ngIf="createForm.controls.productIds.invalid">
             At least one product is required
           </mat-error>
         </mat-form-field>
+        <ul>
+          <li *ngFor="let product of selectedProducts">
+            {{ product.id + ' - ' + product.name }}
+            <button type="button" (click)="removeProduct(product)">Remove</button>
+          </li>
+        </ul>
 
         <mat-form-field appearance="outline">
           <mat-label>Quantity</mat-label>

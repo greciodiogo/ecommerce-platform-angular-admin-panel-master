@@ -39,7 +39,7 @@ export class ShopkeeperSalesListComponent
     'id',
     'created',
     'order_number',
-    'shop',
+    // 'shop',
     'quantity',
   ];
 

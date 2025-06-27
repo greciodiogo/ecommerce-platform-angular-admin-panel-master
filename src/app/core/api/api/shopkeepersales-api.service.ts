@@ -231,10 +231,10 @@ export class ShopkeepersalesApiService {
      * @param observe set whether or not to return the data Observable as the body, response or events. defaults to returning the body.
      * @param reportProgress flag to report request and response progress.
      */
-    public findAll(orderNumber?: string, productName?: string, productId?: number, date?: string, observe?: 'body', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<Array<ShopkeeperSale>>;
-    public findAll(orderNumber?: string, productName?: string, productId?: number, date?: string, observe?: 'response', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<HttpResponse<Array<ShopkeeperSale>>>;
-    public findAll(orderNumber?: string, productName?: string, productId?: number, date?: string, observe?: 'events', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<HttpEvent<Array<ShopkeeperSale>>>;
-    public findAll(orderNumber?: string, productName?: string, productId?: number, date?: string, observe: any = 'body', reportProgress: boolean = false, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<any> {
+    public findAll(orderNumber?: string, productName?: string, productId?: string, date?: string, observe?: 'body', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<Array<ShopkeeperSale>>;
+    public findAll(orderNumber?: string, productName?: string, productId?: string, date?: string, observe?: 'response', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<HttpResponse<Array<ShopkeeperSale>>>;
+    public findAll(orderNumber?: string, productName?: string, productId?: string, date?: string, observe?: 'events', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<HttpEvent<Array<ShopkeeperSale>>>;
+    public findAll(orderNumber?: string, productName?: string, productId?: string, date?: string, observe: any = 'body', reportProgress: boolean = false, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<any> {
 
         let localVarQueryParameters = new HttpParams({encoder: this.encoder});
         if (orderNumber !== undefined && orderNumber !== null) {
@@ -306,10 +306,10 @@ export class ShopkeepersalesApiService {
      * @param observe set whether or not to return the data Observable as the body, response or events. defaults to returning the body.
      * @param reportProgress flag to report request and response progress.
      */
-    public findMySales(orderNumber?: string, productName?: string, productId?: number, date?: string, observe?: 'body', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<Array<ShopkeeperSale>>;
-    public findMySales(orderNumber?: string, productName?: string, productId?: number, date?: string, observe?: 'response', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<HttpResponse<Array<ShopkeeperSale>>>;
-    public findMySales(orderNumber?: string, productName?: string, productId?: number, date?: string, observe?: 'events', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<HttpEvent<Array<ShopkeeperSale>>>;
-    public findMySales(orderNumber?: string, productName?: string, productId?: number, date?: string, observe: any = 'body', reportProgress: boolean = false, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<any> {
+    public findMySales(orderNumber?: string, productName?: string, productId?: string, date?: string, observe?: 'body', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<Array<ShopkeeperSale>>;
+    public findMySales(orderNumber?: string, productName?: string, productId?: string, date?: string, observe?: 'response', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<HttpResponse<Array<ShopkeeperSale>>>;
+    public findMySales(orderNumber?: string, productName?: string, productId?: string, date?: string, observe?: 'events', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<HttpEvent<Array<ShopkeeperSale>>>;
+    public findMySales(orderNumber?: string, productName?: string, productId?: string, date?: string, observe: any = 'body', reportProgress: boolean = false, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<any> {
 
         let localVarQueryParameters = new HttpParams({encoder: this.encoder});
         if (orderNumber !== undefined && orderNumber !== null) {

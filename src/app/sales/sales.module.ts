@@ -72,6 +72,8 @@ import { ShopkeeperSaleComponent } from './pages/shopkeepersale/shopkeepersale.c
 import { SalesReportComponent } from './pages/sales-report/sales-report.component';
 import { MatProgressBarModule } from '@angular/material/progress-bar';
 import { OrdersReportComponent } from './pages/orders-report/orders-report.component';
+import { MatChipsModule } from '@angular/material/chips';
+import { MatAutocompleteModule } from '@angular/material/autocomplete';
 
 @NgModule({
   declarations: [
@@ -148,6 +150,8 @@ import { OrdersReportComponent } from './pages/orders-report/orders-report.compo
     MatDatepickerModule,
     MatNativeDateModule,
     MatProgressBarModule,
+    MatChipsModule,
+    MatAutocompleteModule,
   ],
 })
 export class SalesModule {}

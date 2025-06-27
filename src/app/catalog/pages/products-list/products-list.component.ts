@@ -36,7 +36,6 @@ export class ProductsListComponent implements OnInit, AfterViewInit, OnDestroy {
   displayedColumns: string[] = [
     'id',
     'photo',
-    'shop',
     'name',
     'purchasePrice',
     'price',
@@ -66,10 +65,27 @@ export class ProductsListComponent implements OnInit, AfterViewInit, OnDestroy {
     });
 
     this.role$.subscribe((role) => {
-      if (role === 'sales') {
-        this.displayedColumns = this.displayedColumns.filter(
-          (c) => c !== 'price',
-        );
+      if (role === 'admin' || role === 'manager') {
+        this.displayedColumns = [
+          'id',
+          'photo',
+          'shop',
+          'name',
+          'purchasePrice',
+          'price',
+          'stock',
+          'visible',
+        ];
+      } else {
+        this.displayedColumns = [
+          'id',
+          'photo',
+          'name',
+          'purchasePrice',
+          'price',
+          'stock',
+          'visible',
+        ];
       }
     });
   }

@@ -86,7 +86,7 @@ export class OrdersReportComponent implements OnInit {
     const data = this.dataSource.data;
     const keys = [
       { key: 'order_number', width: 20 },
-      { key: 'customer_name', width: 30 },
+      { key: 'fullName', width: 30 },
       { key: 'total_amount', width: 20 },
       { key: 'status', width: 15 },
       { key: 'payment_method', width: 20 },
@@ -104,7 +104,7 @@ export class OrdersReportComponent implements OnInit {
       cols,
       title,
       5,
-      5,
+      7,
       20,
       3,
       [1],
