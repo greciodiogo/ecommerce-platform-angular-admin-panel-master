@@ -9,13 +9,14 @@
  * https://openapi-generator.tech
  * Do not edit the class manually.
  */
+import { Product } from './product';
+import { ShopkeeperSale } from './shopkeeper-sale';
 
 
-export interface CreateAddressDto { 
-    name: string;
-    slug?: string;
-    visible?: boolean;
-    parentAddressId?: number;
-    price?: number;
+export interface ShopkeeperSaleProduct { 
+    id: number;
+    shopkeeperSale: ShopkeeperSale;
+    product: Product;
+    quantity: number;
 }
 

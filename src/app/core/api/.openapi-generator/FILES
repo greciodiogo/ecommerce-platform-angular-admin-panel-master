@@ -102,6 +102,9 @@ model/shop-item.ts
 model/shop-update-dto.ts
 model/shop.ts
 model/shopkeeper-sale-create-dto.ts
+model/shopkeeper-sale-product-create-dto.ts
+model/shopkeeper-sale-product-update-dto.ts
+model/shopkeeper-sale-product.ts
 model/shopkeeper-sale-update-dto.ts
 model/shopkeeper-sale.ts
 model/update-address-dto.ts

@@ -9,12 +9,12 @@
  * https://openapi-generator.tech
  * Do not edit the class manually.
  */
+import { ShopkeeperSaleProductUpdateDto } from './shopkeeper-sale-product-update-dto';
 
 
 export interface ShopkeeperSaleUpdateDto { 
     order_number?: string;
     shopId?: number;
-    productIds?: Array<number>;
-    quantity?: number;
+    products?: Array<ShopkeeperSaleProductUpdateDto>;
 }
 

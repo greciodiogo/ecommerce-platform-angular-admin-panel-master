@@ -11,11 +11,8 @@
  */
 
 
-export interface CreateAddressDto { 
-    name: string;
-    slug?: string;
-    visible?: boolean;
-    parentAddressId?: number;
-    price?: number;
+export interface ShopkeeperSaleProductCreateDto { 
+    productId: number;
+    quantity: number;
 }
 

@@ -18,5 +18,6 @@ export interface Address {
     visible: boolean;
     parentAddress?: Address;
     childAddresses: Array<Address>;
+    price?: number;
 }
 
