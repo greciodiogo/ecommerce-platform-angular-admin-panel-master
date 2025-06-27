@@ -68,7 +68,17 @@ export class OrdersReportComponent implements OnInit {
         )
         .toPromise();
 
-      this.dataSource.data = orders || [];
+      this.dataSource.data = (orders || []).map(order => ({
+        order_number: order.order_number,
+        fullName: order.fullName,
+        total_amount: (order.items?.reduce((sum, item) => sum + (item.price * item.quantity), 0) || 0)
+          + (order.delivery?.method?.price || 0)
+          + (order.payment?.method?.price || 0),
+        status: order.status,
+        payment_method: order.payment?.method?.name || 'N/A',
+        delivery_method: order.delivery?.method?.name || 'N/A',
+        created_date: order.created,
+      }));
       if (this.sort) this.dataSource.sort = this.sort;
       if (this.paginator) this.dataSource.paginator = this.paginator;
     } catch (e) {

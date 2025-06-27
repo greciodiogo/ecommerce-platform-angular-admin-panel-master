@@ -80,7 +80,11 @@ export class ProductsReportComponent implements OnInit {
   }
 
   public exportAsXLSX() {
-    const data = this.dataSource.data;
+    const data = this.dataSource.data.map(row => ({
+      ...row,
+      shop: row.shop?.shopName || 'N/A',
+      created: row.created ? (typeof row.created === 'string' ? (new Date(row.created)) : row.created) : '',
+    }));
     const keys = [
       { key: 'id', width: 15 },
       { key: 'name', width: 40 },
@@ -96,7 +100,10 @@ export class ProductsReportComponent implements OnInit {
       'Products Report [' + moment().format('DD-MM-YYYY_HH-mm') + ']';
     
     this.exportExcelService.excels(
-      data,
+      data.map(row => ({
+        ...row,
+        created: row.created ? moment(row.created).format('D MMM YYYY, HH:mm') : '',
+      })),
       nameFile,
       keys,
       cols,
