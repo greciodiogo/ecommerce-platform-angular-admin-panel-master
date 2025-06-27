@@ -82,7 +82,6 @@ export class ProductsListComponent implements OnInit, AfterViewInit, OnDestroy {
           'photo',
           'name',
           'purchasePrice',
-          'price',
           'stock',
           'visible',
         ];
