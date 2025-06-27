@@ -11,11 +11,8 @@
  */
 
 
-export interface UpdateAddressDto { 
-    name?: string;
-    slug?: string;
-    visible?: boolean;
-    parentAddressId?: number;
-    price?: number;
+export interface ShopkeeperSaleProductUpdateDto { 
+    productId: number;
+    quantity: number;
 }
 

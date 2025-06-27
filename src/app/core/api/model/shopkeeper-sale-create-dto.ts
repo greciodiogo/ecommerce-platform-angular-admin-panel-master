@@ -9,12 +9,12 @@
  * https://openapi-generator.tech
  * Do not edit the class manually.
  */
+import { ShopkeeperSaleProductCreateDto } from './shopkeeper-sale-product-create-dto';
 
 
 export interface ShopkeeperSaleCreateDto { 
     order_number: string;
-    shopId: number;
-    productIds: Array<number>;
-    quantity: number;
+    shopId?: number;
+    products: Array<ShopkeeperSaleProductCreateDto>;
 }
 

@@ -1,1 +1,21 @@
-<router-outlet></router-outlet>
+<mat-card>
+  <mat-card-title-group>
+    <mat-card-title>
+      {{ (promotionCategory$ | async)?.name }}
+    </mat-card-title>
+  </mat-card-title-group>
+  <mat-tab-group dynamicHeight>
+    <mat-tab>
+      <ng-template mat-tab-label>
+        <mat-icon class="mat-tab-icon">local_offer</mat-icon>
+        Promotions
+      </ng-template>
+      <mat-card-content>
+        <app-category-products
+          *ngIf="promotionCategory$ | async"
+          [category]="(promotionCategory$ | async) ?? null"
+        ></app-category-products>
+      </mat-card-content>
+    </mat-tab>
+  </mat-tab-group>
+</mat-card>

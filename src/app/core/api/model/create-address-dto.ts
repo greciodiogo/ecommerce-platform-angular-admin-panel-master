@@ -16,5 +16,6 @@ export interface CreateAddressDto {
     slug?: string;
     visible?: boolean;
     parentAddressId?: number;
+    price?: number;
 }
 

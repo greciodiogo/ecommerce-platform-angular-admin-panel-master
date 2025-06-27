@@ -21,6 +21,9 @@ import { CheckboxTreeComponent } from './components/checkbox-tree/checkbox-tree.
 import { MatCheckboxModule } from '@angular/material/checkbox';
 import { FilterHelper } from './components/filter-helper/filter-helper.component';
 import { AsideRightComponent } from './components/aside-right/aside-right.component';
+import { MatChipsModule } from '@angular/material/chips';
+import { MatAutocompleteModule } from '@angular/material/autocomplete';
+import { MatInputModule } from '@angular/material/input';
 
 @NgModule({
   declarations: [
@@ -49,6 +52,9 @@ import { AsideRightComponent } from './components/aside-right/aside-right.compon
     FormsModule,
     MatIconModule,
     MatCheckboxModule,
+    MatChipsModule,
+    MatAutocompleteModule,
+    MatInputModule,
   ],
   exports: [
     RoleNamePipe,
@@ -62,7 +68,10 @@ import { AsideRightComponent } from './components/aside-right/aside-right.compon
     RatingStarsComponent,
     CheckboxTreeComponent,
     AsideRightComponent,
-    FilterHelper
+    FilterHelper,
+    MatChipsModule,
+    MatAutocompleteModule,
+    MatInputModule,
   ],
 })
 export class SharedModule {}

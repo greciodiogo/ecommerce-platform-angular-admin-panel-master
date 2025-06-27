@@ -10,7 +10,7 @@
  * Do not edit the class manually.
  */
 import { Shop } from './shop';
-import { Product } from './product';
+import { ShopkeeperSaleProduct } from './shopkeeper-sale-product';
 
 
 export interface ShopkeeperSale { 
@@ -19,7 +19,6 @@ export interface ShopkeeperSale {
     updated: string;
     order_number: string;
     shop: Shop;
-    products: Array<Product>;
-    quantity: number;
+    products: Array<ShopkeeperSaleProduct>;
 }
 

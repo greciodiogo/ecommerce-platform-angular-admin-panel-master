@@ -19,7 +19,7 @@ export class CategoriesTreeComponent implements OnInit, OnDestroy {
   role$ = this.store.select(selectUserRole);
   categoriesTree$ = this.categories$.pipe(
     map((categories) => {
-      const filtered = categories.filter(cat => cat.name !== 'Trending');
+      const filtered = categories.filter(cat => cat.name !== 'Trending' && cat.name !== 'Promotions');
       return CategoriesTreeComponent.createTree(filtered);
     }),
   );

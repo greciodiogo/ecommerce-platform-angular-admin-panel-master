@@ -65,9 +65,9 @@ export class SalesReportComponent implements OnInit {
         for (const product of sale.products) {
           rows.push({
             order_number: sale.order_number,
-            productId: product.id,
-            productName: product.name,
-            quantity: sale.quantity,
+            productId: product.product.id,
+            productName: product.product.name,
+            quantity: product.quantity,
             date: sale.created,
           });
         }

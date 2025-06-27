@@ -68,7 +68,17 @@ export class OrdersReportComponent implements OnInit {
         )
         .toPromise();
 
-      this.dataSource.data = orders || [];
+      this.dataSource.data = (orders || []).map(order => ({
+        order_number: order.order_number,
+        fullName: order.fullName,
+        total_amount: (order.items?.reduce((sum, item) => sum + (item.price * item.quantity), 0) || 0)
+          + (order.delivery?.method?.price || 0)
+          + (order.payment?.method?.price || 0),
+        status: order.status,
+        payment_method: order.payment?.method?.name || 'N/A',
+        delivery_method: order.delivery?.method?.name || 'N/A',
+        created_date: order.created,
+      }));
       if (this.sort) this.dataSource.sort = this.sort;
       if (this.paginator) this.dataSource.paginator = this.paginator;
     } catch (e) {
@@ -86,7 +96,7 @@ export class OrdersReportComponent implements OnInit {
     const data = this.dataSource.data;
     const keys = [
       { key: 'order_number', width: 20 },
-      { key: 'customer_name', width: 30 },
+      { key: 'fullName', width: 30 },
       { key: 'total_amount', width: 20 },
       { key: 'status', width: 15 },
       { key: 'payment_method', width: 20 },
@@ -104,7 +114,7 @@ export class OrdersReportComponent implements OnInit {
       cols,
       title,
       5,
-      5,
+      7,
       20,
       3,
       [1],
