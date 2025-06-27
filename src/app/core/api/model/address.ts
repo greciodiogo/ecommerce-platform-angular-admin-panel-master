@@ -16,8 +16,8 @@ export interface Address {
     name: string;
     slug?: string;
     visible: boolean;
+    price?: number;
     parentAddress?: Address;
     childAddresses: Array<Address>;
-    price?: number;
 }
 
