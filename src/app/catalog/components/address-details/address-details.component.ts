@@ -29,6 +29,10 @@ export class AddressDetailsComponent implements OnInit {
       nonNullable: true,
       validators: [Validators.required],
     }),
+    price: new FormControl(0, {
+      nonNullable: true,
+      validators: [Validators.required],
+    }),
   });
 
   constructor(
@@ -49,6 +53,7 @@ export class AddressDetailsComponent implements OnInit {
       name: this.address.name,
       slug: this.address.slug,
       visible: this.address.visible,
+      price: this.address.price ?? 0,
     });
   }
 
@@ -63,6 +68,7 @@ export class AddressDetailsComponent implements OnInit {
           name: this.editForm.value.name!,
           slug: this.editForm.value.slug!,
           visible: this.editForm.value.visible!,
+          price: this.editForm.value.price!,
         },
       }),
     );

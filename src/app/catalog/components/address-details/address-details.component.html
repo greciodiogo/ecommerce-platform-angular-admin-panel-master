@@ -37,6 +37,12 @@
     <mat-error>Invalid visibility setting</mat-error>
   </mat-form-field>
 
+  <mat-form-field appearance="outline" class="address-price">
+    <mat-label>Price</mat-label>
+    <input matInput type="number" formControlName="price" />
+    <mat-error>Invalid price</mat-error>
+  </mat-form-field>
+
   <div>
     <button mat-flat-button type="button" (click)="delete()" color="warn">
       Delete address
