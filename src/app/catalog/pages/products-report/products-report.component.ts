@@ -40,9 +40,9 @@ export class ProductsReportComponent implements OnInit {
     private exportExcelService: ExportExcelService
   ) {
     this.filterForm = this.fb.group({
-      productName: [''],
+      name: [''],
       category: [''],
-      shop: [''],
+      shopName: [''],
       minPrice: [''],
       maxPrice: [''],
       minStock: [''],
@@ -61,11 +61,18 @@ export class ProductsReportComponent implements OnInit {
   async fetchData() {
     this.loading = true;
     try {
+      const filters = { ...this.filterForm.value };
+      const cleanFilters = Object.fromEntries(
+        Object.entries(filters).filter(([_, value]) => value !== null && value !== ''),
+      );
+
+      this.store.dispatch(ProductsActions.loadProducts({ filters: cleanFilters }));
+      
       this.dataSource.data = await firstValueFrom(this.products$);
       this.subscription = this.products$.subscribe((products) => {
         this.dataSource.data = products;
       });
-      this.store.dispatch(ProductsActions.loadProducts({}));
+      
       this.dataSource.sort = this.sort;
       this.dataSource.paginator = this.paginator;
     } catch (e) {

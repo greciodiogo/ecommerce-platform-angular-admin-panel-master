@@ -48,6 +48,7 @@ export class OrdersListComponent implements OnInit, AfterViewInit, OnDestroy {
       orderNumber: [''],
       date: [''],
       shopName: [''],
+      status: [''],
     });
   }
 

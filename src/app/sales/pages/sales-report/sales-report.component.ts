@@ -37,6 +37,7 @@ export class SalesReportComponent implements OnInit {
       productName: [''],
       productId: [''],
       date: [''],
+      shopName: [''],
     });
   }
 
@@ -47,18 +48,22 @@ export class SalesReportComponent implements OnInit {
   async fetchData() {
     this.loading = true;
     try {
-      const filters = this.filterForm.value;
-      const dateStr = filters.date instanceof Date
-        ? moment(filters.date).format('YYYY-MM-DD')
-        : filters.date;
+      const filters = { ...this.filterForm.value };
+
+      if (filters.date instanceof Date) {
+        filters.date = moment(filters.date).format('YYYY-MM-DD');
+      }
+
       const sales = await this.salesApi
         .findMySales(
           filters.orderNumber || undefined,
           filters.productName || undefined,
           filters.productId || undefined,
-          dateStr || undefined
+          filters.date || undefined,
+          undefined
         )
         .toPromise();
+
       // Flatten products for report rows
       const rows = [];
       for (const sale of sales) {

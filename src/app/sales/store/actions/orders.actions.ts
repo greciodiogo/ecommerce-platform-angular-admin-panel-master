@@ -3,7 +3,14 @@ import { Order, OrderCreateDto, OrderUpdateDto } from '../../../core/api';
 
 export const loadOrders = createAction(
   '[Orders] Load Orders',
-  props<{ filters?: { orderNumber?: string; date?: string; shopName?: string } }>(),
+  props<{
+    filters?: {
+      orderNumber?: string;
+      date?: string;
+      shopName?: string;
+      status?: 'pending' | 'failed' | 'confirmed' | 'open' | 'cancelled' | 'delivered' | 'refunded';
+    };
+  }>(),
 );
 
 export const loadSales = createAction('[Orders] Load Sales');

@@ -215,24 +215,49 @@ export class OrdersApiService {
 
     /**
      * @param orderNumber 
-     * @param date 
+     * @param customerName 
+     * @param status 
+     * @param paymentMethodId 
+     * @param deliveryMethodId 
+     * @param startDate 
+     * @param endDate 
      * @param shopName 
      * @param observe set whether or not to return the data Observable as the body, response or events. defaults to returning the body.
      * @param reportProgress flag to report request and response progress.
      */
-    public getOrders(orderNumber?: string, date?: string, shopName?: string, observe?: 'body', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<Array<Order>>;
-    public getOrders(orderNumber?: string, date?: string, shopName?: string, observe?: 'response', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<HttpResponse<Array<Order>>>;
-    public getOrders(orderNumber?: string, date?: string, shopName?: string, observe?: 'events', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<HttpEvent<Array<Order>>>;
-    public getOrders(orderNumber?: string, date?: string, shopName?: string, observe: any = 'body', reportProgress: boolean = false, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<any> {
+    public getOrders(orderNumber?: string, customerName?: string, status?: 'pending' | 'failed' | 'confirmed' | 'open' | 'cancelled' | 'delivered' | 'refunded', paymentMethodId?: string, deliveryMethodId?: string, startDate?: string, endDate?: string, shopName?: string, observe?: 'body', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<Array<Order>>;
+    public getOrders(orderNumber?: string, customerName?: string, status?: 'pending' | 'failed' | 'confirmed' | 'open' | 'cancelled' | 'delivered' | 'refunded', paymentMethodId?: string, deliveryMethodId?: string, startDate?: string, endDate?: string, shopName?: string, observe?: 'response', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<HttpResponse<Array<Order>>>;
+    public getOrders(orderNumber?: string, customerName?: string, status?: 'pending' | 'failed' | 'confirmed' | 'open' | 'cancelled' | 'delivered' | 'refunded', paymentMethodId?: string, deliveryMethodId?: string, startDate?: string, endDate?: string, shopName?: string, observe?: 'events', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<HttpEvent<Array<Order>>>;
+    public getOrders(orderNumber?: string, customerName?: string, status?: 'pending' | 'failed' | 'confirmed' | 'open' | 'cancelled' | 'delivered' | 'refunded', paymentMethodId?: string, deliveryMethodId?: string, startDate?: string, endDate?: string, shopName?: string, observe: any = 'body', reportProgress: boolean = false, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<any> {
 
         let localVarQueryParameters = new HttpParams({encoder: this.encoder});
         if (orderNumber !== undefined && orderNumber !== null) {
           localVarQueryParameters = this.addToHttpParams(localVarQueryParameters,
             <any>orderNumber, 'order_number');
         }
-        if (date !== undefined && date !== null) {
+        if (customerName !== undefined && customerName !== null) {
           localVarQueryParameters = this.addToHttpParams(localVarQueryParameters,
-            <any>date, 'date');
+            <any>customerName, 'customerName');
+        }
+        if (status !== undefined && status !== null) {
+          localVarQueryParameters = this.addToHttpParams(localVarQueryParameters,
+            <any>status, 'status');
+        }
+        if (paymentMethodId !== undefined && paymentMethodId !== null) {
+          localVarQueryParameters = this.addToHttpParams(localVarQueryParameters,
+            <any>paymentMethodId, 'paymentMethodId');
+        }
+        if (deliveryMethodId !== undefined && deliveryMethodId !== null) {
+          localVarQueryParameters = this.addToHttpParams(localVarQueryParameters,
+            <any>deliveryMethodId, 'deliveryMethodId');
+        }
+        if (startDate !== undefined && startDate !== null) {
+          localVarQueryParameters = this.addToHttpParams(localVarQueryParameters,
+            <any>startDate, 'startDate');
+        }
+        if (endDate !== undefined && endDate !== null) {
+          localVarQueryParameters = this.addToHttpParams(localVarQueryParameters,
+            <any>endDate, 'endDate');
         }
         if (shopName !== undefined && shopName !== null) {
           localVarQueryParameters = this.addToHttpParams(localVarQueryParameters,

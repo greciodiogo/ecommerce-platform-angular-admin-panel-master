@@ -66,15 +66,11 @@ export class ShopkeeperSalesListComponent
     const filters = { ...this.filterForm.value };
 
     if (filters.date instanceof Date) {
-      const date = filters.date as Date;
-      const year = date.getFullYear();
-      const month = (date.getMonth() + 1).toString().padStart(2, '0');
-      const day = date.getDate().toString().padStart(2, '0');
-      filters.date = `${year}-${month}-${day}`;
+      filters.date = moment(filters.date).format('YYYY-MM-DD');
     }
 
     const cleanFilters = Object.fromEntries(
-      Object.entries(filters).filter(([_, value]) => value),
+      Object.entries(filters).filter(([_, value]) => value !== null && value !== ''),
     );
 
     this.store.dispatch(

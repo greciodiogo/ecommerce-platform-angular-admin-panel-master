@@ -21,7 +21,10 @@ export class ProductsEffects {
             action.filters?.id,
             action.filters?.name,
             action.filters?.shopName,
-            action.filters?.withVisible !== undefined ? String(action.filters.withVisible) : undefined,
+            action.filters?.minStock,
+            action.filters?.maxStock,
+            action.filters?.minPrice,
+            action.filters?.maxPrice,
           )
           .pipe(
             map((products) =>
