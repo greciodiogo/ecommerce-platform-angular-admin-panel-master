@@ -14,7 +14,10 @@ export const loadProducts = createAction(
       id?: string;
       name?: string;
       shopName?: string;
-      withVisible?: boolean;
+      minStock?: number;
+      maxStock?: number;
+      minPrice?: number;
+      maxPrice?: number;
     };
   }>(),
 );

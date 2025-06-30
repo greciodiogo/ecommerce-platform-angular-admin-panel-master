@@ -549,14 +549,18 @@ export class ProductsApiService {
      * @param id 
      * @param name 
      * @param shopName 
+     * @param minStock 
+     * @param maxStock 
+     * @param minPrice 
+     * @param maxPrice 
      * @param context 
      * @param observe set whether or not to return the data Observable as the body, response or events. defaults to returning the body.
      * @param reportProgress flag to report request and response progress.
      */
-    public getProducts(id?: string, name?: string, shopName?: string, context?: string, observe?: 'body', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<Array<Product>>;
-    public getProducts(id?: string, name?: string, shopName?: string, context?: string, observe?: 'response', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<HttpResponse<Array<Product>>>;
-    public getProducts(id?: string, name?: string, shopName?: string, context?: string, observe?: 'events', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<HttpEvent<Array<Product>>>;
-    public getProducts(id?: string, name?: string, shopName?: string, context?: string, observe: any = 'body', reportProgress: boolean = false, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<any> {
+    public getProducts(id?: string, name?: string, shopName?: string, minStock?: number, maxStock?: number, minPrice?: number, maxPrice?: number, context?: string, observe?: 'body', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<Array<Product>>;
+    public getProducts(id?: string, name?: string, shopName?: string, minStock?: number, maxStock?: number, minPrice?: number, maxPrice?: number, context?: string, observe?: 'response', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<HttpResponse<Array<Product>>>;
+    public getProducts(id?: string, name?: string, shopName?: string, minStock?: number, maxStock?: number, minPrice?: number, maxPrice?: number, context?: string, observe?: 'events', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<HttpEvent<Array<Product>>>;
+    public getProducts(id?: string, name?: string, shopName?: string, minStock?: number, maxStock?: number, minPrice?: number, maxPrice?: number, context?: string, observe: any = 'body', reportProgress: boolean = false, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<any> {
 
         let localVarQueryParameters = new HttpParams({encoder: this.encoder});
         if (id !== undefined && id !== null) {
@@ -570,6 +574,22 @@ export class ProductsApiService {
         if (shopName !== undefined && shopName !== null) {
           localVarQueryParameters = this.addToHttpParams(localVarQueryParameters,
             <any>shopName, 'shopName');
+        }
+        if (minStock !== undefined && minStock !== null) {
+          localVarQueryParameters = this.addToHttpParams(localVarQueryParameters,
+            <any>minStock, 'minStock');
+        }
+        if (maxStock !== undefined && maxStock !== null) {
+          localVarQueryParameters = this.addToHttpParams(localVarQueryParameters,
+            <any>maxStock, 'maxStock');
+        }
+        if (minPrice !== undefined && minPrice !== null) {
+          localVarQueryParameters = this.addToHttpParams(localVarQueryParameters,
+            <any>minPrice, 'minPrice');
+        }
+        if (maxPrice !== undefined && maxPrice !== null) {
+          localVarQueryParameters = this.addToHttpParams(localVarQueryParameters,
+            <any>maxPrice, 'maxPrice');
         }
         if (context !== undefined && context !== null) {
           localVarQueryParameters = this.addToHttpParams(localVarQueryParameters,
