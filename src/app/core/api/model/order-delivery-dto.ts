@@ -18,5 +18,6 @@ export interface OrderDeliveryDto {
     city: string;
     postalCode?: string;
     country: string;
+    addressId?: number;
 }
 

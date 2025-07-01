@@ -11,6 +11,7 @@
  */
 import { Order } from './order';
 import { DeliveryMethod } from './delivery-method';
+import { Address } from './address';
 
 
 export interface OrderDelivery { 
@@ -22,5 +23,7 @@ export interface OrderDelivery {
     city: string;
     postalCode?: string;
     country: string;
+    addressEntity?: Address;
+    price?: number;
 }
 
