@@ -1,51 +1,53 @@
-<mat-list>
-  <mat-list-item
-    *ngFor="let setting of filteredSettings$ | async; trackBy: trackByFn"
-  >
-    <div mat-line>{{ setting.name }}</div>
-    <div mat-line>{{ setting.description }}</div>
-    <mat-form-field
-      appearance="outline"
-      *ngIf="setting.type === 'number' || setting.type === 'string'"
+<div class="settings-list-root">
+  <mat-list>
+    <mat-list-item
+      *ngFor="let setting of filteredSettings$ | async; trackBy: trackByFn"
     >
-      <mat-label> Value </mat-label>
-      <input
-        [type]="setting.type === 'number' ? 'number' : 'text'"
-        matInput
+      <div mat-line>{{ setting.name }}</div>
+      <div mat-line>{{ setting.description }}</div>
+      <mat-form-field
+        appearance="outline"
+        *ngIf="setting.type === 'number' || setting.type === 'string'"
+      >
+        <mat-label> Value </mat-label>
+        <input
+          [type]="setting.type === 'number' ? 'number' : 'text'"
+          matInput
+          [(ngModel)]="setting.value"
+          (ngModelChange)="save(setting.id, $event)"
+        />
+      </mat-form-field>
+      <mat-slide-toggle
+        color="primary"
+        *ngIf="setting.type === 'boolean'"
+        [checked]="setting.value === 'true'"
+        (change)="save(setting.id, $event.checked.toString())"
+      ></mat-slide-toggle>
+      <app-country-select
+        *ngIf="
+          setting.type === 'country' ||
+          setting.type === 'countriesList' ||
+          setting.type === 'currencyCode' ||
+          setting.type === 'currenciesList'
+        "
+        [type]="setting.type"
         [(ngModel)]="setting.value"
         (ngModelChange)="save(setting.id, $event)"
-      />
-    </mat-form-field>
-    <mat-slide-toggle
-      color="primary"
-      *ngIf="setting.type === 'boolean'"
-      [checked]="setting.value === 'true'"
-      (change)="save(setting.id, $event.checked.toString())"
-    ></mat-slide-toggle>
-    <app-country-select
-      *ngIf="
-        setting.type === 'country' ||
-        setting.type === 'countriesList' ||
-        setting.type === 'currencyCode' ||
-        setting.type === 'currenciesList'
-      "
-      [type]="setting.type"
-      [(ngModel)]="setting.value"
-      (ngModelChange)="save(setting.id, $event)"
-    ></app-country-select>
-    <button mat-icon-button (click)="delete(setting.id)" *ngIf="!builtin">
-      <mat-icon>delete</mat-icon>
-    </button>
-  </mat-list-item>
-</mat-list>
-<span
-  *ngIf="(filteredSettings$ | async)?.length === 0"
-  class="empty-placeholder"
->
-  No settings found
-</span>
+      ></app-country-select>
+      <button mat-icon-button (click)="delete(setting.id)" *ngIf="!builtin">
+        <mat-icon>delete</mat-icon>
+      </button>
+    </mat-list-item>
+  </mat-list>
+  <span
+    *ngIf="(filteredSettings$ | async)?.length === 0"
+    class="empty-placeholder"
+  >
+    No settings found
+  </span>
 
-<ng-container *ngIf="!builtin">
-  <mat-divider></mat-divider>
-  <app-setting-add-form></app-setting-add-form>
-</ng-container>
+  <ng-container *ngIf="!builtin">
+    <mat-divider></mat-divider>
+    <app-setting-add-form></app-setting-add-form>
+  </ng-container>
+</div>
