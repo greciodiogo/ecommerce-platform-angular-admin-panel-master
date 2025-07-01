@@ -1,6 +1,7 @@
 import { Injectable } from '@angular/core';
 import { io, Socket } from 'socket.io-client';
 import { BehaviorSubject } from 'rxjs';
+import { environment } from 'src/environments/environment';
 
 @Injectable({ providedIn: 'root' })
 export class NotificationsService {
@@ -9,16 +10,14 @@ export class NotificationsService {
 
   constructor() {
     // const userId = localStorage.getItem('userId'); // ou de authService
-    const userId = 1 // ou de authService
-    this.socket = io('http://localhost:3000', {
+    const userId = 1; // ou de authService
+    this.socket = io(environment.apiUrl, {
       query: { userId },
+      transports: ['websocket', 'polling'],
     });
 
-    this.socket.on('notification', (notification) => {
-      this.notifications$.next([
-        notification,
-        ...this.notifications$.value,
-      ]);
+    this.socket.on('ping', (notification) => {
+      this.notifications$.next([notification, ...this.notifications$.value]);
     });
   }
 
@@ -26,4 +25,4 @@ export class NotificationsService {
   loadInitialNotifications(list: any[]) {
     this.notifications$.next(list);
   }
-}
+} 
