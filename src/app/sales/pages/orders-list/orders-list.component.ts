@@ -128,6 +128,10 @@ export class OrdersListComponent implements OnInit, AfterViewInit, OnDestroy {
       default: return '';
     }
   }
+
+  getOrderItemsTotal(order: Order): number {
+    return order.items.reduce((sum, item) => sum + (item.price * (item.quantity || 1)), 0);
+  }
 }
 
 @Component({

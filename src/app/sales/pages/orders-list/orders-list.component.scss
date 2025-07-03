@@ -128,3 +128,23 @@ mat-paginator {
   color: #6d4c41;
   font-weight: bold;
 }
+
+@media (max-width: 768px) {
+  table, .mat-paginator, .mat-header-row, .mat-row {
+    display: none !important;
+  }
+  .order-card {
+    display: block;
+    margin: 1rem 0;
+    padding: 1rem;
+    background: #fff;
+    border-radius: 8px;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.05);
+  }
+  .order-card .actions {
+    margin-top: 1rem;
+    display: flex;
+    gap: 8px;
+    justify-content: flex-end;
+  }
+}
