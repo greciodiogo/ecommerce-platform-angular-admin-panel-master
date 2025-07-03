@@ -53,3 +53,14 @@ export const selectSelectedOrder = createSelector(
       : null;
   },
 );
+
+export const selectOrderStatusDistribution = createSelector(
+  selectOrdersList,
+  (orders) => {
+    const statusCounts: { [key: string]: number } = {};
+    orders.forEach(order => {
+      statusCounts[order.status] = (statusCounts[order.status] || 0) + 1;
+    });
+    return statusCounts;
+  }
+);

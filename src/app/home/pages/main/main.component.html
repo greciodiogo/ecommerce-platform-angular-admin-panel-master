@@ -183,7 +183,11 @@
           
         </div>
         <div class="box_item" *ngIf="(role$ | async) !== 'sales'">
-          <grafico-pie-chart></grafico-pie-chart>
+          <grafico-pie-chart
+            [series]="orderStatusSeries"
+            [labels]="orderStatusLabels"
+            title="Order Status Distribution"
+          ></grafico-pie-chart>
         </div>
       </div>
     </div>

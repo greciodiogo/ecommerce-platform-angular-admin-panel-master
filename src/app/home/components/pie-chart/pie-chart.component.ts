@@ -35,66 +35,62 @@ export class PieChartComponent implements OnInit{
   @ViewChild("chart") chart: ChartComponent;
   public chartOptions: Partial<ChartOptions>;
 
-    @Input() title: string = "Order History"
-  
+  @Input() title: string = "Order Status Distribution";
+  @Input() series: number[] = [1];
+  @Input() labels: string[] = ["No Data"];
+
   constructor(
     private ngZone: NgZone,
     private cdr: ChangeDetectorRef,
-  ) {
-    this.initChart()
+  ) {}
+
+  public ngOnInit(){
+    this.initChart();
   }
 
   public initChart(){
     this.chartOptions = {
-      series: [{
-      name: 'Vendas',
-      data: [4, 3, 10, 9, 29, 19]
-    }],
+      series: this.series,
       chart: {
-      height: 280,
-      type: 'line',
-    },
-    forecastDataPoints: {
-      count: 7
-    },
-    stroke: {
-      width: 5,
-      curve: 'smooth'
-    },
-    xaxis: {
-      type: 'datetime',
-      categories: ['1/11/2000', '2/11/2000', '3/11/2000', '4/11/2000', '5/11/2000', '9/11/2000'],
-      tickAmount: 10,
-      labels: {
-        formatter: function(value, timestamp, opts) {
-          return opts.dateFormatter(new Date(timestamp), 'dd MMM')
-        }
-      }
-    },
-    title: {
-      text: 'Forecast',
-      align: 'left',
-      style: {
-        fontSize: "16px",
-        color: '#666'
-      }
-    },
-    fill: {
-      type: 'gradient',
-      gradient: {
-        shade: 'dark',
-        gradientToColors: [ '#1D8A4F'],
-        shadeIntensity: 1,
-        type: 'horizontal',
-        opacityFrom: 1,
-        opacityTo: 1,
-        stops: [0, 100, 100, 100]
+        height: 280,
+        type: 'pie',
       },
-    }
+      labels: this.labels,
+      title: {
+        text: this.title,
+        align: 'left',
+        style: {
+          fontSize: "16px",
+          color: '#666'
+        }
+      },
+      fill: {
+        type: 'gradient',
+        gradient: {
+          shade: 'dark',
+          gradientToColors: [ '#1D8A4F'],
+          shadeIntensity: 1,
+          type: 'horizontal',
+          opacityFrom: 1,
+          opacityTo: 1,
+          stops: [0, 100, 100, 100]
+        },
+      },
+      tooltip: {
+        y: {
+          formatter: function(val) {
+            return val.toString();
+          }
+        }
+      },
+      dataLabels: {
+        enabled: true
+      }
     };
   }
 
-  public ngOnInit(){
+  ngOnChanges() {
+    this.initChart();
   }
 
   public areas: any = []

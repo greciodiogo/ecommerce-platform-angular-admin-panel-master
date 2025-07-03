@@ -7,7 +7,7 @@ import { combineLatest, firstValueFrom, Subscription } from 'rxjs';
 import { ProductsActions, selectProductsList, selectShopsList, ShopsActions } from 'src/app/catalog/store';
 import { Order } from 'src/app/core/api';
 import { selectUsername, selectUserRole } from 'src/app/core/auth/store';
-import { DashboardActions, OrdersActions, selectDashboardItems, selectOrdersListWithItems } from 'src/app/sales/store';
+import { DashboardActions, OrdersActions, selectDashboardItems, selectOrdersListWithItems, selectOrderStatusDistribution } from 'src/app/sales/store';
 import { FnService } from 'src/app/services/fn.helper.service';
 import { FormControl } from '@angular/forms';
 
@@ -32,6 +32,10 @@ export class MainComponent implements OnInit, OnDestroy {
 
     @ViewChild(MatSort) sort!: MatSort;
     @ViewChild(MatPaginator) paginator!: MatPaginator;
+
+    orderStatusDistribution$ = this.store.select(selectOrderStatusDistribution);
+    public orderStatusSeries: number[] = [];
+    public orderStatusLabels: string[] = [];
 
   public dashboard: any = {
     totalProductsInStock: 0,
@@ -82,7 +86,8 @@ export class MainComponent implements OnInit, OnDestroy {
       this.products$,
       this.orders$,
       this.dashboard$,
-    ]).subscribe(([shops, products, orders, dashboard]) => {
+      this.orderStatusDistribution$
+    ]).subscribe(([shops, products, orders, dashboard, statusDistribution]) => {
       this.lastOrders = orders.slice(0,4)
       this.dashboard_ = {
         totalShops: shops?.length || 0,
@@ -96,6 +101,14 @@ export class MainComponent implements OnInit, OnDestroy {
         newUsers: dashboard.newUsers,
         totalSales: dashboard.totalSales,
         lowStockProductsCount: dashboard.lowStockProductsCount
+      }
+      // Prepare data for pie chart
+      if (statusDistribution) {
+        this.orderStatusLabels = Object.keys(statusDistribution);
+        this.orderStatusSeries = Object.values(statusDistribution);
+      } else {
+        this.orderStatusLabels = ["No Data"];
+        this.orderStatusSeries = [1];
       }
     });
   }
