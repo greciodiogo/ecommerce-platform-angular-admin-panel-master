@@ -39,6 +39,10 @@ export class AddressesTreeComponent implements OnInit, OnDestroy {
       nonNullable: true,
       validators: [Validators.required],
     }),
+    newPrice: new FormControl('', {
+      nonNullable: true,
+      validators: [Validators.required, Validators.pattern('^\\d+(\\.\\d{1,2})?$'), Validators.min(0.01)],
+    }),
   });
 
   constructor(private store: Store, private router: Router) {}
@@ -112,6 +116,7 @@ export class AddressesTreeComponent implements OnInit, OnDestroy {
       AddressActions.createAddress({
         data: {
           name: this.formGroup.value.newName!,
+          price: Number(this.formGroup.value.newPrice),
           visible: true,
           parentAddressId: this.newNode.parentAddress?.id,
         },
