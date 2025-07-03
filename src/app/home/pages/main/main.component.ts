@@ -1,4 +1,4 @@
-import { AfterViewInit, Component, OnDestroy, OnInit, ViewChild } from '@angular/core';
+import { AfterViewInit, Component, OnDestroy, OnInit, ViewChild, ChangeDetectorRef } from '@angular/core';
 import { MatPaginator } from '@angular/material/paginator';
 import { MatSort } from '@angular/material/sort';
 import { MatTableDataSource } from '@angular/material/table';
@@ -59,7 +59,8 @@ export class MainComponent implements OnInit, OnDestroy {
   public dashboard_: any 
 
   constructor(public configService: FnService,
-    private store: Store) { }
+    private store: Store,
+    private cdr: ChangeDetectorRef) { }
 
   ngOnInit() {
     this.dataSource.data = [];
@@ -107,9 +108,10 @@ export class MainComponent implements OnInit, OnDestroy {
         lowStockProductsCount: dashboard.lowStockProductsCount
       }
       // Prepare data for pie chart
-      if (statusDistribution) {
+      if (statusDistribution && Object.keys(statusDistribution).length > 0) {
         this.orderStatusLabels = Object.keys(statusDistribution);
         this.orderStatusSeries = Object.values(statusDistribution);
+        this.cdr.detectChanges();
       } else {
         this.orderStatusLabels = ["No Data"];
         this.orderStatusSeries = [1];

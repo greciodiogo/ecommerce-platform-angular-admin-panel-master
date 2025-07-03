@@ -115,7 +115,7 @@
         </a>
       </div>
     </div>
-    <div class="dashboard_container">
+    <div class="dashboard_container" *ngIf="(role$ | async) !== 'sales'">
       <h2 class="dashboard_title" style="margin-top: 2rem;">Statistic</h2>
       <div class="wrapper">
         <div class="box_item">
@@ -186,7 +186,7 @@
           </ul>
           
         </div>
-        <div class="box_item" *ngIf="(role$ | async) !== 'sales'">
+        <div class="box_item" *ngIf="(role$ | async) !== 'sales' && orderStatusSeries.length > 0 && orderStatusLabels[0] !== 'No Data'">
           <grafico-pie-chart
             [series]="orderStatusSeries"
             [labels]="orderStatusLabels"
