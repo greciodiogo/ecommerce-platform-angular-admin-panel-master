@@ -2,6 +2,7 @@ import { createSelector } from '@ngrx/store';
 import * as fromOrders from '../reducers/orders.reducer';
 import { selectSalesState } from './index';
 import { Order } from '../../../core/api';
+import { isWithinInterval, startOfWeek, endOfWeek, startOfMonth, endOfMonth, startOfYear, endOfYear, parseISO } from 'date-fns';
 
 export const selectOrdersState = createSelector(
   selectSalesState,
@@ -62,5 +63,28 @@ export const selectOrderStatusDistribution = createSelector(
       statusCounts[order.status] = (statusCounts[order.status] || 0) + 1;
     });
     return statusCounts;
+  }
+);
+
+export const selectOrdersByPeriod = (period: 'weekly' | 'monthly' | 'yearly') => createSelector(
+  selectOrdersList,
+  (orders) => {
+    const now = new Date();
+    let start: Date, end: Date;
+    if (period === 'weekly') {
+      start = startOfWeek(now, { weekStartsOn: 1 });
+      end = endOfWeek(now, { weekStartsOn: 1 });
+    } else if (period === 'monthly') {
+      start = startOfMonth(now);
+      end = endOfMonth(now);
+    } else {
+      start = startOfYear(now);
+      end = endOfYear(now);
+    }
+    return orders.filter(order => {
+      if (order.status === 'cancelled') return false;
+      const created = parseISO(order.created);
+      return isWithinInterval(created, { start, end });
+    });
   }
 );

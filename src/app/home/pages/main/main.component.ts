@@ -7,7 +7,7 @@ import { combineLatest, firstValueFrom, Subscription } from 'rxjs';
 import { ProductsActions, selectProductsList, selectShopsList, ShopsActions } from 'src/app/catalog/store';
 import { Order } from 'src/app/core/api';
 import { selectUsername, selectUserRole } from 'src/app/core/auth/store';
-import { DashboardActions, OrdersActions, selectDashboardItems, selectOrdersListWithItems, selectOrderStatusDistribution } from 'src/app/sales/store';
+import { DashboardActions, OrdersActions, selectDashboardItems, selectOrdersListWithItems, selectOrderStatusDistribution, selectOrdersByPeriod } from 'src/app/sales/store';
 import { FnService } from 'src/app/services/fn.helper.service';
 import { FormControl } from '@angular/forms';
 
@@ -36,6 +36,9 @@ export class MainComponent implements OnInit, OnDestroy {
     orderStatusDistribution$ = this.store.select(selectOrderStatusDistribution);
     public orderStatusSeries: number[] = [];
     public orderStatusLabels: string[] = [];
+
+    public barChartSeries: number[] = [];
+    public barChartLabels: string[] = [];
 
   public dashboard: any = {
     totalProductsInStock: 0,
@@ -86,8 +89,9 @@ export class MainComponent implements OnInit, OnDestroy {
       this.products$,
       this.orders$,
       this.dashboard$,
-      this.orderStatusDistribution$
-    ]).subscribe(([shops, products, orders, dashboard, statusDistribution]) => {
+      this.orderStatusDistribution$,
+      this.store.select(selectOrdersByPeriod(this.periodControl.value))
+    ]).subscribe(([shops, products, orders, dashboard, statusDistribution, filteredOrders]) => {
       this.lastOrders = orders.slice(0,4)
       this.dashboard_ = {
         totalShops: shops?.length || 0,
@@ -109,6 +113,48 @@ export class MainComponent implements OnInit, OnDestroy {
       } else {
         this.orderStatusLabels = ["No Data"];
         this.orderStatusSeries = [1];
+      }
+      // Prepare data for bar chart (order count by month/week/year)
+      const period = this.periodControl.value;
+      let counts: { [key: string]: number } = {};
+      let labels: string[] = [];
+      if (filteredOrders && filteredOrders.length > 0) {
+        if (period === 'weekly') {
+          // Group by day of week
+          const days = ['Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat', 'Sun'];
+          counts = days.reduce((acc, day) => ({ ...acc, [day]: 0 }), {});
+          filteredOrders.forEach(order => {
+            const d = new Date(order.created);
+            const day = days[d.getDay() === 0 ? 6 : d.getDay() - 1];
+            counts[day]++;
+          });
+          labels = days;
+        } else if (period === 'monthly') {
+          // Group by day of month
+          const days = Array.from({ length: 31 }, (_, i) => (i + 1).toString());
+          counts = days.reduce((acc, day) => ({ ...acc, [day]: 0 }), {});
+          filteredOrders.forEach(order => {
+            const d = new Date(order.created);
+            const day = d.getDate().toString();
+            counts[day]++;
+          });
+          labels = days;
+        } else {
+          // Group by month
+          const months = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'];
+          counts = months.reduce((acc, month) => ({ ...acc, [month]: 0 }), {});
+          filteredOrders.forEach(order => {
+            const d = new Date(order.created);
+            const month = months[d.getMonth()];
+            counts[month]++;
+          });
+          labels = months;
+        }
+        this.barChartLabels = labels;
+        this.barChartSeries = labels.map(label => counts[label]);
+      } else {
+        this.barChartLabels = ["No Data"];
+        this.barChartSeries = [0];
       }
     });
   }

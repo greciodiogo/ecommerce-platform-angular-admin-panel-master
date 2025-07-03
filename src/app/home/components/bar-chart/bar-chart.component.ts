@@ -34,67 +34,67 @@ export class BarChartComponent implements OnInit {
   @ViewChild("chart") chart: ChartComponent;
   public chartOptions: Partial<ChartOptions>;
 
-    @Input() title: string = "Movimentos em Stock"
+  @Input() title: string = "Order Count by Period";
+  @Input() series: number[] = [0];
+  @Input() labels: string[] = ["No Data"];
 
   constructor(
     private ngZone: NgZone,
     private cdr: ChangeDetectorRef,
-  ) {
-    this.initConfig()
+  ) {}
+
+  public ngOnInit(){
+    this.initConfig();
   }
 
   public initConfig(){
     this.chartOptions = {
       series: [{
-      name: 'Entrada',
-      data: [56, 61, 58, 63, 60, 66],
-      color: '#3f51b5'
-    }, {
-      name: 'Saídas',
-      data: [98, 87, 105, 91, 114, 94],
-      color: '#022213'
-    },
-  ],
+        name: 'Orders',
+        data: this.series,
+        color: '#3f51b5'
+      }],
       chart: {
-      type: 'bar',
-      height: 270
-    },
-    dataLabels: {
-      enabled: false,
-      style: {
-        colors: ['#15283c', '#ff5722', '#214162'],
+        type: 'bar',
+        height: 270
       },
-    },
-    stroke: {
-      show: true,
-      width: 2,
-      colors: ['transparent']
-    },
-    xaxis: {
-      categories: ['Jul', 'Ago', 'Set', 'Oct', 'Nov', 'Des'],
-    },
-    yaxis: {
-      title: {
-        text: ' (000 Kwanzas)'
-      }
-    },
-    fill: {
-      colors: ['#15283c', '#ff5722', '#214162'],
-      opacity: 1
-    },
-    tooltip: {
-      y: {
-        formatter: function (val) {
-          return "" + val + " KZ"
+      dataLabels: {
+        enabled: false,
+        style: {
+          colors: ['#15283c', '#ff5722', '#214162'],
+        },
+      },
+      stroke: {
+        show: true,
+        width: 2,
+        colors: ['transparent']
+      },
+      xaxis: {
+        categories: this.labels,
+      },
+      yaxis: {
+        title: {
+          text: 'Orders'
+        }
+      },
+      fill: {
+        colors: ['#15283c', '#ff5722', '#214162'],
+        opacity: 1
+      },
+      tooltip: {
+        y: {
+          formatter: function (val) {
+            return val.toString() + " Orders"
+          }
         }
       }
-    }
     };
   }
 
-  public ngOnInit(){
+  ngOnChanges() {
+    this.initConfig();
   }
-  
+
   public totais: any = []
   public months: any = []
   public areaPercentual: any = []
