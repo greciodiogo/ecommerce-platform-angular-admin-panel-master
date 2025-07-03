@@ -1,13 +1,12 @@
-<aside [class.active]="isOpen">
-    <div class="container-aside size_medium" [class.container_active]="isOpen"> 
-      <div class="closeBtn" (click)="onClose()">
-        <mat-icon style="color: black;">close</mat-icon>
-      </div>
-      <div class="aside-main">
-        <h2>{{ componentTitle || ' ' }}</h2>
-        <h5>{{ componentDesc || ' ' }}</h5>
-        <ng-content></ng-content>
-        
-      </div>
+<aside *ngIf="isOpen">
+  <div class="container-aside size_medium" [@slideInOut]="isOpen ? 'in' : 'out'" [class.container_active]="isOpen"> 
+    <div class="closeBtn" (click)="onClose()">
+      <mat-icon style="color: black;">close</mat-icon>
     </div>
-  </aside>
+    <div class="aside-main">
+      <h2>{{ componentTitle || ' ' }}</h2>
+      <h5>{{ componentDesc || ' ' }}</h5>
+      <ng-content></ng-content>
+      </div>
+  </div>
+</aside>

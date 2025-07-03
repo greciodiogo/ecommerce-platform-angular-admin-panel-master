@@ -16,12 +16,12 @@
           >{{ sale.id }}
         </mat-cell>
       </ng-container>
-      <ng-container matColumnDef="created">
-        <mat-header-cell *matHeaderCellDef mat-sort-header="created">
-          Created
+      <ng-container matColumnDef="updated">
+        <mat-header-cell *matHeaderCellDef mat-sort-header="updated">
+          Sale Date
         </mat-header-cell>
         <mat-cell *matCellDef="let sale">
-          {{ sale.created | date : 'd MMM yyyy, HH:mm' }}
+          {{ sale.updated | date : 'd MMM yyyy, HH:mm' }}
         </mat-cell>
       </ng-container>
       <ng-container matColumnDef="status">
@@ -84,7 +84,7 @@
       <mat-header-row
         *matHeaderRowDef="[
           'id',
-          'created',
+          'updated',
           'status',
           'itemsCount',
           'itemsTotal',
@@ -98,7 +98,7 @@
           let sale;
           columns: [
             'id',
-            'created',
+            'updated',
             'status',
             'itemsCount',
             'itemsTotal',

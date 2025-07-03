@@ -24,48 +24,64 @@
   </div>
 
   <table mat-table [dataSource]="dataSource" matSort>
-    <!-- Column Definitions -->
-    <ng-container matColumnDef="id">
-      <th mat-header-cell *matHeaderCellDef mat-sort-header>ID</th>
+    <!-- Order Number -->
+    <ng-container matColumnDef="order_number">
+      <th mat-header-cell *matHeaderCellDef mat-sort-header>Order #</th>
+      <td mat-cell *matCellDef="let order">{{ order.order_number }}</td>
+    </ng-container>
+    <!-- Contact -->
+    <ng-container matColumnDef="contact">
+      <th mat-header-cell *matHeaderCellDef mat-sort-header>Contact</th>
+      <td mat-cell *matCellDef="let order">{{ order.contactPhone }}</td>
+    </ng-container>
+    <!-- Items -->
+    <ng-container matColumnDef="items">
+      <th mat-header-cell *matHeaderCellDef mat-sort-header>Items</th>
+      <td mat-cell style="text-align: center;" *matCellDef="let order">{{ order.items.length }}</td>
+    </ng-container>
+    <!-- Total -->
+    <ng-container matColumnDef="total">
+      <th mat-header-cell *matHeaderCellDef mat-sort-header  style="text-align: center;">Total</th>
       <td mat-cell *matCellDef="let order">
-        {{ order.id }}
+        {{ (order.itemsTotal + order.delivery.price + order.payment.method.price) | formatCurrency }}
       </td>
     </ng-container>
+    <!-- Status -->
+    <ng-container matColumnDef="status">
+      <th mat-header-cell *matHeaderCellDef mat-sort-header>Status</th>
+      <td mat-cell *matCellDef="let order">
+        <span [ngClass]="getStatusClass(order.status)">
+          {{ order.status }}
+        </span>
+      </td>
+    </ng-container>
+    <!-- Created -->
     <ng-container matColumnDef="created">
       <th mat-header-cell *matHeaderCellDef mat-sort-header>Created</th>
       <td mat-cell *matCellDef="let order">
         {{ order.created | date : 'd MMM yyyy, HH:mm' }}
       </td>
     </ng-container>
-    <ng-container matColumnDef="status">
-      <th mat-header-cell *matHeaderCellDef mat-sort-header>Status</th>
-      <td mat-cell *matCellDef="let order">{{ order.status }}</td>
-    </ng-container>
-    <ng-container matColumnDef="itemsCount">
-      <th mat-header-cell *matHeaderCellDef mat-sort-header>Items</th>
-      <td mat-cell *matCellDef="let order">{{ order.itemsCount }}</td>
-    </ng-container>
-    <ng-container matColumnDef="itemsTotal">
-      <th mat-header-cell *matHeaderCellDef mat-sort-header>Total</th>
-      <td mat-cell *matCellDef="let order">
-        {{
-          order.itemsTotal +
-            order.delivery.method.price +
-            order.payment.method.price | formatCurrency
-        }}
+    <!-- Actions -->
+    <ng-container matColumnDef="actions">
+      <th mat-header-cell *matHeaderCellDef class="actions-header">Actions</th>
+      <td mat-cell *matCellDef="let order" class="actions-cell">
+        <div style="display: flex; gap: 8px; justify-content: center;">
+          <ng-container [ngSwitch]="order.status">
+            <ng-container *ngSwitchCase="'pending'">
+              <button mat-flat-button color="warn" (click)="updateOrderStatus(order, 'cancelled')" (click)="$event.stopPropagation()">Cancel</button>
+              <button mat-flat-button color="primary" (click)="updateOrderStatus(order, 'open')" (click)="$event.stopPropagation()">Open</button>
+            </ng-container>
+            <ng-container *ngSwitchCase="'open'">
+              <button mat-flat-button color="warn" (click)="updateOrderStatus(order, 'cancelled')" (click)="$event.stopPropagation()">Cancel</button>
+              <button mat-flat-button color="accent" (click)="updateOrderStatus(order, 'delivered')" (click)="$event.stopPropagation()">Deliver</button>
+            </ng-container>
+            <ng-container *ngSwitchCase="'delivered'">
+              <button mat-flat-button color="primary" (click)="updateOrderStatus(order, 'confirmed')" (click)="$event.stopPropagation()">Confirm</button>
+            </ng-container>
+          </ng-container>
+        </div>
       </td>
-    </ng-container>
-    <ng-container matColumnDef="fullName">
-      <th mat-header-cell *matHeaderCellDef mat-sort-header>Full Name</th>
-      <td mat-cell *matCellDef="let order">{{ order.fullName }}</td>
-    </ng-container>
-    <ng-container matColumnDef="delivery">
-      <th mat-header-cell *matHeaderCellDef mat-sort-header>Delivery</th>
-      <td mat-cell *matCellDef="let order">{{ order.delivery.method.name }}</td>
-    </ng-container>
-    <ng-container matColumnDef="payment">
-      <th mat-header-cell *matHeaderCellDef mat-sort-header>Payment</th>
-      <td mat-cell *matCellDef="let order">{{ order.payment.method.name }}</td>
     </ng-container>
 
     <!-- Header and Row Declarations -->

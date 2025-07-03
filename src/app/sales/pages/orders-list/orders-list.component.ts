@@ -4,6 +4,7 @@ import {
   OnDestroy,
   OnInit,
   ViewChild,
+  Inject,
 } from '@angular/core';
 import { Store } from '@ngrx/store';
 import { OrdersActions, selectOrdersListWithItems } from '../../store';
@@ -15,6 +16,7 @@ import { MatPaginator } from '@angular/material/paginator';
 import { selectUserRole } from 'src/app/core/auth/store';
 import { FormBuilder, FormGroup } from '@angular/forms';
 import { Router } from '@angular/router';
+import { MatDialog, MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
 
 @Component({
   selector: 'app-orders-list',
@@ -32,18 +34,18 @@ export class OrdersListComponent implements OnInit, AfterViewInit, OnDestroy {
   @ViewChild(MatPaginator) paginator!: MatPaginator;
 
   displayedColumns: string[] = [
-    'id',
-    'created',
+    'order_number',
+    'contact',
+    'items',
+    'total',
     'status',
-    'itemsCount',
-    'itemsTotal',
-    'fullName',
-    'delivery',
-    'payment',
+    'created',
+    'actions',
   ];
 
   constructor(private store: Store, private fb: FormBuilder,
-    public router: Router,) {
+    public router: Router,
+    private dialog: MatDialog) {
     this.filterForm = this.fb.group({
       orderNumber: [''],
       date: [''],
@@ -91,4 +93,57 @@ export class OrdersListComponent implements OnInit, AfterViewInit, OnDestroy {
   onRowClick(order: Order) {
     this.router.navigate(['/sales/orders', order.id]);
   }
+
+  updateOrderStatus(order: Order, newStatus: Order.StatusEnum) {
+    const dialogRef = this.dialog.open(ConfirmDialogComponent, {
+      data: {
+        message: `Are you sure you want to change status to '${newStatus}'?`,
+        confirmText: 'Yes',
+        cancelText: 'No',
+      },
+    });
+    dialogRef.afterClosed().subscribe(result => {
+      if (result) {
+        this.store.dispatch(
+          OrdersActions.updateOrder({
+            orderId: order.id,
+            data: {
+              status: newStatus,
+            },
+          })
+        );
+      }
+    });
+  }
+
+  getStatusClass(status: Order.StatusEnum): string {
+    switch (status) {
+      case 'pending': return 'status-pending';
+      case 'open': return 'status-open';
+      case 'delivered': return 'status-delivered';
+      case 'confirmed': return 'status-confirmed';
+      case 'cancelled': return 'status-cancelled';
+      case 'failed': return 'status-failed';
+      case 'refunded': return 'status-refunded';
+      default: return '';
+    }
+  }
+}
+
+@Component({
+  selector: 'app-confirm-dialog',
+  template: `
+    <h2 mat-dialog-title>Confirm</h2>
+    <mat-dialog-content>{{ data.message }}</mat-dialog-content>
+    <mat-dialog-actions align="end">
+      <button mat-button mat-dialog-close>{{ data.cancelText || 'Cancel' }}</button>
+      <button mat-flat-button color="primary" [mat-dialog-close]="true">{{ data.confirmText || 'OK' }}</button>
+    </mat-dialog-actions>
+  `,
+})
+export class ConfirmDialogComponent {
+  constructor(
+    public dialogRef: MatDialogRef<ConfirmDialogComponent>,
+    @Inject(MAT_DIALOG_DATA) public data: any
+  ) {}
 }

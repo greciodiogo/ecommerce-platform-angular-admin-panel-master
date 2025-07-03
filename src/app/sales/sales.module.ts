@@ -18,7 +18,7 @@ import { ReturnsComponent } from './pages/returns/returns.component';
 import { PaymentMethodsComponent } from './pages/payment-methods/payment-methods.component';
 import { DeliveryMethodsComponent } from './pages/delivery-methods/delivery-methods.component';
 import { OrderComponent } from './pages/order/order.component';
-import { OrdersListComponent } from './pages/orders-list/orders-list.component';
+import { OrdersListComponent, ConfirmDialogComponent } from './pages/orders-list/orders-list.component';
 import { CreateOrderFormComponent } from './pages/create-order-form/create-order-form.component';
 import { CreateReturnFormComponent } from './pages/create-return-form/create-return-form.component';
 import { ReturnsListComponent } from './pages/returns-list/returns-list.component';
@@ -84,6 +84,7 @@ import { MatListModule } from '@angular/material/list';
     DeliveryMethodsComponent,
     OrderComponent,
     OrdersListComponent,
+    ConfirmDialogComponent,
     CreateOrderFormComponent,
     CreateReturnFormComponent,
     ReturnsListComponent,
