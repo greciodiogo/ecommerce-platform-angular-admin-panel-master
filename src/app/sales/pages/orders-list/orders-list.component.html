@@ -89,35 +89,6 @@
     <tr mat-row *matRowDef="let row; columns: displayedColumns" class="order-row" (click)="onRowClick(row)"></tr>
   </table>
 
-  <!-- Mobile Card Layout -->
-  <div class="order-card" *ngFor="let order of dataSource.data">
-    <div><strong>Order #:</strong> {{ order.order_number }}</div>
-    <div><strong>Contact:</strong> {{ order.contactPhone }}</div>
-    <div><strong>Items:</strong> {{ order.items.length }}</div>
-    <div><strong>Total:</strong> {{ (getOrderItemsTotal(order) + order.delivery.method.price + order.payment.method.price) | formatCurrency }}</div>
-    <div>
-      <strong>Status:</strong>
-      <span [ngClass]="getStatusClass(order.status)">
-        {{ order.status }}
-      </span>
-    </div>
-    <div class="actions">
-      <ng-container [ngSwitch]="order.status">
-        <ng-container *ngSwitchCase="'pending'">
-          <button mat-flat-button color="warn" (click)="updateOrderStatus(order, 'cancelled')">Cancel</button>
-          <button mat-flat-button color="primary" (click)="updateOrderStatus(order, 'open')">Open</button>
-        </ng-container>
-        <ng-container *ngSwitchCase="'open'">
-          <button mat-flat-button color="warn" (click)="updateOrderStatus(order, 'cancelled')">Cancel</button>
-          <button mat-flat-button color="accent" (click)="updateOrderStatus(order, 'delivered')">Deliver</button>
-        </ng-container>
-        <ng-container *ngSwitchCase="'delivered'">
-          <button mat-flat-button color="primary" (click)="updateOrderStatus(order, 'confirmed')">Confirm</button>
-        </ng-container>
-      </ng-container>
-    </div>
-  </div>
-
   <div *ngIf="dataSource.data.length === 0" class="empty-placeholder">
     No orders found.
   </div>
