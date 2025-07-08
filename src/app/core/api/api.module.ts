@@ -14,6 +14,7 @@ import { FaqsApiService } from './api/faqs-api.service';
 import { FeedbackApiService } from './api/feedback-api.service';
 import { ImportExportApiService } from './api/import-export-api.service';
 import { NotificationsApiService } from './api/notifications-api.service';
+import { OperationLogsApiService } from './api/operation-logs-api.service';
 import { OrdersApiService } from './api/orders-api.service';
 import { PagesApiService } from './api/pages-api.service';
 import { PaymentMethodsApiService } from './api/payment-methods-api.service';

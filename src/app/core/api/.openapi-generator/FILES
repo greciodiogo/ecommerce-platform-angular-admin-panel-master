@@ -14,6 +14,7 @@ api/faqs-api.service.ts
 api/feedback-api.service.ts
 api/import-export-api.service.ts
 api/notifications-api.service.ts
+api/operation-logs-api.service.ts
 api/orders-api.service.ts
 api/pages-api.service.ts
 api/payment-methods-api.service.ts
