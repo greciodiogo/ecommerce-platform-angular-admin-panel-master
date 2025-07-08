@@ -107,6 +107,14 @@
         </a>
       </div>
 
+      <!-- Shops -->
+      <a mat-list-item routerLink="/catalog/shops" [appAuthRole]="['admin']">
+        <span class="main-item-content">
+          <mat-icon mat-list-icon class="icon-space">shopping_bag</mat-icon>
+          <span>Shops</span>
+        </span>
+      </a>
+
       <!-- Configs Group -->
       <mat-list-item (click)="toggleGroup('configs')" style="cursor:pointer;" [appAuthRole]="['admin', 'manager']">
         <span class="main-item-content">
