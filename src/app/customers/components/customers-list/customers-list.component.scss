@@ -8,15 +8,15 @@ mat-card-content {
   margin-right: -16px;
 }
 
-mat-row.user-detail-row {
+mat-row.customer-detail-row {
   min-height: 0;
 }
 
-mat-row.user-row:not(.user-detail-row):hover {
+mat-row.user-row:not(.customer-detail-row):hover {
   background: whitesmoke;
 }
 
-mat-row.user-row:not(.user-detail-row):active {
+mat-row.user-row:not(.customer-detail-row):active {
   background: #efefef;
 }
 

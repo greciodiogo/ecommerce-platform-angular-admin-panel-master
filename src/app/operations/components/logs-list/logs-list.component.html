@@ -16,7 +16,13 @@
       <ng-container matColumnDef="userName">
         <mat-header-cell *matHeaderCellDef>User</mat-header-cell>
         <mat-cell *matCellDef="let log">
-          {{ log.details?.result?.user?.firstName ? (log.details.result.user.firstName + ' ' + log.details.result.user.lastName) : log.userId }}
+          {{
+            log.details?.result?.user?.firstName
+              ? (log.details.result.user.firstName + ' ' + log.details.result.user.lastName)
+              : (log.details?.result?.user?.email
+                  ? log.details.result.user.email
+                  : (log.userId || 'Unknown User'))
+          }}
         </mat-cell>
       </ng-container>
       <ng-container matColumnDef="action">

@@ -1,1 +1,8 @@
 /* Styles for operations page */ 
+:host {
+  max-width: 1000px;
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
+  margin: 0 auto;
+}
