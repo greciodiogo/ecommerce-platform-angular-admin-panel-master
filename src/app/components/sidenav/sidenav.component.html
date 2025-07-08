@@ -6,220 +6,186 @@
     [opened]="(matchesMedium | async) === false"
   >
     <mat-nav-list>
-      <a
-        mat-list-item
-        routerLink="/"
-        [appAuthRole]="['admin', 'manager', 'sales']"
-      >
-        <mat-icon mat-list-icon>home</mat-icon>
+      <a mat-list-item routerLink="/" [appAuthRole]="['admin', 'manager', 'sales']">
+        <mat-icon mat-list-icon class="icon-space">home</mat-icon>
         Home
       </a>
       <mat-divider [appAuthRole]="['admin', 'manager']"></mat-divider>
-      <a
-        mat-list-item
-        routerLink="/sales/sales"
-        [appAuthRole]="['admin', 'manager']"
-        [ngClass]="{ active: router.url.startsWith('/sales/sales') }"
-      >
-        <mat-icon mat-list-icon>sell</mat-icon>
-        Sales
-      </a>
-      <a
-        mat-list-item
-        routerLink="/sales/orders"
-        [appAuthRole]="['admin', 'manager']"
-        [ngClass]="{ active: router.url.startsWith('/sales/orders') }"
-      >
-        <mat-icon mat-list-icon>receipt</mat-icon>
-        Orders
-      </a>
-      <a
-        mat-list-item
-        routerLink="/sales/returns"
-        [appAuthRole]="['admin', 'manager']"
-        [ngClass]="{ active: router.url.startsWith('/sales/returns') }"
-      >
-        <mat-icon mat-list-icon>cancel</mat-icon>
-        Returns
-      </a>
-      <a
-        mat-list-item
-        routerLink="/sales/payment-methods"
-        [appAuthRole]="['admin']"
-        [ngClass]="{ active: router.url.startsWith('/sales/payment-methods') }"
-      >
-        <mat-icon mat-list-icon>payments</mat-icon>
-        Payment methods
-      </a>
-      <a
-        mat-list-item
-        routerLink="/sales/delivery-methods"
-        [appAuthRole]="['admin']"
-        [ngClass]="{ active: router.url.startsWith('/sales/delivery-methods') }"
-      >
-        <mat-icon mat-list-icon>local_shipping</mat-icon>
-        Delivery methods
-      </a>
 
-      <mat-divider [appAuthRole]="['admin', 'manager', 'sales']"></mat-divider>
-      <a
-        mat-list-item
-        routerLink="/catalog/categories"
-        [appAuthRole]="['admin', 'manager']"
-        [ngClass]="{ active: router.url.endsWith('/catalog/categories') }"
-      >
-        <mat-icon mat-list-icon>local_offer</mat-icon>
-        Categories
-      </a>
-      <a
-        mat-list-item
-        routerLink="/catalog/products"
-        [appAuthRole]="['admin', 'manager', 'sales']"
-        [ngClass]="{ active: router.url.endsWith('/catalog/products') }"
-      >
-        <mat-icon mat-list-icon>inventory_2</mat-icon>
-        Products
-      </a>
-      <a
-        mat-list-item
-        routerLink="/sales/shopkeepersales"
-        [appAuthRole]="['sales']"
-        [ngClass]="{ active: router.url.startsWith('/sales/shopkeepersales') }"
-      >
-        <mat-icon mat-list-icon>store</mat-icon>
-        Shopkeeper Sales
-      </a>
-      <a
-        mat-list-item
-        routerLink="/sales/sales-report"
-        [appAuthRole]="['sales']"
-        [ngClass]="{ active: router.url.startsWith('/sales/sales-report') }"
-      >
-        <mat-icon mat-list-icon>bar_chart</mat-icon>
-        Sales Report
-      </a>
-      <a
-      routerLink="/catalog/categories/2/trending"
-      mat-list-item
-      [appAuthRole]="['admin', 'manager']"
-      [ngClass]="{ active: router.url.endsWith('/trending') }"
-      >
-        <mat-icon mat-list-icon>numbers</mat-icon>
-        Trending Products
-      </a>
-      <a 
-      routerLink="/catalog/promotions"
-      [ngClass]="{ active: router.url.startsWith('/catalog/promotions') }"
-      mat-list-item [appAuthRole]="['admin', 'manager']">
-        <mat-icon mat-list-icon>star</mat-icon>
-        Promotions
-      </a>
-      <a
-        mat-list-item
-        routerLink="/catalog/reports"
-        [appAuthRole]="['admin']"
-        [ngClass]="{ active: router.url.startsWith('/catalog/reports') }"
-      >
-        <mat-icon mat-list-icon>bookmark_border</mat-icon>
-        Reports
-      </a>
-      <a
-        mat-list-item
-        routerLink="/sales/complaints"
-        [appAuthRole]="['admin', 'manager']"
-        [ngClass]="{ active: router.url.startsWith('/catalog/complaints') }"
-      >
-        <mat-icon mat-list-icon>personal_injury</mat-icon>
-        Complaints
-      </a>
-      <a
-        mat-list-item
-        routerLink="/catalog/faqs"
-        [appAuthRole]="['admin', 'manager']"
-        [ngClass]="{ active: router.url.startsWith('/catalog/faqs') }"
-      >
-        <mat-icon mat-list-icon>question_answer</mat-icon>
-        FAQ
-      </a>
-      <mat-divider [appAuthRole]="['admin']"></mat-divider>
-      <a
-        mat-list-item
-        routerLink="/pages"
-        [appAuthRole]="['admin']"
-        [ngClass]="{ active: router.url.startsWith('/pages') }"
-      >
-        <mat-icon mat-list-icon>article</mat-icon>
-        Pages
-      </a>
-      <a
-        mat-list-item
-        routerLink="/catalog/shops"
-        [appAuthRole]="['admin']"
-        [ngClass]="{ active: router.url.startsWith('/shops') }"
-      >
-        <mat-icon mat-list-icon>shopping_bag_speed</mat-icon>
-        Shops
-      </a>
-      <a
-        mat-list-item
-        routerLink="/catalog/addresses"
-        [appAuthRole]="['admin', 'manager']"
-        [ngClass]="{ active: router.url.startsWith('/catalog/addresses') }"
-      >
-        <mat-icon mat-list-icon>location_on</mat-icon>
-        Addresses
-      </a>
-      <a
-        mat-list-item
-        [appAuthRole]="['admin', 'manager']"
-        [ngClass]="{ active: router.url.startsWith('/sales/deliveries') }"
-      >
-        <mat-icon mat-list-icon>group</mat-icon>
-        Deliveries
-      </a>
+      <!-- Orders Group -->
+      <mat-list-item (click)="toggleGroup('sales')" style="cursor:pointer;" [appAuthRole]="['admin', 'manager']">
+        <span class="main-item-content">
+          <mat-icon mat-list-icon class="icon-space">receipt</mat-icon>
+          <span>Orders</span>
+          <mat-icon class="arrow-icon">{{ expanded.sales ? 'expand_less' : 'expand_more' }}</mat-icon>
+        </span>
+      </mat-list-item>
+      <div *ngIf="expanded.sales" class="sidenav-subgroup">
+        <a mat-list-item routerLink="/sales/sales" [appAuthRole]="['admin', 'manager']">
+          <mat-icon mat-list-icon class="icon-space">sell</mat-icon>
+          Sales
+        </a>
+        <a mat-list-item routerLink="/sales/orders" [appAuthRole]="['admin', 'manager']">
+          <mat-icon mat-list-icon class="icon-space">receipt</mat-icon>
+          Orders
+        </a>
+        <a mat-list-item routerLink="/sales/returns" [appAuthRole]="['admin', 'manager']">
+          <mat-icon mat-list-icon class="icon-space">cancel</mat-icon>
+          Returns
+        </a>
+      </div>
 
-      <mat-divider [appAuthRole]="['admin']"></mat-divider>
-      <a
-        mat-list-item
-        routerLink="/users"
-        [appAuthRole]="['admin']"
-        [ngClass]="{ active: router.url.startsWith('/users') }"
-      >
-        <mat-icon mat-list-icon>people</mat-icon>
-        Users
-      </a>
-      <a
-        mat-list-item
-        routerLink="/operations"
-        [appAuthRole]="['admin']"
-        [ngClass]="{ active: router.url.startsWith('/operations') }"
-      >
-        <mat-icon mat-list-icon>history</mat-icon>
-        Operation Logs
-      </a>
-      <a
-        mat-list-item
-        routerLink="/customers"
-        [appAuthRole]="['admin', 'manager']"
-        [ngClass]="{ active: router.url.startsWith('/customers') }"
-      >
-        <mat-icon mat-list-icon>person</mat-icon>
-        customers
-      </a>
+      <!-- Products Group -->
+      <mat-list-item (click)="toggleGroup('products')" style="cursor:pointer;" [appAuthRole]="['admin', 'manager', 'sales']">
+        <span class="main-item-content">
+          <mat-icon mat-list-icon class="icon-space">inventory_2</mat-icon>
+          <span>Products</span>
+          <mat-icon class="arrow-icon">{{ expanded.products ? 'expand_less' : 'expand_more' }}</mat-icon>
+        </span>
+      </mat-list-item>
+      <div *ngIf="expanded.products" class="sidenav-subgroup">
+        <a mat-list-item routerLink="/catalog/products" [appAuthRole]="['admin', 'manager', 'sales']">
+          <mat-icon mat-list-icon class="icon-space">inventory_2</mat-icon>
+          Product List
+        </a>
+        <a mat-list-item routerLink="/catalog/categories/2/trending" [appAuthRole]="['admin', 'manager']">
+          <mat-icon mat-list-icon class="icon-space">trending_up</mat-icon>
+          Trending
+        </a>
+        <a mat-list-item routerLink="/catalog/promotions" [appAuthRole]="['admin', 'manager']">
+          <mat-icon mat-list-icon class="icon-space">local_offer</mat-icon>
+          Promotions
+        </a>
+      </div>
 
-      <a
-        mat-list-item
-        routerLink="/settings"
-        [appAuthRole]="['admin']"
-        [ngClass]="{ active: router.url.startsWith('/settings') }"
-      >
-        <mat-icon mat-list-icon>settings</mat-icon>
-        Settings
-      </a>
+      <!-- Reports -->
+      <mat-list-item (click)="toggleGroup('reports')" style="cursor:pointer;" [appAuthRole]="['admin', 'sales']">
+        <span class="main-item-content">
+          <mat-icon mat-list-icon class="icon-space">bar_chart</mat-icon>
+          <span>Reports</span>
+          <mat-icon class="arrow-icon">{{ expanded.reports ? 'expand_less' : 'expand_more' }}</mat-icon>
+        </span>
+      </mat-list-item>
+      <div *ngIf="expanded.reports" class="sidenav-subgroup">
+        <a mat-list-item routerLink="/catalog/reports" [appAuthRole]="['admin']">
+          <mat-icon mat-list-icon class="icon-space">description</mat-icon>
+          Catalog Reports
+        </a>
+        <a mat-list-item routerLink="/sales/sales-report" [appAuthRole]="['sales']">
+          <mat-icon mat-list-icon class="icon-space">assessment</mat-icon>
+          Sales Report
+        </a>
+      </div>
+
+      <!-- Complaints -->
+      <mat-list-item (click)="toggleGroup('complaints')" style="cursor:pointer;" [appAuthRole]="['admin', 'manager']">
+        <span class="main-item-content">
+          <mat-icon mat-list-icon class="icon-space">personal_injury</mat-icon>
+          <span>Complaints</span>
+          <mat-icon class="arrow-icon">{{ expanded.complaints ? 'expand_less' : 'expand_more' }}</mat-icon>
+        </span>
+      </mat-list-item>
+      <div *ngIf="expanded.complaints" class="sidenav-subgroup">
+        <a mat-list-item routerLink="/sales/complaints" [appAuthRole]="['admin', 'manager']">
+          <mat-icon mat-list-icon class="icon-space">report_problem</mat-icon>
+          Complaints
+        </a>
+      </div>
+
+      <!-- FAQs -->
+      <mat-list-item (click)="toggleGroup('faqs')" style="cursor:pointer;" [appAuthRole]="['admin', 'manager']">
+        <span class="main-item-content">
+          <mat-icon mat-list-icon class="icon-space">question_answer</mat-icon>
+          <span>FAQs</span>
+          <mat-icon class="arrow-icon">{{ expanded.faqs ? 'expand_less' : 'expand_more' }}</mat-icon>
+        </span>
+      </mat-list-item>
+      <div *ngIf="expanded.faqs" class="sidenav-subgroup">
+        <a mat-list-item routerLink="/catalog/faqs" [appAuthRole]="['admin', 'manager']">
+          <mat-icon mat-list-icon class="icon-space">help_outline</mat-icon>
+          FAQs
+        </a>
+      </div>
+
+      <!-- Configs Group -->
+      <mat-list-item (click)="toggleGroup('configs')" style="cursor:pointer;" [appAuthRole]="['admin', 'manager']">
+        <span class="main-item-content">
+          <mat-icon mat-list-icon class="icon-space">settings</mat-icon>
+          <span>Configs</span>
+          <mat-icon class="arrow-icon">{{ expanded.configs ? 'expand_less' : 'expand_more' }}</mat-icon>
+        </span>
+      </mat-list-item>
+      <div *ngIf="expanded.configs" class="sidenav-subgroup">
+        <a mat-list-item routerLink="/catalog/addresses" [appAuthRole]="['admin', 'manager']">
+          <mat-icon mat-list-icon class="icon-space">location_on</mat-icon>
+          Addresses
+        </a>
+        <a mat-list-item routerLink="/catalog/categories" [appAuthRole]="['admin', 'manager']">
+          <mat-icon mat-list-icon class="icon-space">category</mat-icon>
+          Categories
+        </a>
+      </div>
+
+      <!-- Users Group -->
+      <mat-list-item (click)="toggleGroup('users')" style="cursor:pointer;" [appAuthRole]="['admin', 'manager']">
+        <span class="main-item-content">
+          <mat-icon mat-list-icon class="icon-space">people</mat-icon>
+          <span>Users</span>
+          <mat-icon class="arrow-icon">{{ expanded.users ? 'expand_less' : 'expand_more' }}</mat-icon>
+        </span>
+      </mat-list-item>
+      <div *ngIf="expanded.users" class="sidenav-subgroup">
+        <a mat-list-item routerLink="/users" [appAuthRole]="['admin']">
+          <mat-icon mat-list-icon class="icon-space">people</mat-icon>
+          Users List
+        </a>
+        <a mat-list-item routerLink="/customers" [appAuthRole]="['admin', 'manager']">
+          <mat-icon mat-list-icon class="icon-space">person</mat-icon>
+          Customers
+        </a>
+        <a mat-list-item routerLink="/operations" [appAuthRole]="['admin']" [ngClass]="{ active: router.url.startsWith('/operations') }">
+          <mat-icon mat-list-icon class="icon-space">history</mat-icon>
+          Operation Logs
+        </a>
+      </div>
+
+      <!-- Settings -->
+      <mat-list-item (click)="toggleGroup('settings')" style="cursor:pointer;" [appAuthRole]="['admin']">
+        <span class="main-item-content">
+          <mat-icon mat-list-icon class="icon-space">settings</mat-icon>
+          <span>Settings</span>
+          <mat-icon class="arrow-icon">{{ expanded.settings ? 'expand_less' : 'expand_more' }}</mat-icon>
+        </span>
+      </mat-list-item>
+      <div *ngIf="expanded.settings" class="sidenav-subgroup">
+        <a mat-list-item routerLink="/settings" [appAuthRole]="['admin']">
+          <mat-icon mat-list-icon class="icon-space">settings</mat-icon>
+          Settings
+        </a>
+      </div>
     </mat-nav-list>
   </mat-sidenav>
-
   <mat-sidenav-content>
     <ng-content></ng-content>
   </mat-sidenav-content>
 </mat-sidenav-container>
+
+<style>
+.sidenav-subgroup {
+  padding-left: 2em;
+  background: rgba(0,0,0,0.02);
+}
+.main-item-content {
+  display: flex;
+  align-items: center;
+  width: 100%;
+}
+.arrow-icon {
+  font-size: 20px;
+  margin-left: auto;
+  vertical-align: middle;
+}
+.icon-space {
+  margin-right: 0.5em;
+}
+</style>

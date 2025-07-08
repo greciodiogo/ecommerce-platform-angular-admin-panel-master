@@ -16,6 +16,18 @@ export class SidenavComponent {
 
   @ViewChild(MatSidenav) sidenav!: MatSidenav;
 
+  // State for expanded/collapsed groups
+  expanded = {
+    sales: false,
+    products: false,
+    reports: false,
+    complaints: false,
+    faqs: false,
+    configs: false,
+    users: false,
+    settings: false,
+  };
+
   constructor(breakpointObserver: BreakpointObserver, public router: Router) {
     this.matchesMedium = breakpointObserver
       .observe([Breakpoints.XSmall, Breakpoints.Small])
@@ -27,5 +39,9 @@ export class SidenavComponent {
 
   async toggle() {
     this.sidenav.toggle();
+  }
+
+  toggleGroup(group: keyof typeof this.expanded) {
+    this.expanded[group] = !this.expanded[group];
   }
 }
