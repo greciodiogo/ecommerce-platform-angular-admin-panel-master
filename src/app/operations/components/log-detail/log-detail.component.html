@@ -1,12 +1,18 @@
-<div class="log-detail-content">
-  <h3>Log Details</h3>
-  <div><strong>ID:</strong> {{ log.id }}</div>
-  <div><strong>User ID:</strong> {{ log.userId }}</div>
-  <div><strong>Action:</strong> {{ log.action }}</div>
-  <div><strong>Entity:</strong> {{ log.entity }}</div>
-  <div><strong>Entity ID:</strong> {{ log.entityId }}</div>
-  <div><strong>Description:</strong> {{ log.description }}</div>
-  <div><strong>Details:</strong></div>
-  <pre>{{ log.details | json }}</pre>
-  <button mat-button (click)="cancel.emit()">Close</button>
-</div> 
+<mat-card class="log-detail-card">
+  <mat-card-title>Log Details</mat-card-title>
+  <mat-card-content>
+    <div class="log-detail-row"><span class="log-detail-label">ID:</span> <span>{{ log.id }}</span></div>
+    <div class="log-detail-row"><span class="log-detail-label">User ID:</span> <span>{{ log.userId }}</span></div>
+    <div class="log-detail-row"><span class="log-detail-label">Action:</span> <span>{{ log.action }}</span></div>
+    <div class="log-detail-row"><span class="log-detail-label">Entity:</span> <span>{{ log.entity }}</span></div>
+    <div class="log-detail-row"><span class="log-detail-label">Entity ID:</span> <span>{{ log.entityId }}</span></div>
+    <div class="log-detail-row"><span class="log-detail-label">Description:</span> <span>{{ log.description }}</span></div>
+    <div class="log-detail-row log-detail-json">
+      <span class="log-detail-label">Details:</span>
+      <pre>{{ log.details | json }}</pre>
+    </div>
+    <div class="log-detail-actions">
+      <button mat-stroked-button color="primary" (click)="cancel.emit()">Close</button>
+    </div>
+  </mat-card-content>
+</mat-card> 
