@@ -66,6 +66,14 @@ const routes: Routes = [
         loadChildren: () =>
           import('./sales/sales.module').then((m) => m.SalesModule),
       },
+      {
+        title: 'Operations',
+        path: 'operations',
+        canActivate: [AuthRoleGuard],
+        data: { roles: [RoleEnum.Admin] },
+        loadChildren: () =>
+          import('./operations/operations.module').then((m) => m.OperationsModule),
+      },
     ],
   },
   {

@@ -1,0 +1,81 @@
+<mat-card>
+  <mat-card-title> Operation Logs </mat-card-title>
+  <mat-card-content>
+    <mat-table
+      [dataSource]="dataSource"
+      multiTemplateDataRows
+      matSort
+      matSortActive="id"
+      matSortDirection="asc"
+      (matSortChange)="expandedLog = null"
+    >
+      <ng-container matColumnDef="id">
+        <mat-header-cell *matHeaderCellDef mat-sort-header="id">ID</mat-header-cell>
+        <mat-cell *matCellDef="let log">{{ log.id }}</mat-cell>
+      </ng-container>
+      <ng-container matColumnDef="userName">
+        <mat-header-cell *matHeaderCellDef>User</mat-header-cell>
+        <mat-cell *matCellDef="let log">
+          {{ log.details?.result?.user?.firstName ? (log.details.result.user.firstName + ' ' + log.details.result.user.lastName) : log.userId }}
+        </mat-cell>
+      </ng-container>
+      <ng-container matColumnDef="action">
+        <mat-header-cell *matHeaderCellDef mat-sort-header="action">Action</mat-header-cell>
+        <mat-cell *matCellDef="let log">{{ log.action }}</mat-cell>
+      </ng-container>
+      <ng-container matColumnDef="entity">
+        <mat-header-cell *matHeaderCellDef mat-sort-header="entity">Entity</mat-header-cell>
+        <mat-cell *matCellDef="let log">{{ log.entity }}</mat-cell>
+      </ng-container>
+      <ng-container matColumnDef="entityId">
+        <mat-header-cell *matHeaderCellDef mat-sort-header="entityId">Entity ID</mat-header-cell>
+        <mat-cell *matCellDef="let log">{{ log.entityId }}</mat-cell>
+      </ng-container>
+      <ng-container matColumnDef="description">
+        <mat-header-cell *matHeaderCellDef mat-sort-header="description">Description</mat-header-cell>
+        <mat-cell *matCellDef="let log">{{ log.description }}</mat-cell>
+      </ng-container>
+      <ng-container matColumnDef="expand">
+        <mat-header-cell *matHeaderCellDef aria-label="row actions">&nbsp;</mat-header-cell>
+        <mat-cell *matCellDef="let log">
+          <button
+            mat-icon-button
+            aria-label="expand row"
+            (click)="expandedLog = expandedLog === log ? null : log; $event.stopPropagation()"
+          >
+            <mat-icon *ngIf="expandedLog !== log">keyboard_arrow_down</mat-icon>
+            <mat-icon *ngIf="expandedLog === log">keyboard_arrow_up</mat-icon>
+          </button>
+          <button
+            mat-icon-button
+            color="warn"
+            aria-label="delete log"
+            (click)="$event.stopPropagation(); store.dispatch(OperationsActions.deleteLog({ id: log.id }))"
+          >
+            <mat-icon>delete</mat-icon>
+          </button>
+        </mat-cell>
+      </ng-container>
+      <ng-container matColumnDef="expandedDetail">
+        <mat-cell *matCellDef="let log" [attr.colspan]="7">
+          <div
+            *ngIf="expandedLog === log"
+            class="log-detail"
+            [@detailExpand]="log && log === expandedLog ? 'expanded' : 'collapsed'"
+          >
+            <app-log-detail [log]="log" (cancel)="expandedLog = null"></app-log-detail>
+          </div>
+        </mat-cell>
+      </ng-container>
+      <mat-header-row *matHeaderRowDef="['id', 'userName', 'action', 'entity', 'entityId', 'description', 'expand']"></mat-header-row>
+      <mat-row
+        *matRowDef="let log; columns: ['id', 'userName', 'action', 'entity', 'entityId', 'description', 'expand']"
+        class="log-row"
+        [class.log-expanded-row]="expandedLog === log"
+        (click)="expandedLog = expandedLog === log ? null : log"
+      ></mat-row>
+      <mat-row *matRowDef="let row; columns: ['expandedDetail']" class="log-detail-row"></mat-row>
+    </mat-table>
+    <mat-paginator showFirstLastButtons pageSize="50" hidePageSize="true" (page)="expandedLog = null"></mat-paginator>
+  </mat-card-content>
+</mat-card> 
