@@ -6,4 +6,5 @@ export interface OperationLog {
   entityId: string;
   description: string | null;
   details: any;
+  timestamp: string; // ISO date string
 } 

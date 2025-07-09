@@ -5,8 +5,8 @@
       [dataSource]="dataSource"
       multiTemplateDataRows
       matSort
-      matSortActive="id"
-      matSortDirection="asc"
+      matSortActive="timestamp"
+      matSortDirection="desc"
       (matSortChange)="expandedLog = null"
     >
       <ng-container matColumnDef="id">
@@ -41,6 +41,10 @@
         <mat-header-cell *matHeaderCellDef mat-sort-header="description">Description</mat-header-cell>
         <mat-cell *matCellDef="let log">{{ log.description }}</mat-cell>
       </ng-container>
+      <ng-container matColumnDef="timestamp">
+        <mat-header-cell *matHeaderCellDef mat-sort-header="timestamp">Timestamp</mat-header-cell>
+        <mat-cell *matCellDef="let log">{{ log.timestamp | date:'short' }}</mat-cell>
+      </ng-container>
       <ng-container matColumnDef="expand">
         <mat-header-cell *matHeaderCellDef aria-label="row actions">&nbsp;</mat-header-cell>
         <mat-cell *matCellDef="let log">
@@ -73,9 +77,9 @@
           </div>
         </mat-cell>
       </ng-container>
-      <mat-header-row *matHeaderRowDef="['id', 'userName', 'action', 'entity', 'entityId', 'description', 'expand']"></mat-header-row>
+      <mat-header-row *matHeaderRowDef="['id', 'userName', 'action', 'entity', 'entityId', 'description', 'timestamp', 'expand']"></mat-header-row>
       <mat-row
-        *matRowDef="let log; columns: ['id', 'userName', 'action', 'entity', 'entityId', 'description', 'expand']"
+        *matRowDef="let log; columns: ['id', 'userName', 'action', 'entity', 'entityId', 'description', 'timestamp', 'expand']"
         class="log-row"
         [class.log-expanded-row]="expandedLog === log"
         (click)="expandedLog = expandedLog === log ? null : log"

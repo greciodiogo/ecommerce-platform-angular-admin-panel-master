@@ -21,6 +21,10 @@ import { MatTableDataSource } from '@angular/material/table';
 import { firstValueFrom, Subscription } from 'rxjs';
 import { MatPaginator } from '@angular/material/paginator';
 
+function sortLogsByTimestampDesc(logs: OperationLog[]): OperationLog[] {
+  return [...logs].sort((a, b) => new Date(b.timestamp).getTime() - new Date(a.timestamp).getTime());
+}
+
 @Component({
   selector: 'app-logs-list',
   templateUrl: './logs-list.component.html',
@@ -61,10 +65,11 @@ export class LogsListComponent implements OnInit, AfterViewInit, OnDestroy {
   }
 
   async ngAfterViewInit() {
-    this.dataSource.data = await firstValueFrom(this.logs$);
+    const logs = await firstValueFrom(this.logs$);
+    this.dataSource.data = sortLogsByTimestampDesc(logs);
     this.dataSource.paginator = this.paginator;
     this.subscription = this.logs$.subscribe((logs) => {
-      this.dataSource.data = logs;
+      this.dataSource.data = sortLogsByTimestampDesc(logs);
     });
     this.store.dispatch(OperationsActions.loadLogs());
     this.dataSource.sort = this.sort;
