@@ -86,6 +86,6 @@
       ></mat-row>
       <mat-row *matRowDef="let row; columns: ['expandedDetail']" class="log-detail-row"></mat-row>
     </mat-table>
-    <mat-paginator showFirstLastButtons pageSize="50" hidePageSize="true" (page)="expandedLog = null"></mat-paginator>
+    <mat-paginator showFirstLastButtons pageSize="30" hidePageSize="true" (page)="expandedLog = null"></mat-paginator>
   </mat-card-content>
 </mat-card> 
