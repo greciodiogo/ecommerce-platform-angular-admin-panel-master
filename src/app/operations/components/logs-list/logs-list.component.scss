@@ -34,7 +34,17 @@ mat-row, mat-header-row {
 
 .mat-column-id {
   padding-left: 8px;
+  flex-basis: 40px;
+  flex-grow: 0.2;
+}
+.mat-column-action {
+  padding-left: 8px;
   flex-basis: 48px;
+  flex-grow: 0.2;
+}
+.mat-column-entity {
+  padding-left: 8px;
+  flex-basis: 50px;
   flex-grow: 0.2;
 }
 .mat-column-email {

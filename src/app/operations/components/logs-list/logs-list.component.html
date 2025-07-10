@@ -21,7 +21,7 @@
               ? (log.details.result.user.firstName + ' ' + log.details.result.user.lastName)
               : (log.details?.result?.user?.email
                   ? log.details.result.user.email
-                  : (log.userId || 'Unknown User'))
+                  : ( log.userName || log.userId || 'Unknown User'))
           }}
         </mat-cell>
       </ng-container>
