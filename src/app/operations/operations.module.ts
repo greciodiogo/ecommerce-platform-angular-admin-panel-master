@@ -20,19 +20,23 @@ import { SharedModule } from '../shared/shared.module';
 import { MatSortModule } from '@angular/material/sort';
 import { MatSnackBarModule } from '@angular/material/snack-bar';
 import { MatPaginatorModule } from '@angular/material/paginator';
+import { UserSessionLogsEffects } from './store/effects/user-session-logs.effects';
+import { UserSessionLogsListComponent } from './components/user-session-logs-list/user-session-logs-list.component';
+import { MatTabsModule } from '@angular/material/tabs';
 
 @NgModule({
   declarations: [
     OperationsComponent,
     LogsListComponent,
     LogDetailComponent,
+    UserSessionLogsListComponent,
   ],
   imports: [
     CommonModule,
     OperationsRoutingModule,
     MatTableModule,
     StoreModule.forFeature(fromOperations.operationsFeatureKey, fromOperations.reducers),
-    EffectsModule.forFeature([OperationsEffects]),
+    EffectsModule.forFeature([OperationsEffects, UserSessionLogsEffects]),
     MatCardModule,
     MatButtonModule,
     MatIconModule,
@@ -44,6 +48,7 @@ import { MatPaginatorModule } from '@angular/material/paginator';
     MatSortModule,
     MatSnackBarModule,
     MatPaginatorModule,
+    MatTabsModule,
   ],
 })
 export class OperationsModule {} 
