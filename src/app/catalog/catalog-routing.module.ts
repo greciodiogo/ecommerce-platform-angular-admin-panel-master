@@ -25,6 +25,7 @@ import { AddressesComponent } from './pages/addresses/addresses.component';
 import { AddressesTreeComponent } from './pages/addresses-tree/addresses-tree.component';
 import { AddressComponent } from './pages/address/address.component';
 import { ProductsReportComponent } from './pages/products-report/products-report.component';
+import { ShopsCardsPageComponent } from './pages/shops/shops-cards-page.component';
 
 const routes: Routes = [
   {
@@ -154,7 +155,7 @@ const routes: Routes = [
     path: 'shops',
     canActivate: [AuthRoleGuard],
     data: { roles: [RoleEnum.Admin] },
-    component: ShopsComponent,
+    component: ShopsCardsPageComponent,
   },
   {
     title: 'Addresses',

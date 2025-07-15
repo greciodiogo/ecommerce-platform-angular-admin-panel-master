@@ -86,6 +86,7 @@ import { MatProgressBarModule } from '@angular/material/progress-bar';
 import { MatDatepickerModule } from '@angular/material/datepicker';
 import { MatNativeDateModule } from '@angular/material/core';
 import { ProductsReportComponent } from './pages/products-report/products-report.component';
+import { ShopsCardsPageComponent } from './pages/shops/shops-cards-page.component';
 
 @NgModule({
   declarations: [
@@ -130,6 +131,7 @@ import { ProductsReportComponent } from './pages/products-report/products-report
     AddressDetailsComponent,
     AddressComponent,
     ProductsReportComponent,
+    ShopsCardsPageComponent,
   ],
   imports: [
     CommonModule,
