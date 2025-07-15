@@ -29,6 +29,6 @@ export class ShopsCardsPageComponent implements OnInit {
   }
 
   viewShop(shop: Shop): void {
-    this.router.navigate(['/shops', shop.id]);
+    this.router.navigate(['/catalog/shops', shop.id]);
   }
 } 

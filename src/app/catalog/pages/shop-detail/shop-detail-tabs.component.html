@@ -18,12 +18,11 @@
       </ng-template>
     </div>
   </mat-tab>
-  <mat-tab label="Orders">
+  <!-- <mat-tab label="Orders">
     <div class="tab-content">
-      <!-- TODO: List orders for this shop -->
       Orders for shop {{ shopId }}
     </div>
-  </mat-tab>
+  </mat-tab> -->
   <mat-tab label="Shop Details">
     <div class="tab-content">
       <ng-container *ngIf="shop$ | async as shop; else loadingShop">
@@ -31,7 +30,7 @@
           <h3>{{ shop.shopName }}</h3>
           <div *ngIf="shop.address">Address: {{ shop.address }}</div>
           <div *ngIf="shop.contactPhone">Phone: {{ shop.contactPhone }}</div>
-          <div *ngIf="shop.user.email">Email: {{ shop.user.email }}</div>
+          <!-- <div *ngIf="shop.user">Email: {{ shop.user.email }}</div> -->
           <div *ngIf="shop.nif">NIF: {{ shop.nif }}</div>
           <div *ngIf="shop.alvara">Alvará: {{ shop.alvara }}</div>
         </div>
