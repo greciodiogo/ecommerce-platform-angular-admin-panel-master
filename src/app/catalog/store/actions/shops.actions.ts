@@ -62,3 +62,18 @@ export const deleteShopFailure = createAction(
   '[Shops] Delete Shop Failure',
   props<{ error: string }>(),
 );
+
+export const loadShopById = createAction(
+  '[Shops] Load Shop By Id',
+  props<{ id: number }>(),
+);
+
+export const loadShopByIdSuccess = createAction(
+  '[Shops] Load Shop By Id Success',
+  props<{ shop: Shop }>(),
+);
+
+export const loadShopByIdFailure = createAction(
+  '[Shops] Load Shop By Id Failure',
+  props<{ error: string }>(),
+);

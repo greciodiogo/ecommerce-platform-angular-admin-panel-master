@@ -7,11 +7,13 @@ export const shopsFeatureKey = 'shops';
 export interface State {
   list: Shop[];
   selectedShopId: number | null;
+  selectedShop: Shop | null;
 }
 
 export const initialState: State = {
   list: [],
   selectedShopId: null,
+  selectedShop: null,
 };
 
 export const reducer = createReducer(
@@ -49,6 +51,13 @@ export const reducer = createReducer(
     (state, { id }): State => ({
       ...state,
       list: state.list.filter((p) => p.id !== id),
+    }),
+  ),
+  on(
+    ShopsActions.loadShopByIdSuccess,
+    (state, { shop }): State => ({
+      ...state,
+      selectedShop: shop,
     }),
   ),
 );

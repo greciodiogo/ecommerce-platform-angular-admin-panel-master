@@ -8,12 +8,14 @@ export interface State {
   list: Product[];
   selectedProductId: number | null;
   photos: { id: number; data: Blob | null }[];
+  productsByShop: { [shopId: number]: Product[] };
 }
 
 export const initialState: State = {
   list: [],
   selectedProductId: null,
   photos: [],
+  productsByShop: {},
 };
 
 export const reducer = createReducer(
@@ -106,6 +108,16 @@ export const reducer = createReducer(
           : p,
       ),
       photos: state.photos.filter((p) => p.id !== photoId),
+    }),
+  ),
+  on(
+    ProductsActions.loadProductsByShopIdSuccess,
+    (state, { shopId, products }): State => ({
+      ...state,
+      productsByShop: {
+        ...state.productsByShop,
+        [shopId]: products,
+      },
     }),
   ),
 );

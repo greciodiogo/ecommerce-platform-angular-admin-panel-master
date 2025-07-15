@@ -22,3 +22,8 @@ export const selectSelectedShop = createSelector(
   selectSelectedShopId,
   (shops, selectedShopId) => shops.find((c) => c.id === selectedShopId) ?? null,
 );
+
+export const selectShopDetails = createSelector(
+  selectShopsState,
+  (state) => state.selectedShop
+);

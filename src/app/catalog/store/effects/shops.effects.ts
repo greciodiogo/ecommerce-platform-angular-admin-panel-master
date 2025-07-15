@@ -53,6 +53,20 @@ export class ShopsEffects {
     );
   });
 
+  loadShopById$ = createEffect(() => {
+    return this.actions$.pipe(
+      ofType(ShopsActions.loadShopById),
+      exhaustMap(({ id }) =>
+        this.shopsApi.getShopById(id).pipe(
+          map((shop) => ShopsActions.loadShopByIdSuccess({ shop })),
+          catchError(({ error }) =>
+            of(ShopsActions.loadShopByIdFailure({ error: error.message })),
+          ),
+        ),
+      ),
+    );
+  });
+
   // deleteShop$ = createEffect(() => {
   //   return this.actions$.pipe(
   //     ofType(ShopsActions.deleteShop),

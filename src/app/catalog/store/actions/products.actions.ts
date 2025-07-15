@@ -136,3 +136,18 @@ export const deleteProductPhotoFailure = createAction(
   '[Products] Delete Product Photo Failure',
   props<{ error: string }>(),
 );
+
+export const loadProductsByShopId = createAction(
+  '[Products] Load Products By Shop Id',
+  props<{ shopId: number }>(),
+);
+
+export const loadProductsByShopIdSuccess = createAction(
+  '[Products] Load Products By Shop Id Success',
+  props<{ shopId: number; products: Product[] }>(),
+);
+
+export const loadProductsByShopIdFailure = createAction(
+  '[Products] Load Products By Shop Id Failure',
+  props<{ error: string }>(),
+);

@@ -35,3 +35,8 @@ export const selectProductPhoto = (photoId: number) =>
     selectProductPhotos,
     (state) => state.find((p) => p.id === photoId) ?? null,
   );
+
+export const selectProductsByShop = (shopId: number) => createSelector(
+  selectProductsState,
+  (state) => state.productsByShop[shopId] || []
+);

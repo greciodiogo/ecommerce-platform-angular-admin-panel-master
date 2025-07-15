@@ -73,6 +73,20 @@ export class ProductsEffects {
     );
   });
 
+  loadProductsByShopId$ = createEffect(() => {
+    return this.actions$.pipe(
+      ofType(ProductsActions.loadProductsByShopId),
+      exhaustMap(({ shopId }) =>
+        this.productsApi.getProductsByShopId(shopId).pipe(
+          map((products) => ProductsActions.loadProductsByShopIdSuccess({ shopId, products })),
+          catchError(({ error }) =>
+            of(ProductsActions.loadProductsByShopIdFailure({ error: error.message })),
+          ),
+        ),
+      ),
+    );
+  });
+
   addProduct$ = createEffect(() => {
     return this.actions$.pipe(
       ofType(ProductsActions.addProduct),

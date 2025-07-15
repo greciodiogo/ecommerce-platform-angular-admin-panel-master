@@ -87,6 +87,7 @@ import { MatDatepickerModule } from '@angular/material/datepicker';
 import { MatNativeDateModule } from '@angular/material/core';
 import { ProductsReportComponent } from './pages/products-report/products-report.component';
 import { ShopsCardsPageComponent } from './pages/shops/shops-cards-page.component';
+import { ShopDetailTabsComponent } from './pages/shop-detail/shop-detail-tabs.component';
 
 @NgModule({
   declarations: [
@@ -132,6 +133,7 @@ import { ShopsCardsPageComponent } from './pages/shops/shops-cards-page.componen
     AddressComponent,
     ProductsReportComponent,
     ShopsCardsPageComponent,
+    ShopDetailTabsComponent,
   ],
   imports: [
     CommonModule,

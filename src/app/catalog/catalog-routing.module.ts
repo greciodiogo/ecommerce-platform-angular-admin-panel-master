@@ -26,6 +26,7 @@ import { AddressesTreeComponent } from './pages/addresses-tree/addresses-tree.co
 import { AddressComponent } from './pages/address/address.component';
 import { ProductsReportComponent } from './pages/products-report/products-report.component';
 import { ShopsCardsPageComponent } from './pages/shops/shops-cards-page.component';
+import { ShopDetailTabsComponent } from './pages/shop-detail/shop-detail-tabs.component';
 
 const routes: Routes = [
   {
@@ -156,6 +157,12 @@ const routes: Routes = [
     canActivate: [AuthRoleGuard],
     data: { roles: [RoleEnum.Admin] },
     component: ShopsCardsPageComponent,
+  },
+  {
+    path: 'shops/:id',
+    canActivate: [AuthRoleGuard],
+    data: { roles: [RoleEnum.Admin] },
+    component: ShopDetailTabsComponent,
   },
   {
     title: 'Addresses',

@@ -1,0 +1,47 @@
+<mat-tab-group>
+  <mat-tab label="Products">
+    <div class="tab-content">
+      <ng-container *ngIf="products$ | async as products; else loadingProducts">
+        <div *ngIf="products.length > 0; else noProducts">
+          <ul>
+            <li *ngFor="let product of products">
+              {{ product.name }} <span *ngIf="product.price">- {{ product.price | currency }}</span>
+            </li>
+          </ul>
+        </div>
+        <ng-template #noProducts>
+          <div>No products found for this shop.</div>
+        </ng-template>
+      </ng-container>
+      <ng-template #loadingProducts>
+        <div>Loading products...</div>
+      </ng-template>
+    </div>
+  </mat-tab>
+  <mat-tab label="Orders">
+    <div class="tab-content">
+      <!-- TODO: List orders for this shop -->
+      Orders for shop {{ shopId }}
+    </div>
+  </mat-tab>
+  <mat-tab label="Shop Details">
+    <div class="tab-content">
+      <ng-container *ngIf="shop$ | async as shop; else loadingShop">
+        <div *ngIf="shop; else noShop">
+          <h3>{{ shop.shopName }}</h3>
+          <div *ngIf="shop.address">Address: {{ shop.address }}</div>
+          <div *ngIf="shop.contactPhone">Phone: {{ shop.contactPhone }}</div>
+          <div *ngIf="shop.user.email">Email: {{ shop.user.email }}</div>
+          <div *ngIf="shop.nif">NIF: {{ shop.nif }}</div>
+          <div *ngIf="shop.alvara">Alvará: {{ shop.alvara }}</div>
+        </div>
+        <ng-template #noShop>
+          <div>Shop not found.</div>
+        </ng-template>
+      </ng-container>
+      <ng-template #loadingShop>
+        <div>Loading shop details...</div>
+      </ng-template>
+    </div>
+  </mat-tab>
+</mat-tab-group> 
