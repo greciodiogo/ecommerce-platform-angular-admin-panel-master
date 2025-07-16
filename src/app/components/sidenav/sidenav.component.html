@@ -10,6 +10,15 @@
         <mat-icon mat-list-icon class="icon-space">home</mat-icon>
         Home
       </a>
+      
+      <!-- Shops -->
+      <a mat-list-item routerLink="/catalog/shops" [appAuthRole]="['admin','manager']">
+        <span class="main-item-content">
+          <mat-icon mat-list-icon class="icon-space">shopping_bag</mat-icon>
+          <span>Shops</span>
+        </span>
+      </a>
+
       <mat-divider [appAuthRole]="['admin', 'manager']"></mat-divider>
 
       <!-- Orders Group -->
@@ -106,14 +115,6 @@
           FAQs
         </a>
       </div>
-
-      <!-- Shops -->
-      <a mat-list-item routerLink="/catalog/shops" [appAuthRole]="['admin']">
-        <span class="main-item-content">
-          <mat-icon mat-list-icon class="icon-space">shopping_bag</mat-icon>
-          <span>Shops</span>
-        </span>
-      </a>
 
       <!-- Configs Group -->
       <mat-list-item (click)="toggleGroup('configs')" style="cursor:pointer;" [appAuthRole]="['admin', 'manager']">

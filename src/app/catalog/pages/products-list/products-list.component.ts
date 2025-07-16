@@ -4,6 +4,9 @@ import {
   OnDestroy,
   OnInit,
   ViewChild,
+  Input,
+  OnChanges,
+  SimpleChanges,
 } from '@angular/core';
 import { FormBuilder, FormGroup } from '@angular/forms';
 import { MatPaginator } from '@angular/material/paginator';
@@ -22,9 +25,11 @@ import { ProductsActions, selectProductsList } from '../../store';
   templateUrl: './products-list.component.html',
   styleUrls: ['./products-list.component.scss'],
 })
-export class ProductsListComponent implements OnInit, AfterViewInit, OnDestroy {
+export class ProductsListComponent implements OnInit, AfterViewInit, OnDestroy, OnChanges {
   @ViewChild(MatSort) sort!: MatSort;
   @ViewChild(MatPaginator) paginator!: MatPaginator;
+
+  @Input() shopName?: string;
 
   products$ = this.store.select(selectProductsList);
   role$ = this.store.select(selectUserRole);
@@ -58,7 +63,12 @@ export class ProductsListComponent implements OnInit, AfterViewInit, OnDestroy {
   }
 
   ngOnInit() {
-    this.store.dispatch(ProductsActions.loadProducts({ filters: {} }));
+    if (this.shopName) {
+      this.filterForm.patchValue({ shopName: this.shopName });
+      this.applyFilters();
+    } else {
+      this.store.dispatch(ProductsActions.loadProducts({ filters: {} }));
+    }
 
     this.subscription = this.products$.subscribe((products) => {
       this.dataSource.data = products;
@@ -87,6 +97,13 @@ export class ProductsListComponent implements OnInit, AfterViewInit, OnDestroy {
         ];
       }
     });
+  }
+
+  ngOnChanges(changes: SimpleChanges) {
+    if (changes['shopName'] && this.shopName) {
+      this.filterForm.patchValue({ shopName: this.shopName });
+      this.applyFilters();
+    }
   }
 
   ngAfterViewInit() {
