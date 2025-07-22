@@ -9,7 +9,7 @@
  * https://openapi-generator.tech
  * Do not edit the class manually.
  */
-import { Category } from './category';
+import { Product } from './product';
 
 
 export interface Promotion { 
@@ -17,11 +17,12 @@ export interface Promotion {
     created: string;
     updated: string;
     name: string;
+    slug: string;
     description: string;
     startDate: string;
     endDate: string;
     discount: number;
     isActive: boolean;
-    categories: Array<Category>;
+    products: Array<Product>;
 }
 

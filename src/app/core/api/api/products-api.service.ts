@@ -698,6 +698,111 @@ export class ProductsApiService {
 
     /**
      * @param id 
+     * @param name 
+     * @param shopName 
+     * @param minStock 
+     * @param maxStock 
+     * @param minPrice 
+     * @param maxPrice 
+     * @param page 
+     * @param limit 
+     * @param context 
+     * @param observe set whether or not to return the data Observable as the body, response or events. defaults to returning the body.
+     * @param reportProgress flag to report request and response progress.
+     */
+    public getProductsPaginated(id?: string, name?: string, shopName?: string, minStock?: number, maxStock?: number, minPrice?: number, maxPrice?: number, page?: number, limit?: number, context?: string, observe?: 'body', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<Array<Product>>;
+    public getProductsPaginated(id?: string, name?: string, shopName?: string, minStock?: number, maxStock?: number, minPrice?: number, maxPrice?: number, page?: number, limit?: number, context?: string, observe?: 'response', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<HttpResponse<Array<Product>>>;
+    public getProductsPaginated(id?: string, name?: string, shopName?: string, minStock?: number, maxStock?: number, minPrice?: number, maxPrice?: number, page?: number, limit?: number, context?: string, observe?: 'events', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<HttpEvent<Array<Product>>>;
+    public getProductsPaginated(id?: string, name?: string, shopName?: string, minStock?: number, maxStock?: number, minPrice?: number, maxPrice?: number, page?: number, limit?: number, context?: string, observe: any = 'body', reportProgress: boolean = false, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<any> {
+
+        let localVarQueryParameters = new HttpParams({encoder: this.encoder});
+        if (id !== undefined && id !== null) {
+          localVarQueryParameters = this.addToHttpParams(localVarQueryParameters,
+            <any>id, 'id');
+        }
+        if (name !== undefined && name !== null) {
+          localVarQueryParameters = this.addToHttpParams(localVarQueryParameters,
+            <any>name, 'name');
+        }
+        if (shopName !== undefined && shopName !== null) {
+          localVarQueryParameters = this.addToHttpParams(localVarQueryParameters,
+            <any>shopName, 'shopName');
+        }
+        if (minStock !== undefined && minStock !== null) {
+          localVarQueryParameters = this.addToHttpParams(localVarQueryParameters,
+            <any>minStock, 'minStock');
+        }
+        if (maxStock !== undefined && maxStock !== null) {
+          localVarQueryParameters = this.addToHttpParams(localVarQueryParameters,
+            <any>maxStock, 'maxStock');
+        }
+        if (minPrice !== undefined && minPrice !== null) {
+          localVarQueryParameters = this.addToHttpParams(localVarQueryParameters,
+            <any>minPrice, 'minPrice');
+        }
+        if (maxPrice !== undefined && maxPrice !== null) {
+          localVarQueryParameters = this.addToHttpParams(localVarQueryParameters,
+            <any>maxPrice, 'maxPrice');
+        }
+        if (page !== undefined && page !== null) {
+          localVarQueryParameters = this.addToHttpParams(localVarQueryParameters,
+            <any>page, 'page');
+        }
+        if (limit !== undefined && limit !== null) {
+          localVarQueryParameters = this.addToHttpParams(localVarQueryParameters,
+            <any>limit, 'limit');
+        }
+        if (context !== undefined && context !== null) {
+          localVarQueryParameters = this.addToHttpParams(localVarQueryParameters,
+            <any>context, 'context');
+        }
+
+        let localVarHeaders = this.defaultHeaders;
+
+        let localVarHttpHeaderAcceptSelected: string | undefined = options && options.httpHeaderAccept;
+        if (localVarHttpHeaderAcceptSelected === undefined) {
+            // to determine the Accept header
+            const httpHeaderAccepts: string[] = [
+                'application/json'
+            ];
+            localVarHttpHeaderAcceptSelected = this.configuration.selectHeaderAccept(httpHeaderAccepts);
+        }
+        if (localVarHttpHeaderAcceptSelected !== undefined) {
+            localVarHeaders = localVarHeaders.set('Accept', localVarHttpHeaderAcceptSelected);
+        }
+
+        let localVarHttpContext: HttpContext | undefined = options && options.context;
+        if (localVarHttpContext === undefined) {
+            localVarHttpContext = new HttpContext();
+        }
+
+
+        let responseType_: 'text' | 'json' | 'blob' = 'json';
+        if (localVarHttpHeaderAcceptSelected) {
+            if (localVarHttpHeaderAcceptSelected.startsWith('text')) {
+                responseType_ = 'text';
+            } else if (this.configuration.isJsonMime(localVarHttpHeaderAcceptSelected)) {
+                responseType_ = 'json';
+            } else {
+                responseType_ = 'blob';
+            }
+        }
+
+        return this.httpClient.get<Array<Product>>(`${this.configuration.basePath}/products/paginated`,
+            {
+                context: localVarHttpContext,
+                params: localVarQueryParameters,
+                responseType: <any>responseType_,
+                withCredentials: this.configuration.withCredentials,
+                headers: localVarHeaders,
+                observe: observe,
+                reportProgress: reportProgress
+            }
+        );
+    }
+
+    /**
+     * @param id 
      * @param productUpdateDto 
      * @param observe set whether or not to return the data Observable as the body, response or events. defaults to returning the body.
      * @param reportProgress flag to report request and response progress.

@@ -19,5 +19,6 @@ export interface PromotionCreateDto {
     discount: number;
     categoryIds: Array<number>;
     isActive?: boolean;
+    productIds?: Array<number>;
 }
 
