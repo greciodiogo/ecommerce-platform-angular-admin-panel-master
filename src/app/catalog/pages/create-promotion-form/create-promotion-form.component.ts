@@ -32,10 +32,10 @@ export class CreatePromotionFormComponent implements OnInit {
       nonNullable: true,
       validators: [Validators.required, Validators.min(0)],
     }),
-    categoryIds: new FormControl([], {
-      nonNullable: true,
-      validators: [Validators.required],
-    }),
+    // categoryIds: new FormControl([], {
+    //   nonNullable: true,
+    //   validators: [Validators.required],
+    // }),
     isActive: new FormControl(true, {
       nonNullable: true,
     }),
@@ -51,10 +51,10 @@ export class CreatePromotionFormComponent implements OnInit {
         data: {
           name: this.createForm.controls.name.value,
           description: this.createForm.controls.description.value,
-          startDate: this.createForm.controls.startDate.value,
-          endDate: this.createForm.controls.endDate.value,
+          startDate: this.createForm.controls.startDate.value ? new Date(this.createForm.controls.startDate.value).toISOString() : '',
+          endDate: this.createForm.controls.endDate.value ? new Date(this.createForm.controls.endDate.value).toISOString() : '',
           discount: this.createForm.controls.discount.value,
-          categoryIds: this.createForm.controls.categoryIds.value,
+          // categoryIds: this.createForm.controls.categoryIds.value,
           isActive: this.createForm.controls.isActive.value,
         },
       })

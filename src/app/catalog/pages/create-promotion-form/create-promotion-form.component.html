@@ -1,48 +1,61 @@
-<mat-card>
+<mat-card class="promotion-modal">
   <mat-card-title-group>
     <mat-card-title>
-      <a mat-button routerLink="/catalog/promotions">
+      <a mat-button routerLink="/catalog/promotions" style="display: flex; align-items: center; justify-content: center;">
         <mat-icon>arrow_back</mat-icon></a
-      >Create new Promotion
+      >Criar nova Promoção
     </mat-card-title>
   </mat-card-title-group>
   <mat-card-content>
     <form [formGroup]="createForm" (submit)="save()">
-      <div class="items">
-        <h2>Items</h2>
-        <!-- <app-order-items-input></app-order-items-input> -->
-      </div>
-
-      <div class="contact">
-        <h2>Promotion data</h2>
+      <div class="form-fields">
         <mat-form-field appearance="outline">
-          <mat-label>Name </mat-label>
+          <mat-label>Nome</mat-label>
+          <mat-icon matPrefix>local_offer</mat-icon>
           <input matInput type="text" formControlName="name" />
           <mat-error *ngIf="createForm.controls.name.invalid">
-            Invalid name
+            Nome inválido
           </mat-error>
         </mat-form-field>
         <mat-form-field appearance="outline">
-          <mat-label>Description </mat-label>
+          <mat-label>Descrição</mat-label>
+          <mat-icon matPrefix>description</mat-icon>
           <input matInput type="text" formControlName="description" />
           <mat-error *ngIf="createForm.controls.description.invalid">
-            Invalid description
+            Descrição inválida
+          </mat-error>
+        </mat-form-field>
+        <mat-form-field appearance="outline">
+          <mat-label>Data de início</mat-label>
+          <mat-icon matPrefix>event</mat-icon>
+          <input matInput [matDatepicker]="pickerStart" formControlName="startDate" />
+          <mat-datepicker-toggle matSuffix [for]="pickerStart">
+            <mat-icon matDatepickerToggleIcon>event</mat-icon>
+          </mat-datepicker-toggle>
+          <mat-datepicker #pickerStart></mat-datepicker>
+          <mat-error *ngIf="createForm.controls.startDate.invalid">
+            Data de início inválida
+          </mat-error>
+        </mat-form-field>
+        <mat-form-field appearance="outline">
+          <mat-label>Data de fim</mat-label>
+          <mat-icon matPrefix>event</mat-icon>
+          <input matInput [matDatepicker]="pickerEnd" formControlName="endDate" />
+          <mat-datepicker-toggle matSuffix [for]="pickerEnd">
+            <mat-icon matDatepickerToggleIcon>event</mat-icon>
+          </mat-datepicker-toggle>
+          <mat-datepicker #pickerEnd></mat-datepicker>
+          <mat-error *ngIf="createForm.controls.endDate.invalid">
+            Data de fim inválida
           </mat-error>
         </mat-form-field>
         <mat-form-field appearance="outline" class="discount"  [appAuthRole]="['admin', 'sales']">
-          <mat-label>Discount</mat-label>
+          <mat-label>Desconto (%)</mat-label>
+          <mat-icon matPrefix>percent</mat-icon>
           <input type="number" matInput required formControlName="discount" />
-          <mat-error>Invalid discount</mat-error>
+          <mat-error>Desconto inválido</mat-error>
         </mat-form-field>
-        <!-- <mat-form-field appearance="outline">
-          <mat-label> Message </mat-label>
-          <textarea matInput formControlName="message"></textarea>
-          <mat-error *ngIf="createForm.controls.message.invalid">
-            Invalid message
-          </mat-error>
-        </mat-form-field> -->
       </div>
-
       <div class="details">
         <div class="buttons">
           <button
@@ -51,7 +64,7 @@
             routerLink="/catalog/promotions"
             color="primary"
           >
-            Cancel
+            Cancelar
           </button>
           <button
             mat-flat-button
@@ -59,7 +72,7 @@
             [disabled]="!createForm.valid || !createForm.dirty"
             color="primary"
           >
-            Create
+            Criar
           </button>
         </div>
       </div>
