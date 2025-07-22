@@ -25,11 +25,12 @@ import { ProductsActions, selectProductsList } from '../../store';
   templateUrl: './products-list.component.html',
   styleUrls: ['./products-list.component.scss'],
 })
-export class ProductsListComponent implements OnInit, AfterViewInit, OnDestroy, OnChanges {
+export class ProductsListComponent implements OnInit, AfterViewInit, OnDestroy {
   @ViewChild(MatSort) sort!: MatSort;
   @ViewChild(MatPaginator) paginator!: MatPaginator;
 
   @Input() shopName?: string;
+  @Input() isHide?: boolean = false;
 
   products$ = this.store.select(selectProductsList);
   role$ = this.store.select(selectUserRole);
@@ -97,13 +98,6 @@ export class ProductsListComponent implements OnInit, AfterViewInit, OnDestroy, 
         ];
       }
     });
-  }
-
-  ngOnChanges(changes: SimpleChanges) {
-    if (changes['shopName'] && this.shopName) {
-      this.filterForm.patchValue({ shopName: this.shopName });
-      this.applyFilters();
-    }
   }
 
   ngAfterViewInit() {
