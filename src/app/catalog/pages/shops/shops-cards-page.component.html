@@ -12,15 +12,9 @@
     <mat-card class="shop-card" *ngFor="let shop of shops" (click)="viewShop(shop)">
       <mat-card-header>
         <div mat-card-avatar class="shop-avatar">
-          <ng-container *ngIf="shop.shopName; else storeIcon">
-            {{ shop.shopName | uppercase }}
-          </ng-container>
-          <ng-template #storeIcon>
-            <mat-icon>storefront</mat-icon>
-          </ng-template>
+          {{ shop.shopName?.charAt(0) | uppercase }}
         </div>
-        <mat-card-title>{{ shop.shopName }}</mat-card-title>
-        <!-- <mat-card-subtitle>{{ shop?.email }}</mat-card-subtitle> -->
+        <mat-card-title class="shop-title">{{ shop.shopName }}</mat-card-title>
       </mat-card-header>
       <mat-card-content>
         <div class="shop-details">
