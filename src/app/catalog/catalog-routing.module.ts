@@ -27,6 +27,7 @@ import { AddressComponent } from './pages/address/address.component';
 import { ProductsReportComponent } from './pages/products-report/products-report.component';
 import { ShopsCardsPageComponent } from './pages/shops/shops-cards-page.component';
 import { ShopDetailTabsComponent } from './pages/shop-detail/shop-detail-tabs.component';
+import { PromotionsCardsPageComponent } from './pages/promotions/promotions-cards-page.component';
 
 const routes: Routes = [
   {
@@ -90,7 +91,7 @@ const routes: Routes = [
     path: 'promotions',
     canActivate: [AuthRoleGuard],
     data: { roles: [RoleEnum.Admin, RoleEnum.Manager, RoleEnum.Sales] },
-    component: PromotionsComponent,
+    component: PromotionsCardsPageComponent,
     children: [
       {
         title: 'Create new order',
@@ -101,11 +102,6 @@ const routes: Routes = [
         title: 'Promotion',
         path: ':id',
         component: PromotionComponent,
-      },
-      {
-        title: 'Promotions',
-        path: '',
-        component: PromotionsListComponent,
       },
     ],
   },

@@ -1,0 +1,92 @@
+.promotions-cards-container {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 32px;
+  padding: 32px 16px;
+  justify-content: flex-start;
+}
+
+.promotion-card {
+  flex: 1 1 320px;
+  min-width: 280px;
+  max-width: 360px;
+  cursor: pointer;
+  transition: box-shadow 0.2s, transform 0.2s;
+  margin-bottom: 24px;
+  border-radius: 18px;
+  box-shadow: 0 2px 12px rgba(0,0,0,0.08);
+  background: #fff;
+  border: none;
+  position: relative;
+  overflow: hidden;
+}
+
+.promotion-card:hover {
+  box-shadow: 0 8px 32px rgba(25, 118, 210, 0.18);
+  transform: translateY(-4px) scale(1.02);
+}
+
+.promotion-card .mat-card-header {
+  align-items: flex-start;
+  padding-bottom: 0;
+}
+
+.promotion-avatar {
+  width: 48px;
+  height: 48px;
+  border-radius: 50%;
+  background: #e3f2fd;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 2rem;
+  color: #1976d2;
+  margin-right: 16px;
+  box-shadow: 0 2px 8px rgba(25, 118, 210, 0.08);
+}
+
+.promotion-card .mat-card-title {
+  font-size: 1.25rem;
+  font-weight: 600;
+  color: #222;
+}
+
+.promotion-card .mat-card-subtitle {
+  font-size: 1rem;
+  color: #666;
+}
+
+.promotion-details {
+  margin: 12px 0 0 0;
+  font-size: 0.98rem;
+  color: #444;
+}
+
+.promotion-card .mat-card-actions {
+  display: flex;
+  justify-content: flex-end;
+  padding-bottom: 8px;
+}
+
+.promotion-card button[mat-button] {
+  font-weight: 500;
+  letter-spacing: 0.5px;
+}
+
+.create-promotion-card {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: linear-gradient(135deg, #e3f2fd 60%, #fff 100%);
+  color: #1976d2;
+  border: 2px dashed #1976d2;
+}
+
+.create-promotion-content {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 8px;
+  font-size: 1.1rem;
+  font-weight: 500;
+} 
