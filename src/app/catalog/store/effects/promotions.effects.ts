@@ -51,6 +51,44 @@ export class PromotionsEffects {
     ),
   );
 
+  addPromotionProduct$ = createEffect(() =>
+    this.actions$.pipe(
+      ofType(PromotionsActions.addPromotionProduct),
+      exhaustMap(({ promotionId, product }) =>
+        this.promotionsApi.addPromotionProduct(promotionId, product).pipe(
+          map((addedProduct) => 
+            PromotionsActions.addPromotionProductSuccess({ 
+              promotionId, 
+              product: addedProduct 
+            })
+          ),
+          catchError(({ error }) =>
+            of(PromotionsActions.addPromotionProductFailure({ error: error.message })),
+          ),
+        ),
+      ),
+    ),
+  );
+
+  deletePromotionProduct$ = createEffect(() =>
+    this.actions$.pipe(
+      ofType(PromotionsActions.deletePromotionProduct),
+      exhaustMap(({ promotionId, productId }) =>
+        this.promotionsApi.deletePromotionProduct(promotionId, productId).pipe(
+          map(() => 
+            PromotionsActions.deletePromotionProductSuccess({ 
+              promotionId, 
+              productId 
+            })
+          ),
+          catchError(({ error }) =>
+            of(PromotionsActions.deletePromotionProductFailure({ error: error.message })),
+          ),
+        ),
+      ),
+    ),
+  );
+
   updatePromotion$ = createEffect(() =>
     this.actions$.pipe(
       ofType(PromotionsActions.updatePromotion),

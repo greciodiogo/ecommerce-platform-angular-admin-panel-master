@@ -1,7 +1,9 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
 import { Store } from '@ngrx/store';
-import { CategoriesActions, selectCategoriesList, selectSelectedCategory } from '../../store';
+import * as PromotionsActions from '../../store/actions/promotions.actions';
 import { Subscription } from 'rxjs';
+import { selectSelectedCategory, selectSelectedPromotion } from '../../store';
+import { ActivatedRoute } from '@angular/router';
 
 @Component({
   selector: 'app-promotions',
@@ -9,22 +11,19 @@ import { Subscription } from 'rxjs';
   styleUrls: ['./promotions.component.scss'],
 })
 export class PromotionsComponent implements OnInit, OnDestroy {
-  promotionCategory$ = this.store.select(selectSelectedCategory);
-  private categoriesSub?: Subscription;
+  promotionCategory$ = this.store.select(selectSelectedPromotion);
 
-  constructor(private store: Store) {}
+  constructor(private store: Store, private route: ActivatedRoute) {}
 
   ngOnInit() {
-    this.categoriesSub = this.store.select(selectCategoriesList).subscribe(categories => {
-      const promoCat = categories.find(c => c.name?.toLowerCase() === 'promotions');
-      if (promoCat) {
-        this.store.dispatch(CategoriesActions.selectCategory({ categoryId: promoCat.id }));
+      const id = parseInt(this.route.snapshot.paramMap.get('id') ?? '0') || null;
+      if (id) {
+        this.store.dispatch(PromotionsActions.selectPromotion({ promotionId: id }));
+        this.store.dispatch(PromotionsActions.getPromotion({ promotionId: id }));
       }
-    });
   }
 
   ngOnDestroy() {
-    if (this.categoriesSub) this.categoriesSub.unsubscribe();
-    this.store.dispatch(CategoriesActions.selectCategory({ categoryId: null }));
+    this.store.dispatch(PromotionsActions.selectPromotion({ promotionId: null }));
   }
 }

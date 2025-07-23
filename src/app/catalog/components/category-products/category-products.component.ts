@@ -1,5 +1,5 @@
 import { Component, Input, OnInit } from '@angular/core';
-import { Category } from '../../../core/api';
+import { Category, Promotion } from '../../../core/api';
 import { Store } from '@ngrx/store';
 import { CategoriesActions } from '../../store';
 
@@ -9,7 +9,7 @@ import { CategoriesActions } from '../../store';
   styleUrls: ['./category-products.component.scss'],
 })
 export class CategoryProductsComponent implements OnInit {
-  @Input() category: Category | null = null;
+  @Input() category: Category | Promotion | null = null;
 
   constructor(private store: Store) {}
 

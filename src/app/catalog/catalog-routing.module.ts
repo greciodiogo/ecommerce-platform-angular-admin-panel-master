@@ -92,18 +92,20 @@ const routes: Routes = [
     canActivate: [AuthRoleGuard],
     data: { roles: [RoleEnum.Admin, RoleEnum.Manager, RoleEnum.Sales] },
     component: PromotionsCardsPageComponent,
-    children: [
-      {
-        title: 'Create new order',
-        path: 'new',
-        component: CreatePromotionFormComponent,
-      },
-      {
-        title: 'Promotion',
-        path: ':id',
-        component: PromotionComponent,
-      },
-    ],
+  },
+  {
+    title: 'Create Promotion',
+    path: 'promotions/new',
+    canActivate: [AuthRoleGuard],
+    data: { roles: [RoleEnum.Admin, RoleEnum.Manager, RoleEnum.Sales] },
+    component: CreatePromotionFormComponent,
+  },
+  {
+    title: 'Promotion Details',
+    path: 'promotion/:id',
+    canActivate: [AuthRoleGuard],
+    data: { roles: [RoleEnum.Admin, RoleEnum.Manager, RoleEnum.Sales] },
+    component: PromotionComponent,
   },
   {
     title: 'Categories',

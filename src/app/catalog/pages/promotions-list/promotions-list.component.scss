@@ -6,17 +6,33 @@ mat-card-content {
   margin-right: -16px;
 }
 
-mat-row.order-row:hover {
+mat-row.promotion-row {
+  position: relative;
+  cursor: pointer;
+}
+
+mat-row.promotion-row:hover {
   background: whitesmoke;
 }
-mat-row.order-row:active {
+
+mat-row.promotion-row:active {
   background: #efefef;
 }
+
 mat-row, mat-header-row {
   gap: 16px;
   padding-left: 16px;
   padding-right: 24px;
   position: relative;
+}
+
+.row-link {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  z-index: 1;
 }
 mat-header-row {
   position: sticky;

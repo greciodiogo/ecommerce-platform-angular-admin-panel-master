@@ -2,6 +2,8 @@ import { createAction, props } from '@ngrx/store';
 import { Promotion } from '../../../core/api/model/promotion';
 import { PromotionCreateDto } from '../../../core/api/model/promotion-create-dto';
 import { PromotionUpdateDto } from '../../../core/api/model/promotion-update-dto';
+import { AddCategoryProductRequest } from '../../../core/api/model/add-category-product-request';
+import { Product } from '../../../core/api/model/product';
 
 export const loadPromotions = createAction('[Promotions] Load Promotions');
 
@@ -47,6 +49,36 @@ export const createPromotionSuccess = createAction(
 
 export const createPromotionFailure = createAction(
   '[Promotions] Create Promotion Failure',
+  props<{ error: string }>(),
+);
+
+export const addPromotionProduct = createAction(
+  '[Promotions] Add Promotion Product',
+  props<{ promotionId: number; product: AddCategoryProductRequest }>(),
+);
+
+export const addPromotionProductSuccess = createAction(
+  '[Promotions] Add Promotion Product Success',
+  props<{ promotionId: number; product: Product }>(),
+);
+
+export const addPromotionProductFailure = createAction(
+  '[Promotions] Add Promotion Product Failure',
+  props<{ error: string }>(),
+);
+
+export const deletePromotionProduct = createAction(
+  '[Promotions] Delete Promotion Product',
+  props<{ promotionId: number; productId: number }>(),
+);
+
+export const deletePromotionProductSuccess = createAction(
+  '[Promotions] Delete Promotion Product Success',
+  props<{ promotionId: number; productId: number }>(),
+);
+
+export const deletePromotionProductFailure = createAction(
+  '[Promotions] Delete Promotion Product Failure',
   props<{ error: string }>(),
 );
 
