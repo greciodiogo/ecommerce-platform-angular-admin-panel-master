@@ -1,9 +1,11 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Optional } from '@angular/core';
 import { Store } from '@ngrx/store';
 import * as PromotionsActions from '../../store/actions/promotions.actions';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
-import { first } from 'rxjs';
+import { Actions, ofType } from '@ngrx/effects';
+import { MatDialogRef } from '@angular/material/dialog';
+import { take } from 'rxjs/operators';
 
 @Component({
   selector: 'app-create-promotion-form',
@@ -41,7 +43,12 @@ export class CreatePromotionFormComponent implements OnInit {
     }),
   });
 
-  constructor(private store: Store, private router: Router) {}
+  constructor(
+    private store: Store,
+    private actions$: Actions,
+    private router: Router,
+    @Optional() private dialogRef?: MatDialogRef<CreatePromotionFormComponent>
+  ) {}
 
   ngOnInit() {}
 
@@ -49,17 +56,24 @@ export class CreatePromotionFormComponent implements OnInit {
     this.store.dispatch(
       PromotionsActions.createPromotion({
         data: {
-          name: this.createForm.controls.name.value,
-          description: this.createForm.controls.description.value,
-          startDate: this.createForm.controls.startDate.value ? new Date(this.createForm.controls.startDate.value).toISOString() : '',
-          endDate: this.createForm.controls.endDate.value ? new Date(this.createForm.controls.endDate.value).toISOString() : '',
-          discount: this.createForm.controls.discount.value,
-          // categoryIds: this.createForm.controls.categoryIds.value,
-          isActive: this.createForm.controls.isActive.value,
+          name: this.createForm.value.name,
+          description: this.createForm.value.description,
+          startDate: this.createForm.value.startDate ? new Date(this.createForm.value.startDate).toISOString() : '',
+          endDate: this.createForm.value.endDate ? new Date(this.createForm.value.endDate).toISOString() : '',
+          discount: this.createForm.value.discount,
+          // categoryIds: this.createForm.value.categoryIds,
+          isActive: this.createForm.value.isActive,
         },
       })
     );
-    // Optionally, listen for success and navigate
-    this.router.navigate(['catalog/promotions']);
+    this.actions$
+      .pipe(ofType(PromotionsActions.createPromotionSuccess), take(1))
+      .subscribe(() => {
+        if (this.dialogRef) {
+          this.dialogRef.close();
+        } else {
+          this.router.navigate(['catalog/promotions']);
+        }
+      });
   }
 }

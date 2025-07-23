@@ -15,6 +15,7 @@ import {
   FaqsEffects,
   ProductRatingsEffects,
   ProductsEffects,
+  PromotionsEffects,
   ShopsEffects,
 } from './store/effects';
 import { ProductsListComponent } from './pages/products-list/products-list.component';
@@ -149,7 +150,8 @@ import { PromotionsCardsPageComponent } from './pages/promotions/promotions-card
       AttributeTypesEffects,
       ProductRatingsEffects,
       DashboardEffects,
-      AddressesEffects
+      AddressesEffects,
+      PromotionsEffects
       
     ]),
     MatCardModule,

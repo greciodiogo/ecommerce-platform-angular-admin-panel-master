@@ -3,7 +3,7 @@
     <mat-card-content>
       <div class="create-promotion-content">
         <mat-icon>add_circle_outline</mat-icon>
-        <span>Criar Nova Promoção</span>
+        <span>Create New Promotion</span>
       </div>
     </mat-card-content>
   </mat-card>
@@ -24,8 +24,9 @@
       </mat-card-header>
       <mat-card-content>
         <div class="promotion-details">
-          <div *ngIf="promotion.startDate">Início: {{ promotion.startDate | date:'shortDate' }}</div>
-          <div *ngIf="promotion.endDate">Fim: {{ promotion.endDate | date:'shortDate' }}</div>
+          <div *ngIf="promotion.startDate">Start Date: {{ promotion.startDate | date:'shortDate' }}</div>
+          <div *ngIf="promotion.endDate">End Date: {{ promotion.endDate | date:'shortDate' }}</div>
+          <div *ngIf="promotion.discount">Discount: {{ promotion.discount + '%' }}</div>
         </div>
       </mat-card-content>
       <mat-card-actions>
