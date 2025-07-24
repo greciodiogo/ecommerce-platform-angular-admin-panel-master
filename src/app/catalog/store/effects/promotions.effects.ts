@@ -28,7 +28,20 @@ export class PromotionsEffects {
       ofType(PromotionsActions.getPromotion),
       exhaustMap(({ promotionId }) =>
         this.promotionsApi.getPromotion(promotionId).pipe(
-          map((promotion) => PromotionsActions.getPromotionSuccess({ promotion })),
+          exhaustMap((promotion) => 
+            // Após obter a promoção, buscamos seus produtos
+            this.promotionsApi.getPromotionProducts(promotionId).pipe(
+              map((products) => PromotionsActions.getPromotionSuccess({ 
+                promotion: {
+                  ...promotion,
+                  products
+                }
+              })),
+              catchError(({ error }) =>
+                of(PromotionsActions.getPromotionFailure({ error: error.message })),
+              ),
+            )
+          ),
           catchError(({ error }) =>
             of(PromotionsActions.getPromotionFailure({ error: error.message })),
           ),

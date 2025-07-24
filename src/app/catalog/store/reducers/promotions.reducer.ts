@@ -34,11 +34,23 @@ export const reducer = createReducer(
     PromotionsActions.getPromotionSuccess,
     (state, { promotion }): PromotionState => ({
       ...state,
-      list: state.list.map((p) => 
-        p.id === promotion.id 
-          ? { ...promotion, products: promotion.products || [] }
-          : p
-      ),
+      list: state.list.map((p) => {
+        if (p.id === promotion.id) {
+          // Se recebemos produtos novos, atualizamos apenas os produtos
+          if (Array.isArray(promotion.products) && !promotion.name) {
+            return {
+              ...p,
+              products: promotion.products
+            };
+          }
+          // Se recebemos uma promoção completa, mantemos os produtos existentes se não houver novos
+          return {
+            ...promotion,
+            products: Array.isArray(promotion.products) ? promotion.products : (p.products || [])
+          };
+        }
+        return p;
+      }),
     }),
   ),
   on(
@@ -65,9 +77,14 @@ export const reducer = createReducer(
       ...state,
       list: state.list.map((p) => {
         if (p.id === promotionId) {
+          const existingProducts = p.products || [];
+          // Verifica se o produto já existe
+          if (existingProducts.some(ep => ep.id === product.id)) {
+            return p;
+          }
           return {
             ...p,
-            products: [...(p.products || []), product]
+            products: [...existingProducts, product]
           };
         }
         return p;
