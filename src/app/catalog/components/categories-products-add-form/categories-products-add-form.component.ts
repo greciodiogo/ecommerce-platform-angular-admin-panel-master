@@ -67,9 +67,11 @@ export class CategoriesProductsAddFormComponent implements OnInit {
       return;
     }
 
-    // Emit each selected product ID
-    this.selectedProducts.value.forEach(productId => {
-      this.addProduct.emit(productId);
+    // Emit each selected product ID with a slight delay to ensure proper processing
+    this.selectedProducts.value.forEach((productId, index) => {
+      setTimeout(() => {
+        this.addProduct.emit(productId);
+      }, index * 100); // Add 100ms delay between each emission
     });
 
     // Reset the selection

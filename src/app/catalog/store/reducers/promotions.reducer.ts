@@ -20,7 +20,7 @@ export const reducer = createReducer(
     PromotionsActions.loadPromotionsSuccess,
     (state, { promotions }): PromotionState => ({
       ...state,
-      list: promotions,
+      list: promotions.map(p => ({ ...p, products: p.products || [] })),
     }),
   ),
   on(
@@ -34,21 +34,29 @@ export const reducer = createReducer(
     PromotionsActions.getPromotionSuccess,
     (state, { promotion }): PromotionState => ({
       ...state,
-      list: state.list.map((p) => (p.id === promotion.id ? promotion : p)),
+      list: state.list.map((p) => 
+        p.id === promotion.id 
+          ? { ...promotion, products: promotion.products || [] }
+          : p
+      ),
     }),
   ),
   on(
     PromotionsActions.createPromotionSuccess,
     (state, { promotion }): PromotionState => ({
       ...state,
-      list: [...state.list, promotion],
+      list: [...state.list, { ...promotion, products: promotion.products || [] }],
     }),
   ),
   on(
     PromotionsActions.updatePromotionSuccess,
     (state, { promotionId, promotion }): PromotionState => ({
       ...state,
-      list: state.list.map((p) => (p.id === promotionId ? promotion : p)),
+      list: state.list.map((p) => 
+        p.id === promotionId 
+          ? { ...promotion, products: promotion.products || [] }
+          : p
+      ),
     }),
   ),
   on(

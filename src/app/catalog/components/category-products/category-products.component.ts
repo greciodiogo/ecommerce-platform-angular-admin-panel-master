@@ -54,6 +54,11 @@ export class CategoryProductsComponent implements OnInit {
         })
       );
     } else if (this.promotion) {
+      // Dispatch first to ensure we have the latest promotion data
+      this.store.dispatch(
+        PromotionsActions.getPromotion({ promotionId: this.promotion.id })
+      );
+
       this.store.dispatch(
         PromotionsActions.addPromotionProduct({
           promotionId: this.promotion.id,
@@ -64,6 +69,7 @@ export class CategoryProductsComponent implements OnInit {
   }
 
   getProducts(): any[] {
-    return this.category?.products || this.promotion?.products || [];
+    const products = this.category?.products || this.promotion?.products;
+    return Array.isArray(products) ? products : [];
   }
 }
