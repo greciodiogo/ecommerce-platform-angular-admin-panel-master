@@ -51,4 +51,34 @@ export const reducer = createReducer(
       list: state.list.map((p) => (p.id === promotionId ? promotion : p)),
     }),
   ),
+  on(
+    PromotionsActions.addPromotionProductSuccess,
+    (state, { promotionId, product }): PromotionState => ({
+      ...state,
+      list: state.list.map((p) => {
+        if (p.id === promotionId) {
+          return {
+            ...p,
+            products: [...(p.products || []), product]
+          };
+        }
+        return p;
+      }),
+    }),
+  ),
+  on(
+    PromotionsActions.deletePromotionProductSuccess,
+    (state, { promotionId, productId }): PromotionState => ({
+      ...state,
+      list: state.list.map((p) => {
+        if (p.id === promotionId) {
+          return {
+            ...p,
+            products: (p.products || []).filter(prod => prod.id !== productId)
+          };
+        }
+        return p;
+      }),
+    }),
+  ),
 ); 

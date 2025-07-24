@@ -9,27 +9,26 @@
       matSortDirection="asc"
     >
       <ng-container matColumnDef="id">
-        <mat-header-cell *matHeaderCellDef mat-sort-header="id"
-          >ID</mat-header-cell
-        >
-        <mat-cell *matCellDef="let order"
-          >{{ order.id }}<a [routerLink]="['/catalog/promotions', order.id]"></a
-        ></mat-cell>
+        <mat-header-cell *matHeaderCellDef mat-sort-header="id">ID</mat-header-cell>
+        <mat-cell *matCellDef="let promotion">
+          {{ promotion.id }}
+          <a [routerLink]="['/catalog/promotion', promotion.id]" class="row-link"></a>
+        </mat-cell>
       </ng-container>
       <ng-container matColumnDef="startDate">
         <mat-header-cell *matHeaderCellDef mat-sort-header="startDate">
           Start Date
         </mat-header-cell>
-        <mat-cell *matCellDef="let order">
-          {{ order.created | date : 'd MMM yyyy, HH:mm' }}
+        <mat-cell *matCellDef="let promotion">
+          {{ promotion.startDate | date : 'd MMM yyyy, HH:mm' }}
         </mat-cell>
       </ng-container>
       <ng-container matColumnDef="endDate">
         <mat-header-cell *matHeaderCellDef mat-sort-header="endDate">
           End Date
         </mat-header-cell>
-        <mat-cell *matCellDef="let order">
-          {{ order.created | date : 'd MMM yyyy, HH:mm' }}
+        <mat-cell *matCellDef="let promotion">
+          {{ promotion.endDate | date : 'd MMM yyyy, HH:mm' }}
         </mat-cell>
       </ng-container>
       <ng-container matColumnDef="status">
@@ -54,23 +53,7 @@
         <mat-header-cell *matHeaderCellDef mat-sort-header="name">
           Name
         </mat-header-cell>
-        <mat-cell *matCellDef="let order">{{ order.fullName }}</mat-cell>
-      </ng-container>
-      <ng-container matColumnDef="delivery">
-        <mat-header-cell *matHeaderCellDef mat-sort-header="delivery">
-          Start Date
-        </mat-header-cell>
-        <mat-cell *matCellDef="let order">
-          {{ order.created | date : 'd MMM yyyy, HH:mm' }}
-        </mat-cell>
-      </ng-container>
-      <ng-container matColumnDef="payment">
-        <mat-header-cell *matHeaderCellDef mat-sort-header="payment">
-          End Date
-        </mat-header-cell>
-        <mat-cell *matCellDef="let order">
-          {{ order.created | date : 'd MMM yyyy, HH:mm' }}
-        </mat-cell>
+        <mat-cell *matCellDef="let promotion">{{ promotion.name }}</mat-cell>
       </ng-container>
 
       <mat-header-row
@@ -78,20 +61,20 @@
           'id',
           'name',
           'startDate',
-          'endDate',
+          'endDate'
         ]"
       ></mat-header-row>
       <mat-row
         *matRowDef="
-          let order;
+          let promotion;
           columns: [
             'id',
             'name',
             'startDate',
-            'endDate',
+            'endDate'
           ]
         "
-        class="order-row"
+        class="promotion-row"
       ></mat-row>
     </mat-table>
     <span *ngIf="(promotions$ | async)?.length === 0" class="empty-placeholder">

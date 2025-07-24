@@ -1,57 +1,78 @@
-import { Component, Input } from '@angular/core';
-import { CategoriesActions, selectProductsList } from '../../store';
-import { Category } from '../../../core/api';
+import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
+import { selectProductsList } from '../../store';
+import { Category, Promotion } from '../../../core/api';
 import { FormControl } from '@angular/forms';
-import { combineLatestWith } from 'rxjs';
+import { combineLatestWith, startWith } from 'rxjs';
 import { map } from 'rxjs/operators';
 import { Store } from '@ngrx/store';
 import { selectUserRole } from 'src/app/core/auth/store';
+import { ProductsActions } from '../../store/actions';
 
 @Component({
   selector: 'app-categories-products-add-form',
   templateUrl: './categories-products-add-form.component.html',
   styleUrls: ['./categories-products-add-form.component.scss'],
 })
-export class CategoriesProductsAddFormComponent {
+export class CategoriesProductsAddFormComponent implements OnInit {
   @Input() category: Category | null = null;
+  @Input() promotion: Promotion | null = null;
+  @Output() addProduct = new EventEmitter<number>();
+
   role$ = this.store.select(selectUserRole);
   products$ = this.store.select(selectProductsList);
 
   selectedProducts = new FormControl<number[]>([], {
     nonNullable: true,
   });
-  productsFilter = new FormControl('');
+  productsFilter = new FormControl<string>('', { nonNullable: true });
 
   filteredProducts$ = this.products$.pipe(
-    combineLatestWith(this.productsFilter.valueChanges),
+    combineLatestWith(this.productsFilter.valueChanges.pipe(startWith(''))),
     map(([products, filter]) => {
-      products = products.filter(
-        ({ id }) => !this.category?.products.map((p) => p.id).includes(id),
-      );
-      if (!filter) {
-        return products;
-      } else {
-        return products.filter((product) =>
-          product.name.toLowerCase().includes(filter.toLowerCase()),
+      if (!products) {
+        return [];
+      }
+      
+      const container = this.category || this.promotion;
+      let filteredProducts = [...products];
+
+      // Remove already added products
+      if (container && container.products) {
+        const existingProductIds = container.products.map(p => p.id);
+        filteredProducts = products.filter(
+          ({ id }) => !existingProductIds.includes(id)
         );
       }
-    }),
+
+      // Apply search filter
+      if (filter) {
+        filteredProducts = filteredProducts.filter((product) =>
+          product.name.toLowerCase().includes(filter.toLowerCase())
+        );
+      }
+
+      return filteredProducts;
+    })
   );
 
   constructor(private store: Store) {}
 
-  add() {
-    if (!this.category) {
+  ngOnInit(): void {
+    // Load products list when component initializes
+    this.store.dispatch(ProductsActions.loadProducts({}));
+  }
+
+  add(): void {
+    if (!this.selectedProducts.value.length) {
       return;
     }
-    for (const productId of this.selectedProducts.value) {
-      this.store.dispatch(
-        CategoriesActions.addCategoryProduct({
-          categoryId: this.category.id,
-          productId,
-        }),
-      );
-    }
-    this.selectedProducts.reset();
+
+    // Emit each selected product ID
+    this.selectedProducts.value.forEach(productId => {
+      this.addProduct.emit(productId);
+    });
+
+    // Reset the selection
+    this.selectedProducts.setValue([]);
   }
 }

@@ -54,8 +54,8 @@ export class PromotionsEffects {
   addPromotionProduct$ = createEffect(() =>
     this.actions$.pipe(
       ofType(PromotionsActions.addPromotionProduct),
-      exhaustMap(({ promotionId, product }) =>
-        this.promotionsApi.addPromotionProduct(promotionId, product).pipe(
+      exhaustMap(({ promotionId, productId }) =>
+        this.promotionsApi.addPromotionProduct(promotionId, { productId }).pipe(
           map((addedProduct) => 
             PromotionsActions.addPromotionProductSuccess({ 
               promotionId, 

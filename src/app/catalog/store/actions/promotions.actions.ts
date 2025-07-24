@@ -54,7 +54,7 @@ export const createPromotionFailure = createAction(
 
 export const addPromotionProduct = createAction(
   '[Promotions] Add Promotion Product',
-  props<{ promotionId: number; product: AddCategoryProductRequest }>(),
+  props<{ promotionId: number; productId: number }>(),
 );
 
 export const addPromotionProductSuccess = createAction(

@@ -1,11 +1,11 @@
 <div class="products-list">
   <app-product-card
-    *ngFor="let product of category?.products ?? []"
+    *ngFor="let product of getProducts()"
     [product]="product"
     (delete)="deleteProduct($event)"
   ></app-product-card>
-  <span *ngIf="category?.products?.length === 0" class="mat-headline">
-    No products in this category
+  <span *ngIf="getProducts().length === 0" class="mat-headline">
+    No products found
   </span>
 </div>
 
@@ -13,4 +13,6 @@
 
 <app-categories-products-add-form
   [category]="category"
+  [promotion]="promotion"
+  (addProduct)="onAddProduct($event)"
 ></app-categories-products-add-form>
