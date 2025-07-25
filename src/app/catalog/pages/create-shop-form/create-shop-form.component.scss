@@ -1,25 +1,77 @@
-mat-card-content {
-  margin-top: 18px;
-  display: flex;
-  flex-direction: row;
-  column-gap: 12px;
-  flex-wrap: wrap;
-  margin-bottom: 0;
-  mat-form-field {
-    flex: 1;
-    min-width: 180px;
+.shop-form-card {
+  max-width: 900px;
+  max-height: 90vh;
+  margin: 0 auto;
+  padding: 24px;
+  border-radius: 8px;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+  overflow-y: auto;
+  
+  &::-webkit-scrollbar {
+    width: 8px;
   }
-}
+  
+  &::-webkit-scrollbar-track {
+    background: #f1f1f1;
+    border-radius: 4px;
+  }
+  
+  &::-webkit-scrollbar-thumb {
+    background: #888;
+    border-radius: 4px;
+    
+    &:hover {
+      background: #666;
+    }
+  }
 
-mat-card-actions {
-  margin-bottom: 0;
-  margin-right: 0;
-  margin-left: 0;
-  padding-bottom: 0;
-  padding-top: 0;
-}
+  .form-title {
+    color: #2c3e50;
+    margin-bottom: 0;
+    font-size: 24px;
+    font-weight: 500;
+    position: sticky;
+    top: 0;
+    background: white;
+    padding: 10px 0;
+    z-index: 1;
+  }
 
-mat-card-content {
-  display: grid;
-  grid-template-columns: repeat(3, 1fr);
+  .shop-form {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+  }
+
+  mat-card-content {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 12px;
+    padding: 12px 0;
+    margin: 0;
+
+    mat-form-field {
+      width: 100%;
+    }
+  }
+
+  mat-card-actions {
+    padding: 0;
+    margin: 0;
+    display: flex;
+    justify-content: flex-end;
+
+    button {
+      min-width: 120px;
+      padding: 8px 24px;
+      font-weight: 500;
+    }
+  }
+
+  // Add a subtle separator between sections
+  mat-card-title:not(:first-child) {
+    margin-top: 10px;
+    padding-top: 10px;
+    border-top: 1px solid rgba(0, 0, 0, 0.12);
+  }
 }

@@ -1,8 +1,8 @@
-<mat-card>
-  <form (submit)="add()" [formGroup]="addForm">
-    <mat-card-title>Add shop</mat-card-title>
-    <mat-card-content>
-      <mat-form-field appearance="outline">
+<mat-card class="shop-form-card">
+  <form (submit)="add()" [formGroup]="addForm" class="shop-form">
+    <mat-card-title class="form-title">Add shop</mat-card-title>
+    <mat-card-content class="form-content">
+      <mat-form-field appearance="outline" class="form-field">
         <mat-label>Shop Name</mat-label>
         <input matInput type="shopName" formControlName="shopName" required />
         <mat-error *ngIf="addForm.controls.shopName.invalid">
