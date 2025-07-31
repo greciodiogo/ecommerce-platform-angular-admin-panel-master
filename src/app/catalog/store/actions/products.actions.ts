@@ -151,3 +151,18 @@ export const loadProductsByShopIdFailure = createAction(
   '[Products] Load Products By Shop Id Failure',
   props<{ error: string }>(),
 );
+
+export const loadProductsByPromotionId = createAction(
+  '[Products] Load Products By Promotion Id',
+  props<{ promotionId: number }>(),
+);
+
+export const loadProductsByPromotionIdSuccess = createAction(
+  '[Products] Load Products By Promotion Id Success',
+  props<{ promotionId: number; products: Product[] }>(),
+);
+
+export const loadProductsByPromotionIdFailure = createAction(
+  '[Products] Load Products By Promotion Id Failure',
+  props<{ error: string }>(),
+);

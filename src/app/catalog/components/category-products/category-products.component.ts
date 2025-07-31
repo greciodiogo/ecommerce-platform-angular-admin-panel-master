@@ -22,7 +22,7 @@ export class CategoryProductsComponent implements OnInit {
       );
     } else if (this.promotion) {
       this.store.dispatch(
-        PromotionsActions.getPromotion({ promotionId: this.promotion.id })
+        PromotionsActions.getPromotionProducts({ id: this.promotion.id })
       );
     }
   }

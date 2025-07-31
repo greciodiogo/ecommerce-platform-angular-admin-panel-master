@@ -1,6 +1,5 @@
 import { createSelector } from '@ngrx/store';
 import * as fromPromotions from '../reducers/promotions.reducer';
-import { Promotion } from '../../../core/api/model/promotion';
 import { selectCatalogState } from './index';
 
 export const selectPromotionsState = createSelector(
@@ -19,11 +18,21 @@ export const selectSelectedPromotionId = createSelector(
 );
 
 export const selectSelectedPromotion = createSelector(
-  selectPromotionsState,
+  selectPromotionsList,
   selectSelectedPromotionId,
-  (state, selectedPromotionId) => {
+  (promotions, selectedPromotionId) => {
     return selectedPromotionId
-      ? state.list.find((p) => p.id === selectedPromotionId)
+      ? promotions.find((p) => p.id === selectedPromotionId)
       : null;
   },
 ); 
+
+export const selectPromotionDetails = createSelector(
+  selectPromotionsState,
+  (state) => state.selectedPromotion
+);
+
+export const selectPromotionProducts = createSelector(
+  selectPromotionDetails,
+  (promotion) => promotion?.products || []
+);

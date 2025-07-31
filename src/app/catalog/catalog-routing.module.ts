@@ -15,11 +15,8 @@ import { CreateProductFormComponent } from './pages/create-product-form/create-p
 import { FaqsComponent } from './pages/faqs/faqs.component';
 import { FaqComponent } from './pages/faq/faq.component';
 import { ReportsComponent } from './pages/reports/reports.component';
-import { ShopsComponent } from './pages/shops/shops.component';
 import { TrendingComponent } from './pages/trending/trending.component';
-import { PromotionsComponent } from './pages/promotions/promotions.component';
 import { PromotionComponent } from './pages/promotion/promotion.component';
-import { PromotionsListComponent } from './pages/promotions-list/promotions-list.component';
 import { CreatePromotionFormComponent } from './pages/create-promotion-form/create-promotion-form.component';
 import { AddressesComponent } from './pages/addresses/addresses.component';
 import { AddressesTreeComponent } from './pages/addresses-tree/addresses-tree.component';
@@ -97,14 +94,14 @@ const routes: Routes = [
     title: 'Create Promotion',
     path: 'promotions/new',
     canActivate: [AuthRoleGuard],
-    data: { roles: [RoleEnum.Admin, RoleEnum.Manager, RoleEnum.Sales] },
+    data: { roles: [RoleEnum.Admin, RoleEnum.Manager] },
     component: CreatePromotionFormComponent,
   },
   {
     title: 'Promotion Details',
-    path: 'promotion/:id',
+    path: 'promotions/:id',
     canActivate: [AuthRoleGuard],
-    data: { roles: [RoleEnum.Admin, RoleEnum.Manager, RoleEnum.Sales] },
+    data: { roles: [RoleEnum.Admin, RoleEnum.Manager] },
     component: PromotionComponent,
   },
   {

@@ -30,6 +30,6 @@ export class PromotionsCardsPageComponent implements OnInit {
   }
 
   viewPromotion(promotion: Promotion): void {
-    this.router.navigate(['/catalog/promotion', promotion.id]);
+    this.router.navigate(['/catalog/promotions', promotion.id]);
   }
 } 

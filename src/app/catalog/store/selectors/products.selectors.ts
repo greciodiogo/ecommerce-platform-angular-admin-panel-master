@@ -40,3 +40,8 @@ export const selectProductsByShop = (shopId: number) => createSelector(
   selectProductsState,
   (state) => state.productsByShop[shopId] || []
 );
+
+export const selectProductsByPromotion = (promotionId: number) => createSelector(
+  selectProductsState,
+  (state) => state.productsByPromotion[promotionId] || []
+);

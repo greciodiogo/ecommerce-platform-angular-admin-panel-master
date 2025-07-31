@@ -11,14 +11,14 @@ export class NotificationsService {
   constructor() {
     // const userId = localStorage.getItem('userId'); // ou de authService
     const userId = 1; // ou de authService
-    this.socket = io(environment.apiUrl, {
-      query: { userId },
-      transports: ['websocket', 'polling'],
-    });
+    // this.socket = io(environment.apiUrl, {
+    //   query: { userId },
+    //   transports: ['websocket', 'polling'],
+    // });
 
-    this.socket.on('ping', (notification) => {
-      this.notifications$.next([notification, ...this.notifications$.value]);
-    });
+    // this.socket.on('ping', (notification) => {
+    //   this.notifications$.next([notification, ...this.notifications$.value]);
+    // });
   }
 
   // Para iniciar com as antigas

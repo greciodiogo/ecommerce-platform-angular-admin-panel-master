@@ -1,5 +1,5 @@
 import { createReducer, on } from '@ngrx/store';
-import { Product } from '../../../core/api';
+import { Product, Promotion } from '../../../core/api';
 import { ProductsActions } from '../actions';
 
 export const productsFeatureKey = 'products';
@@ -9,6 +9,7 @@ export interface State {
   selectedProductId: number | null;
   photos: { id: number; data: Blob | null }[];
   productsByShop: { [shopId: number]: Product[] };
+  productsByPromotion: { [promotionId: number]: Product[] };
 }
 
 export const initialState: State = {
@@ -16,6 +17,7 @@ export const initialState: State = {
   selectedProductId: null,
   photos: [],
   productsByShop: {},
+  productsByPromotion: {},
 };
 
 export const reducer = createReducer(
@@ -117,6 +119,16 @@ export const reducer = createReducer(
       productsByShop: {
         ...state.productsByShop,
         [shopId]: products,
+      },
+    }),
+  ),
+    on(
+    ProductsActions.loadProductsByPromotionIdSuccess,
+    (state, { promotionId, products }): State => ({
+      ...state,
+      productsByPromotion: {
+        ...state.productsByPromotion,
+        [promotionId]: products,
       },
     }),
   ),

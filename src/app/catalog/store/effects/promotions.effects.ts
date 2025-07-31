@@ -1,13 +1,21 @@
 import { Injectable } from '@angular/core';
 import { Actions, createEffect, ofType } from '@ngrx/effects';
+import { Store } from '@ngrx/store';
 import { PromotionsApiService } from '../../../core/api/api/promotions-api.service';
 import * as PromotionsActions from '../actions/promotions.actions';
-import { exhaustMap, map, catchError } from 'rxjs/operators';
+import { exhaustMap, map, catchError, debounceTime, filter, distinctUntilChanged, switchMap, withLatestFrom } from 'rxjs/operators';
 import { of } from 'rxjs';
 
 @Injectable()
 export class PromotionsEffects {
-  constructor(private actions$: Actions, private promotionsApi: PromotionsApiService) {}
+  private lastPromotionId: number | null = null;
+  private lastProductsUpdate = 0;
+  
+  constructor(
+    private actions$: Actions,
+    private promotionsApi: PromotionsApiService,
+    private store: Store
+  ) {}
 
   loadPromotions$ = createEffect(() =>
     this.actions$.pipe(
@@ -23,32 +31,43 @@ export class PromotionsEffects {
     ),
   );
 
-  getPromotion$ = createEffect(() =>
-    this.actions$.pipe(
-      ofType(PromotionsActions.getPromotion),
-      exhaustMap(({ promotionId }) =>
-        this.promotionsApi.getPromotion(promotionId).pipe(
-          exhaustMap((promotion) => 
-            // Após obter a promoção, buscamos seus produtos
-            this.promotionsApi.getPromotionProducts(promotionId).pipe(
-              map((products) => PromotionsActions.getPromotionSuccess({ 
-                promotion: {
-                  ...promotion,
-                  products
-                }
-              })),
-              catchError(({ error }) =>
-                of(PromotionsActions.getPromotionFailure({ error: error.message })),
-              ),
-            )
-          ),
-          catchError(({ error }) =>
-            of(PromotionsActions.getPromotionFailure({ error: error.message })),
+    getPromotion$ = createEffect(() => {
+      return this.actions$.pipe(
+        ofType(PromotionsActions.getPromotion),
+        exhaustMap(({ promotionId }) =>
+          this.promotionsApi.getPromotion(promotionId).pipe(
+            map((promotion) => PromotionsActions.getPromotionSuccess({ promotion })),
+            catchError(({ error }) =>
+              of(PromotionsActions.getPromotionFailure({ error: error.message })),
+            ),
           ),
         ),
-      ),
-    ),
-  );
+      );
+    });
+
+  // Effect separado para produtos que só executa uma vez por promoção
+     getPromotionProducts$ = createEffect(() => {
+       return this.actions$.pipe(
+         ofType(PromotionsActions.getPromotionProducts),
+         exhaustMap(({ id }) =>
+           this.promotionsApi.getPromotionProducts(id).pipe(
+             map((products) =>
+               PromotionsActions.getPromotionProductsSuccess({
+                 PromotionId: id,
+                 products,
+               }),
+             ),
+             catchError(({ error }) =>
+               of(
+                 PromotionsActions.getPromotionProductsFailure({
+                   error: error.message,
+                 }),
+               ),
+             ),
+           ),
+         ),
+       );
+     });
 
   createPromotion$ = createEffect(() =>
     this.actions$.pipe(
@@ -67,7 +86,11 @@ export class PromotionsEffects {
   addPromotionProduct$ = createEffect(() =>
     this.actions$.pipe(
       ofType(PromotionsActions.addPromotionProduct),
-      exhaustMap(({ promotionId, productId }) =>
+      distinctUntilChanged((prev, curr) => 
+        prev.promotionId === curr.promotionId && prev.productId === curr.productId
+      ),
+      debounceTime(300),
+      switchMap(({ promotionId, productId }) =>
         this.promotionsApi.addPromotionProduct(promotionId, { productId }).pipe(
           map((addedProduct) => 
             PromotionsActions.addPromotionProductSuccess({ 

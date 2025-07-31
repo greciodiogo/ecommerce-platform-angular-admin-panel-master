@@ -10,7 +10,6 @@ export class ShopsEffects {
   constructor(private actions$: Actions, private shopsApi: ShopsApiService) {}
 
   loadShops$ = createEffect(() => {
-    console.log('teste on load effect');
     return this.actions$.pipe(
       ofType(ShopsActions.loadShops, CategoriesActions.loadCategories),
       exhaustMap(() =>
@@ -25,7 +24,6 @@ export class ShopsEffects {
   });
 
   addShop$ = createEffect(() => {
-    console.log("on effects")
     return this.actions$.pipe(
       ofType(ShopsActions.addShop),
       concatMap(({ data }) =>

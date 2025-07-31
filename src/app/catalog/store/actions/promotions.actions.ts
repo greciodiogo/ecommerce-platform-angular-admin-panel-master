@@ -82,6 +82,22 @@ export const deletePromotionProductFailure = createAction(
   props<{ error: string }>(),
 );
 
+export const getPromotionProducts = createAction(
+  '[Promotions] Get Promotion Products',
+  props<{ id: number }>(),
+);
+
+export const getPromotionProductsSuccess = createAction(
+  '[Promotions] Get Promotion Products Success',
+  props<{ PromotionId: number; products: Product[] }>(),
+);
+
+export const getPromotionProductsFailure = createAction(
+  '[Promotions] Get Category Products Failure',
+  props<{ error: string }>(),
+);
+
+
 export const updatePromotion = createAction(
   '[Promotions] Update Promotion',
   props<{ promotionId: number; data: PromotionUpdateDto }>(),

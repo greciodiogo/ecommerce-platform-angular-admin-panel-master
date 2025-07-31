@@ -75,7 +75,6 @@ import { MatSnackBarModule } from '@angular/material/snack-bar';
 import { DashboardEffects } from '../sales/store/effects';
 import { TrendingComponent } from './pages/trending/trending.component';
 import { PromotionsListComponent } from './pages/promotions-list/promotions-list.component';
-import { PromotionsComponent } from './pages/promotions/promotions.component';
 import { PromotionComponent } from './pages/promotion/promotion.component';
 import { CreatePromotionFormComponent } from './pages/create-promotion-form/create-promotion-form.component';
 import { NgxMatIntlTelInputComponent } from 'ngx-mat-intl-tel-input';
@@ -126,7 +125,6 @@ import { PromotionsCardsPageComponent } from './pages/promotions/promotions-card
     ShopDetailComponent,
     TrendingComponent,
     PromotionsListComponent,
-    PromotionsComponent,
     PromotionComponent,
     CreatePromotionFormComponent,
     AddressesComponent,

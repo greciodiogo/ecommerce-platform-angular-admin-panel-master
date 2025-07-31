@@ -1,9 +1,9 @@
-<mat-card>
+<mat-card *ngIf="promotion$ | async as promotion">
   <mat-card-title-group>
     <mat-card-title>
       <a mat-button routerLink="/catalog/promotions">
         <mat-icon>arrow_back</mat-icon></a
-      >Promotion #{{ (promotion$ | async)?.id }}
+      >Promotion #{{ promotion?.id }}
     </mat-card-title>
   </mat-card-title-group>
   <mat-tab-group dynamicHeight>
@@ -13,10 +13,11 @@
         Products
       </ng-template>
       <mat-card-content>
-        <app-category-products
-          *ngIf="promotion$ | async"
-          [promotion]="(promotion$ | async) ?? null"
-        ></app-category-products>
+        <div class="products-container">
+          <app-category-products
+            [promotion]="promotion"
+          ></app-category-products>
+        </div>
       </mat-card-content>
     </mat-tab>
     <mat-tab>
