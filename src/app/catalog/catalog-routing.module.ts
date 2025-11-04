@@ -25,6 +25,7 @@ import { ProductsReportComponent } from './pages/products-report/products-report
 import { ShopsCardsPageComponent } from './pages/shops/shops-cards-page.component';
 import { ShopDetailTabsComponent } from './pages/shop-detail/shop-detail-tabs.component';
 import { PromotionsCardsPageComponent } from './pages/promotions/promotions-cards-page.component';
+import { PromotionConfigComponent } from './pages/promotion-config/promotion-config.component';
 
 const routes: Routes = [
   {
@@ -179,6 +180,13 @@ const routes: Routes = [
         component: AddressComponent,
       },
     ],
+  },
+  {
+    title: 'Configuração de Promoção',
+    path: 'promotion-config',
+    canActivate: [AuthRoleGuard],
+    data: { roles: [RoleEnum.Admin, RoleEnum.Manager] },
+    component: PromotionConfigComponent,
   },
   {
     path: '',

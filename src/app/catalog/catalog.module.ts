@@ -83,12 +83,14 @@ import { AddressDetailsComponent } from './components/address-details/address-de
 import { AddressesComponent } from './pages/addresses/addresses.component';
 import { AddressComponent } from './pages/address/address.component';
 import { MatProgressBarModule } from '@angular/material/progress-bar';
+import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
 import { MatDatepickerModule } from '@angular/material/datepicker';
 import { MatNativeDateModule } from '@angular/material/core';
 import { ProductsReportComponent } from './pages/products-report/products-report.component';
 import { ShopsCardsPageComponent } from './pages/shops/shops-cards-page.component';
 import { ShopDetailTabsComponent } from './pages/shop-detail/shop-detail-tabs.component';
 import { PromotionsCardsPageComponent } from './pages/promotions/promotions-cards-page.component';
+import { PromotionConfigComponent } from './pages/promotion-config/promotion-config.component';
 
 @NgModule({
   declarations: [
@@ -135,6 +137,7 @@ import { PromotionsCardsPageComponent } from './pages/promotions/promotions-card
     ShopsCardsPageComponent,
     ShopDetailTabsComponent,
     PromotionsCardsPageComponent,
+    PromotionConfigComponent,
   ],
   imports: [
     CommonModule,
@@ -179,6 +182,7 @@ import { PromotionsCardsPageComponent } from './pages/promotions/promotions-card
     MatSnackBarModule,
     NgxMatIntlTelInputComponent,
     MatProgressBarModule,
+    MatProgressSpinnerModule,
     MatDatepickerModule,
     MatNativeDateModule,
   ],
