@@ -74,6 +74,14 @@ const routes: Routes = [
         loadChildren: () =>
           import('./operations/operations.module').then((m) => m.OperationsModule),
       },
+      {
+        title: 'Splash Screens',
+        path: 'splash-screens',
+        canActivate: [AuthRoleGuard],
+        data: { roles: [RoleEnum.Admin] },
+        loadChildren: () =>
+          import('./splash-screens/splash-screens.module').then((m) => m.SplashScreensModule),
+      },
     ],
   },
   {

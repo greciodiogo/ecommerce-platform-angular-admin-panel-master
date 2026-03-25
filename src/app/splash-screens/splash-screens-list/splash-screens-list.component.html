@@ -1,0 +1,79 @@
+<mat-card>
+  <mat-card-header>
+    <mat-card-title>Gestão de Splash Screens</mat-card-title>
+  </mat-card-header>
+  <mat-card-content>
+    <div class="actions-bar">
+      <button mat-raised-button color="primary" (click)="createNew()">
+        <mat-icon>add</mat-icon>
+        Novo Splash Screen
+      </button>
+    </div>
+
+    <div class="splash-screens-container" cdkDropList (cdkDropListDropped)="drop($event)">
+      <div
+        *ngFor="let screen of splashScreens"
+        class="splash-screen-item"
+        cdkDrag
+      >
+        <div class="drag-handle" cdkDragHandle>
+          <mat-icon>drag_indicator</mat-icon>
+        </div>
+        
+        <div class="screen-image">
+          <img [src]="screen.imageUrl" [alt]="screen.title" />
+        </div>
+
+        <div class="screen-info">
+          <h3>{{ screen.title }}</h3>
+          <p *ngIf="screen.description">{{ screen.description }}</p>
+          <div class="screen-meta">
+            <span>Duração: {{ screen.duration }}ms</span>
+            <span>Ordem: {{ screen.order }}</span>
+          </div>
+        </div>
+
+        <div class="screen-actions">
+          <button
+            mat-icon-button
+            [color]="screen.isActive ? 'primary' : 'warn'"
+            (click)="toggleActive(screen)"
+            [matTooltip]="screen.isActive ? 'Desativar' : 'Ativar'"
+          >
+            <mat-icon>{{ screen.isActive ? 'visibility' : 'visibility_off' }}</mat-icon>
+          </button>
+          
+          <button
+            mat-icon-button
+            color="primary"
+            (click)="edit(screen.id)"
+            matTooltip="Editar"
+          >
+            <mat-icon>edit</mat-icon>
+          </button>
+          
+          <button
+            mat-icon-button
+            color="warn"
+            (click)="delete(screen.id)"
+            matTooltip="Excluir"
+          >
+            <mat-icon>delete</mat-icon>
+          </button>
+        </div>
+      </div>
+    </div>
+
+    <div *ngIf="splashScreens.length === 0 && !loading" class="empty-state">
+      <mat-icon>image</mat-icon>
+      <p>Nenhum splash screen cadastrado</p>
+      <button mat-raised-button color="primary" (click)="createNew()">
+        Criar primeiro splash screen
+      </button>
+    </div>
+
+    <div *ngIf="loading" class="loading-state">
+      <p>Carregando...</p>
+    </div>
+  </mat-card-content>
+</mat-card>
