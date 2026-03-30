@@ -35,35 +35,35 @@ export class BannersService {
   constructor(private http: HttpClient) {}
 
   findAll(): Observable<Banner[]> {
-    return this.http.get<Banner[]>(this.apiUrl);
+    return this.http.get<Banner[]>(this.apiUrl, { withCredentials: true });
   }
 
   findOne(id: number): Observable<Banner> {
-    return this.http.get<Banner>(`${this.apiUrl}/${id}`);
+    return this.http.get<Banner>(`${this.apiUrl}/${id}`, { withCredentials: true });
   }
 
   create(data: FormData): Observable<Banner> {
-    return this.http.post<Banner>(this.apiUrl, data);
+    return this.http.post<Banner>(this.apiUrl, data, { withCredentials: true });
   }
 
   update(id: number, data: FormData): Observable<Banner> {
-    return this.http.patch<Banner>(`${this.apiUrl}/${id}`, data);
+    return this.http.patch<Banner>(`${this.apiUrl}/${id}`, data, { withCredentials: true });
   }
 
   remove(id: number): Observable<void> {
-    return this.http.delete<void>(`${this.apiUrl}/${id}`);
+    return this.http.delete<void>(`${this.apiUrl}/${id}`, { withCredentials: true });
   }
 
   toggleActive(id: number): Observable<Banner> {
-    return this.http.patch<Banner>(`${this.apiUrl}/${id}/toggle`, {});
+    return this.http.patch<Banner>(`${this.apiUrl}/${id}/toggle`, {}, { withCredentials: true });
   }
 
   reorder(ids: number[]): Observable<Banner[]> {
-    return this.http.put<Banner[]>(`${this.apiUrl}/reorder`, { ids });
+    return this.http.put<Banner[]>(`${this.apiUrl}/reorder`, { ids }, { withCredentials: true });
   }
 
   deleteImage(id: number, lang: 'pt' | 'en'): Observable<Banner> {
-    return this.http.delete<Banner>(`${this.apiUrl}/${id}/image/${lang}`);
+    return this.http.delete<Banner>(`${this.apiUrl}/${id}/image/${lang}`, { withCredentials: true });
   }
 
   getImageUrl(path?: string): string {

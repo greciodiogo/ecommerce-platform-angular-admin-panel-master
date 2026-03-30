@@ -35,31 +35,31 @@ export class SplashScreensService {
   constructor(private http: HttpClient) {}
 
   findAll(): Observable<SplashScreen[]> {
-    return this.http.get<SplashScreen[]>(this.apiUrl);
+    return this.http.get<SplashScreen[]>(this.apiUrl, { withCredentials: true });
   }
 
   findOne(id: number): Observable<SplashScreen> {
-    return this.http.get<SplashScreen>(`${this.apiUrl}/${id}`);
+    return this.http.get<SplashScreen>(`${this.apiUrl}/${id}`, { withCredentials: true });
   }
 
   create(data: FormData): Observable<SplashScreen> {
-    return this.http.post<SplashScreen>(this.apiUrl, data);
+    return this.http.post<SplashScreen>(this.apiUrl, data, { withCredentials: true });
   }
 
   update(id: number, data: FormData): Observable<SplashScreen> {
-    return this.http.patch<SplashScreen>(`${this.apiUrl}/${id}`, data);
+    return this.http.patch<SplashScreen>(`${this.apiUrl}/${id}`, data, { withCredentials: true });
   }
 
   remove(id: number): Observable<void> {
-    return this.http.delete<void>(`${this.apiUrl}/${id}`);
+    return this.http.delete<void>(`${this.apiUrl}/${id}`, { withCredentials: true });
   }
 
   deleteImage(id: number): Observable<SplashScreen> {
-    return this.http.delete<SplashScreen>(`${this.apiUrl}/${id}/image`);
+    return this.http.delete<SplashScreen>(`${this.apiUrl}/${id}/image`, { withCredentials: true });
   }
 
   reorder(ids: number[]): Observable<SplashScreen[]> {
-    return this.http.put<SplashScreen[]>(`${this.apiUrl}/reorder`, { ids });
+    return this.http.put<SplashScreen[]>(`${this.apiUrl}/reorder`, { ids }, { withCredentials: true });
   }
 
   getImageUrl(path?: string): string {
