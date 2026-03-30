@@ -11,14 +11,15 @@
  */
 
 
-export interface PromotionUpdateDto { 
-    name?: string;
-    slug?: string;
-    description?: string;
-    startDate?: string;
-    endDate?: string;
-    discount?: number;
-    isActive?: boolean;
-    productIds?: Array<number>;
+export interface SplashScreen { 
+    id: number;
+    title: string;
+    description: string;
+    imageUrl: string;
+    order: number;
+    duration: number;
+    isActive: boolean;
+    createdAt: string;
+    updatedAt: string;
 }
 

@@ -4,13 +4,13 @@
   justify-content: flex-end;
 }
 
-.splash-screens-container {
+.banners-container {
   display: flex;
   flex-direction: column;
   gap: 16px;
 }
 
-.splash-screen-item {
+.banner-item {
   display: flex;
   align-items: center;
   gap: 16px;
@@ -41,8 +41,8 @@
   align-items: center;
 }
 
-.screen-image {
-  width: 80px;
+.banner-image {
+  width: 120px;
   height: 80px;
   border-radius: 4px;
   overflow: hidden;
@@ -74,7 +74,7 @@
   }
 }
 
-.screen-info {
+.banner-info {
   flex: 1;
 
   h3 {
@@ -89,15 +89,22 @@
     font-size: 14px;
   }
 
-  .screen-meta {
+  .banner-meta {
     display: flex;
     gap: 16px;
     font-size: 12px;
     color: #999;
+    
+    span {
+      max-width: 300px;
+      overflow: hidden;
+      text-overflow: ellipsis;
+      white-space: nowrap;
+    }
   }
 }
 
-.screen-actions {
+.banner-actions {
   display: flex;
   gap: 8px;
   flex-shrink: 0;
@@ -121,6 +128,6 @@
   }
 }
 
-.cdk-drop-list-dragging .splash-screen-item:not(.cdk-drag-placeholder) {
+.cdk-drop-list-dragging .banner-item:not(.cdk-drag-placeholder) {
   transition: transform 250ms cubic-bezier(0, 0, 0.2, 1);
 }

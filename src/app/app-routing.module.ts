@@ -82,6 +82,14 @@ const routes: Routes = [
         loadChildren: () =>
           import('./splash-screens/splash-screens.module').then((m) => m.SplashScreensModule),
       },
+      {
+        title: 'Banners',
+        path: 'banners',
+        canActivate: [AuthRoleGuard],
+        data: { roles: [RoleEnum.Admin] },
+        loadChildren: () =>
+          import('./banners/banners.module').then((m) => m.BannersModule),
+      },
     ],
   },
   {

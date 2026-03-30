@@ -1,0 +1,139 @@
+<mat-card>
+  <mat-card-header>
+    <mat-card-title>
+      {{ isEditMode ? 'Editar Banner' : 'Novo Banner' }}
+    </mat-card-title>
+  </mat-card-header>
+  <mat-card-content>
+    <form [formGroup]="form" (ngSubmit)="onSubmit()">
+      <div class="form-grid">
+        <mat-form-field appearance="outline" class="full-width">
+          <mat-label>Título</mat-label>
+          <input matInput formControlName="title" required />
+          <mat-error *ngIf="form.get('title')?.hasError('required')">
+            Título é obrigatório
+          </mat-error>
+          <mat-error *ngIf="form.get('title')?.hasError('maxlength')">
+            Máximo de 255 caracteres
+          </mat-error>
+        </mat-form-field>
+
+        <mat-form-field appearance="outline" class="full-width">
+          <mat-label>Descrição</mat-label>
+          <textarea matInput formControlName="description" rows="3"></textarea>
+        </mat-form-field>
+
+        <mat-form-field appearance="outline" class="full-width">
+          <mat-label>URL de Destino</mat-label>
+          <input matInput formControlName="linkUrl" />
+          <mat-hint>URL para onde o usuário será direcionado ao clicar no banner</mat-hint>
+        </mat-form-field>
+
+        <div class="image-upload-section">
+          <h3>Imagem PT (Português)</h3>
+          <input
+            type="file"
+            accept="image/*"
+            (change)="onImagePtSelected($event)"
+            #imagePtInput
+            style="display: none"
+          />
+          <div class="image-actions">
+            <button
+              mat-raised-button
+              type="button"
+              color="primary"
+              (click)="imagePtInput.click()"
+            >
+              <mat-icon>upload</mat-icon>
+              {{ imagePtPreview ? 'Alterar Imagem PT' : 'Carregar Imagem PT' }}
+            </button>
+            <button
+              mat-raised-button
+              type="button"
+              color="warn"
+              (click)="removeImagePt()"
+              *ngIf="imagePtPreview"
+            >
+              <mat-icon>delete</mat-icon>
+              Remover
+            </button>
+          </div>
+          <div class="image-preview" *ngIf="imagePtPreview">
+            <img [src]="imagePtPreview" alt="Preview PT" />
+          </div>
+        </div>
+
+        <div class="image-upload-section">
+          <h3>Imagem EN (Inglês)</h3>
+          <input
+            type="file"
+            accept="image/*"
+            (change)="onImageEnSelected($event)"
+            #imageEnInput
+            style="display: none"
+          />
+          <div class="image-actions">
+            <button
+              mat-raised-button
+              type="button"
+              color="primary"
+              (click)="imageEnInput.click()"
+            >
+              <mat-icon>upload</mat-icon>
+              {{ imageEnPreview ? 'Alterar Imagem EN' : 'Carregar Imagem EN' }}
+            </button>
+            <button
+              mat-raised-button
+              type="button"
+              color="warn"
+              (click)="removeImageEn()"
+              *ngIf="imageEnPreview"
+            >
+              <mat-icon>delete</mat-icon>
+              Remover
+            </button>
+          </div>
+          <div class="image-preview" *ngIf="imageEnPreview">
+            <img [src]="imageEnPreview" alt="Preview EN" />
+          </div>
+        </div>
+
+        <mat-form-field appearance="outline">
+          <mat-label>Ordem</mat-label>
+          <input matInput type="number" formControlName="order" required />
+          <mat-hint>Ordem de exibição (menor aparece primeiro)</mat-hint>
+          <mat-error *ngIf="form.get('order')?.hasError('required')">
+            Ordem é obrigatória
+          </mat-error>
+          <mat-error *ngIf="form.get('order')?.hasError('min')">
+            Ordem deve ser maior ou igual a 0
+          </mat-error>
+        </mat-form-field>
+
+        <div class="toggle-field">
+          <mat-slide-toggle formControlName="isActive">
+            Ativo
+          </mat-slide-toggle>
+          <span class="toggle-hint">
+            Apenas banners ativos serão exibidos no aplicativo
+          </span>
+        </div>
+      </div>
+
+      <div class="form-actions">
+        <button mat-button type="button" (click)="cancel()" [disabled]="loading">
+          Cancelar
+        </button>
+        <button
+          mat-raised-button
+          color="primary"
+          type="submit"
+          [disabled]="form.invalid || loading"
+        >
+          {{ loading ? 'Salvando...' : 'Salvar' }}
+        </button>
+      </div>
+    </form>
+  </mat-card-content>
+</mat-card>

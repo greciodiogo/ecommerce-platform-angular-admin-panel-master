@@ -23,17 +23,39 @@
           <textarea matInput formControlName="description" rows="3"></textarea>
         </mat-form-field>
 
-        <mat-form-field appearance="outline" class="full-width">
-          <mat-label>URL da Imagem</mat-label>
-          <input matInput formControlName="imageUrl" required />
-          <mat-hint>Cole a URL completa da imagem</mat-hint>
-          <mat-error *ngIf="form.get('imageUrl')?.hasError('required')">
-            URL da imagem é obrigatória
-          </mat-error>
-        </mat-form-field>
-
-        <div class="image-preview" *ngIf="form.get('imageUrl')?.value">
-          <img [src]="form.get('imageUrl')?.value" alt="Preview" />
+        <div class="image-upload-section">
+          <h3>Imagem</h3>
+          <input
+            type="file"
+            accept="image/*"
+            (change)="onImageSelected($event)"
+            #imageInput
+            style="display: none"
+          />
+          <div class="image-actions">
+            <button
+              mat-raised-button
+              type="button"
+              color="primary"
+              (click)="imageInput.click()"
+            >
+              <mat-icon>upload</mat-icon>
+              {{ imagePreview ? 'Alterar Imagem' : 'Carregar Imagem' }}
+            </button>
+            <button
+              mat-raised-button
+              type="button"
+              color="warn"
+              (click)="removeImage()"
+              *ngIf="imagePreview"
+            >
+              <mat-icon>delete</mat-icon>
+              Remover
+            </button>
+          </div>
+          <div class="image-preview" *ngIf="imagePreview">
+            <img [src]="imagePreview" alt="Preview" />
+          </div>
         </div>
 
         <div class="form-row">

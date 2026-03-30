@@ -1,0 +1,82 @@
+<mat-card>
+  <mat-card-header>
+    <mat-card-title>Gestão de Banners</mat-card-title>
+  </mat-card-header>
+  <mat-card-content>
+    <div class="actions-bar">
+      <button mat-raised-button color="primary" (click)="createNew()">
+        <mat-icon>add</mat-icon>
+        Novo Banner
+      </button>
+    </div>
+
+    <div class="banners-container" cdkDropList (cdkDropListDropped)="drop($event)">
+      <div
+        *ngFor="let banner of banners"
+        class="banner-item"
+        cdkDrag
+      >
+        <div class="drag-handle" cdkDragHandle>
+          <mat-icon>drag_indicator</mat-icon>
+        </div>
+        
+        <div class="banner-image">
+          <img [src]="getImageUrl(banner)" [alt]="banner.title" *ngIf="getImageUrl(banner)" />
+          <div class="no-image" *ngIf="!getImageUrl(banner)">
+            <mat-icon>image</mat-icon>
+          </div>
+        </div>
+
+        <div class="banner-info">
+          <h3>{{ banner.title }}</h3>
+          <p *ngIf="banner.description">{{ banner.description }}</p>
+          <div class="banner-meta">
+            <span *ngIf="banner.linkUrl">Link: {{ banner.linkUrl }}</span>
+            <span>Ordem: {{ banner.order }}</span>
+          </div>
+        </div>
+
+        <div class="banner-actions">
+          <button
+            mat-icon-button
+            [color]="banner.isActive ? 'primary' : 'warn'"
+            (click)="toggleActive(banner)"
+            [matTooltip]="banner.isActive ? 'Desativar' : 'Ativar'"
+          >
+            <mat-icon>{{ banner.isActive ? 'visibility' : 'visibility_off' }}</mat-icon>
+          </button>
+          
+          <button
+            mat-icon-button
+            color="primary"
+            (click)="edit(banner.id)"
+            matTooltip="Editar"
+          >
+            <mat-icon>edit</mat-icon>
+          </button>
+          
+          <button
+            mat-icon-button
+            color="warn"
+            (click)="delete(banner.id)"
+            matTooltip="Excluir"
+          >
+            <mat-icon>delete</mat-icon>
+          </button>
+        </div>
+      </div>
+    </div>
+
+    <div *ngIf="banners.length === 0 && !loading" class="empty-state">
+      <mat-icon>image</mat-icon>
+      <p>Nenhum banner cadastrado</p>
+      <button mat-raised-button color="primary" (click)="createNew()">
+        Criar primeiro banner
+      </button>
+    </div>
+
+    <div *ngIf="loading" class="loading-state">
+      <p>Carregando...</p>
+    </div>
+  </mat-card-content>
+</mat-card>

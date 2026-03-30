@@ -21,7 +21,10 @@
         </div>
         
         <div class="screen-image">
-          <img [src]="screen.imageUrl" [alt]="screen.title" />
+          <img [src]="getImageUrl(screen)" [alt]="screen.title" *ngIf="getImageUrl(screen)" />
+          <div class="no-image" *ngIf="!getImageUrl(screen)">
+            <mat-icon>image</mat-icon>
+          </div>
         </div>
 
         <div class="screen-info">

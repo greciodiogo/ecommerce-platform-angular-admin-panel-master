@@ -5,6 +5,7 @@ api/address-api.service.ts
 api/api.ts
 api/attribute-types-api.service.ts
 api/auth-api.service.ts
+api/banners-api.service.ts
 api/carts-api.service.ts
 api/categories-api.service.ts
 api/codes-api.service.ts
@@ -25,6 +26,7 @@ api/returns-api.service.ts
 api/settings-api.service.ts
 api/shopkeepersales-api.service.ts
 api/shops-api.service.ts
+api/splash-screens-api.service.ts
 api/users-api.service.ts
 api/wishlists-api.service.ts
 configuration.ts
@@ -37,6 +39,7 @@ model/attribute-dto.ts
 model/attribute-type-dto.ts
 model/attribute-type.ts
 model/attribute.ts
+model/banner.ts
 model/cart-dto.ts
 model/cart-item-dto.ts
 model/cart-item.ts
@@ -108,6 +111,7 @@ model/shopkeeper-sale-product-update-dto.ts
 model/shopkeeper-sale-product.ts
 model/shopkeeper-sale-update-dto.ts
 model/shopkeeper-sale.ts
+model/splash-screen.ts
 model/update-address-dto.ts
 model/user-update-dto.ts
 model/user.ts

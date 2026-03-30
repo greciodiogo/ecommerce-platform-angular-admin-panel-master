@@ -42,11 +42,11 @@ export class SplashScreensService {
     return this.http.get<SplashScreen>(`${this.apiUrl}/${id}`);
   }
 
-  create(data: SplashScreenCreateDto): Observable<SplashScreen> {
+  create(data: FormData): Observable<SplashScreen> {
     return this.http.post<SplashScreen>(this.apiUrl, data);
   }
 
-  update(id: number, data: SplashScreenUpdateDto): Observable<SplashScreen> {
+  update(id: number, data: FormData): Observable<SplashScreen> {
     return this.http.patch<SplashScreen>(`${this.apiUrl}/${id}`, data);
   }
 
@@ -54,7 +54,17 @@ export class SplashScreensService {
     return this.http.delete<void>(`${this.apiUrl}/${id}`);
   }
 
+  deleteImage(id: number): Observable<SplashScreen> {
+    return this.http.delete<SplashScreen>(`${this.apiUrl}/${id}/image`);
+  }
+
   reorder(ids: number[]): Observable<SplashScreen[]> {
     return this.http.put<SplashScreen[]>(`${this.apiUrl}/reorder`, { ids });
+  }
+
+  getImageUrl(path?: string): string {
+    if (!path) return '';
+    const supabaseUrl = 'https://opfiripapiqozvbopcdc.supabase.co/storage/v1/object/public/uploads/';
+    return `${supabaseUrl}${path}`;
   }
 }

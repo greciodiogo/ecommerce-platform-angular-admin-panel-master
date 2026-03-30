@@ -5,6 +5,7 @@ import { HttpClient } from '@angular/common/http';
 import { AddressApiService } from './api/address-api.service';
 import { AttributeTypesApiService } from './api/attribute-types-api.service';
 import { AuthApiService } from './api/auth-api.service';
+import { BannersApiService } from './api/banners-api.service';
 import { CartsApiService } from './api/carts-api.service';
 import { CategoriesApiService } from './api/categories-api.service';
 import { CodesApiService } from './api/codes-api.service';
@@ -25,6 +26,7 @@ import { ReturnsApiService } from './api/returns-api.service';
 import { SettingsApiService } from './api/settings-api.service';
 import { ShopkeepersalesApiService } from './api/shopkeepersales-api.service';
 import { ShopsApiService } from './api/shops-api.service';
+import { SplashScreensApiService } from './api/splash-screens-api.service';
 import { UsersApiService } from './api/users-api.service';
 import { WishlistsApiService } from './api/wishlists-api.service';
 

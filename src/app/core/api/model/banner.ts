@@ -11,14 +11,16 @@
  */
 
 
-export interface PromotionUpdateDto { 
-    name?: string;
-    slug?: string;
-    description?: string;
-    startDate?: string;
-    endDate?: string;
-    discount?: number;
-    isActive?: boolean;
-    productIds?: Array<number>;
+export interface Banner { 
+    id: number;
+    title: string;
+    description: string;
+    imageUrlPt: string;
+    imageUrlEn: string;
+    linkUrl: string;
+    order: number;
+    isActive: boolean;
+    createdAt: string;
+    updatedAt: string;
 }
 

@@ -36,6 +36,10 @@ export class SplashScreensListComponent implements OnInit {
     });
   }
 
+  getImageUrl(splashScreen: SplashScreen): string {
+    return splashScreen.imageUrl ? this.splashScreensService.getImageUrl(splashScreen.imageUrl) : '';
+  }
+
   drop(event: CdkDragDrop<SplashScreen[]>): void {
     moveItemInArray(this.splashScreens, event.previousIndex, event.currentIndex);
     const ids = this.splashScreens.map(s => s.id);
@@ -51,9 +55,10 @@ export class SplashScreensListComponent implements OnInit {
   }
 
   toggleActive(splashScreen: SplashScreen): void {
-    this.splashScreensService.update(splashScreen.id, {
-      isActive: !splashScreen.isActive,
-    }).subscribe({
+    const formData = new FormData();
+    formData.append('isActive', (!splashScreen.isActive).toString());
+    
+    this.splashScreensService.update(splashScreen.id, formData).subscribe({
       next: () => {
         this.loadSplashScreens();
       },

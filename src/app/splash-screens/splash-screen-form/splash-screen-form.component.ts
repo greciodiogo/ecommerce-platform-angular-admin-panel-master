@@ -13,6 +13,9 @@ export class SplashScreenFormComponent implements OnInit {
   isEditMode = false;
   splashScreenId?: number;
   loading = false;
+  imageFile?: File;
+  imagePreview?: string;
+  currentSplashScreen?: SplashScreen;
 
   constructor(
     private fb: FormBuilder,
@@ -23,7 +26,6 @@ export class SplashScreenFormComponent implements OnInit {
     this.form = this.fb.group({
       title: ['', [Validators.required, Validators.maxLength(255)]],
       description: [''],
-      imageUrl: ['', [Validators.required, Validators.maxLength(500)]],
       order: [0, [Validators.required, Validators.min(0)]],
       duration: [3000, [Validators.required, Validators.min(1000)]],
       isActive: [true],
@@ -43,7 +45,11 @@ export class SplashScreenFormComponent implements OnInit {
     this.loading = true;
     this.splashScreensService.findOne(id).subscribe({
       next: (data) => {
+        this.currentSplashScreen = data;
         this.form.patchValue(data);
+        if (data.imageUrl) {
+          this.imagePreview = this.splashScreensService.getImageUrl(data.imageUrl);
+        }
         this.loading = false;
       },
       error: (error) => {
@@ -54,13 +60,62 @@ export class SplashScreenFormComponent implements OnInit {
     });
   }
 
+  onImageSelected(event: Event): void {
+    const input = event.target as HTMLInputElement;
+    if (input.files && input.files[0]) {
+      this.imageFile = input.files[0];
+      const reader = new FileReader();
+      reader.onload = (e) => {
+        this.imagePreview = e.target?.result as string;
+      };
+      reader.readAsDataURL(this.imageFile);
+    }
+  }
+
+  removeImage(): void {
+    if (this.isEditMode && this.currentSplashScreen?.imageUrl) {
+      if (confirm('Tem certeza que deseja remover a imagem?')) {
+        this.splashScreensService.deleteImage(this.splashScreenId!).subscribe({
+          next: (splashScreen) => {
+            this.currentSplashScreen = splashScreen;
+            this.imagePreview = undefined;
+            this.imageFile = undefined;
+          },
+          error: (error) => {
+            console.error('Erro ao remover imagem:', error);
+            alert('Erro ao remover imagem');
+          },
+        });
+      }
+    } else {
+      this.imagePreview = undefined;
+      this.imageFile = undefined;
+    }
+  }
+
   onSubmit(): void {
     if (this.form.invalid) {
       return;
     }
 
+    if (!this.isEditMode && !this.imageFile) {
+      alert('Por favor, adicione uma imagem');
+      return;
+    }
+
     this.loading = true;
-    const formData = this.form.value;
+    const formData = new FormData();
+
+    Object.keys(this.form.value).forEach(key => {
+      const value = this.form.value[key];
+      if (value !== null && value !== undefined) {
+        formData.append(key, value);
+      }
+    });
+
+    if (this.imageFile) {
+      formData.append('image', this.imageFile);
+    }
 
     const request = this.isEditMode
       ? this.splashScreensService.update(this.splashScreenId!, formData)
@@ -73,6 +128,7 @@ export class SplashScreenFormComponent implements OnInit {
       error: (error) => {
         console.error('Erro ao salvar:', error);
         this.loading = false;
+        alert('Erro ao salvar splash screen. Verifique os dados e tente novamente.');
       },
     });
   }
