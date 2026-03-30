@@ -58,6 +58,11 @@ mat-row.item-row:active {
     margin-right: 8px;
   }
 }
+.mat-column-shop {
+  flex-basis: 120px;
+  flex-grow: 0.5;
+  flex-shrink: 0;
+}
 .mat-column-price {
   flex-basis: 80px;
   flex-grow: 0.2;

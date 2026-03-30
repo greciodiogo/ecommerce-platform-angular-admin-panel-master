@@ -26,6 +26,13 @@
     >
     <mat-footer-cell *matFooterCellDef></mat-footer-cell>
   </ng-container>
+  <ng-container matColumnDef="shop">
+    <mat-header-cell *matHeaderCellDef mat-sort-header="shop"
+      >Shop</mat-header-cell
+    >
+    <mat-cell *matCellDef="let item">{{ item.product?.shop?.shopName || '-' }}</mat-cell>
+    <mat-footer-cell *matFooterCellDef></mat-footer-cell>
+  </ng-container>
   <ng-container matColumnDef="price">
     <mat-header-cell
       *matHeaderCellDef
@@ -67,13 +74,13 @@
   </ng-container>
 
   <mat-header-row
-    *matHeaderRowDef="['id', 'name', 'price', 'quantity', 'total']"
+    *matHeaderRowDef="['id', 'name', 'shop', 'price', 'quantity', 'total']"
   ></mat-header-row>
   <mat-row
-    *matRowDef="let item; columns: ['id', 'name', 'price', 'quantity', 'total']"
+    *matRowDef="let item; columns: ['id', 'name', 'shop', 'price', 'quantity', 'total']"
     class="item-row"
   ></mat-row>
   <mat-footer-row
-    *matFooterRowDef="['id', 'name', 'price', 'quantity', 'total']"
+    *matFooterRowDef="['id', 'name', 'shop', 'price', 'quantity', 'total']"
   ></mat-footer-row>
 </mat-table>
