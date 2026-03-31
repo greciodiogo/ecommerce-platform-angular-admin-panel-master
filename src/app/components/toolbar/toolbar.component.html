@@ -14,28 +14,74 @@
   </button>
   <span>{{ title.getTitle() }}</span>
   <span class="spacer"></span>
-  <button class="demo-section" mat-button [matMenuTriggerFor]="afterMenu">
-    <!-- [matBadge]="notifications.length > 0 ? notifications.length : null" -->
+  
+  <button class="demo-section" mat-icon-button [matMenuTriggerFor]="notificationMenu">
     <mat-icon
-      [matBadge]="totalNotifications"
+      [matBadge]="unreadCount > 0 ? unreadCount : null"
       matBadgePosition="after"
       matBadgeColor="accent"
-      >notifications</mat-icon
+      matBadgeSize="small"
     >
+      notifications
+    </mat-icon>
   </button>
-  <mat-menu #afterMenu="matMenu">
-  <ng-container *ngIf="totalNotifications > 0; else noNotifications">
-    <button mat-menu-item class="buttonMatMenu"  *ngFor="let n of notifications">
-      {{ n.title }}
-    </button>
-  </ng-container>
+  
+  <mat-menu #notificationMenu="matMenu" class="notification-menu">
+    <div class="notification-header" (click)="$event.stopPropagation()">
+      <span class="notification-title">Notificações</span>
+      <button 
+        mat-button 
+        color="primary" 
+        *ngIf="unreadCount > 0"
+        (click)="markAllAsRead()"
+        class="mark-all-btn"
+      >
+        Marcar todas como lidas
+      </button>
+    </div>
+    
+    <mat-divider></mat-divider>
+    
+    <div class="notification-list">
+      <ng-container *ngIf="notifications.length > 0; else noNotifications">
+        <button 
+          mat-menu-item 
+          class="notification-item"
+          *ngFor="let n of notifications"
+          [class.unread]="!n.isRead"
+          (click)="onNotificationClick(n)"
+        >
+          <div class="notification-content">
+            <div class="notification-title-text">
+              <mat-icon class="notification-icon">{{ n.type === 'order' ? 'shopping_cart' : 'info' }}</mat-icon>
+              {{ n.title }}
+            </div>
+            <div class="notification-message">{{ n.message }}</div>
+            <div class="notification-time">{{ n.createdAt | date: 'short' }}</div>
+          </div>
+        </button>
+      </ng-container>
 
-  <ng-template #noNotifications>
-    <button mat-menu-item>
-      Nenhuma notificação no momento
+      <ng-template #noNotifications>
+        <div class="no-notifications">
+          <mat-icon>notifications_none</mat-icon>
+          <p>Nenhuma notificação no momento</p>
+        </div>
+      </ng-template>
+    </div>
+    
+    <mat-divider></mat-divider>
+    
+    <button 
+      mat-menu-item 
+      class="view-all-btn"
+      (click)="viewAllNotifications()"
+    >
+      <mat-icon>list</mat-icon>
+      Ver todas as notificações
     </button>
-  </ng-template>
-</mat-menu>
+  </mat-menu>
+  
   <span>{{
     (role$ | async) === 'sales' ? 'shopkeeper' : (role$ | async)
   }}</span>

@@ -17,7 +17,22 @@ export interface Notification {
     title: string;
     message: string;
     isRead: boolean;
+    type: Notification.TypeEnum;
+    relatedEntityId?: number;
+    actionUrl?: string;
     createdAt: string;
+    updatedAt: string;
     user: User;
 }
+export namespace Notification {
+    export type TypeEnum = 'order' | 'product' | 'system' | 'promotion' | 'general';
+    export const TypeEnum = {
+        Order: 'order' as TypeEnum,
+        Product: 'product' as TypeEnum,
+        System: 'system' as TypeEnum,
+        Promotion: 'promotion' as TypeEnum,
+        General: 'general' as TypeEnum
+    };
+}
+
 
