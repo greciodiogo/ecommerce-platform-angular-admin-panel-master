@@ -17,7 +17,7 @@ import { FormControl } from '@angular/forms';
   styleUrls: ['./main.component.css'],
 })
 export class MainComponent implements OnInit, OnDestroy {
-    periodControl = new FormControl<'weekly' | 'monthly' | 'yearly'>('monthly');
+    periodControl = new FormControl<'weekly' | 'monthly' | 'yearly'>('weekly');
 
     // Dados do Dashboard
     dashboard$ = this.store.select(selectDashboardItems);
