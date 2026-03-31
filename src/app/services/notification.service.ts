@@ -19,17 +19,24 @@ export class NotificationsService {
 
     this.userId = userId;
     
+    console.log('🔌 Connecting to notifications with userId:', userId);
+    
     this.socket = io(environment.apiUrl, {
       query: { userId: userId.toString() },
-      transports: ['websocket', 'polling'],
+      transports: ['polling', 'websocket'], // Polling primeiro para Railway/Vercel
+      reconnection: true,
+      reconnectionDelay: 1000,
+      reconnectionAttempts: 5,
+      timeout: 10000,
     });
 
     this.socket.on('connect', () => {
-      console.log('WebSocket connected for notifications');
+      console.log('✅ WebSocket connected for notifications');
+      console.log('📡 Transport:', this.socket?.io.engine.transport.name);
     });
 
     this.socket.on('notification', (notification: any) => {
-      console.log('New notification received:', notification);
+      console.log('🔔 New notification received:', notification);
       this.notifications$.next([notification, ...this.notifications$.value]);
       this.unreadCount$.next(this.unreadCount$.value + 1);
       
@@ -37,12 +44,16 @@ export class NotificationsService {
       this.playNotificationSound();
     });
 
-    this.socket.on('disconnect', () => {
-      console.log('WebSocket disconnected');
+    this.socket.on('disconnect', (reason: string) => {
+      console.log('❌ WebSocket disconnected:', reason);
+    });
+
+    this.socket.on('connect_error', (error: any) => {
+      console.error('🚫 WebSocket connection error:', error.message);
     });
 
     this.socket.on('error', (error: any) => {
-      console.error('WebSocket error:', error);
+      console.error('⚠️ WebSocket error:', error);
     });
   }
 
