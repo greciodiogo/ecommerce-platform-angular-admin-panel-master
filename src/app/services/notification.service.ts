@@ -55,7 +55,9 @@ export class NotificationsService {
   }
 
   loadInitialNotifications(list: any[]) {
-    this.notifications$.next(list);
+    // Filtrar apenas notificações não lidas
+    const unreadNotifications = list.filter(n => !n.isRead);
+    this.notifications$.next(unreadNotifications);
     this.updateUnreadCount();
   }
 
@@ -63,15 +65,16 @@ export class NotificationsService {
     const notifications = this.notifications$.value;
     const index = notifications.findIndex(n => n.id === notificationId);
     if (index !== -1 && !notifications[index].isRead) {
-      notifications[index].isRead = true;
+      // Remover da lista em vez de marcar como lida
+      notifications.splice(index, 1);
       this.notifications$.next([...notifications]);
       this.updateUnreadCount();
     }
   }
 
   markAllAsRead() {
-    const notifications = this.notifications$.value.map(n => ({ ...n, isRead: true }));
-    this.notifications$.next(notifications);
+    // Limpar todas as notificações da lista
+    this.notifications$.next([]);
     this.unreadCount$.next(0);
   }
 
@@ -88,11 +91,38 @@ export class NotificationsService {
 
   private playNotificationSound() {
     try {
+      // Tentar tocar arquivo MP3
       const audio = new Audio('assets/notification.mp3');
       audio.volume = 0.5;
-      audio.play().catch(err => console.log('Could not play notification sound:', err));
+      audio.play().catch(() => {
+        // Se falhar, usar Web Audio API para gerar um beep
+        this.playBeep();
+      });
     } catch (error) {
-      console.log('Notification sound not available');
+      // Fallback para beep gerado
+      this.playBeep();
+    }
+  }
+
+  private playBeep() {
+    try {
+      const audioContext = new (window.AudioContext || (window as any).webkitAudioContext)();
+      const oscillator = audioContext.createOscillator();
+      const gainNode = audioContext.createGain();
+
+      oscillator.connect(gainNode);
+      gainNode.connect(audioContext.destination);
+
+      oscillator.frequency.value = 800; // Frequência em Hz
+      oscillator.type = 'sine';
+
+      gainNode.gain.setValueAtTime(0.3, audioContext.currentTime);
+      gainNode.gain.exponentialRampToValueAtTime(0.01, audioContext.currentTime + 0.3);
+
+      oscillator.start(audioContext.currentTime);
+      oscillator.stop(audioContext.currentTime + 0.3);
+    } catch (error) {
+      console.log('Could not play notification sound:', error);
     }
   }
 } 

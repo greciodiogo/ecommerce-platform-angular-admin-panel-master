@@ -90,6 +90,14 @@ const routes: Routes = [
         loadChildren: () =>
           import('./banners/banners.module').then((m) => m.BannersModule),
       },
+      {
+        title: 'Notificações',
+        path: 'notifications',
+        canActivate: [AuthRoleGuard],
+        data: { roles: [RoleEnum.Admin, RoleEnum.Manager, RoleEnum.Sales] },
+        loadChildren: () =>
+          import('./notifications/notifications.module').then((m) => m.NotificationsModule),
+      },
     ],
   },
   {
