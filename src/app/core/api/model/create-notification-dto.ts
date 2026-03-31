@@ -15,5 +15,19 @@ export interface CreateNotificationDto {
     title: string;
     message: string;
     userId: number;
+    type?: CreateNotificationDto.TypeEnum;
+    relatedEntityId?: number;
+    actionUrl?: string;
 }
+export namespace CreateNotificationDto {
+    export type TypeEnum = 'order' | 'product' | 'system' | 'promotion' | 'general';
+    export const TypeEnum = {
+        Order: 'order' as TypeEnum,
+        Product: 'product' as TypeEnum,
+        System: 'system' as TypeEnum,
+        Promotion: 'promotion' as TypeEnum,
+        General: 'general' as TypeEnum
+    };
+}
+
 

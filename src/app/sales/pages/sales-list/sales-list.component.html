@@ -53,8 +53,8 @@
         <mat-cell *matCellDef="let sale">
           {{
             sale.itemsTotal +
-              sale.delivery.method.price +
-              sale.payment.method.price | formatCurrency
+              (sale.delivery.price || 0) +
+              (sale.payment.method.price || 0) | formatCurrency
           }}
         </mat-cell>
       </ng-container>

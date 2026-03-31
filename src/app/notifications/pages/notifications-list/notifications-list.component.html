@@ -1,0 +1,95 @@
+<div class="notifications-container">
+  <mat-card>
+    <mat-card-header>
+      <mat-card-title>
+        <div class="header-content">
+          <h2>Notificações</h2>
+          <button 
+            mat-raised-button 
+            color="primary" 
+            (click)="markAllAsRead()"
+            [disabled]="filteredNotifications.length === 0 || filter === 'read'"
+          >
+            <mat-icon>done_all</mat-icon>
+            Marcar todas como lidas
+          </button>
+        </div>
+      </mat-card-title>
+    </mat-card-header>
+
+    <mat-card-content>
+      <!-- Filtros -->
+      <mat-button-toggle-group 
+        [value]="filter" 
+        (change)="onFilterChange($event.value)"
+        class="filter-group"
+      >
+        <mat-button-toggle value="unread">
+          Não lidas ({{ unreadCount }})
+        </mat-button-toggle>
+        <mat-button-toggle value="all">
+          Todas ({{ totalCount }})
+        </mat-button-toggle>
+        <mat-button-toggle value="read">
+          Lidas ({{ readCount }})
+        </mat-button-toggle>
+      </mat-button-toggle-group>
+
+      <!-- Loading -->
+      <div *ngIf="loading" class="loading-container">
+        <mat-spinner diameter="50"></mat-spinner>
+        <p>Carregando notificações...</p>
+      </div>
+
+      <!-- Lista de notificações -->
+      <div *ngIf="!loading && filteredNotifications.length > 0" class="notifications-list">
+        <mat-card 
+          *ngFor="let notification of filteredNotifications"
+          class="notification-card"
+          [class.unread]="!notification.isRead"
+          (click)="onNotificationClick(notification)"
+        >
+          <div class="notification-content">
+            <div class="notification-icon" [ngClass]="getNotificationColor(notification.type)">
+              <mat-icon>{{ getNotificationIcon(notification.type) }}</mat-icon>
+            </div>
+            
+            <div class="notification-body">
+              <div class="notification-header">
+                <h3>{{ notification.title }}</h3>
+                <span class="notification-time">{{ notification.createdAt | date: 'short' }}</span>
+              </div>
+              <p class="notification-message">{{ notification.message }}</p>
+              <div class="notification-meta">
+                <mat-chip [class]="'chip-' + notification.type">
+                  {{ notification.type }}
+                </mat-chip>
+                <span *ngIf="!notification.isRead" class="unread-badge">Não lida</span>
+              </div>
+            </div>
+
+            <div class="notification-actions">
+              <button 
+                mat-icon-button 
+                color="warn"
+                (click)="deleteNotification(notification, $event)"
+                matTooltip="Excluir notificação"
+              >
+                <mat-icon>delete</mat-icon>
+              </button>
+            </div>
+          </div>
+        </mat-card>
+      </div>
+
+      <!-- Estado vazio -->
+      <div *ngIf="!loading && filteredNotifications.length === 0" class="empty-state">
+        <mat-icon>notifications_none</mat-icon>
+        <h3>Nenhuma notificação</h3>
+        <p *ngIf="filter === 'unread'">Você não tem notificações não lidas</p>
+        <p *ngIf="filter === 'read'">Você não tem notificações lidas</p>
+        <p *ngIf="filter === 'all'">Você ainda não recebeu nenhuma notificação</p>
+      </div>
+    </mat-card-content>
+  </mat-card>
+</div>

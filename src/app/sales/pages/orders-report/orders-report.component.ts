@@ -72,7 +72,7 @@ export class OrdersReportComponent implements OnInit {
         order_number: order.order_number,
         fullName: order.fullName,
         total_amount: (order.items?.reduce((sum, item) => sum + (item.price * item.quantity), 0) || 0)
-          + (order.delivery?.method?.price || 0)
+          + (order.delivery?.price || 0)
           + (order.payment?.method?.price || 0),
         status: order.status,
         payment_method: order.payment?.method?.name || 'N/A',
