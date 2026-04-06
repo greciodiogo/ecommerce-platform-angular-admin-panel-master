@@ -20,19 +20,34 @@ export class NotificationsService {
     this.userId = userId;
     
     console.log('🔌 Connecting to notifications with userId:', userId);
+    console.log('🌐 API URL:', environment.apiUrl);
     
+    // Configuração otimizada para Railway + Vercel
     this.socket = io(environment.apiUrl, {
+      path: '/socket.io/', // Path explícito
       query: { userId: userId.toString() },
-      transports: ['polling', 'websocket'], // Polling primeiro para Railway/Vercel
+      transports: ['websocket', 'polling'], // WebSocket primeiro, polling como fallback
       reconnection: true,
       reconnectionDelay: 1000,
-      reconnectionAttempts: 5,
-      timeout: 10000,
+      reconnectionDelayMax: 5000,
+      reconnectionAttempts: 10,
+      timeout: 20000,
+      autoConnect: true,
+      forceNew: false,
+      // Importante para ambientes serverless
+      upgrade: true,
+      rememberUpgrade: true,
     });
 
     this.socket.on('connect', () => {
       console.log('✅ WebSocket connected for notifications');
       console.log('📡 Transport:', this.socket?.io.engine.transport.name);
+      console.log('🆔 Socket ID:', this.socket?.id);
+      
+      // Upgrade para WebSocket se começou com polling
+      this.socket?.io.engine.on('upgrade', (transport: any) => {
+        console.log('⬆️ Upgraded to:', transport.name);
+      });
     });
 
     this.socket.on('notification', (notification: any) => {
