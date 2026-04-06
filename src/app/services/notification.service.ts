@@ -23,10 +23,11 @@ export class NotificationsService {
     console.log('🌐 API URL:', environment.apiUrl);
     
     // Configuração otimizada para Railway + Vercel
+    // Usar apenas polling porque Railway pode não suportar WebSocket upgrade
     this.socket = io(environment.apiUrl, {
       path: '/socket.io/', // Path explícito
       query: { userId: userId.toString() },
-      transports: ['websocket', 'polling'], // WebSocket primeiro, polling como fallback
+      transports: ['polling'], // Apenas polling para Railway
       reconnection: true,
       reconnectionDelay: 1000,
       reconnectionDelayMax: 5000,
@@ -34,20 +35,13 @@ export class NotificationsService {
       timeout: 20000,
       autoConnect: true,
       forceNew: false,
-      // Importante para ambientes serverless
-      upgrade: true,
-      rememberUpgrade: true,
+      upgrade: false, // Desabilitar upgrade para WebSocket
     });
 
     this.socket.on('connect', () => {
-      console.log('✅ WebSocket connected for notifications');
+      console.log('✅ Socket.IO connected successfully!');
       console.log('📡 Transport:', this.socket?.io.engine.transport.name);
       console.log('🆔 Socket ID:', this.socket?.id);
-      
-      // Upgrade para WebSocket se começou com polling
-      this.socket?.io.engine.on('upgrade', (transport: any) => {
-        console.log('⬆️ Upgraded to:', transport.name);
-      });
     });
 
     this.socket.on('notification', (notification: any) => {
@@ -60,15 +54,16 @@ export class NotificationsService {
     });
 
     this.socket.on('disconnect', (reason: string) => {
-      console.log('❌ WebSocket disconnected:', reason);
+      console.log('❌ Socket.IO disconnected:', reason);
     });
 
     this.socket.on('connect_error', (error: any) => {
-      console.error('🚫 WebSocket connection error:', error.message);
+      console.error('🚫 Socket.IO connection error:', error.message);
+      console.error('💡 Tip: Check if backend is running and CORS is configured');
     });
 
     this.socket.on('error', (error: any) => {
-      console.error('⚠️ WebSocket error:', error);
+      console.error('⚠️ Socket.IO error:', error);
     });
   }
 
