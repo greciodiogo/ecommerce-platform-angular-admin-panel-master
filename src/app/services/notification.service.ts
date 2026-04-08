@@ -163,7 +163,7 @@ export class NotificationsService {
     try {
       // Tentar tocar arquivo MP3
       const audio = new Audio('assets/notification.mp3');
-      audio.volume = 0.5;
+      audio.volume = 1.0; // Volume máximo (0.0 a 1.0)
       audio.play().catch(() => {
         // Se falhar, usar Web Audio API para gerar um beep
         this.playBeep();
@@ -186,11 +186,12 @@ export class NotificationsService {
       oscillator.frequency.value = 800; // Frequência em Hz
       oscillator.type = 'sine';
 
-      gainNode.gain.setValueAtTime(0.3, audioContext.currentTime);
-      gainNode.gain.exponentialRampToValueAtTime(0.01, audioContext.currentTime + 0.3);
+      // Volume máximo com fade out suave
+      gainNode.gain.setValueAtTime(1.0, audioContext.currentTime); // Volume máximo
+      gainNode.gain.exponentialRampToValueAtTime(0.01, audioContext.currentTime + 0.5);
 
       oscillator.start(audioContext.currentTime);
-      oscillator.stop(audioContext.currentTime + 0.3);
+      oscillator.stop(audioContext.currentTime + 0.5);
     } catch (error) {
       console.log('Could not play notification sound:', error);
     }
