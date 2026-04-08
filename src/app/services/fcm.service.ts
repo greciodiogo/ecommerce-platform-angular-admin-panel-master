@@ -50,7 +50,7 @@ export class FcmService {
         
         // Get FCM token
         const token = await getToken(this.messaging, {
-          vapidKey: 'YOUR_VAPID_KEY' // Obtenha em Firebase Console > Project Settings > Cloud Messaging > Web Push certificates
+          vapidKey: 'BJRd7QoNf1znUGn0z5_U40sdi-I7gh-Sno__lnKuO0-LFVh_6LOAWwFxf122b10bAGIW1JPih1RHlfmrWs0TReA' // Obtenha em Firebase Console > Project Settings > Cloud Messaging > Web Push certificates
         });
         
         console.log('FCM Token:', token);
