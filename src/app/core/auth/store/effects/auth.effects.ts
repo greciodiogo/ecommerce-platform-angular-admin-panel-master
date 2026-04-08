@@ -6,6 +6,7 @@ import { exhaustMap, map, tap } from 'rxjs/operators';
 import { AuthApiService, UsersApiService } from '../../../api';
 import { catchError, of } from 'rxjs';
 import { Router } from '@angular/router';
+import { FcmService } from '../../../../services/fcm.service';
 
 @Injectable()
 export class AuthEffects {
@@ -14,6 +15,7 @@ export class AuthEffects {
     private authApi: AuthApiService,
     private usersApi: UsersApiService,
     private router: Router,
+    private fcmService: FcmService,
   ) {}
 
   loginCheck$ = createEffect(() => {
@@ -33,6 +35,9 @@ export class AuthEffects {
       return this.actions$.pipe(
         ofType(AuthActions.loginCheckSuccess),
         tap(() => {
+          // Register pending FCM token after successful login check
+          this.fcmService.registerPendingToken();
+          
           if (this.router.url === '/login') {
             this.router.navigate(['/']);
           }
@@ -61,7 +66,12 @@ export class AuthEffects {
     () => {
       return this.actions$.pipe(
         ofType(AuthActions.loginSuccess),
-        tap(() => this.router.navigate(['/'])),
+        tap(() => {
+          // Register pending FCM token after successful login
+          this.fcmService.registerPendingToken();
+          
+          this.router.navigate(['/']);
+        }),
       );
     },
     { dispatch: false },

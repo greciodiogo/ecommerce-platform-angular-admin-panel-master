@@ -77,20 +77,39 @@ export class FcmService {
         token,
         deviceName: deviceInfo.name,
         deviceType: deviceInfo.type
+      }, {
+        withCredentials: true // Importante: enviar cookies de sessão
       }).toPromise();
       
       console.log('Device token registered successfully');
-    } catch (error) {
-      console.error('Error registering device token:', error);
+    } catch (error: any) {
+      if (error.status === 401) {
+        console.warn('User not authenticated. Token will be registered after login.');
+        // Salvar token no localStorage para registrar depois do login
+        localStorage.setItem('fcm_token_pending', token);
+      } else {
+        console.error('Error registering device token:', error);
+      }
     }
   }
 
   async unregisterToken(token: string): Promise<void> {
     try {
-      await this.http.delete(`${environment.apiUrl}/notifications/device-tokens/${token}`).toPromise();
+      await this.http.delete(`${environment.apiUrl}/notifications/device-tokens/${token}`, {
+        withCredentials: true
+      }).toPromise();
       console.log('Device token unregistered successfully');
     } catch (error) {
       console.error('Error unregistering device token:', error);
+    }
+  }
+
+  async registerPendingToken(): Promise<void> {
+    const pendingToken = localStorage.getItem('fcm_token_pending');
+    if (pendingToken) {
+      console.log('Registering pending FCM token after login...');
+      await this.registerToken(pendingToken);
+      localStorage.removeItem('fcm_token_pending');
     }
   }
 
