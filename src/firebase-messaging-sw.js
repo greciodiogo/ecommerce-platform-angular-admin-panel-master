@@ -2,14 +2,14 @@
 importScripts('https://www.gstatic.com/firebasejs/10.7.1/firebase-app-compat.js');
 importScripts('https://www.gstatic.com/firebasejs/10.7.1/firebase-messaging-compat.js');
 
-// Firebase config - substitua com suas credenciais
 firebase.initializeApp({
-  apiKey: "AIzaSyBqKxqVxqVxqVxqVxqVxqVxqVxqVxqVxqV", // Substitua
+  apiKey: "AIzaSyCxCPAEE3TJGCEhNpGON0xows-qFx3STL4",
   authDomain: "encontrar-nestjs.firebaseapp.com",
   projectId: "encontrar-nestjs",
-  storageBucket: "encontrar-nestjs.appspot.com",
+  storageBucket: "encontrar-nestjs.firebasestorage.app",
   messagingSenderId: "845426261563",
-  appId: "1:845426261563:web:xxxxxxxxxxxxx" // Substitua
+  appId: "1:845426261563:web:d7c0fca5967501fba6a61e",
+  measurementId: "G-FGK6G36VVZ"
 });
 
 const messaging = firebase.messaging();
