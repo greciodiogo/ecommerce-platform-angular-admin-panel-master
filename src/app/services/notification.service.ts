@@ -49,6 +49,9 @@ export class NotificationsService {
       this.notifications$.next([notification, ...this.notifications$.value]);
       this.unreadCount$.next(this.unreadCount$.value + 1);
       
+      // Show browser notification
+      this.showBrowserNotification(notification);
+      
       // Play notification sound
       this.playNotificationSound();
     });
@@ -108,6 +111,52 @@ export class NotificationsService {
   private updateUnreadCount() {
     const unread = this.notifications$.value.filter(n => !n.isRead).length;
     this.unreadCount$.next(unread);
+  }
+
+  private showBrowserNotification(notification: any) {
+    // Check if browser supports notifications and permission is granted
+    if ('Notification' in window && Notification.permission === 'granted') {
+      const title = notification.title || 'Nova Notificação';
+      const options = {
+        body: notification.message || '',
+        icon: '/assets/logo.png',
+        badge: '/assets/logo.png',
+        tag: notification.id?.toString() || 'notification',
+        requireInteraction: false,
+        data: {
+          id: notification.id,
+          actionUrl: notification.actionUrl,
+          type: notification.type,
+        }
+      };
+
+      const browserNotification = new Notification(title, options);
+
+      // Handle notification click
+      browserNotification.onclick = (event) => {
+        event.preventDefault();
+        window.focus();
+        
+        // Navigate to action URL if provided
+        if (notification.actionUrl) {
+          window.location.href = notification.actionUrl;
+        }
+        
+        browserNotification.close();
+      };
+
+      // Auto close after 5 seconds
+      setTimeout(() => {
+        browserNotification.close();
+      }, 5000);
+    } else if ('Notification' in window && Notification.permission === 'default') {
+      // Request permission if not yet decided
+      Notification.requestPermission().then(permission => {
+        if (permission === 'granted') {
+          this.showBrowserNotification(notification);
+        }
+      });
+    }
   }
 
   private playNotificationSound() {
