@@ -80,6 +80,11 @@ export class ProductPhotosInputComponent implements OnChanges, OnInit {
         data: URL.createObjectURL(file),
       });
     }
+    
+    // Emitir dirty quando há fotos para salvar
+    if (this.photosToSave.value.files.length > 0) {
+      this.dirty.emit();
+    }
   }
 
   removePhoto(name: string) {
