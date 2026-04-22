@@ -52,7 +52,7 @@ export class ProductsEffects {
             )
             .map((photo) =>
               this.productsApi
-                .getProductPhoto(photo.productId, photo.id, true)
+                .getProductPhoto(photo.productId, photo.id, 'true')
                 .pipe(
                   map((data) => ({
                     id: photo.id,
