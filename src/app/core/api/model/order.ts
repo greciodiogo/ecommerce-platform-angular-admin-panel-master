@@ -30,6 +30,8 @@ export interface Order {
     contactEmail: string;
     contactPhone: string;
     message?: string;
+    source: string;
+    source_details?: object;
     return?: Return;
 }
 export namespace Order {

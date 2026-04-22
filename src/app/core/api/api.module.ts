@@ -28,6 +28,7 @@ import { ShopkeepersalesApiService } from './api/shopkeepersales-api.service';
 import { ShopsApiService } from './api/shops-api.service';
 import { SplashScreensApiService } from './api/splash-screens-api.service';
 import { UsersApiService } from './api/users-api.service';
+import { WebhooksApiService } from './api/webhooks-api.service';
 import { WishlistsApiService } from './api/wishlists-api.service';
 
 @NgModule({

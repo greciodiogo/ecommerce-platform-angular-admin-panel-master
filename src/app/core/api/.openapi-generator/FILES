@@ -28,6 +28,7 @@ api/shopkeepersales-api.service.ts
 api/shops-api.service.ts
 api/splash-screens-api.service.ts
 api/users-api.service.ts
+api/webhooks-api.service.ts
 api/wishlists-api.service.ts
 configuration.ts
 encoder.ts
@@ -70,6 +71,7 @@ model/order-delivery-dto.ts
 model/order-delivery.ts
 model/order-item-dto.ts
 model/order-item.ts
+model/order-notification-dto.ts
 model/order-payment-dto.ts
 model/order-payment.ts
 model/order-update-dto.ts

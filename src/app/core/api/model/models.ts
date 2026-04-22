@@ -35,6 +35,7 @@ export * from './order-delivery';
 export * from './order-delivery-dto';
 export * from './order-item';
 export * from './order-item-dto';
+export * from './order-notification-dto';
 export * from './order-payment';
 export * from './order-payment-dto';
 export * from './order-update-dto';

@@ -15,6 +15,9 @@ export interface NotifyUsersByRoleDto {
     title: string;
     message: string;
     role?: NotifyUsersByRoleDto.RoleEnum;
+    type?: NotifyUsersByRoleDto.TypeEnum;
+    relatedEntityId?: number;
+    actionUrl?: string;
 }
 export namespace NotifyUsersByRoleDto {
     export type RoleEnum = 'customer' | 'sales' | 'shoper' | 'manager' | 'admin' | 'disabled';
@@ -25,6 +28,14 @@ export namespace NotifyUsersByRoleDto {
         Manager: 'manager' as RoleEnum,
         Admin: 'admin' as RoleEnum,
         Disabled: 'disabled' as RoleEnum
+    };
+    export type TypeEnum = 'order' | 'product' | 'system' | 'promotion' | 'general';
+    export const TypeEnum = {
+        Order: 'order' as TypeEnum,
+        Product: 'product' as TypeEnum,
+        System: 'system' as TypeEnum,
+        Promotion: 'promotion' as TypeEnum,
+        General: 'general' as TypeEnum
     };
 }
 
