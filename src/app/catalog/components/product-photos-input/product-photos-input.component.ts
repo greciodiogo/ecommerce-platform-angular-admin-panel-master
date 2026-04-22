@@ -95,13 +95,24 @@ export class ProductPhotosInputComponent implements OnChanges, OnInit {
   }
 
   markPhotoToDelete(id: number) {
-    const photosToDelete = this.photosToDelete.value;
-    photosToDelete.push(id);
-    this.photosToDelete.setValue(photosToDelete);
-    this.dirty.emit();
+    // Deletar imediatamente ao invés de marcar para deletar depois
+    if (!this.product) {
+      return;
+    }
+    
+    // Confirmar antes de deletar
+    if (confirm('Tem certeza que deseja excluir esta foto? Esta ação não pode ser desfeita.')) {
+      this.store.dispatch(
+        ProductsActions.deleteProductPhoto({
+          productId: this.product.id,
+          photoId: id,
+        }),
+      );
+    }
   }
 
   unmarkPhoto(id: number) {
+    // Método não é mais necessário, mas mantido para compatibilidade
     this.photosToDelete.setValue(
       this.photosToDelete.value.filter((photoId) => photoId !== id),
     );
@@ -136,7 +147,7 @@ export class ProductPhotosInputComponent implements OnChanges, OnInit {
   public async save() {
     await this.savePhotosOrder();
     await this.savePhotos();
-    await this.deletePhotos();
+    // deletePhotos() removido - agora a exclusão é imediata
     await this.resetValues();
     this.updateSortedPhotos();
   }
@@ -155,19 +166,7 @@ export class ProductPhotosInputComponent implements OnChanges, OnInit {
     }
   }
 
-  private async deletePhotos() {
-    if (!this.product) {
-      return;
-    }
-    for (const photoId of this.photosToDelete.value) {
-      this.store.dispatch(
-        ProductsActions.deleteProductPhoto({
-          productId: this.product.id,
-          photoId,
-        }),
-      );
-    }
-  }
+  // Método deletePhotos() removido - não é mais necessário
 
   private async savePhotosOrder() {
     if (!this.product) {
