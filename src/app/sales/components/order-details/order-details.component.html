@@ -27,7 +27,7 @@
   <section *ngIf="order">
     <h2>Origem do Pedido</h2>
     <p>
-      <mat-chip [style.background-color]="getSourceColor(order.source)" [style.color]="order.source === 'ios' ? '#fff' : '#000'">
+      <mat-chip [style.background-color]="getSourceColor(order.source)" [style.color]="'#000'">
         <mat-icon [style.font-size]="'18px'" [style.width]="'18px'" [style.height]="'18px'">{{ getSourceIcon(order.source) }}</mat-icon>
         <span style="margin-left: 6px;">{{ getSourceLabel(order.source) }}</span>
       </mat-chip>

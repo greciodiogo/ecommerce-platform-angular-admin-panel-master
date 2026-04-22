@@ -81,7 +81,7 @@ export class OrderDetailsComponent {
     if (!source) return '#9E9E9E';
     switch(source.toLowerCase()) {
       case 'android': return '#3DDC84';
-      case 'ios': return '#000000';
+      case 'ios': return '#A2AAAD'; // Cinza claro para melhor contraste
       case 'web':
       case 'web-chrome':
       case 'web-firefox':
