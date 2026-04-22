@@ -8,6 +8,8 @@ export class NotificationsService {
   private socket: Socket | null = null;
   public notifications$ = new BehaviorSubject<any[]>([]);
   public unreadCount$ = new BehaviorSubject<number>(0);
+  public orderCreated$ = new BehaviorSubject<any>(null);
+  public orderUpdated$ = new BehaviorSubject<any>(null);
   private userId: number | null = null;
 
   constructor() {}
@@ -54,6 +56,18 @@ export class NotificationsService {
       
       // Play notification sound
       this.playNotificationSound();
+    });
+
+    this.socket.on('order:created', (order: any) => {
+      console.log('📦 New order created:', order);
+      // Emit event for order list to update
+      this.onOrderCreated(order);
+    });
+
+    this.socket.on('order:updated', (order: any) => {
+      console.log('📝 Order updated:', order);
+      // Emit event for order list to update
+      this.onOrderUpdated(order);
     });
 
     this.socket.on('disconnect', (reason: string) => {
@@ -196,4 +210,12 @@ export class NotificationsService {
       console.log('Could not play notification sound:', error);
     }
   }
-} 
+
+  private onOrderCreated(order: any) {
+    this.orderCreated$.next(order);
+  }
+
+  private onOrderUpdated(order: any) {
+    this.orderUpdated$.next(order);
+  }
+}

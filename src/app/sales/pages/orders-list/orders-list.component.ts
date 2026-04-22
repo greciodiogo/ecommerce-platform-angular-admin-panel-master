@@ -17,6 +17,7 @@ import { selectUserRole } from 'src/app/core/auth/store';
 import { FormBuilder, FormGroup } from '@angular/forms';
 import { Router } from '@angular/router';
 import { MatDialog, MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
+import { NotificationsService } from 'src/app/services/notification.service';
 
 @Component({
   selector: 'app-orders-list',
@@ -27,6 +28,8 @@ export class OrdersListComponent implements OnInit, AfterViewInit, OnDestroy {
   orders$ = this.store.select(selectOrdersListWithItems);
   dataSource = new MatTableDataSource<Order>();
   private subscription!: Subscription;
+  private orderCreatedSubscription!: Subscription;
+  private orderUpdatedSubscription!: Subscription;
   role$ = this.store.select(selectUserRole);
   filterForm: FormGroup;
 
@@ -45,7 +48,8 @@ export class OrdersListComponent implements OnInit, AfterViewInit, OnDestroy {
 
   constructor(private store: Store, private fb: FormBuilder,
     public router: Router,
-    private dialog: MatDialog) {
+    private dialog: MatDialog,
+    private notificationsService: NotificationsService) {
     this.filterForm = this.fb.group({
       orderNumber: [''],
       date: [''],
@@ -59,6 +63,30 @@ export class OrdersListComponent implements OnInit, AfterViewInit, OnDestroy {
 
     this.subscription = this.orders$.subscribe((orders) => {
       this.dataSource.data = orders;
+    });
+
+    // Subscribe to real-time order created events
+    this.orderCreatedSubscription = this.notificationsService.orderCreated$.subscribe((order) => {
+      if (order) {
+        console.log('📦 New order received in list:', order);
+        // Prepend the new order to the list
+        const currentData = this.dataSource.data;
+        this.dataSource.data = [order, ...currentData];
+      }
+    });
+
+    // Subscribe to real-time order updated events
+    this.orderUpdatedSubscription = this.notificationsService.orderUpdated$.subscribe((order) => {
+      if (order) {
+        console.log('📝 Order updated in list:', order);
+        // Find and update the order in the list
+        const currentData = this.dataSource.data;
+        const index = currentData.findIndex(o => o.id === order.id);
+        if (index !== -1) {
+          currentData[index] = order;
+          this.dataSource.data = [...currentData];
+        }
+      }
     });
   }
 
@@ -83,6 +111,8 @@ export class OrdersListComponent implements OnInit, AfterViewInit, OnDestroy {
 
   ngOnDestroy() {
     this.subscription?.unsubscribe();
+    this.orderCreatedSubscription?.unsubscribe();
+    this.orderUpdatedSubscription?.unsubscribe();
   }
 
   ngAfterViewInit() {
