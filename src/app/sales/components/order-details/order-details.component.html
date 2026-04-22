@@ -25,6 +25,27 @@
     </p>
   </section>
   <section *ngIf="order">
+    <h2>Origem do Pedido</h2>
+    <p>
+      <mat-chip [style.background-color]="getSourceColor(order.source)" [style.color]="order.source === 'ios' ? '#fff' : '#000'">
+        <mat-icon [style.font-size]="'18px'" [style.width]="'18px'" [style.height]="'18px'">{{ getSourceIcon(order.source) }}</mat-icon>
+        <span style="margin-left: 6px;">{{ getSourceLabel(order.source) }}</span>
+      </mat-chip>
+    </p>
+    <div *ngIf="order.source_details" style="margin-top: 12px; padding: 12px; background: #f5f5f5; border-radius: 4px;">
+      <p style="margin: 4px 0;"><strong>Plataforma:</strong> {{ order.source_details.platform_type || '-' }}</p>
+      <p style="margin: 4px 0;" *ngIf="order.source_details.app_version && order.source_details.app_version !== 'unknown'">
+        <strong>Versão do App:</strong> {{ order.source_details.app_version }}
+      </p>
+      <p style="margin: 4px 0;" *ngIf="order.source_details.user_agent">
+        <strong>User-Agent:</strong> <span style="font-size: 11px; word-break: break-all;">{{ order.source_details.user_agent }}</span>
+      </p>
+      <p style="margin: 4px 0;" *ngIf="order.source_details.ip_address">
+        <strong>IP:</strong> {{ order.source_details.ip_address }}
+      </p>
+    </div>
+  </section>
+  <section *ngIf="order">
     <h2>Message</h2>
     <p>
       {{ order.message || '-' }}
