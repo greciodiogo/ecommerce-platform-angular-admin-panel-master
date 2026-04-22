@@ -4,6 +4,14 @@ import { ReturnAddDialogComponent } from '../return-add-dialog/return-add-dialog
 import { MatDialog } from '@angular/material/dialog';
 import { Router } from '@angular/router';
 
+interface OrderSourceDetails {
+  user_agent?: string;
+  platform_type?: string;
+  app_version?: string;
+  ip_address?: string;
+  referer?: string;
+}
+
 @Component({
   selector: 'app-order-details',
   templateUrl: './order-details.component.html',
@@ -13,6 +21,10 @@ export class OrderDetailsComponent {
   @Input() order: Order | null = null;
 
   constructor(private dialog: MatDialog, private router: Router) {}
+
+  getSourceDetails(): OrderSourceDetails | null {
+    return this.order?.source_details as OrderSourceDetails || null;
+  }
 
   addReturn() {
     const dialogRef = this.dialog.open(ReturnAddDialogComponent, {
