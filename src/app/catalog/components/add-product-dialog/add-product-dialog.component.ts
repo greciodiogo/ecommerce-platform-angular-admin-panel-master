@@ -22,7 +22,7 @@ export class AddProductDialogComponent implements OnInit {
   products$: Observable<Product[]>;
   filteredProducts$: Observable<Product[]>;
   searchControl = new FormControl('');
-  selectedProductId: number | null = null;
+  selectedProductIds: number[] = [];
 
   constructor(
     public dialogRef: MatDialogRef<AddProductDialogComponent>,
@@ -64,8 +64,17 @@ export class AddProductDialogComponent implements OnInit {
     });
   }
 
-  selectProduct(productId: number) {
-    this.selectedProductId = productId;
+  toggleProduct(productId: number) {
+    const index = this.selectedProductIds.indexOf(productId);
+    if (index > -1) {
+      this.selectedProductIds.splice(index, 1);
+    } else {
+      this.selectedProductIds.push(productId);
+    }
+  }
+
+  isSelected(productId: number): boolean {
+    return this.selectedProductIds.includes(productId);
   }
 
   onCancel(): void {
@@ -73,8 +82,8 @@ export class AddProductDialogComponent implements OnInit {
   }
 
   onConfirm(): void {
-    if (this.selectedProductId) {
-      this.dialogRef.close(this.selectedProductId);
+    if (this.selectedProductIds.length > 0) {
+      this.dialogRef.close(this.selectedProductIds);
     }
   }
 }

@@ -80,14 +80,17 @@ export class PromotionProductsComponent implements OnInit {
       },
     });
 
-    dialogRef.afterClosed().subscribe((productId: number | undefined) => {
-      if (productId && this.promotion) {
-        this.store.dispatch(
-          PromotionsActions.addPromotionProduct({
-            promotionId: this.promotion.id,
-            productId,
-          })
-        );
+    dialogRef.afterClosed().subscribe((productIds: number[] | undefined) => {
+      if (productIds && productIds.length > 0 && this.promotion) {
+        // Add each product to the promotion
+        productIds.forEach(productId => {
+          this.store.dispatch(
+            PromotionsActions.addPromotionProduct({
+              promotionId: this.promotion!.id,
+              productId,
+            })
+          );
+        });
       }
     });
   }
