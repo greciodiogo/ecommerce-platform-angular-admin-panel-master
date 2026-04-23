@@ -72,9 +72,16 @@ export class EditOrderFormComponent implements OnInit {
         data: {
           status: this.editForm.getRawValue().status,
           delivery: {
-            ...this.order.delivery,
-            deliveryStatus: this.editForm.getRawValue().deliveryStatus,
             methodId: this.editForm.getRawValue().deliveryMethod,
+            deliveryStatus: this.editForm.getRawValue().deliveryStatus,
+            address: this.order.delivery.address,
+            city: this.order.delivery.city,
+            postalCode: this.order.delivery.postalCode,
+            country: this.order.delivery.country,
+            addressId: this.order.delivery.addressEntity?.id,
+            delivery_option: this.order.delivery.delivery_option as any,
+            scheduled_date: this.order.delivery.scheduled_date,
+            scheduled_time: this.order.delivery.scheduled_time,
           },
           payment: {
             paymentStatus: this.editForm.getRawValue().paymentStatus,
