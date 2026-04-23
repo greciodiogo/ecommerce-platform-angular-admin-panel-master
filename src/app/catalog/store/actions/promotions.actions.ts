@@ -63,4 +63,34 @@ export const updatePromotionSuccess = createAction(
 export const updatePromotionFailure = createAction(
   '[Promotions] Update Promotion Failure',
   props<{ error: string }>(),
+);
+
+export const addPromotionProduct = createAction(
+  '[Promotions] Add Product to Promotion',
+  props<{ promotionId: number; productId: number }>(),
+);
+
+export const addPromotionProductSuccess = createAction(
+  '[Promotions] Add Product to Promotion Success',
+  props<{ promotionId: number }>(),
+);
+
+export const addPromotionProductFailure = createAction(
+  '[Promotions] Add Product to Promotion Failure',
+  props<{ error: string; statusCode?: number }>(),
+);
+
+export const removePromotionProduct = createAction(
+  '[Promotions] Remove Product from Promotion',
+  props<{ promotionId: number; productId: number }>(),
+);
+
+export const removePromotionProductSuccess = createAction(
+  '[Promotions] Remove Product from Promotion Success',
+  props<{ promotionId: number }>(),
+);
+
+export const removePromotionProductFailure = createAction(
+  '[Promotions] Remove Product from Promotion Failure',
+  props<{ error: string }>(),
 ); 

@@ -2,45 +2,36 @@
   <mat-card-title-group>
     <mat-card-title>
       <a mat-button routerLink="/catalog/promotions">
-        <mat-icon>arrow_back</mat-icon></a
-      >Promotion #{{ (promotion$ | async)?.id }}
+        <mat-icon>arrow_back</mat-icon>
+      </a>
+      Promoção #{{ (promotion$ | async)?.id }}
     </mat-card-title>
   </mat-card-title-group>
+  
   <mat-tab-group dynamicHeight>
     <mat-tab>
       <ng-template mat-tab-label>
         <mat-icon class="mat-tab-icon">info</mat-icon>
-        General
+        Informações
       </ng-template>
       <mat-card-content>
-        <!-- <app-order-details
-          *ngIf="order$ | async"
-          [order]="(order$ | async) ?? null"
-        ></app-order-details -->
-      ></mat-card-content>
-    </mat-tab>
-    <mat-tab>
-      <ng-template mat-tab-label>
-        <mat-icon class="mat-tab-icon">shopping_cart</mat-icon>
-        Items
-      </ng-template>
-      <mat-card-content>
-        <!-- <app-order-items
-          *ngIf="(order$ | async)?.items"
-          [order]="(order$ | async) ?? null"
-        ></app-order-items> -->
+        <app-promotion-details
+          *ngIf="promotion$ | async"
+          [promotion]="(promotion$ | async) ?? null"
+        ></app-promotion-details>
       </mat-card-content>
     </mat-tab>
+    
     <mat-tab>
       <ng-template mat-tab-label>
-        <mat-icon class="mat-tab-icon">edit</mat-icon>
-        Edit
+        <mat-icon class="mat-tab-icon">inventory_2</mat-icon>
+        Produtos
       </ng-template>
       <mat-card-content>
-        <!-- <app-edit-order-form
-          *ngIf="order$ | async"
-          [order]="(order$ | async) ?? null"
-        ></app-edit-order-form> -->
+        <app-promotion-products
+          *ngIf="promotion$ | async"
+          [promotion]="(promotion$ | async) ?? null"
+        ></app-promotion-products>
       </mat-card-content>
     </mat-tab>
   </mat-tab-group>

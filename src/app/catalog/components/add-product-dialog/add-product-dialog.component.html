@@ -1,0 +1,47 @@
+<h2 mat-dialog-title>Adicionar Produto à Promoção</h2>
+
+<mat-dialog-content>
+  <mat-form-field appearance="outline" class="search-field">
+    <mat-label>Buscar produto</mat-label>
+    <input matInput [formControl]="searchControl" placeholder="Nome ou ID do produto">
+    <mat-icon matPrefix>search</mat-icon>
+  </mat-form-field>
+
+  <div class="products-list">
+    <mat-selection-list #productList [multiple]="false">
+      <mat-list-option 
+        *ngFor="let product of filteredProducts$ | async" 
+        [value]="product.id"
+        (click)="selectProduct(product.id)"
+        [selected]="selectedProductId === product.id">
+        <div matListItemTitle class="product-item">
+          <div class="product-info">
+            <strong>{{ product.name }}</strong>
+            <small>ID: {{ product.id }}</small>
+            <small *ngIf="product.brand">Marca: {{ product.brand }}</small>
+          </div>
+          <div class="product-price">
+            {{ product.price | currency:'AOA':'symbol':'1.0-0' }}
+          </div>
+        </div>
+      </mat-list-option>
+    </mat-selection-list>
+
+    <div *ngIf="(filteredProducts$ | async)?.length === 0" class="no-products">
+      <mat-icon>inventory_2</mat-icon>
+      <p>Nenhum produto encontrado</p>
+      <small>Todos os produtos já estão na promoção ou não há produtos disponíveis</small>
+    </div>
+  </div>
+</mat-dialog-content>
+
+<mat-dialog-actions align="end">
+  <button mat-button (click)="onCancel()">Cancelar</button>
+  <button 
+    mat-raised-button 
+    color="primary" 
+    (click)="onConfirm()"
+    [disabled]="!selectedProductId">
+    Adicionar
+  </button>
+</mat-dialog-actions>

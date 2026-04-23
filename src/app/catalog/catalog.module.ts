@@ -16,6 +16,7 @@ import {
   ProductRatingsEffects,
   ProductsEffects,
   ShopsEffects,
+  PromotionsEffects,
 } from './store/effects';
 import { ProductsListComponent } from './pages/products-list/products-list.component';
 import { FaqsListComponent } from './pages/faqs-list/faqs-list.component';
@@ -88,6 +89,9 @@ import { MatNativeDateModule } from '@angular/material/core';
 import { ProductsReportComponent } from './pages/products-report/products-report.component';
 import { ShopsCardsPageComponent } from './pages/shops/shops-cards-page.component';
 import { ShopDetailTabsComponent } from './pages/shop-detail/shop-detail-tabs.component';
+import { PromotionDetailsComponent } from './components/promotion-details/promotion-details.component';
+import { PromotionProductsComponent } from './components/promotion-products/promotion-products.component';
+import { AddProductDialogComponent } from './components/add-product-dialog/add-product-dialog.component';
 
 @NgModule({
   declarations: [
@@ -134,6 +138,9 @@ import { ShopDetailTabsComponent } from './pages/shop-detail/shop-detail-tabs.co
     ProductsReportComponent,
     ShopsCardsPageComponent,
     ShopDetailTabsComponent,
+    PromotionDetailsComponent,
+    PromotionProductsComponent,
+    AddProductDialogComponent,
   ],
   imports: [
     CommonModule,
@@ -147,8 +154,8 @@ import { ShopDetailTabsComponent } from './pages/shop-detail/shop-detail-tabs.co
       AttributeTypesEffects,
       ProductRatingsEffects,
       DashboardEffects,
-      AddressesEffects
-      
+      AddressesEffects,
+      PromotionsEffects,
     ]),
     MatCardModule,
     MatTableModule,

@@ -48,4 +48,26 @@ export class PromotionsListComponent implements OnInit, AfterViewInit, OnDestroy
     this.dataSource.sort = this.sort;
     this.dataSource.paginator = this.paginator;
   }
+
+  getStatusColor(promotion: Promotion): string {
+    const now = new Date();
+    const start = new Date(promotion.startDate);
+    const end = new Date(promotion.endDate);
+    
+    if (!promotion.isActive) return 'warn';
+    if (now < start) return 'accent';
+    if (now > end) return 'warn';
+    return 'primary';
+  }
+
+  getStatusText(promotion: Promotion): string {
+    const now = new Date();
+    const start = new Date(promotion.startDate);
+    const end = new Date(promotion.endDate);
+    
+    if (!promotion.isActive) return 'Inativa';
+    if (now < start) return 'Agendada';
+    if (now > end) return 'Expirada';
+    return 'Ativa';
+  }
 }

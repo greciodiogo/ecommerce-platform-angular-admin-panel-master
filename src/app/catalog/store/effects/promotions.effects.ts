@@ -2,12 +2,17 @@ import { Injectable } from '@angular/core';
 import { Actions, createEffect, ofType } from '@ngrx/effects';
 import { PromotionsApiService } from '../../../core/api/api/promotions-api.service';
 import * as PromotionsActions from '../actions/promotions.actions';
-import { exhaustMap, map, catchError } from 'rxjs/operators';
+import { exhaustMap, map, catchError, tap } from 'rxjs/operators';
 import { of } from 'rxjs';
+import { MatSnackBar } from '@angular/material/snack-bar';
 
 @Injectable()
 export class PromotionsEffects {
-  constructor(private actions$: Actions, private promotionsApi: PromotionsApiService) {}
+  constructor(
+    private actions$: Actions,
+    private promotionsApi: PromotionsApiService,
+    private snackBar: MatSnackBar,
+  ) {}
 
   loadPromotions$ = createEffect(() =>
     this.actions$.pipe(
@@ -65,5 +70,100 @@ export class PromotionsEffects {
         ),
       ),
     ),
+  );
+
+  addPromotionProduct$ = createEffect(() =>
+    this.actions$.pipe(
+      ofType(PromotionsActions.addPromotionProduct),
+      exhaustMap(({ promotionId, productId }) =>
+        this.promotionsApi.addPromotionProduct(promotionId, { productId }).pipe(
+          map(() => PromotionsActions.addPromotionProductSuccess({ promotionId })),
+          catchError((error) => {
+            const statusCode = error.status;
+            const message = error.error?.message || 'Erro ao adicionar produto';
+            
+            return of(
+              PromotionsActions.addPromotionProductFailure({
+                error: message,
+                statusCode,
+              })
+            );
+          }),
+        ),
+      ),
+    ),
+  );
+
+  addPromotionProductSuccess$ = createEffect(() =>
+    this.actions$.pipe(
+      ofType(PromotionsActions.addPromotionProductSuccess),
+      tap(() => {
+        this.snackBar.open('Produto adicionado com sucesso!', 'Fechar', {
+          duration: 3000,
+        });
+      }),
+      map(({ promotionId }) => PromotionsActions.getPromotion({ promotionId })),
+    ),
+  );
+
+  addPromotionProductFailure$ = createEffect(
+    () =>
+      this.actions$.pipe(
+        ofType(PromotionsActions.addPromotionProductFailure),
+        tap(({ error, statusCode }) => {
+          let message = error;
+          
+          if (statusCode === 409) {
+            message = 'Este produto já está em outra promoção ativa. Remova-o da outra promoção primeiro.';
+          }
+          
+          this.snackBar.open(message, 'Fechar', {
+            duration: 5000,
+            panelClass: ['error-snackbar'],
+          });
+        }),
+      ),
+    { dispatch: false }
+  );
+
+  removePromotionProduct$ = createEffect(() =>
+    this.actions$.pipe(
+      ofType(PromotionsActions.removePromotionProduct),
+      exhaustMap(({ promotionId, productId }) =>
+        this.promotionsApi.removePromotionProduct(promotionId, productId).pipe(
+          map(() => PromotionsActions.removePromotionProductSuccess({ promotionId })),
+          catchError((error) => {
+            const message = error.error?.message || 'Erro ao remover produto';
+            return of(PromotionsActions.removePromotionProductFailure({ error: message }));
+          }),
+        ),
+      ),
+    ),
+  );
+
+  removePromotionProductSuccess$ = createEffect(() =>
+    this.actions$.pipe(
+      ofType(PromotionsActions.removePromotionProductSuccess),
+      tap(() => {
+        this.snackBar.open('Produto removido com sucesso!', 'Fechar', {
+          duration: 3000,
+        });
+      }),
+      map(({ promotionId }) => PromotionsActions.getPromotion({ promotionId })),
+    ),
+  );
+
+  removePromotionProductFailure$ = createEffect(
+    () =>
+      this.actions$.pipe(
+        ofType(PromotionsActions.removePromotionProductFailure),
+        tap(({ error }) => {
+          this.snackBar.open(error, 'Fechar', {
+            duration: 5000,
+            panelClass: ['error-snackbar'],
+          });
+        }),
+      ),
+    { dispatch: false }
   );
 } 

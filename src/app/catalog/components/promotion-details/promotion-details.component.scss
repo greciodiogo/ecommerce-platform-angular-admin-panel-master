@@ -1,0 +1,39 @@
+.promotion-details {
+  mat-card {
+    margin: 16px 0;
+  }
+
+  mat-card-header {
+    margin-bottom: 16px;
+  }
+
+  mat-list {
+    padding: 0;
+  }
+
+  mat-list-item {
+    height: auto;
+    min-height: 64px;
+    padding: 12px 0;
+  }
+
+  .discount-value {
+    font-size: 18px;
+    font-weight: 600;
+    color: #4caf50;
+  }
+
+  .days-remaining {
+    color: #4caf50;
+    font-weight: 500;
+  }
+
+  .expired {
+    color: #f44336;
+    font-weight: 500;
+  }
+
+  mat-divider {
+    margin: 8px 0;
+  }
+}

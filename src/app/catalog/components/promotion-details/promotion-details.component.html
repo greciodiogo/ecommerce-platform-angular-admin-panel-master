@@ -1,0 +1,72 @@
+<div class="promotion-details" *ngIf="promotion">
+  <mat-card>
+    <mat-card-header>
+      <mat-card-title>{{ promotion.name }}</mat-card-title>
+      <mat-card-subtitle>
+        <mat-chip [color]="getStatusColor()" selected>
+          {{ getStatusText() }}
+        </mat-chip>
+      </mat-card-subtitle>
+    </mat-card-header>
+    
+    <mat-card-content>
+      <mat-list>
+        <mat-list-item>
+          <mat-icon matListItemIcon>description</mat-icon>
+          <div matListItemTitle>Descrição</div>
+          <div matListItemLine>{{ promotion.description || 'Sem descrição' }}</div>
+        </mat-list-item>
+        
+        <mat-divider></mat-divider>
+        
+        <mat-list-item>
+          <mat-icon matListItemIcon>local_offer</mat-icon>
+          <div matListItemTitle>Desconto</div>
+          <div matListItemLine class="discount-value">{{ promotion.discount }}%</div>
+        </mat-list-item>
+        
+        <mat-divider></mat-divider>
+        
+        <mat-list-item>
+          <mat-icon matListItemIcon>event</mat-icon>
+          <div matListItemTitle>Data de Início</div>
+          <div matListItemLine>{{ promotion.startDate | date:'dd/MM/yyyy HH:mm' }}</div>
+        </mat-list-item>
+        
+        <mat-divider></mat-divider>
+        
+        <mat-list-item>
+          <mat-icon matListItemIcon>event</mat-icon>
+          <div matListItemTitle>Data de Término</div>
+          <div matListItemLine>
+            {{ promotion.endDate | date:'dd/MM/yyyy HH:mm' }}
+            <span *ngIf="getDaysRemaining() > 0" class="days-remaining">
+              ({{ getDaysRemaining() }} dias restantes)
+            </span>
+            <span *ngIf="getDaysRemaining() <= 0" class="expired">
+              (Expirada)
+            </span>
+          </div>
+        </mat-list-item>
+        
+        <mat-divider></mat-divider>
+        
+        <mat-list-item>
+          <mat-icon matListItemIcon>inventory_2</mat-icon>
+          <div matListItemTitle>Produtos</div>
+          <div matListItemLine>
+            <strong>{{ promotion.products?.length || 0 }}</strong> produtos na promoção
+          </div>
+        </mat-list-item>
+        
+        <mat-divider></mat-divider>
+        
+        <mat-list-item>
+          <mat-icon matListItemIcon>link</mat-icon>
+          <div matListItemTitle>Slug</div>
+          <div matListItemLine>{{ promotion.slug }}</div>
+        </mat-list-item>
+      </mat-list>
+    </mat-card-content>
+  </mat-card>
+</div>
