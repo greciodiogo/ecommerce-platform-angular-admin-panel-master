@@ -48,6 +48,7 @@ export * from './payment-method';
 export * from './payment-method-dto';
 export * from './pick-type-class';
 export * from './product';
+export * from './product-active-promotion';
 export * from './product-create-dto';
 export * from './product-photo';
 export * from './product-rating';

@@ -19,5 +19,16 @@ export interface OrderDeliveryDto {
     postalCode?: string;
     country: string;
     addressId?: number;
+    delivery_option?: OrderDeliveryDto.DeliveryOptionEnum;
+    scheduled_date?: string;
+    scheduled_time?: string;
 }
+export namespace OrderDeliveryDto {
+    export type DeliveryOptionEnum = 'standard' | 'scheduled';
+    export const DeliveryOptionEnum = {
+        Standard: 'standard' as DeliveryOptionEnum,
+        Scheduled: 'scheduled' as DeliveryOptionEnum
+    };
+}
+
 

@@ -13,6 +13,7 @@ import { Shop } from './shop';
 import { ProductRating } from './product-rating';
 import { Attribute } from './attribute';
 import { ProductPhoto } from './product-photo';
+import { ProductActivePromotion } from './product-active-promotion';
 
 
 export interface Product { 
@@ -32,5 +33,10 @@ export interface Product {
     ratings: Array<ProductRating>;
     shop: Shop;
     shopId: number;
+    hasActivePromotion?: boolean;
+    promotionalPrice?: number;
+    originalPrice?: number;
+    discountPercentage?: number;
+    activePromotion: ProductActivePromotion;
 }
 

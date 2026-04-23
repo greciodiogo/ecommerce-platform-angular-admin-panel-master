@@ -84,6 +84,7 @@ model/page.ts
 model/payment-method-dto.ts
 model/payment-method.ts
 model/pick-type-class.ts
+model/product-active-promotion.ts
 model/product-create-dto.ts
 model/product-photo.ts
 model/product-rating-dto.ts
