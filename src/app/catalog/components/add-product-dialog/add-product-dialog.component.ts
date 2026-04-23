@@ -34,7 +34,7 @@ export class AddProductDialogComponent implements OnInit {
   }
 
   ngOnInit() {
-    this.store.dispatch(ProductsActions.loadProducts());
+    this.store.dispatch(ProductsActions.loadProducts({ filters: {} }));
 
     // Filter products based on search and exclude existing ones
     this.filteredProducts$ = this.products$.pipe(
