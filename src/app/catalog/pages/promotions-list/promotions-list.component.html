@@ -1,80 +1,88 @@
 <mat-card>
   <mat-card-title>Promoções</mat-card-title>
   <mat-card-content>
-    <mat-table
-      [dataSource]="dataSource"
-      matSort
-      matSortActive="id"
-      matSortDirection="desc"
-    >
-      <ng-container matColumnDef="id">
-        <mat-header-cell *matHeaderCellDef mat-sort-header="id">ID</mat-header-cell>
-        <mat-cell *matCellDef="let promotion">
-          <a [routerLink]="['/catalog/promotions', promotion.id]">{{ promotion.id }}</a>
-        </mat-cell>
-      </ng-container>
+    <div *ngIf="dataSource.data.length > 0">
+      <mat-table
+        [dataSource]="dataSource"
+        matSort
+        matSortActive="id"
+        matSortDirection="desc"
+      >
+        <ng-container matColumnDef="id">
+          <mat-header-cell *matHeaderCellDef mat-sort-header="id">ID</mat-header-cell>
+          <mat-cell *matCellDef="let promotion">
+            <a [routerLink]="['/catalog/promotions', promotion.id]">{{ promotion.id }}</a>
+          </mat-cell>
+        </ng-container>
 
-      <ng-container matColumnDef="name">
-        <mat-header-cell *matHeaderCellDef mat-sort-header="name">Nome</mat-header-cell>
-        <mat-cell *matCellDef="let promotion">
-          <strong>{{ promotion.name }}</strong>
-        </mat-cell>
-      </ng-container>
+        <ng-container matColumnDef="name">
+          <mat-header-cell *matHeaderCellDef mat-sort-header="name">Nome</mat-header-cell>
+          <mat-cell *matCellDef="let promotion">
+            <strong>{{ promotion.name }}</strong>
+          </mat-cell>
+        </ng-container>
 
-      <ng-container matColumnDef="discount">
-        <mat-header-cell *matHeaderCellDef mat-sort-header="discount">Desconto</mat-header-cell>
-        <mat-cell *matCellDef="let promotion">
-          <mat-chip color="accent" selected>{{ promotion.discount }}%</mat-chip>
-        </mat-cell>
-      </ng-container>
+        <ng-container matColumnDef="discount">
+          <mat-header-cell *matHeaderCellDef mat-sort-header="discount">Desconto</mat-header-cell>
+          <mat-cell *matCellDef="let promotion">
+            <mat-chip color="accent" selected>{{ promotion.discount }}%</mat-chip>
+          </mat-cell>
+        </ng-container>
 
-      <ng-container matColumnDef="startDate">
-        <mat-header-cell *matHeaderCellDef mat-sort-header="startDate">Início</mat-header-cell>
-        <mat-cell *matCellDef="let promotion">
-          {{ promotion.startDate | date : 'dd/MM/yyyy' }}
-        </mat-cell>
-      </ng-container>
+        <ng-container matColumnDef="startDate">
+          <mat-header-cell *matHeaderCellDef mat-sort-header="startDate">Início</mat-header-cell>
+          <mat-cell *matCellDef="let promotion">
+            {{ promotion.startDate | date : 'dd/MM/yyyy' }}
+          </mat-cell>
+        </ng-container>
 
-      <ng-container matColumnDef="endDate">
-        <mat-header-cell *matHeaderCellDef mat-sort-header="endDate">Término</mat-header-cell>
-        <mat-cell *matCellDef="let promotion">
-          {{ promotion.endDate | date : 'dd/MM/yyyy' }}
-        </mat-cell>
-      </ng-container>
+        <ng-container matColumnDef="endDate">
+          <mat-header-cell *matHeaderCellDef mat-sort-header="endDate">Término</mat-header-cell>
+          <mat-cell *matCellDef="let promotion">
+            {{ promotion.endDate | date : 'dd/MM/yyyy' }}
+          </mat-cell>
+        </ng-container>
 
-      <ng-container matColumnDef="productsCount">
-        <mat-header-cell *matHeaderCellDef>Produtos</mat-header-cell>
-        <mat-cell *matCellDef="let promotion">
-          {{ promotion.products?.length || 0 }}
-        </mat-cell>
-      </ng-container>
+        <ng-container matColumnDef="productsCount">
+          <mat-header-cell *matHeaderCellDef>Produtos</mat-header-cell>
+          <mat-cell *matCellDef="let promotion">
+            {{ promotion.products?.length || 0 }}
+          </mat-cell>
+        </ng-container>
 
-      <ng-container matColumnDef="status">
-        <mat-header-cell *matHeaderCellDef mat-sort-header="isActive">Status</mat-header-cell>
-        <mat-cell *matCellDef="let promotion">
-          <mat-chip [color]="getStatusColor(promotion)" selected>
-            {{ getStatusText(promotion) }}
-          </mat-chip>
-        </mat-cell>
-      </ng-container>
+        <ng-container matColumnDef="status">
+          <mat-header-cell *matHeaderCellDef mat-sort-header="isActive">Status</mat-header-cell>
+          <mat-cell *matCellDef="let promotion">
+            <mat-chip [color]="getStatusColor(promotion)" selected>
+              {{ getStatusText(promotion) }}
+            </mat-chip>
+          </mat-cell>
+        </ng-container>
 
-      <mat-header-row
-        *matHeaderRowDef="['id', 'name', 'discount', 'startDate', 'endDate', 'productsCount', 'status']"
-      ></mat-header-row>
-      <mat-row
-        *matRowDef="let promotion; columns: ['id', 'name', 'discount', 'startDate', 'endDate', 'productsCount', 'status']"
-        class="promotion-row"
-      ></mat-row>
-    </mat-table>
+        <mat-header-row
+          *matHeaderRowDef="['id', 'name', 'discount', 'startDate', 'endDate', 'productsCount', 'status']"
+        ></mat-header-row>
+        <mat-row
+          *matRowDef="let promotion; columns: ['id', 'name', 'discount', 'startDate', 'endDate', 'productsCount', 'status']"
+          class="promotion-row"
+        ></mat-row>
+      </mat-table>
 
-    <span *ngIf="(promotions$ | async)?.length === 0" class="empty-placeholder">
-      Nenhuma promoção encontrada
-    </span>
+      <mat-paginator
+        [pageSizeOptions]="[10, 25, 50]"
+        showFirstLastButtons
+      ></mat-paginator>
+    </div>
 
-    <mat-paginator
-      [pageSizeOptions]="[10, 25, 50]"
-      showFirstLastButtons
-    ></mat-paginator>
+    <div *ngIf="dataSource.data.length === 0" class="empty-state">
+      <mat-icon>local_offer</mat-icon>
+      <h3>Nenhuma promoção encontrada</h3>
+      <p>Crie sua primeira promoção para começar a oferecer descontos aos clientes.</p>
+      <button mat-raised-button color="primary" routerLink="/catalog/promotions/new">
+        <mat-icon>add</mat-icon>
+        Criar Primeira Promoção
+      </button>
+    </div>
   </mat-card-content>
 
   <a
@@ -87,6 +95,7 @@
       'sales_color': (role$ | async) === 'sales',
       'manager_color': (role$ | async) === 'manager',
     }"
+    *ngIf="dataSource.data.length > 0"
   >
     <mat-icon>add</mat-icon>
   </a>
