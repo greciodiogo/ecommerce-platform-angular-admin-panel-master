@@ -25,58 +25,36 @@ mat-card {
   }
 }
 
-
 form {
   display: flex;
-  flex-direction: row;
-  justify-content: left;
-  column-gap: 18px;
-  row-gap: 4px;
-  flex-wrap: wrap;
-  align-items: stretch;
+  flex-direction: column;
+  gap: 16px;
+
   h2 {
-    margin-bottom: 6px;
+    margin-bottom: 12px;
+    margin-top: 8px;
   }
-  .items {
-    flex: 4;
-    flex-basis: 100%;
-    overflow: hidden;
-    margin-left: -16px;
-    margin-right: -16px;
-    h2 {
-      padding-left: 16px;
-    }
-  }
-  .contact {
-    flex: 1;
-    flex-shrink: 0;
-    flex-basis: 180px;
-    max-width: 100%;
-    overflow: hidden;
+
+  .promotion-data {
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+
     mat-form-field {
       width: 100%;
     }
-    textarea {
-      height:160px;
+
+    mat-checkbox {
+      margin-top: 8px;
     }
   }
-  .details {
-    flex: 1;
-    flex-basis: 180px;
-    overflow: hidden;
-    padding-bottom: 36px;
-    mat-form-field, mat-select-country {
-      width: 100%;
-      display: inline-block;
-    }
 
-    > div.buttons {
-      position: absolute;
-      bottom: 16px;
-      right: 16px;
-      button {
-        margin-left: 12px;
-      }
-    }
+  .buttons {
+    display: flex;
+    justify-content: flex-end;
+    gap: 12px;
+    margin-top: 24px;
+    padding-top: 16px;
+    border-top: 1px solid #e0e0e0;
   }
 }

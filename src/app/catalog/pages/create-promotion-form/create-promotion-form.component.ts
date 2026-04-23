@@ -3,7 +3,6 @@ import { Store } from '@ngrx/store';
 import * as PromotionsActions from '../../store/actions/promotions.actions';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
-import { first } from 'rxjs';
 
 @Component({
   selector: 'app-create-promotion-form',
@@ -13,6 +12,10 @@ import { first } from 'rxjs';
 export class CreatePromotionFormComponent implements OnInit {
   createForm = new FormGroup({
     name: new FormControl('', {
+      nonNullable: true,
+      validators: [Validators.required],
+    }),
+    slug: new FormControl('', {
       nonNullable: true,
       validators: [Validators.required],
     }),
@@ -30,11 +33,7 @@ export class CreatePromotionFormComponent implements OnInit {
     }),
     discount: new FormControl(0, {
       nonNullable: true,
-      validators: [Validators.required, Validators.min(0)],
-    }),
-    productIds: new FormControl([], {
-      nonNullable: true,
-      validators: [Validators.required],
+      validators: [Validators.required, Validators.min(0), Validators.max(100)],
     }),
     isActive: new FormControl(true, {
       nonNullable: true,
@@ -43,23 +42,39 @@ export class CreatePromotionFormComponent implements OnInit {
 
   constructor(private store: Store, private router: Router) {}
 
-  ngOnInit() {}
+  ngOnInit() {
+    // Auto-generate slug from name
+    this.createForm.controls.name.valueChanges.subscribe(name => {
+      if (name && !this.createForm.controls.slug.dirty) {
+        const slug = name.toLowerCase()
+          .replace(/[^a-z0-9]+/g, '-')
+          .replace(/^-|-$/g, '');
+        this.createForm.controls.slug.setValue(slug);
+      }
+    });
+  }
 
   save() {
+    if (!this.createForm.valid) {
+      return;
+    }
+
+    const formValue = this.createForm.getRawValue();
+    
     this.store.dispatch(
       PromotionsActions.createPromotion({
         data: {
-          name: this.createForm.controls.name.value,
-          description: this.createForm.controls.description.value,
-          startDate: this.createForm.controls.startDate.value,
-          endDate: this.createForm.controls.endDate.value,
-          discount: this.createForm.controls.discount.value,
-          productIds: this.createForm.controls.productIds.value,
-          isActive: this.createForm.controls.isActive.value,
+          name: formValue.name,
+          slug: formValue.slug,
+          description: formValue.description,
+          startDate: new Date(formValue.startDate).toISOString(),
+          endDate: new Date(formValue.endDate).toISOString(),
+          discount: formValue.discount,
+          isActive: formValue.isActive,
         },
       })
     );
-    // Optionally, listen for success and navigate
-    this.router.navigate(['catalog/promotions']);
+    
+    this.router.navigate(['/catalog/promotions']);
   }
 }

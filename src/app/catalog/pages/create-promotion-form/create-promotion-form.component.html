@@ -3,65 +3,90 @@
     <mat-card-title>
       <a mat-button routerLink="/catalog/promotions">
         <mat-icon>arrow_back</mat-icon></a
-      >Create new Promotion
+      >Criar Nova Promoção
     </mat-card-title>
   </mat-card-title-group>
   <mat-card-content>
     <form [formGroup]="createForm" (submit)="save()">
-      <div class="items">
-        <h2>Items</h2>
-        <!-- <app-order-items-input></app-order-items-input> -->
-      </div>
-
-      <div class="contact">
-        <h2>Promotion data</h2>
+      <div class="promotion-data">
+        <h2>Dados da Promoção</h2>
+        
         <mat-form-field appearance="outline">
-          <mat-label>Name </mat-label>
-          <input matInput type="text" formControlName="name" />
+          <mat-label>Nome</mat-label>
+          <input matInput type="text" formControlName="name" required />
           <mat-error *ngIf="createForm.controls.name.invalid">
-            Invalid name
+            Nome é obrigatório
           </mat-error>
         </mat-form-field>
+
         <mat-form-field appearance="outline">
-          <mat-label>Description </mat-label>
-          <input matInput type="text" formControlName="description" />
+          <mat-label>Slug</mat-label>
+          <input matInput type="text" formControlName="slug" required />
+          <mat-hint>Ex: black-friday-2026</mat-hint>
+          <mat-error *ngIf="createForm.controls.slug.invalid">
+            Slug é obrigatório
+          </mat-error>
+        </mat-form-field>
+
+        <mat-form-field appearance="outline">
+          <mat-label>Descrição</mat-label>
+          <textarea matInput formControlName="description" rows="3" required></textarea>
           <mat-error *ngIf="createForm.controls.description.invalid">
-            Invalid description
+            Descrição é obrigatória
           </mat-error>
         </mat-form-field>
-        <mat-form-field appearance="outline" class="discount"  [appAuthRole]="['admin', 'sales']">
-          <mat-label>Discount</mat-label>
-          <input type="number" matInput required formControlName="discount" />
-          <mat-error>Invalid discount</mat-error>
-        </mat-form-field>
-        <!-- <mat-form-field appearance="outline">
-          <mat-label> Message </mat-label>
-          <textarea matInput formControlName="message"></textarea>
-          <mat-error *ngIf="createForm.controls.message.invalid">
-            Invalid message
+
+        <mat-form-field appearance="outline">
+          <mat-label>Desconto (%)</mat-label>
+          <input type="number" matInput formControlName="discount" min="0" max="100" required />
+          <mat-hint>Entre 0 e 100</mat-hint>
+          <mat-error *ngIf="createForm.controls.discount.invalid">
+            Desconto deve ser entre 0 e 100
           </mat-error>
-        </mat-form-field> -->
+        </mat-form-field>
+
+        <mat-form-field appearance="outline">
+          <mat-label>Data de Início</mat-label>
+          <input matInput [matDatepicker]="startPicker" formControlName="startDate" required />
+          <mat-datepicker-toggle matSuffix [for]="startPicker"></mat-datepicker-toggle>
+          <mat-datepicker #startPicker></mat-datepicker>
+          <mat-error *ngIf="createForm.controls.startDate.invalid">
+            Data de início é obrigatória
+          </mat-error>
+        </mat-form-field>
+
+        <mat-form-field appearance="outline">
+          <mat-label>Data de Término</mat-label>
+          <input matInput [matDatepicker]="endPicker" formControlName="endDate" required />
+          <mat-datepicker-toggle matSuffix [for]="endPicker"></mat-datepicker-toggle>
+          <mat-datepicker #endPicker></mat-datepicker>
+          <mat-error *ngIf="createForm.controls.endDate.invalid">
+            Data de término é obrigatória
+          </mat-error>
+        </mat-form-field>
+
+        <mat-checkbox formControlName="isActive">
+          Promoção Ativa
+        </mat-checkbox>
       </div>
 
-      <div class="details">
-        <div class="buttons">
-          <button
-            mat-button
-            type="button"
-            routerLink="/catalog/promotions"
-            color="primary"
-          >
-            Cancel
-          </button>
-          <button
-            mat-flat-button
-            type="submit"
-            [disabled]="!createForm.valid || !createForm.dirty"
-            color="primary"
-          >
-            Create
-          </button>
-        </div>
+      <div class="buttons">
+        <button
+          mat-button
+          type="button"
+          routerLink="/catalog/promotions"
+          color="primary"
+        >
+          Cancelar
+        </button>
+        <button
+          mat-flat-button
+          type="submit"
+          [disabled]="!createForm.valid"
+          color="primary"
+        >
+          Criar Promoção
+        </button>
       </div>
     </form>
   </mat-card-content>
