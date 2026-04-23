@@ -18,7 +18,7 @@
           <div class="product-info">
             <strong>{{ product.name }}</strong>
             <small>ID: {{ product.id }}</small>
-            <small *ngIf="product.brand">Marca: {{ product.brand }}</small>
+            <small *ngIf="product.shop">Loja: {{ product.shop.shopName }}</small>
           </div>
           <div class="product-price">
             {{ product.price | currency:'AOA':'symbol':'1.0-0' }}
