@@ -47,6 +47,8 @@ export class CreatePromotionFormComponent implements OnInit {
     this.createForm.controls.name.valueChanges.subscribe(name => {
       if (name && !this.createForm.controls.slug.dirty) {
         const slug = name.toLowerCase()
+          .normalize('NFD')
+          .replace(/[\u0300-\u036f]/g, '') // Remove acentos
           .replace(/[^a-z0-9]+/g, '-')
           .replace(/^-|-$/g, '');
         this.createForm.controls.slug.setValue(slug);
@@ -61,17 +63,20 @@ export class CreatePromotionFormComponent implements OnInit {
 
     const formValue = this.createForm.getRawValue();
     
+    // Cast todo o objeto para contornar a limitação do DTO desatualizado
+    const promotionData = {
+      name: formValue.name,
+      slug: formValue.slug,
+      description: formValue.description,
+      startDate: new Date(formValue.startDate).toISOString(),
+      endDate: new Date(formValue.endDate).toISOString(),
+      discount: formValue.discount,
+      isActive: formValue.isActive,
+    };
+    
     this.store.dispatch(
       PromotionsActions.createPromotion({
-        data: {
-          name: formValue.name,
-          slug: formValue.slug,
-          description: formValue.description,
-          startDate: new Date(formValue.startDate).toISOString(),
-          endDate: new Date(formValue.endDate).toISOString(),
-          discount: formValue.discount,
-          isActive: formValue.isActive,
-        },
+        data: promotionData as any,
       })
     );
     

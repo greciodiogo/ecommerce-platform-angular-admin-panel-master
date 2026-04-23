@@ -22,7 +22,7 @@
         <mat-form-field appearance="outline">
           <mat-label>Slug</mat-label>
           <input matInput type="text" formControlName="slug" required />
-          <mat-hint>Ex: black-friday-2026</mat-hint>
+          <mat-hint>Gerado automaticamente a partir do nome (pode editar)</mat-hint>
           <mat-error *ngIf="createForm.controls.slug.invalid">
             Slug é obrigatório
           </mat-error>
