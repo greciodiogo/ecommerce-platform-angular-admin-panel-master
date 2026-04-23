@@ -130,7 +130,7 @@ export class PromotionsEffects {
     this.actions$.pipe(
       ofType(PromotionsActions.removePromotionProduct),
       exhaustMap(({ promotionId, productId }) =>
-        this.promotionsApi.removePromotionProduct(promotionId, productId).pipe(
+        this.promotionsApi.deletePromotionProduct(promotionId, productId).pipe(
           map(() => PromotionsActions.removePromotionProductSuccess({ promotionId })),
           catchError((error) => {
             const message = error.error?.message || 'Erro ao remover produto';
