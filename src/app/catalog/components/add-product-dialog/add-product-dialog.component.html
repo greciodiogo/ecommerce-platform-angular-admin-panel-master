@@ -14,11 +14,13 @@
         [value]="product.id"
         (click)="toggleProduct(product.id)"
         [selected]="isSelected(product.id)">
-        <div matListItemTitle class="product-item">
+        <div class="product-item">
           <div class="product-info">
-            <strong>{{ product.name }}</strong>
-            <small>ID: {{ product.id }}</small>
-            <small *ngIf="product.shop">Loja: {{ product.shop.shopName }}</small>
+            <div class="product-name">{{ product.name }}</div>
+            <div class="product-meta">
+              <span class="product-id">ID: {{ product.id }}</span>
+              <span *ngIf="product.shop" class="product-shop"> • Loja: {{ product.shop.shopName }}</span>
+            </div>
           </div>
           <div class="product-price">
             {{ product.price | currency:'AOA':'symbol':'1.0-0' }}

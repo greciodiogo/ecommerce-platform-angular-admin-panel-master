@@ -44,15 +44,25 @@ mat-dialog-content {
   display: flex;
   flex-direction: column;
   gap: 4px;
+  flex: 1;
 
-  strong {
+  .product-name {
     font-size: 14px;
+    font-weight: 600;
     color: #333;
   }
 
-  small {
+  .product-meta {
     font-size: 12px;
     color: #666;
+
+    .product-id {
+      color: #999;
+    }
+
+    .product-shop {
+      color: #666;
+    }
   }
 }
 
@@ -60,6 +70,7 @@ mat-dialog-content {
   font-size: 16px;
   font-weight: 600;
   color: #4caf50;
+  margin-left: 16px;
 }
 
 .no-products {
