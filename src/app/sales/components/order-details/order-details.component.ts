@@ -32,6 +32,29 @@ export class OrderDetailsComponent implements OnChanges {
     }
   }
 
+  formatScheduledDate(dateStr: string | undefined): string {
+    if (!dateStr) return '';
+    
+    try {
+      const date = new Date(dateStr);
+      if (isNaN(date.getTime())) {
+        return dateStr; // Retorna string original se não for data válida
+      }
+      
+      const options: Intl.DateTimeFormatOptions = {
+        weekday: 'long',
+        year: 'numeric',
+        month: 'long',
+        day: 'numeric'
+      };
+      
+      return new Intl.DateTimeFormat('pt-PT', options).format(date);
+    } catch (e) {
+      console.error('Error formatting date:', e);
+      return dateStr;
+    }
+  }
+
   getSourceDetails(): OrderSourceDetails | null {
     return this.order?.source_details as OrderSourceDetails || null;
   }
