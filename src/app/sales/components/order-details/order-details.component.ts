@@ -1,4 +1,4 @@
-import { Component, Input } from '@angular/core';
+import { Component, Input, OnChanges, SimpleChanges } from '@angular/core';
 import { Order } from '../../../core/api';
 import { ReturnAddDialogComponent } from '../return-add-dialog/return-add-dialog.component';
 import { MatDialog } from '@angular/material/dialog';
@@ -17,10 +17,20 @@ interface OrderSourceDetails {
   templateUrl: './order-details.component.html',
   styleUrls: ['./order-details.component.scss'],
 })
-export class OrderDetailsComponent {
+export class OrderDetailsComponent implements OnChanges {
   @Input() order: Order | null = null;
 
   constructor(private dialog: MatDialog, private router: Router) {}
+
+  ngOnChanges(changes: SimpleChanges): void {
+    if (changes['order'] && this.order) {
+      console.log('🔍 Order Details - Full Order:', this.order);
+      console.log('🔍 Order Details - Delivery:', this.order.delivery);
+      console.log('🔍 Order Details - Delivery Option:', this.order.delivery?.delivery_option);
+      console.log('🔍 Order Details - Scheduled Date:', this.order.delivery?.scheduled_date);
+      console.log('🔍 Order Details - Scheduled Time:', this.order.delivery?.scheduled_time);
+    }
+  }
 
   getSourceDetails(): OrderSourceDetails | null {
     return this.order?.source_details as OrderSourceDetails || null;
