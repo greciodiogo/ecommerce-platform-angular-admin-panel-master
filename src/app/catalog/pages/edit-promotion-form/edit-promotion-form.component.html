@@ -1,0 +1,122 @@
+<div class="edit-promotion-form">
+  <mat-card>
+    <mat-card-header>
+      <mat-card-title>
+        <a mat-button routerLink="/catalog/promotions">
+          <mat-icon>arrow_back</mat-icon>
+        </a>
+        Editar Promoção
+      </mat-card-title>
+    </mat-card-header>
+
+    <mat-card-content>
+      <form [formGroup]="editForm" (ngSubmit)="onSubmit()">
+        <div class="form-row">
+          <mat-form-field appearance="outline" class="full-width">
+            <mat-label>Nome da Promoção</mat-label>
+            <input matInput formControlName="name" placeholder="Ex: Black Friday 2024" required>
+            <mat-error *ngIf="editForm.get('name')?.hasError('required')">
+              Nome é obrigatório
+            </mat-error>
+            <mat-error *ngIf="editForm.get('name')?.hasError('minlength')">
+              Nome deve ter no mínimo 3 caracteres
+            </mat-error>
+          </mat-form-field>
+        </div>
+
+        <div class="form-row">
+          <mat-form-field appearance="outline" class="full-width">
+            <mat-label>Slug (URL amigável)</mat-label>
+            <input matInput formControlName="slug" placeholder="black-friday-2024" required>
+            <mat-hint>Gerado automaticamente a partir do nome</mat-hint>
+            <mat-error *ngIf="editForm.get('slug')?.hasError('required')">
+              Slug é obrigatório
+            </mat-error>
+          </mat-form-field>
+        </div>
+
+        <div class="form-row">
+          <mat-form-field appearance="outline" class="full-width">
+            <mat-label>Descrição</mat-label>
+            <textarea 
+              matInput 
+              formControlName="description" 
+              placeholder="Descreva a promoção"
+              rows="3">
+            </textarea>
+          </mat-form-field>
+        </div>
+
+        <div class="form-row">
+          <mat-form-field appearance="outline" class="discount-field">
+            <mat-label>Desconto (%)</mat-label>
+            <input 
+              matInput 
+              type="number" 
+              formControlName="discount" 
+              placeholder="0"
+              min="0"
+              max="100"
+              required>
+            <span matTextSuffix>%</span>
+            <mat-error *ngIf="editForm.get('discount')?.hasError('required')">
+              Desconto é obrigatório
+            </mat-error>
+            <mat-error *ngIf="editForm.get('discount')?.hasError('min')">
+              Desconto deve ser no mínimo 0%
+            </mat-error>
+            <mat-error *ngIf="editForm.get('discount')?.hasError('max')">
+              Desconto deve ser no máximo 100%
+            </mat-error>
+          </mat-form-field>
+        </div>
+
+        <div class="form-row date-row">
+          <mat-form-field appearance="outline" class="date-field">
+            <mat-label>Data de Início</mat-label>
+            <input 
+              matInput 
+              type="datetime-local" 
+              formControlName="startDate"
+              required>
+            <mat-error *ngIf="editForm.get('startDate')?.hasError('required')">
+              Data de início é obrigatória
+            </mat-error>
+          </mat-form-field>
+
+          <mat-form-field appearance="outline" class="date-field">
+            <mat-label>Data de Término</mat-label>
+            <input 
+              matInput 
+              type="datetime-local" 
+              formControlName="endDate"
+              required>
+            <mat-error *ngIf="editForm.get('endDate')?.hasError('required')">
+              Data de término é obrigatória
+            </mat-error>
+          </mat-form-field>
+        </div>
+
+        <div class="form-row">
+          <mat-checkbox formControlName="isActive" color="primary">
+            Promoção Ativa
+          </mat-checkbox>
+          <mat-hint>Desmarque para desativar temporariamente a promoção</mat-hint>
+        </div>
+
+        <div class="form-actions">
+          <button mat-button type="button" (click)="onCancel()">
+            Cancelar
+          </button>
+          <button 
+            mat-raised-button 
+            color="primary" 
+            type="submit"
+            [disabled]="editForm.invalid">
+            Salvar Alterações
+          </button>
+        </div>
+      </form>
+    </mat-card-content>
+  </mat-card>
+</div>

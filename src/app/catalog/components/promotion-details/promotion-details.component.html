@@ -9,6 +9,16 @@
       </mat-card-subtitle>
     </mat-card-header>
     
+    <mat-card-actions align="end">
+      <button 
+        mat-raised-button 
+        color="primary" 
+        [routerLink]="['/catalog/promotions', promotion.id, 'edit']">
+        <mat-icon>edit</mat-icon>
+        Editar Promoção
+      </button>
+    </mat-card-actions>
+    
     <mat-card-content>
       <mat-list>
         <mat-list-item>

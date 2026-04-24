@@ -21,6 +21,7 @@ import { PromotionsComponent } from './pages/promotions/promotions.component';
 import { PromotionComponent } from './pages/promotion/promotion.component';
 import { PromotionsListComponent } from './pages/promotions-list/promotions-list.component';
 import { CreatePromotionFormComponent } from './pages/create-promotion-form/create-promotion-form.component';
+import { EditPromotionFormComponent } from './pages/edit-promotion-form/edit-promotion-form.component';
 import { AddressesComponent } from './pages/addresses/addresses.component';
 import { AddressesTreeComponent } from './pages/addresses-tree/addresses-tree.component';
 import { AddressComponent } from './pages/address/address.component';
@@ -93,9 +94,14 @@ const routes: Routes = [
     component: PromotionsComponent,
     children: [
       {
-        title: 'Create new order',
+        title: 'Create new promotion',
         path: 'new',
         component: CreatePromotionFormComponent,
+      },
+      {
+        title: 'Edit promotion',
+        path: ':id/edit',
+        component: EditPromotionFormComponent,
       },
       {
         title: 'Promotion',

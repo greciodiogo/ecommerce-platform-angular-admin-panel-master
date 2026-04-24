@@ -86,12 +86,14 @@ import { AddressComponent } from './pages/address/address.component';
 import { MatProgressBarModule } from '@angular/material/progress-bar';
 import { MatDatepickerModule } from '@angular/material/datepicker';
 import { MatNativeDateModule } from '@angular/material/core';
+import { MatCheckboxModule } from '@angular/material/checkbox';
 import { ProductsReportComponent } from './pages/products-report/products-report.component';
 import { ShopsCardsPageComponent } from './pages/shops/shops-cards-page.component';
 import { ShopDetailTabsComponent } from './pages/shop-detail/shop-detail-tabs.component';
 import { PromotionDetailsComponent } from './components/promotion-details/promotion-details.component';
 import { PromotionProductsComponent } from './components/promotion-products/promotion-products.component';
 import { AddProductDialogComponent } from './components/add-product-dialog/add-product-dialog.component';
+import { EditPromotionFormComponent } from './pages/edit-promotion-form/edit-promotion-form.component';
 
 @NgModule({
   declarations: [
@@ -131,6 +133,7 @@ import { AddProductDialogComponent } from './components/add-product-dialog/add-p
     PromotionsComponent,
     PromotionComponent,
     CreatePromotionFormComponent,
+    EditPromotionFormComponent,
     AddressesComponent,
     AddressesTreeComponent,
     AddressDetailsComponent,
@@ -186,6 +189,7 @@ import { AddProductDialogComponent } from './components/add-product-dialog/add-p
     MatProgressBarModule,
     MatDatepickerModule,
     MatNativeDateModule,
+    MatCheckboxModule,
   ],
   exports: [ProductPhotoComponent, AddressComponent],
 })
