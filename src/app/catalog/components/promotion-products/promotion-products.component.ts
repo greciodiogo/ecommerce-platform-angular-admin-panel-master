@@ -82,16 +82,27 @@ export class PromotionProductsComponent implements OnInit {
 
     dialogRef.afterClosed().subscribe((productIds: number[] | undefined) => {
       if (productIds && productIds.length > 0 && this.promotion) {
-        // Add each product to the promotion
-        productIds.forEach(productId => {
-          this.store.dispatch(
-            PromotionsActions.addPromotionProduct({
-              promotionId: this.promotion!.id,
-              productId,
-            })
-          );
-        });
+        // Add products sequentially to avoid race conditions
+        this.addProductsSequentially(productIds, 0);
       }
     });
+  }
+
+  private addProductsSequentially(productIds: number[], index: number) {
+    if (index >= productIds.length || !this.promotion) {
+      return;
+    }
+
+    this.store.dispatch(
+      PromotionsActions.addPromotionProduct({
+        promotionId: this.promotion.id,
+        productId: productIds[index],
+      })
+    );
+
+    // Wait a bit before adding the next product
+    setTimeout(() => {
+      this.addProductsSequentially(productIds, index + 1);
+    }, 500);
   }
 }

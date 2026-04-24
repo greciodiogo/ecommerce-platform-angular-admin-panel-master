@@ -32,10 +32,23 @@ export const reducer = createReducer(
   ),
   on(
     PromotionsActions.getPromotionSuccess,
-    (state, { promotion }): PromotionState => ({
-      ...state,
-      list: state.list.map((p) => (p.id === promotion.id ? promotion : p)),
-    }),
+    (state, { promotion }): PromotionState => {
+      const existingIndex = state.list.findIndex((p) => p.id === promotion.id);
+      
+      if (existingIndex >= 0) {
+        // Update existing promotion
+        return {
+          ...state,
+          list: state.list.map((p) => (p.id === promotion.id ? promotion : p)),
+        };
+      } else {
+        // Add new promotion to list
+        return {
+          ...state,
+          list: [...state.list, promotion],
+        };
+      }
+    },
   ),
   on(
     PromotionsActions.createPromotionSuccess,
