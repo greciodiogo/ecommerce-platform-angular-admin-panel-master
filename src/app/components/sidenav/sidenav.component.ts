@@ -25,6 +25,7 @@ export class SidenavComponent {
     faqs: false,
     configs: false,
     users: false,
+    delivery: false,
     settings: false,
   };
 

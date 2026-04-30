@@ -158,6 +158,25 @@
         </a>
       </div>
 
+      <!-- Delivery -->
+      <mat-list-item (click)="toggleGroup('delivery')" style="cursor:pointer;" [appAuthRole]="['admin', 'manager']">
+        <span class="main-item-content">
+          <mat-icon mat-list-icon class="icon-space">local_shipping</mat-icon>
+          <span>Delivery</span>
+          <mat-icon class="arrow-icon">{{ expanded.delivery ? 'expand_less' : 'expand_more' }}</mat-icon>
+        </span>
+      </mat-list-item>
+      <div *ngIf="expanded.delivery" class="sidenav-subgroup">
+        <a mat-list-item routerLink="/settings/delivery-settings" [appAuthRole]="['admin', 'manager']">
+          <mat-icon mat-list-icon class="icon-space">tune</mat-icon>
+          Settings
+        </a>
+        <a mat-list-item routerLink="/settings/delivery-zones" [appAuthRole]="['admin', 'manager']">
+          <mat-icon mat-list-icon class="icon-space">map</mat-icon>
+          Zones
+        </a>
+      </div>
+
       <!-- Settings -->
       <mat-list-item (click)="toggleGroup('settings')" style="cursor:pointer;" [appAuthRole]="['admin']">
         <span class="main-item-content">

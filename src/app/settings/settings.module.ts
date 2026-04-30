@@ -25,6 +25,24 @@ import { ImportComponent } from './components/import/import.component';
 import { MatCheckboxModule } from '@angular/material/checkbox';
 import { MaterialFileInputModule } from 'ngx-custom-material-file-input';
 import { MatProgressBarModule } from '@angular/material/progress-bar';
+import { MatTableModule } from '@angular/material/table';
+import { MatPaginatorModule } from '@angular/material/paginator';
+import { MatDialogModule } from '@angular/material/dialog';
+import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
+import { MatSnackBarModule } from '@angular/material/snack-bar';
+import { MatTooltipModule } from '@angular/material/tooltip';
+
+// Delivery Settings Components
+import { DeliverySettingsListComponent } from './components/delivery-settings/delivery-settings-list/delivery-settings-list.component';
+import { DeliverySettingsEditDialogComponent } from './components/delivery-settings/delivery-settings-edit-dialog/delivery-settings-edit-dialog.component';
+
+// Delivery Zones Components
+import { DeliveryZonesListComponent } from './components/delivery-zones/delivery-zones-list/delivery-zones-list.component';
+import { DeliveryZoneFormDialogComponent } from './components/delivery-zones/delivery-zone-form-dialog/delivery-zone-form-dialog.component';
+
+// Pages
+import { DeliverySettingsPageComponent } from './pages/delivery-settings-page/delivery-settings-page.component';
+import { DeliveryZonesPageComponent } from './pages/delivery-zones-page/delivery-zones-page.component';
 
 @NgModule({
   declarations: [
@@ -33,6 +51,12 @@ import { MatProgressBarModule } from '@angular/material/progress-bar';
     SettingAddFormComponent,
     ExportComponent,
     ImportComponent,
+    DeliverySettingsListComponent,
+    DeliverySettingsEditDialogComponent,
+    DeliveryZonesListComponent,
+    DeliveryZoneFormDialogComponent,
+    DeliverySettingsPageComponent,
+    DeliveryZonesPageComponent,
   ],
   imports: [
     CommonModule,
@@ -57,6 +81,12 @@ import { MatProgressBarModule } from '@angular/material/progress-bar';
     MatCheckboxModule,
     MaterialFileInputModule,
     MatProgressBarModule,
+    MatTableModule,
+    MatPaginatorModule,
+    MatDialogModule,
+    MatProgressSpinnerModule,
+    MatSnackBarModule,
+    MatTooltipModule,
   ],
 })
 export class SettingsModule {}

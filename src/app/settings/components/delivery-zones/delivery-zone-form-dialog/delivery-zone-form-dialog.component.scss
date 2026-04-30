@@ -1,0 +1,53 @@
+mat-dialog-content {
+  min-width: 500px;
+  padding: 24px;
+}
+
+.full-width {
+  width: 100%;
+  margin-bottom: 16px;
+}
+
+.gps-section {
+  margin: 24px 0;
+  padding: 16px;
+  background-color: #f5f5f5;
+  border-radius: 8px;
+
+  h3 {
+    margin: 0 0 16px 0;
+    font-size: 16px;
+    font-weight: 500;
+    color: rgba(0, 0, 0, 0.87);
+  }
+
+  .gps-fields {
+    display: flex;
+    gap: 16px;
+
+    .half-width {
+      flex: 1;
+    }
+  }
+}
+
+.checkboxes {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  margin-top: 16px;
+}
+
+mat-dialog-actions {
+  padding: 16px 24px;
+  margin: 0;
+
+  button {
+    margin-left: 8px;
+
+    mat-spinner {
+      display: inline-block;
+      margin-right: 8px;
+    }
+  }
+}

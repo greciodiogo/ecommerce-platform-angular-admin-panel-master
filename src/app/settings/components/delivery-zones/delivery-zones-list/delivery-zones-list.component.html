@@ -1,0 +1,118 @@
+<mat-card>
+  <mat-card-header>
+    <mat-card-title>Zonas de Entrega</mat-card-title>
+    <mat-card-subtitle>Gerencie endereços e zonas com coordenadas GPS</mat-card-subtitle>
+  </mat-card-header>
+
+  <mat-card-content>
+    <!-- Filtros -->
+    <div class="filters-container">
+      <mat-form-field appearance="outline" class="search-field">
+        <mat-label>Buscar por nome</mat-label>
+        <input matInput [formControl]="searchControl" placeholder="Digite o nome...">
+        <mat-icon matPrefix>search</mat-icon>
+      </mat-form-field>
+
+      <mat-checkbox [formControl]="hasGpsFilter" class="filter-checkbox">
+        Apenas com GPS
+      </mat-checkbox>
+
+      <mat-checkbox [formControl]="isZoneFilter" class="filter-checkbox">
+        Apenas zonas ativas
+      </mat-checkbox>
+
+      <button mat-raised-button color="primary" (click)="addZone()" class="add-button">
+        <mat-icon>add</mat-icon>
+        Adicionar Zona
+      </button>
+    </div>
+
+    <!-- Loading -->
+    <div *ngIf="loading" class="loading-container">
+      <mat-spinner diameter="50"></mat-spinner>
+    </div>
+
+    <!-- Tabela -->
+    <table mat-table [dataSource]="zones" *ngIf="!loading" class="zones-table">
+      <!-- Nome -->
+      <ng-container matColumnDef="name">
+        <th mat-header-cell *matHeaderCellDef>Nome</th>
+        <td mat-cell *matCellDef="let zone">
+          <strong>{{ zone.name }}</strong>
+        </td>
+      </ng-container>
+
+      <!-- Preço -->
+      <ng-container matColumnDef="price">
+        <th mat-header-cell *matHeaderCellDef>Preço (Kz)</th>
+        <td mat-cell *matCellDef="let zone">
+          {{ zone.price | number:'1.0-0' }}
+        </td>
+      </ng-container>
+
+      <!-- GPS -->
+      <ng-container matColumnDef="gps">
+        <th mat-header-cell *matHeaderCellDef>Coordenadas GPS</th>
+        <td mat-cell *matCellDef="let zone">
+          <span *ngIf="hasGps(zone)" class="gps-coords">
+            <mat-icon class="gps-icon">location_on</mat-icon>
+            {{ getGpsDisplay(zone) }}
+          </span>
+          <span *ngIf="!hasGps(zone)" class="no-gps">
+            <mat-icon>location_off</mat-icon>
+            Sem GPS
+          </span>
+        </td>
+      </ng-container>
+
+      <!-- Raio -->
+      <ng-container matColumnDef="radius_km">
+        <th mat-header-cell *matHeaderCellDef>Raio (km)</th>
+        <td mat-cell *matCellDef="let zone">
+          {{ zone.radius_km || '-' }}
+        </td>
+      </ng-container>
+
+      <!-- Zona Ativa -->
+      <ng-container matColumnDef="is_zone">
+        <th mat-header-cell *matHeaderCellDef>Zona Ativa</th>
+        <td mat-cell *matCellDef="let zone">
+          <mat-icon *ngIf="zone.is_zone" class="active-icon">check_circle</mat-icon>
+          <mat-icon *ngIf="!zone.is_zone" class="inactive-icon">cancel</mat-icon>
+        </td>
+      </ng-container>
+
+      <!-- Ações -->
+      <ng-container matColumnDef="actions">
+        <th mat-header-cell *matHeaderCellDef>Ações</th>
+        <td mat-cell *matCellDef="let zone">
+          <button mat-icon-button color="primary" (click)="editZone(zone)" matTooltip="Editar">
+            <mat-icon>edit</mat-icon>
+          </button>
+          <button mat-icon-button color="warn" (click)="deleteZone(zone)" matTooltip="Deletar">
+            <mat-icon>delete</mat-icon>
+          </button>
+        </td>
+      </ng-container>
+
+      <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+      <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+    </table>
+
+    <!-- Paginação -->
+    <mat-paginator
+      *ngIf="!loading"
+      [length]="totalZones"
+      [pageSize]="pageSize"
+      [pageSizeOptions]="[10, 20, 50, 100]"
+      (page)="onPageChange($event)"
+      showFirstLastButtons
+    ></mat-paginator>
+
+    <!-- Sem dados -->
+    <div *ngIf="!loading && zones.length === 0" class="no-data">
+      <mat-icon>location_off</mat-icon>
+      <p>Nenhuma zona encontrada</p>
+    </div>
+  </mat-card-content>
+</mat-card>

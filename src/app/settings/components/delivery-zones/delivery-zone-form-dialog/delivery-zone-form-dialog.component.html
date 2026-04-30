@@ -1,0 +1,74 @@
+<h2 mat-dialog-title>{{ isEditMode ? 'Editar' : 'Adicionar' }} Zona de Entrega</h2>
+
+<mat-dialog-content>
+  <form [formGroup]="form">
+    <mat-form-field appearance="outline" class="full-width">
+      <mat-label>Nome da Zona</mat-label>
+      <input matInput formControlName="name" placeholder="Ex: Talatona">
+      <mat-error *ngIf="form.get('name')?.hasError('required')">
+        Nome é obrigatório
+      </mat-error>
+    </mat-form-field>
+
+    <mat-form-field appearance="outline" class="full-width">
+      <mat-label>Preço (Kz)</mat-label>
+      <input matInput type="number" formControlName="price" placeholder="Ex: 3400">
+      <span matSuffix>Kz</span>
+      <mat-error *ngIf="form.get('price')?.hasError('required')">
+        Preço é obrigatório
+      </mat-error>
+      <mat-error *ngIf="form.get('price')?.hasError('min')">
+        Preço deve ser maior ou igual a 0
+      </mat-error>
+    </mat-form-field>
+
+    <div class="gps-section">
+      <h3>Coordenadas GPS</h3>
+      
+      <div class="gps-fields">
+        <mat-form-field appearance="outline" class="half-width">
+          <mat-label>Latitude</mat-label>
+          <input matInput type="number" step="0.0001" formControlName="latitude" placeholder="-8.9167">
+          <mat-icon matPrefix>location_on</mat-icon>
+        </mat-form-field>
+
+        <mat-form-field appearance="outline" class="half-width">
+          <mat-label>Longitude</mat-label>
+          <input matInput type="number" step="0.0001" formControlName="longitude" placeholder="13.1833">
+          <mat-icon matPrefix>location_on</mat-icon>
+        </mat-form-field>
+      </div>
+
+      <mat-form-field appearance="outline" class="full-width">
+        <mat-label>Raio de Cobertura (km)</mat-label>
+        <input matInput type="number" formControlName="radius_km" placeholder="5">
+        <span matSuffix>km</span>
+      </mat-form-field>
+    </div>
+
+    <div class="checkboxes">
+      <mat-checkbox formControlName="is_zone">
+        Zona Ativa (usar no cálculo de taxa)
+      </mat-checkbox>
+      
+      <mat-checkbox formControlName="visible">
+        Visível
+      </mat-checkbox>
+    </div>
+  </form>
+</mat-dialog-content>
+
+<mat-dialog-actions align="end">
+  <button mat-button (click)="onCancel()" [disabled]="saving">
+    Cancelar
+  </button>
+  <button 
+    mat-raised-button 
+    color="primary" 
+    (click)="onSave()" 
+    [disabled]="form.invalid || saving"
+  >
+    <mat-spinner diameter="20" *ngIf="saving"></mat-spinner>
+    <span *ngIf="!saving">{{ isEditMode ? 'Atualizar' : 'Criar' }}</span>
+  </button>
+</mat-dialog-actions>
