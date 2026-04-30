@@ -1,0 +1,49 @@
+.loading-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 40px;
+}
+
+.settings-table {
+  width: 100%;
+  margin-top: 20px;
+}
+
+.value-display {
+  font-weight: 500;
+  font-size: 16px;
+}
+
+.value-unit {
+  margin-left: 4px;
+  color: #666;
+  font-size: 14px;
+}
+
+.description-text {
+  color: #666;
+  font-size: 13px;
+}
+
+.no-data {
+  text-align: center;
+  padding: 40px;
+  color: #999;
+
+  mat-icon {
+    font-size: 48px;
+    width: 48px;
+    height: 48px;
+    margin-bottom: 16px;
+  }
+
+  p {
+    margin: 0;
+    font-size: 16px;
+  }
+}
+
+mat-card-header {
+  margin-bottom: 20px;
+}
