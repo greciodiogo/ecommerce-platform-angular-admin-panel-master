@@ -53,7 +53,7 @@ export class DeliveryZonesService {
    * Atualizar endereço/zona existente
    */
   update(id: number, zone: Partial<DeliveryZone>): Observable<DeliveryZoneResponse> {
-    return this.http.put<DeliveryZoneResponse>(`${this.apiUrl}/${id}`, zone);
+    return this.http.patch<DeliveryZoneResponse>(`${this.apiUrl}/${id}`, zone);
   }
 
   /**
