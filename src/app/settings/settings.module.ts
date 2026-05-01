@@ -31,6 +31,7 @@ import { MatDialogModule } from '@angular/material/dialog';
 import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
 import { MatSnackBarModule } from '@angular/material/snack-bar';
 import { MatTooltipModule } from '@angular/material/tooltip';
+import { DragDropModule } from '@angular/cdk/drag-drop';
 
 // Delivery Settings Components
 import { DeliverySettingsListComponent } from './components/delivery-settings/delivery-settings-list/delivery-settings-list.component';
@@ -40,9 +41,14 @@ import { DeliverySettingsEditDialogComponent } from './components/delivery-setti
 import { DeliveryZonesListComponent } from './components/delivery-zones/delivery-zones-list/delivery-zones-list.component';
 import { DeliveryZoneFormDialogComponent } from './components/delivery-zones/delivery-zone-form-dialog/delivery-zone-form-dialog.component';
 
+// Search Tags Components
+import { SearchTagsListComponent } from './components/search-tags/search-tags-list/search-tags-list.component';
+import { SearchTagFormDialogComponent } from './components/search-tags/search-tag-form-dialog/search-tag-form-dialog.component';
+
 // Pages
 import { DeliverySettingsPageComponent } from './pages/delivery-settings-page/delivery-settings-page.component';
 import { DeliveryZonesPageComponent } from './pages/delivery-zones-page/delivery-zones-page.component';
+import { SearchTagsPageComponent } from './pages/search-tags-page/search-tags-page.component';
 
 @NgModule({
   declarations: [
@@ -55,8 +61,11 @@ import { DeliveryZonesPageComponent } from './pages/delivery-zones-page/delivery
     DeliverySettingsEditDialogComponent,
     DeliveryZonesListComponent,
     DeliveryZoneFormDialogComponent,
+    SearchTagsListComponent,
+    SearchTagFormDialogComponent,
     DeliverySettingsPageComponent,
     DeliveryZonesPageComponent,
+    SearchTagsPageComponent,
   ],
   imports: [
     CommonModule,
@@ -87,6 +96,7 @@ import { DeliveryZonesPageComponent } from './pages/delivery-zones-page/delivery
     MatProgressSpinnerModule,
     MatSnackBarModule,
     MatTooltipModule,
+    DragDropModule,
   ],
 })
 export class SettingsModule {}
