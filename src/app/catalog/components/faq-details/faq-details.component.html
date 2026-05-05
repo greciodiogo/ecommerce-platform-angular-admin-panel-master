@@ -1,68 +1,126 @@
-<form [formGroup]="editForm" (submit)="save()">
-  <div class="form-column">
-    <h3 style="margin-top: 0;">Portuguese (Português)</h3>
-    <mat-form-field appearance="outline" class="faq-question">
-      <mat-label>Question (PT)</mat-label>
-      <input type="text" matInput required formControlName="question" />
-      <mat-error>Invalid faq question</mat-error>
-    </mat-form-field>
-    <mat-form-field appearance="outline" class="faq-answer">
-      <mat-label>Answer (PT)</mat-label>
-      <textarea matInput formControlName="answer" rows="4"></textarea>
-      <mat-error>Invalid faq Answer</mat-error>
-    </mat-form-field>
-
-    <h3>English (Inglês)</h3>
-    <mat-form-field appearance="outline" class="faq-question-en">
-      <mat-label>Question (EN)</mat-label>
-      <input type="text" matInput formControlName="question_en" />
-      <mat-hint>English translation (optional)</mat-hint>
-    </mat-form-field>
-    <mat-form-field appearance="outline" class="faq-answer-en">
-      <mat-label>Answer (EN)</mat-label>
-      <textarea matInput formControlName="answer_en" rows="4"></textarea>
-      <mat-hint>English translation (optional)</mat-hint>
-    </mat-form-field>
+<form [formGroup]="editForm" (submit)="save()" class="faq-edit-form">
+  
+  <!-- Portuguese Section -->
+  <div class="language-section">
+    <div class="section-header">
+      <mat-icon class="language-icon">language</mat-icon>
+      <h3>Portuguese (PT)</h3>
+      <mat-chip class="required-chip">Required</mat-chip>
+    </div>
+    
+    <div class="form-row">
+      <mat-form-field appearance="outline" class="full-width">
+        <mat-label>Question (PT)</mat-label>
+        <input type="text" matInput required formControlName="question" placeholder="Enter the question in Portuguese" />
+        <mat-icon matPrefix>help_outline</mat-icon>
+        <mat-error>Question is required</mat-error>
+      </mat-form-field>
+    </div>
+    
+    <div class="form-row">
+      <mat-form-field appearance="outline" class="full-width">
+        <mat-label>Answer (PT)</mat-label>
+        <textarea matInput required formControlName="answer" rows="5" placeholder="Enter the answer in Portuguese"></textarea>
+        <mat-icon matPrefix>description</mat-icon>
+        <mat-error>Answer is required</mat-error>
+      </mat-form-field>
+    </div>
   </div>
-  <div class="form-column">
-    <mat-form-field appearance="outline" class="faq-category">
-      <mat-label>Category</mat-label>
-      <mat-select formControlName="category">
-        <mat-option *ngFor="let cat of categories" [value]="cat.value">
-          {{ cat.label }}
-        </mat-option>
-      </mat-select>
-      <mat-error>Invalid category</mat-error>
-    </mat-form-field>
 
-    <mat-form-field appearance="outline" class="faq-order">
-      <mat-label>Order</mat-label>
-      <input type="number" matInput required formControlName="order" />
-      <mat-hint>Display order (lower numbers appear first)</mat-hint>
-      <mat-error>Invalid order</mat-error>
-    </mat-form-field>
+  <mat-divider></mat-divider>
 
-    <mat-form-field appearance="outline" class="faq-visible">
-      <mat-label>Visibility</mat-label>
-      <mat-select formControlName="visible">
-        <mat-option value="true">Visible</mat-option>
-        <mat-option value="false">Hidden</mat-option>
-      </mat-select>
-    </mat-form-field>
+  <!-- English Section -->
+  <div class="language-section">
+    <div class="section-header">
+      <mat-icon class="language-icon">language</mat-icon>
+      <h3>English (EN)</h3>
+      <mat-chip class="optional-chip">Optional</mat-chip>
+    </div>
+    
+    <div class="form-row">
+      <mat-form-field appearance="outline" class="full-width">
+        <mat-label>Question (EN)</mat-label>
+        <input type="text" matInput formControlName="question_en" placeholder="Enter the question in English" />
+        <mat-icon matPrefix>help_outline</mat-icon>
+      </mat-form-field>
+    </div>
+    
+    <div class="form-row">
+      <mat-form-field appearance="outline" class="full-width">
+        <mat-label>Answer (EN)</mat-label>
+        <textarea matInput formControlName="answer_en" rows="5" placeholder="Enter the answer in English"></textarea>
+        <mat-icon matPrefix>description</mat-icon>
+      </mat-form-field>
+    </div>
+  </div>
 
-    <mat-form-field appearance="outline" class="faq-active">
-      <mat-label>Status</mat-label>
-      <mat-select formControlName="is_active">
-        <mat-option value="true">Active</mat-option>
-        <mat-option value="false">Inactive</mat-option>
-      </mat-select>
-    </mat-form-field>
+  <mat-divider></mat-divider>
 
-    <button mat-flat-button type="button" (click)="delete()" color="warn">
-      Delete faq
+  <!-- Settings Section -->
+  <div class="settings-section">
+    <div class="section-header">
+      <mat-icon class="settings-icon">settings</mat-icon>
+      <h3>Settings</h3>
+    </div>
+    
+    <div class="form-row-grid">
+      <mat-form-field appearance="outline">
+        <mat-label>Category</mat-label>
+        <mat-select formControlName="category">
+          <mat-option *ngFor="let cat of categories" [value]="cat.value">
+            <mat-icon class="category-icon">{{ getCategoryIcon(cat.value) }}</mat-icon>
+            {{ cat.label }}
+          </mat-option>
+        </mat-select>
+        <mat-icon matPrefix>category</mat-icon>
+      </mat-form-field>
+      
+      <mat-form-field appearance="outline">
+        <mat-label>Display Order</mat-label>
+        <input type="number" matInput formControlName="order" min="0" />
+        <mat-icon matPrefix>sort</mat-icon>
+        <mat-hint>Lower numbers appear first</mat-hint>
+      </mat-form-field>
+      
+      <mat-form-field appearance="outline">
+        <mat-label>Status</mat-label>
+        <mat-select formControlName="is_active">
+          <mat-option value="true">
+            <mat-icon class="status-icon active">check_circle</mat-icon>
+            Active
+          </mat-option>
+          <mat-option value="false">
+            <mat-icon class="status-icon inactive">cancel</mat-icon>
+            Inactive
+          </mat-option>
+        </mat-select>
+        <mat-icon matPrefix>toggle_on</mat-icon>
+      </mat-form-field>
+    </div>
+  </div>
+
+  <!-- Action Buttons -->
+  <div class="action-buttons">
+    <button
+      mat-stroked-button
+      type="button"
+      (click)="delete()"
+      color="warn"
+      class="delete-button"
+    >
+      <mat-icon>delete</mat-icon>
+      Delete FAQ
     </button>
-    <div>
-      <button mat-button type="button" (click)="resetValues()" color="primary">
+    
+    <div class="right-buttons">
+      <button
+        mat-stroked-button
+        type="button"
+        (click)="resetValues()"
+        color="primary"
+        class="cancel-button"
+      >
+        <mat-icon>close</mat-icon>
         Cancel
       </button>
       <button
@@ -70,13 +128,15 @@
         type="submit"
         [disabled]="!editForm.valid || !editForm.dirty"
         color="primary"
+        class="save-button"
         [ngClass]="{
           'admin_color': (role$ | async) === 'admin',
           'sales_color': (role$ | async) === 'sales',
           'manager_color': (role$ | async) === 'manager',
-      }"
+        }"
       >
-        Save
+        <mat-icon>save</mat-icon>
+        Save Changes
       </button>
     </div>
   </div>

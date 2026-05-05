@@ -20,14 +20,44 @@ export class CustomFaqService {
    * Get all FAQs
    */
   getFaqs(): Observable<Faq[]> {
-    return this.http.get<{ success: boolean; data: any[] }>(`${this.baseUrl}/faqs`)
+    return this.http.get<any>(`${this.baseUrl}/faqs`)
       .pipe(
         map(response => {
+          console.log('FAQ API Response:', response);
+          
+          let allFaqs: any[] = [];
+          
           if (response.success && response.data) {
-            // Transform AdonisJS response to match Angular model
-            return response.data.map(faq => this.transformFaq(faq));
+            // The API returns FAQs grouped by category: { account: [...], delivery: [...], etc }
+            // We need to flatten this structure
+            const categoriesData = response.data;
+            
+            // Iterate through each category and collect all FAQs
+            Object.keys(categoriesData).forEach(categoryKey => {
+              const faqsInCategory = categoriesData[categoryKey];
+              if (Array.isArray(faqsInCategory)) {
+                // Add category to each FAQ if not present
+                faqsInCategory.forEach(faq => {
+                  if (!faq.category) {
+                    faq.category = categoryKey;
+                  }
+                  allFaqs.push(faq);
+                });
+              }
+            });
+          } else if (Array.isArray(response)) {
+            allFaqs = response;
+          } else if (response.data && Array.isArray(response.data)) {
+            allFaqs = response.data;
           }
-          return [];
+          
+          console.log('FAQ Data to transform:', allFaqs);
+          
+          // Transform AdonisJS response to match Angular model
+          const transformed = allFaqs.map((faq: any) => this.transformFaq(faq));
+          console.log('FAQ Transformed:', transformed);
+          
+          return transformed;
         })
       );
   }
@@ -96,14 +126,16 @@ export class CustomFaqService {
    * Maps snake_case to camelCase and handles field differences
    */
   private transformFaq(faq: any): Faq {
-    return {
+    console.log('Transforming FAQ:', faq);
+    
+    const transformed = {
       id: faq.id,
       question: faq.question,
       answer: faq.answer,
       question_en: faq.question_en || undefined,
       answer_en: faq.answer_en || undefined,
       category: faq.category || 'general',
-      order: faq.order || 0,
+      order: faq.order !== undefined ? faq.order : 0,
       is_active: faq.is_active !== undefined ? faq.is_active : true,
       // Legacy field for backward compatibility
       visible: faq.is_active !== undefined ? faq.is_active : true,
@@ -111,5 +143,8 @@ export class CustomFaqService {
       created: new Date().toISOString(),
       updated: new Date().toISOString()
     };
+    
+    console.log('Transformed FAQ:', transformed);
+    return transformed;
   }
 }

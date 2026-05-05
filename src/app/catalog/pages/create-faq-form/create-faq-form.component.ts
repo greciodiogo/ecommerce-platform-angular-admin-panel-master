@@ -52,6 +52,17 @@ export class CreateFaqFormComponent {
 
   constructor(private store: Store, private router: Router) {}
 
+  getCategoryIcon(category: string): string {
+    const icons: { [key: string]: string } = {
+      'general': 'info',
+      'account': 'person',
+      'orders': 'shopping_cart',
+      'payments': 'payment',
+      'delivery': 'local_shipping'
+    };
+    return icons[category] || 'help_outline';
+  }
+
   async save() {
     const formValue = this.addForm.getRawValue();
     this.store.dispatch(

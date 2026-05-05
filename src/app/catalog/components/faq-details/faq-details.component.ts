@@ -62,6 +62,18 @@ export class FaqDetailsComponent implements OnInit {
     private router: Router,
   ) {}
 
+  getCategoryIcon(category: string): string {
+    const icons: { [key: string]: string } = {
+      'general': 'info',
+      'account': 'person',
+      'orders': 'shopping_cart',
+      'payment': 'payment',
+      'payments': 'payment',
+      'delivery': 'local_shipping'
+    };
+    return icons[category] || 'help_outline';
+  }
+
   async ngOnInit() {
     await this.resetValues();
   }
