@@ -15,6 +15,8 @@ import { CategoryGroupDto } from './category-group-dto';
 export interface CategoryUpdateDto { 
     name?: string;
     description?: string;
+    name_en?: string;
+    description_en?: string;
     slug?: string;
     service_fee?: number;
     parentCategoryId?: number;

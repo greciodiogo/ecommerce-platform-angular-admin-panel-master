@@ -24,8 +24,14 @@ export class ProductDetailsComponent implements OnInit {
       nonNullable: true,
       validators: [Validators.required],
     }),
+    name_en: new FormControl('', {
+      nonNullable: false,
+    }),
     description: new FormControl('', {
       nonNullable: true,
+    }),
+    description_en: new FormControl('', {
+      nonNullable: false,
     }),
     purchasePrice: new FormControl(0, {
       nonNullable: true,
@@ -70,7 +76,9 @@ export class ProductDetailsComponent implements OnInit {
     }
     this.editForm.reset({
       name: this.product.name,
+      name_en: this.product.name_en || '',
       description: this.product.description,
+      description_en: this.product.description_en || '',
       purchasePrice: this.product.purchasePrice,
       price: this.product.price,
       stock: this.product.stock,
@@ -88,7 +96,9 @@ export class ProductDetailsComponent implements OnInit {
         id: this.product.id,
         data: {
           name: this.editForm.value.name,
+          name_en: this.editForm.value.name_en,
           description: this.editForm.value.description,
+          description_en: this.editForm.value.description_en,
           purchasePrice: this.editForm.value.purchasePrice,
           price: this.editForm.value.price,
           stock: this.editForm.value.stock,

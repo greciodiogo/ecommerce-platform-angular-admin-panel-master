@@ -14,6 +14,8 @@
 export interface CategoryCreateDto { 
     name: string;
     description: string;
+    name_en?: string;
+    description_en?: string;
     slug?: string;
     service_fee?: number;
     parentCategoryId?: number;

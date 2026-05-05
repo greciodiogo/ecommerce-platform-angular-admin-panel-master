@@ -25,8 +25,14 @@ export class CategoryDetailsComponent implements OnInit {
       nonNullable: true,
       validators: [Validators.required],
     }),
+    name_en: new FormControl('', {
+      nonNullable: false,
+    }),
     description: new FormControl('', {
       nonNullable: true,
+    }),
+    description_en: new FormControl('', {
+      nonNullable: false,
     }),
     slug: new FormControl('', {
       nonNullable: true,
@@ -76,7 +82,9 @@ export class CategoryDetailsComponent implements OnInit {
     }
     this.editForm.reset({
       name: this.category.name,
+      name_en: this.category.name_en || '',
       description: this.category.description,
+      description_en: this.category.description_en || '',
       slug: this.category.slug,
       groups: [],
     });
@@ -123,7 +131,9 @@ export class CategoryDetailsComponent implements OnInit {
         id: this.category.id,
         data: {
           name: this.editForm.value.name,
+          name_en: this.editForm.value.name_en,
           description: this.editForm.value.description,
+          description_en: this.editForm.value.description_en,
           slug: this.editForm.value.slug,
           groups: this.editForm.getRawValue().groups.map((g) => ({ name: g })),
         },

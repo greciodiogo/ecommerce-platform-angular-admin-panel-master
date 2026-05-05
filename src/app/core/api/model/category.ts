@@ -17,6 +17,8 @@ export interface Category {
     id: number;
     name: string;
     description: string;
+    name_en?: string;
+    description_en?: string;
     slug?: string;
     service_fee: number;
     parentCategory?: Category;

@@ -17,6 +17,8 @@ export interface ProductUpdateDto {
     purchasePrice?: number;
     visible?: boolean;
     description?: string;
+    name_en?: string;
+    description_en?: string;
     stock?: number;
     comission?: number;
     photosOrder?: string;

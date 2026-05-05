@@ -25,6 +25,8 @@ export interface Product {
     purchasePrice: number;
     visible: boolean;
     description: string;
+    name_en?: string;
+    description_en?: string;
     stock: number;
     attributes: Array<Attribute>;
     photos: Array<ProductPhoto>;

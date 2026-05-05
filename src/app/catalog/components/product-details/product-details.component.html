@@ -5,6 +5,11 @@
       <input type="text" matInput required formControlName="name" />
       <mat-error>Invalid product name</mat-error>
     </mat-form-field>
+    <mat-form-field appearance="outline" class="product-name-en">
+      <mat-label>Product name (English)</mat-label>
+      <input type="text" matInput formControlName="name_en" />
+      <mat-hint>English translation (optional)</mat-hint>
+    </mat-form-field>
     <app-product-photos-input
       [product]="product"
       (dirty)="photosInputDirty = true"
@@ -14,6 +19,11 @@
       <mat-label>Product description</mat-label>
       <textarea matInput formControlName="description"></textarea>
       <mat-error>Invalid product description</mat-error>
+    </mat-form-field>
+    <mat-form-field appearance="outline" class="product-description-en">
+      <mat-label>Product description (English)</mat-label>
+      <textarea matInput formControlName="description_en"></textarea>
+      <mat-hint>English translation (optional)</mat-hint>
     </mat-form-field>
   </div>
   <div class="form-column">
