@@ -5,7 +5,7 @@
       [dataSource]="dataSource"
       multiTemplateDataRows
       matSort
-      matSortActive="id"
+      matSortActive="order"
       matSortDirection="asc"
     >
       <ng-container matColumnDef="id">
@@ -15,6 +15,22 @@
         <mat-cell *matCellDef="let faq"
           >{{ faq.id }} <a [routerLink]="['/catalog/faqs', faq.id]"></a
         ></mat-cell>
+      </ng-container>
+      <ng-container matColumnDef="order">
+        <mat-header-cell *matHeaderCellDef mat-sort-header="order"
+          >Order</mat-header-cell
+        >
+        <mat-cell *matCellDef="let faq">{{ faq.order }}</mat-cell>
+      </ng-container>
+      <ng-container matColumnDef="category">
+        <mat-header-cell *matHeaderCellDef mat-sort-header="category"
+          >Category</mat-header-cell
+        >
+        <mat-cell *matCellDef="let faq">
+          <span class="category-badge category-{{ faq.category }}">
+            {{ faq.category | titlecase }}
+          </span>
+        </mat-cell>
       </ng-container>
       <ng-container matColumnDef="question">
         <mat-header-cell *matHeaderCellDef mat-sort-header="question"
@@ -26,22 +42,22 @@
         <mat-header-cell *matHeaderCellDef mat-sort-header="answer">
           Answer
         </mat-header-cell>
-        <mat-cell *matCellDef="let faq">{{ faq.answer }}</mat-cell>
+        <mat-cell *matCellDef="let faq">{{ faq.answer | slice:0:100 }}{{ faq.answer.length > 100 ? '...' : '' }}</mat-cell>
       </ng-container>
       <ng-container matColumnDef="visible">
-        <mat-header-cell *matHeaderCellDef mat-sort-header="visible">
-          Visibility
+        <mat-header-cell *matHeaderCellDef mat-sort-header="is_active">
+          Status
         </mat-header-cell>
         <mat-cell *matCellDef="let faq">
-          {{ faq.visible | booleanText : 'Visible' : 'Hidden' }}
+          {{ faq.is_active ? 'Active' : 'Inactive' }}
         </mat-cell>
       </ng-container>
 
       <mat-header-row
-        *matHeaderRowDef="['id', 'question', 'answer', 'visible']"
+        *matHeaderRowDef="['id', 'order', 'category', 'question', 'answer', 'visible']"
       ></mat-header-row>
       <mat-row
-        *matRowDef="let faq; columns: ['id', 'question', 'answer', 'visible']"
+        *matRowDef="let faq; columns: ['id', 'order', 'category', 'question', 'answer', 'visible']"
         class="faq-row"
       ></mat-row>
     </mat-table>

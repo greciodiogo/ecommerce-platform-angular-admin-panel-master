@@ -1,17 +1,47 @@
 <form [formGroup]="editForm" (submit)="save()">
   <div class="form-column">
+    <h3 style="margin-top: 0;">Portuguese (Português)</h3>
     <mat-form-field appearance="outline" class="faq-question">
-      <mat-label>Question</mat-label>
+      <mat-label>Question (PT)</mat-label>
       <input type="text" matInput required formControlName="question" />
       <mat-error>Invalid faq question</mat-error>
     </mat-form-field>
     <mat-form-field appearance="outline" class="faq-answer">
-      <mat-label>Answer</mat-label>
-      <textarea matInput formControlName="answer"></textarea>
+      <mat-label>Answer (PT)</mat-label>
+      <textarea matInput formControlName="answer" rows="4"></textarea>
       <mat-error>Invalid faq Answer</mat-error>
+    </mat-form-field>
+
+    <h3>English (Inglês)</h3>
+    <mat-form-field appearance="outline" class="faq-question-en">
+      <mat-label>Question (EN)</mat-label>
+      <input type="text" matInput formControlName="question_en" />
+      <mat-hint>English translation (optional)</mat-hint>
+    </mat-form-field>
+    <mat-form-field appearance="outline" class="faq-answer-en">
+      <mat-label>Answer (EN)</mat-label>
+      <textarea matInput formControlName="answer_en" rows="4"></textarea>
+      <mat-hint>English translation (optional)</mat-hint>
     </mat-form-field>
   </div>
   <div class="form-column">
+    <mat-form-field appearance="outline" class="faq-category">
+      <mat-label>Category</mat-label>
+      <mat-select formControlName="category">
+        <mat-option *ngFor="let cat of categories" [value]="cat.value">
+          {{ cat.label }}
+        </mat-option>
+      </mat-select>
+      <mat-error>Invalid category</mat-error>
+    </mat-form-field>
+
+    <mat-form-field appearance="outline" class="faq-order">
+      <mat-label>Order</mat-label>
+      <input type="number" matInput required formControlName="order" />
+      <mat-hint>Display order (lower numbers appear first)</mat-hint>
+      <mat-error>Invalid order</mat-error>
+    </mat-form-field>
+
     <mat-form-field appearance="outline" class="faq-visible">
       <mat-label>Visibility</mat-label>
       <mat-select formControlName="visible">
@@ -19,6 +49,15 @@
         <mat-option value="false">Hidden</mat-option>
       </mat-select>
     </mat-form-field>
+
+    <mat-form-field appearance="outline" class="faq-active">
+      <mat-label>Status</mat-label>
+      <mat-select formControlName="is_active">
+        <mat-option value="true">Active</mat-option>
+        <mat-option value="false">Inactive</mat-option>
+      </mat-select>
+    </mat-form-field>
+
     <button mat-flat-button type="button" (click)="delete()" color="warn">
       Delete faq
     </button>

@@ -22,14 +22,39 @@ export class FaqDetailsComponent implements OnInit {
       nonNullable: true,
       validators: [Validators.required],
     }),
+    question_en: new FormControl('', {
+      nonNullable: false,
+    }),
     answer: new FormControl('', {
       nonNullable: true,
       validators: [Validators.required],
     }),
+    answer_en: new FormControl('', {
+      nonNullable: false,
+    }),
+    category: new FormControl('general', {
+      nonNullable: true,
+      validators: [Validators.required],
+    }),
+    order: new FormControl(0, {
+      nonNullable: true,
+      validators: [Validators.required, Validators.min(0)],
+    }),
     visible: new FormControl('true', {
       nonNullable: true,
     }),
+    is_active: new FormControl('true', {
+      nonNullable: true,
+    }),
   });
+
+  categories = [
+    { value: 'orders', label: 'Orders / Pedidos' },
+    { value: 'payment', label: 'Payment / Pagamento' },
+    { value: 'delivery', label: 'Delivery / Entrega' },
+    { value: 'account', label: 'Account / Conta' },
+    { value: 'general', label: 'General / Geral' },
+  ];
 
   constructor(
     private store: Store,
@@ -47,8 +72,13 @@ export class FaqDetailsComponent implements OnInit {
     }
     this.editForm.reset({
       question: this.faq.question,
+      question_en: this.faq.question_en || '',
       answer: this.faq.answer,
+      answer_en: this.faq.answer_en || '',
+      category: this.faq.category || 'general',
+      order: this.faq.order || 0,
       visible: this.faq.visible.toString(),
+      is_active: (this.faq.is_active !== undefined ? this.faq.is_active : true).toString(),
     });
   }
 
@@ -61,8 +91,13 @@ export class FaqDetailsComponent implements OnInit {
         id: this.faq.id,
         data: {
           question: this.editForm.value.question,
+          question_en: this.editForm.value.question_en,
           answer: this.editForm.value.answer,
+          answer_en: this.editForm.value.answer_en,
+          category: this.editForm.value.category,
+          order: this.editForm.value.order,
           visible: this.editForm.value.visible === 'true',
+          is_active: this.editForm.value.is_active === 'true',
         },
       }),
     );

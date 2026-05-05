@@ -15,5 +15,10 @@ export interface FaqCreateDto {
     question: string;
     visible?: boolean;
     answer: string;
+    question_en?: string;
+    answer_en?: string;
+    category?: string;
+    order?: number;
+    is_active?: boolean;
 }
 

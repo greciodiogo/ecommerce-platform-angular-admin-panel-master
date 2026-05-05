@@ -41,6 +41,16 @@ mat-header-row {
     top: 0;
   }
 }
+.mat-column-order {
+  flex-basis: 60px;
+  flex-grow: 0.1;
+  text-align: center;
+  justify-content: center;
+}
+.mat-column-category {
+  flex-basis: 100px;
+  flex-grow: 0.3;
+}
 .mat-column-photo {
   flex-basis: 80px;
   flex-grow: 0;
@@ -58,6 +68,14 @@ mat-header-row {
   flex-basis: 80px;
   flex-grow: 1.2;
 }
+.mat-column-question {
+  flex-basis: 120px;
+  flex-grow: 1;
+}
+.mat-column-answer {
+  flex-basis: 150px;
+  flex-grow: 1.5;
+}
 .mat-column-description {
   flex-basis: 80px;
   flex-grow: 1;
@@ -73,12 +91,46 @@ mat-header-row {
   flex-shrink: 0;
 }
 .mat-column-visible {
-  flex-basis: 56px;
-  flex-grow: 0.1;
+  flex-basis: 80px;
+  flex-grow: 0.2;
 }
 
 mat-cell, mat-header-cell {
   white-space: nowrap;
+}
+
+.category-badge {
+  display: inline-block;
+  padding: 4px 12px;
+  border-radius: 12px;
+  font-size: 12px;
+  font-weight: 500;
+  text-transform: capitalize;
+}
+
+.category-general {
+  background-color: #e3f2fd;
+  color: #1976d2;
+}
+
+.category-account {
+  background-color: #f3e5f5;
+  color: #7b1fa2;
+}
+
+.category-orders {
+  background-color: #fff3e0;
+  color: #f57c00;
+}
+
+.category-payments {
+  background-color: #e8f5e9;
+  color: #388e3c;
+}
+
+.category-delivery {
+  background-color: #fce4ec;
+  color: #c2185b;
 }
 
 .add-button {

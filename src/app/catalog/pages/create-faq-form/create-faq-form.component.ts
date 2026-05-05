@@ -11,7 +11,16 @@ import { selectUserRole } from 'src/app/core/auth/store';
   styleUrls: ['./create-faq-form.component.scss'],
 })
 export class CreateFaqFormComponent {
-    role$ = this.store.select(selectUserRole);
+  role$ = this.store.select(selectUserRole);
+  
+  categories = [
+    { value: 'general', label: 'General' },
+    { value: 'account', label: 'Account' },
+    { value: 'orders', label: 'Orders' },
+    { value: 'payments', label: 'Payments' },
+    { value: 'delivery', label: 'Delivery' }
+  ];
+
   addForm = new FormGroup({
     question: new FormControl('', {
       nonNullable: true,
@@ -20,6 +29,20 @@ export class CreateFaqFormComponent {
     answer: new FormControl('', {
       nonNullable: true,
       validators: [Validators.required],
+    }),
+    question_en: new FormControl('', {
+      nonNullable: true,
+    }),
+    answer_en: new FormControl('', {
+      nonNullable: true,
+    }),
+    category: new FormControl('general', {
+      nonNullable: true,
+      validators: [Validators.required],
+    }),
+    order: new FormControl(0, {
+      nonNullable: true,
+      validators: [Validators.required, Validators.min(0)],
     }),
     visible: new FormControl('true', {
       nonNullable: true,
@@ -30,11 +53,17 @@ export class CreateFaqFormComponent {
   constructor(private store: Store, private router: Router) {}
 
   async save() {
+    const formValue = this.addForm.getRawValue();
     this.store.dispatch(
       FaqsActions.addFaq({
         data: {
-          ...this.addForm.getRawValue(),
-          visible: this.addForm.value.visible === 'true',
+          question: formValue.question,
+          answer: formValue.answer,
+          question_en: formValue.question_en || null,
+          answer_en: formValue.answer_en || null,
+          category: formValue.category,
+          order: formValue.order,
+          is_active: formValue.visible === 'true',
         },
       }),
     );
