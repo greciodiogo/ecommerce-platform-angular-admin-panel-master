@@ -98,6 +98,14 @@ const routes: Routes = [
         loadChildren: () =>
           import('./notifications/notifications.module').then((m) => m.NotificationsModule),
       },
+      {
+        title: 'Analytics',
+        path: 'analytics',
+        canActivate: [AuthRoleGuard],
+        data: { roles: [RoleEnum.Admin, RoleEnum.Manager] },
+        loadChildren: () =>
+          import('./analytics/analytics.module').then((m) => m.AnalyticsModule),
+      },
     ],
   },
   {

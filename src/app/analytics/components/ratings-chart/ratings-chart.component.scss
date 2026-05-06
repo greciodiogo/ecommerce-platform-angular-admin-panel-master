@@ -1,0 +1,38 @@
+.ratings-section {
+  .rating-breakdown {
+    .rating-row {
+      .stars {
+        font-size: 1.1rem;
+      }
+    }
+  }
+
+  .reviews-list {
+    max-height: 600px;
+    overflow-y: auto;
+
+    .review-item {
+      &:last-child {
+        border-bottom: none !important;
+        margin-bottom: 0 !important;
+        padding-bottom: 0 !important;
+      }
+
+      .stars {
+        font-size: 1rem;
+      }
+    }
+  }
+
+  .text-gray-800 {
+    color: #5a5c69 !important;
+  }
+
+  .text-muted {
+    color: #858796 !important;
+  }
+
+  .text-warning {
+    color: #f6c23e !important;
+  }
+}

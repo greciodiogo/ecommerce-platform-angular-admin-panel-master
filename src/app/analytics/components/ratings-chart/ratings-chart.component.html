@@ -1,0 +1,226 @@
+<div class="ratings-section" *ngIf="ratings">
+  <div class="row">
+    <!-- Rating Distribution Chart -->
+    <div class="col-xl-6 col-lg-6 mb-4">
+      <div class="card shadow">
+        <div class="card-header py-3">
+          <h6 class="m-0 font-weight-bold text-primary">Rating Distribution</h6>
+        </div>
+        <div class="card-body">
+          <apx-chart
+            *ngIf="chartOptions.series"
+            [series]="chartOptions.series"
+            [chart]="chartOptions.chart!"
+            [labels]="chartOptions.labels!"
+            [colors]="chartOptions.colors!"
+            [legend]="chartOptions.legend!"
+            [dataLabels]="chartOptions.dataLabels!"
+            [plotOptions]="chartOptions.plotOptions!"
+            [responsive]="chartOptions.responsive!"
+          ></apx-chart>
+        </div>
+      </div>
+    </div>
+
+    <!-- Rating Breakdown -->
+    <div class="col-xl-6 col-lg-6 mb-4">
+      <div class="card shadow">
+        <div class="card-header py-3">
+          <h6 class="m-0 font-weight-bold text-primary">Rating Breakdown</h6>
+        </div>
+        <div class="card-body">
+          <div class="rating-breakdown">
+            <!-- 5 Stars -->
+            <div class="rating-row mb-3">
+              <div class="d-flex align-items-center justify-content-between mb-1">
+                <div class="stars">
+                  <span class="text-warning">★★★★★</span>
+                </div>
+                <span class="font-weight-bold">{{ ratings.distribution[5] }}</span>
+              </div>
+              <div class="progress" style="height: 8px;">
+                <div
+                  class="progress-bar bg-success"
+                  role="progressbar"
+                  [style.width.%]="
+                    (ratings.distribution[5] /
+                      (ratings.distribution[1] +
+                        ratings.distribution[2] +
+                        ratings.distribution[3] +
+                        ratings.distribution[4] +
+                        ratings.distribution[5])) *
+                    100
+                  "
+                ></div>
+              </div>
+            </div>
+
+            <!-- 4 Stars -->
+            <div class="rating-row mb-3">
+              <div class="d-flex align-items-center justify-content-between mb-1">
+                <div class="stars">
+                  <span class="text-warning">★★★★</span>
+                  <span class="text-muted">☆</span>
+                </div>
+                <span class="font-weight-bold">{{ ratings.distribution[4] }}</span>
+              </div>
+              <div class="progress" style="height: 8px;">
+                <div
+                  class="progress-bar bg-info"
+                  role="progressbar"
+                  [style.width.%]="
+                    (ratings.distribution[4] /
+                      (ratings.distribution[1] +
+                        ratings.distribution[2] +
+                        ratings.distribution[3] +
+                        ratings.distribution[4] +
+                        ratings.distribution[5])) *
+                    100
+                  "
+                ></div>
+              </div>
+            </div>
+
+            <!-- 3 Stars -->
+            <div class="rating-row mb-3">
+              <div class="d-flex align-items-center justify-content-between mb-1">
+                <div class="stars">
+                  <span class="text-warning">★★★</span>
+                  <span class="text-muted">☆☆</span>
+                </div>
+                <span class="font-weight-bold">{{ ratings.distribution[3] }}</span>
+              </div>
+              <div class="progress" style="height: 8px;">
+                <div
+                  class="progress-bar bg-warning"
+                  role="progressbar"
+                  [style.width.%]="
+                    (ratings.distribution[3] /
+                      (ratings.distribution[1] +
+                        ratings.distribution[2] +
+                        ratings.distribution[3] +
+                        ratings.distribution[4] +
+                        ratings.distribution[5])) *
+                    100
+                  "
+                ></div>
+              </div>
+            </div>
+
+            <!-- 2 Stars -->
+            <div class="rating-row mb-3">
+              <div class="d-flex align-items-center justify-content-between mb-1">
+                <div class="stars">
+                  <span class="text-warning">★★</span>
+                  <span class="text-muted">☆☆☆</span>
+                </div>
+                <span class="font-weight-bold">{{ ratings.distribution[2] }}</span>
+              </div>
+              <div class="progress" style="height: 8px;">
+                <div
+                  class="progress-bar"
+                  style="background-color: #fd7e14"
+                  role="progressbar"
+                  [style.width.%]="
+                    (ratings.distribution[2] /
+                      (ratings.distribution[1] +
+                        ratings.distribution[2] +
+                        ratings.distribution[3] +
+                        ratings.distribution[4] +
+                        ratings.distribution[5])) *
+                    100
+                  "
+                ></div>
+              </div>
+            </div>
+
+            <!-- 1 Star -->
+            <div class="rating-row">
+              <div class="d-flex align-items-center justify-content-between mb-1">
+                <div class="stars">
+                  <span class="text-warning">★</span>
+                  <span class="text-muted">☆☆☆☆</span>
+                </div>
+                <span class="font-weight-bold">{{ ratings.distribution[1] }}</span>
+              </div>
+              <div class="progress" style="height: 8px;">
+                <div
+                  class="progress-bar bg-danger"
+                  role="progressbar"
+                  [style.width.%]="
+                    (ratings.distribution[1] /
+                      (ratings.distribution[1] +
+                        ratings.distribution[2] +
+                        ratings.distribution[3] +
+                        ratings.distribution[4] +
+                        ratings.distribution[5])) *
+                    100
+                  "
+                ></div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Recent Reviews -->
+  <div class="row">
+    <div class="col-12 mb-4">
+      <div class="card shadow">
+        <div class="card-header py-3">
+          <h6 class="m-0 font-weight-bold text-primary">Recent Reviews</h6>
+        </div>
+        <div class="card-body">
+          <div class="reviews-list">
+            <div
+              *ngFor="let review of ratings.recentReviews"
+              class="review-item mb-3 pb-3 border-bottom"
+            >
+              <div class="d-flex justify-content-between align-items-start mb-2">
+                <div>
+                  <strong>{{ review.author }}</strong>
+                  <div class="stars mt-1">
+                    <span
+                      *ngFor="let star of getStarArray(review.rating)"
+                      class="text-warning"
+                    >
+                      {{ star ? '★' : '☆' }}
+                    </span>
+                  </div>
+                </div>
+                <div class="text-right">
+                  <small class="text-muted">{{ review.date | date: 'short' }}</small>
+                  <div>
+                    <span
+                      class="badge"
+                      [class.badge-success]="review.platform === 'android'"
+                      [class.badge-secondary]="review.platform === 'ios'"
+                    >
+                      <i
+                        class="fab"
+                        [class.fa-android]="review.platform === 'android'"
+                        [class.fa-apple]="review.platform === 'ios'"
+                      ></i>
+                      {{ review.platform === 'android' ? 'Android' : 'iOS' }}
+                    </span>
+                  </div>
+                </div>
+              </div>
+              <p class="mb-2 text-gray-800">{{ review.comment }}</p>
+              <button class="btn btn-sm btn-outline-primary">
+                <i class="fas fa-reply mr-1"></i> Reply
+              </button>
+            </div>
+
+            <div *ngIf="ratings.recentReviews.length === 0" class="text-center text-muted py-4">
+              <i class="fas fa-inbox fa-3x mb-3"></i>
+              <p>No reviews yet</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

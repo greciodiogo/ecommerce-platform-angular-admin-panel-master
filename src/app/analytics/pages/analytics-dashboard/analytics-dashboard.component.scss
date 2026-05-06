@@ -1,0 +1,22 @@
+.analytics-dashboard {
+  padding: 1rem;
+
+  .text-gray-800 {
+    color: #5a5c69 !important;
+  }
+
+  .text-muted {
+    color: #858796 !important;
+  }
+
+  .btn-group {
+    .btn {
+      font-size: 0.875rem;
+    }
+  }
+
+  .badge {
+    font-size: 0.875rem;
+    padding: 0.5rem 0.75rem;
+  }
+}

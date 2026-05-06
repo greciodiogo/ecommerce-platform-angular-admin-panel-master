@@ -1,0 +1,89 @@
+<div class="version-section" *ngIf="versions">
+  <div class="row">
+    <!-- Version Distribution Chart -->
+    <div class="col-xl-6 col-lg-6 mb-4">
+      <div class="card shadow">
+        <div class="card-header py-3">
+          <h6 class="m-0 font-weight-bold text-primary">Version Distribution</h6>
+        </div>
+        <div class="card-body">
+          <apx-chart
+            *ngIf="chartOptions.series"
+            [series]="chartOptions.series"
+            [chart]="chartOptions.chart!"
+            [labels]="chartOptions.labels!"
+            [colors]="chartOptions.colors!"
+            [legend]="chartOptions.legend!"
+            [dataLabels]="chartOptions.dataLabels!"
+            [plotOptions]="chartOptions.plotOptions!"
+            [responsive]="chartOptions.responsive!"
+          ></apx-chart>
+        </div>
+      </div>
+    </div>
+
+    <!-- Version Details -->
+    <div class="col-xl-6 col-lg-6 mb-4">
+      <div class="card shadow">
+        <div class="card-header py-3 d-flex justify-content-between align-items-center">
+          <h6 class="m-0 font-weight-bold text-primary">Version Details</h6>
+          <span class="badge badge-success">Latest: v{{ versions.latestVersion }}</span>
+        </div>
+        <div class="card-body">
+          <!-- Update Rate -->
+          <div class="mb-4 p-3 bg-light rounded">
+            <div class="d-flex justify-content-between align-items-center mb-2">
+              <span class="font-weight-bold">Update Rate</span>
+              <span class="h5 mb-0 font-weight-bold text-success">
+                {{ versions.updateRate.toFixed(1) }}%
+              </span>
+            </div>
+            <div class="progress" style="height: 12px;">
+              <div
+                class="progress-bar bg-success"
+                role="progressbar"
+                [style.width.%]="versions.updateRate"
+              ></div>
+            </div>
+            <small class="text-muted">Users on latest version</small>
+          </div>
+
+          <!-- Version List -->
+          <div class="version-list">
+            <div
+              *ngFor="let version of versions.distribution; let i = index"
+              class="version-item mb-3"
+            >
+              <div class="d-flex justify-content-between align-items-center mb-1">
+                <div>
+                  <span class="font-weight-bold">v{{ version.version }}</span>
+                  <span
+                    *ngIf="version.version === versions.latestVersion"
+                    class="badge badge-success badge-sm ml-2"
+                  >
+                    Latest
+                  </span>
+                </div>
+                <div class="text-right">
+                  <div class="font-weight-bold">{{ version.count | number }}</div>
+                  <small class="text-muted">{{ version.percentage.toFixed(1) }}%</small>
+                </div>
+              </div>
+              <div class="progress" style="height: 6px;">
+                <div
+                  class="progress-bar"
+                  [class.bg-success]="i === 0"
+                  [class.bg-info]="i === 1"
+                  [class.bg-warning]="i === 2"
+                  [class.bg-secondary]="i > 2"
+                  role="progressbar"
+                  [style.width.%]="version.percentage"
+                ></div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

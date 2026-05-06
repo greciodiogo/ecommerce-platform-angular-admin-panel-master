@@ -86,6 +86,14 @@
         </a>
       </div>
 
+      <!-- Analytics -->
+      <a mat-list-item routerLink="/analytics" [appAuthRole]="['admin', 'manager']">
+        <mat-icon mat-list-icon class="icon-space">analytics</mat-icon>
+        App Analytics
+      </a>
+
+      <mat-divider [appAuthRole]="['admin', 'manager']"></mat-divider>
+
       <!-- Complaints -->
       <mat-list-item (click)="toggleGroup('complaints')" style="cursor:pointer;" [appAuthRole]="['admin', 'manager']">
         <span class="main-item-content">

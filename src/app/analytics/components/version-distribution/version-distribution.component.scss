@@ -1,0 +1,17 @@
+.version-section {
+  .version-list {
+    max-height: 400px;
+    overflow-y: auto;
+
+    .version-item {
+      .badge-sm {
+        font-size: 0.7rem;
+        padding: 0.2rem 0.4rem;
+      }
+    }
+  }
+
+  .text-muted {
+    color: #858796 !important;
+  }
+}
