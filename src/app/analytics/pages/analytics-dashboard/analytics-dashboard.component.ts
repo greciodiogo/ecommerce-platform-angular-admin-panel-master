@@ -79,6 +79,21 @@ export class AnalyticsDashboardComponent implements OnInit, OnDestroy {
     }
   }
 
+  getDataSourceColor(): string {
+    if (!this.analyticsData) return '#9e9e9e';
+
+    switch (this.analyticsData.dataSource) {
+      case 'play-console':
+        return '#4caf50';
+      case 'firebase':
+        return '#2196f3';
+      case 'mock':
+        return '#ff9800';
+      default:
+        return '#9e9e9e';
+    }
+  }
+
   getDataSourceLabel(): string {
     if (!this.analyticsData) return 'Unknown';
 

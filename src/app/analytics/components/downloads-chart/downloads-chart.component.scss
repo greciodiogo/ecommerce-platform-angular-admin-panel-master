@@ -1,17 +1,52 @@
 .downloads-charts {
-  .platform-stats {
-    .platform-item {
-      i {
-        font-size: 1.2rem;
-      }
+  .charts-grid {
+    display: grid;
+    grid-template-columns: 2fr 1fr;
+    gap: 16px;
+    margin-bottom: 16px;
+
+    @media (max-width: 968px) {
+      grid-template-columns: 1fr;
     }
   }
 
-  .text-gray-800 {
-    color: #5a5c69 !important;
+  .chart-card {
+    min-height: 400px;
   }
 
-  .text-muted {
-    color: #858796 !important;
+  .platform-card {
+    .platform-item {
+      margin-bottom: 24px;
+
+      &:last-child {
+        margin-bottom: 0;
+      }
+
+      .platform-header {
+        display: flex;
+        align-items: center;
+        gap: 8px;
+        margin-bottom: 8px;
+
+        mat-icon {
+          color: #666;
+        }
+
+        span {
+          flex: 1;
+          font-weight: 500;
+        }
+
+        strong {
+          font-size: 16px;
+        }
+      }
+
+      .platform-percentage {
+        font-size: 12px;
+        color: #666;
+        margin-top: 4px;
+      }
+    }
   }
 }

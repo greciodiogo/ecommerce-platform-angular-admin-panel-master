@@ -1,110 +1,84 @@
 <div class="downloads-charts" *ngIf="downloads">
-  <div class="row">
+  <div class="charts-grid">
     <!-- Downloads by Date -->
-    <div class="col-xl-8 col-lg-7 mb-4">
-      <div class="card shadow">
-        <div class="card-header py-3 d-flex flex-row align-items-center justify-content-between">
-          <h6 class="m-0 font-weight-bold text-primary">Downloads Over Time</h6>
-          <div class="dropdown no-arrow">
-            <span class="badge badge-primary">
-              Total: {{ downloads.android + downloads.ios | number }}
-            </span>
-          </div>
-        </div>
-        <div class="card-body">
-          <apx-chart
-            *ngIf="chartOptions.series"
-            [series]="chartOptions.series"
-            [chart]="chartOptions.chart!"
-            [xaxis]="chartOptions.xaxis!"
-            [yaxis]="chartOptions.yaxis!"
-            [dataLabels]="chartOptions.dataLabels!"
-            [stroke]="chartOptions.stroke!"
-            [colors]="chartOptions.colors!"
-            [grid]="chartOptions.grid!"
-            [tooltip]="chartOptions.tooltip!"
-          ></apx-chart>
-        </div>
-      </div>
-    </div>
+    <mat-card class="chart-card">
+      <mat-card-header>
+        <mat-card-title>Downloads Over Time</mat-card-title>
+        <mat-card-subtitle>Total: {{ downloads.android + downloads.ios | number }}</mat-card-subtitle>
+      </mat-card-header>
+      <mat-card-content>
+        <apx-chart
+          *ngIf="chartOptions.series"
+          [series]="chartOptions.series"
+          [chart]="chartOptions.chart!"
+          [xaxis]="chartOptions.xaxis!"
+          [yaxis]="chartOptions.yaxis!"
+          [dataLabels]="chartOptions.dataLabels!"
+          [stroke]="chartOptions.stroke!"
+          [colors]="chartOptions.colors!"
+          [grid]="chartOptions.grid!"
+          [tooltip]="chartOptions.tooltip!"
+        ></apx-chart>
+      </mat-card-content>
+    </mat-card>
 
     <!-- Platform Distribution -->
-    <div class="col-xl-4 col-lg-5 mb-4">
-      <div class="card shadow">
-        <div class="card-header py-3">
-          <h6 class="m-0 font-weight-bold text-primary">Platform Distribution</h6>
-        </div>
-        <div class="card-body">
-          <div class="platform-stats">
-            <div class="platform-item mb-4">
-              <div class="d-flex justify-content-between align-items-center mb-2">
-                <div>
-                  <i class="fab fa-android text-success mr-2"></i>
-                  <span class="font-weight-bold">Android</span>
-                </div>
-                <span class="text-gray-800 font-weight-bold">
-                  {{ downloads.android | number }}
-                </span>
-              </div>
-              <div class="progress" style="height: 10px;">
-                <div
-                  class="progress-bar bg-success"
-                  role="progressbar"
-                  [style.width.%]="(downloads.android / (downloads.android + downloads.ios)) * 100"
-                ></div>
-              </div>
-              <div class="text-xs text-muted mt-1">
-                {{ ((downloads.android / (downloads.android + downloads.ios)) * 100).toFixed(1) }}%
-              </div>
-            </div>
-
-            <div class="platform-item">
-              <div class="d-flex justify-content-between align-items-center mb-2">
-                <div>
-                  <i class="fab fa-apple text-secondary mr-2"></i>
-                  <span class="font-weight-bold">iOS</span>
-                </div>
-                <span class="text-gray-800 font-weight-bold">
-                  {{ downloads.ios | number }}
-                </span>
-              </div>
-              <div class="progress" style="height: 10px;">
-                <div
-                  class="progress-bar bg-secondary"
-                  role="progressbar"
-                  [style.width.%]="(downloads.ios / (downloads.android + downloads.ios)) * 100"
-                ></div>
-              </div>
-              <div class="text-xs text-muted mt-1">
-                {{ ((downloads.ios / (downloads.android + downloads.ios)) * 100).toFixed(1) }}%
-              </div>
-            </div>
+    <mat-card class="platform-card">
+      <mat-card-header>
+        <mat-card-title>Platform Distribution</mat-card-title>
+      </mat-card-header>
+      <mat-card-content>
+        <div class="platform-item">
+          <div class="platform-header">
+            <mat-icon>android</mat-icon>
+            <span>Android</span>
+            <strong>{{ downloads.android | number }}</strong>
+          </div>
+          <mat-progress-bar 
+            mode="determinate" 
+            [value]="(downloads.android / (downloads.android + downloads.ios)) * 100"
+            color="primary">
+          </mat-progress-bar>
+          <div class="platform-percentage">
+            {{ ((downloads.android / (downloads.android + downloads.ios)) * 100).toFixed(1) }}%
           </div>
         </div>
-      </div>
-    </div>
+
+        <div class="platform-item">
+          <div class="platform-header">
+            <mat-icon>phone_iphone</mat-icon>
+            <span>iOS</span>
+            <strong>{{ downloads.ios | number }}</strong>
+          </div>
+          <mat-progress-bar 
+            mode="determinate" 
+            [value]="(downloads.ios / (downloads.android + downloads.ios)) * 100"
+            color="accent">
+          </mat-progress-bar>
+          <div class="platform-percentage">
+            {{ ((downloads.ios / (downloads.android + downloads.ios)) * 100).toFixed(1) }}%
+          </div>
+        </div>
+      </mat-card-content>
+    </mat-card>
   </div>
 
   <!-- Downloads by Country -->
-  <div class="row">
-    <div class="col-12 mb-4">
-      <div class="card shadow">
-        <div class="card-header py-3">
-          <h6 class="m-0 font-weight-bold text-primary">Downloads by Country</h6>
-        </div>
-        <div class="card-body">
-          <apx-chart
-            *ngIf="countryChartOptions.series"
-            [series]="countryChartOptions.series"
-            [chart]="countryChartOptions.chart!"
-            [xaxis]="countryChartOptions.xaxis!"
-            [yaxis]="countryChartOptions.yaxis!"
-            [dataLabels]="countryChartOptions.dataLabels!"
-            [colors]="countryChartOptions.colors!"
-            [grid]="countryChartOptions.grid!"
-          ></apx-chart>
-        </div>
-      </div>
-    </div>
-  </div>
+  <mat-card style="margin-top: 16px;">
+    <mat-card-header>
+      <mat-card-title>Downloads by Country</mat-card-title>
+    </mat-card-header>
+    <mat-card-content>
+      <apx-chart
+        *ngIf="countryChartOptions.series"
+        [series]="countryChartOptions.series"
+        [chart]="countryChartOptions.chart!"
+        [xaxis]="countryChartOptions.xaxis!"
+        [yaxis]="countryChartOptions.yaxis!"
+        [dataLabels]="countryChartOptions.dataLabels!"
+        [colors]="countryChartOptions.colors!"
+        [grid]="countryChartOptions.grid!"
+      ></apx-chart>
+    </mat-card-content>
+  </mat-card>
 </div>

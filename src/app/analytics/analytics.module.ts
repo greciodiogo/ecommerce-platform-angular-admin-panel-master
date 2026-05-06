@@ -2,6 +2,13 @@ import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { HttpClientModule } from '@angular/common/http';
 import { NgApexchartsModule } from 'ng-apexcharts';
+import { MatCardModule } from '@angular/material/card';
+import { MatButtonModule } from '@angular/material/button';
+import { MatIconModule } from '@angular/material/icon';
+import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
+import { MatProgressBarModule } from '@angular/material/progress-bar';
+import { MatChipsModule } from '@angular/material/chips';
+import { MatButtonToggleModule } from '@angular/material/button-toggle';
 
 import { AnalyticsRoutingModule } from './analytics-routing.module';
 import { AnalyticsDashboardComponent } from './pages/analytics-dashboard/analytics-dashboard.component';
@@ -24,6 +31,13 @@ import { AnalyticsService } from './services/analytics.service';
     HttpClientModule,
     NgApexchartsModule,
     AnalyticsRoutingModule,
+    MatCardModule,
+    MatButtonModule,
+    MatIconModule,
+    MatProgressSpinnerModule,
+    MatProgressBarModule,
+    MatChipsModule,
+    MatButtonToggleModule,
   ],
   providers: [AnalyticsService],
 })

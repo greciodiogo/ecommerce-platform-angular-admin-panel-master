@@ -121,4 +121,9 @@ export class RatingsChartComponent implements OnChanges {
       .fill(0)
       .map((_, i) => (i < rating ? 1 : 0));
   }
+
+  getTotalReviews(): number {
+    if (!this.ratings) return 1;
+    return Object.values(this.ratings.distribution).reduce((sum, val) => sum + val, 0);
+  }
 }

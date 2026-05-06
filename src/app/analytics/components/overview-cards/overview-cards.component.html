@@ -1,137 +1,85 @@
 <div class="overview-cards" *ngIf="metrics">
-  <div class="row">
+  <div class="cards-grid">
     <!-- Total Downloads -->
-    <div class="col-xl-3 col-md-6 mb-4">
-      <div class="card border-left-primary shadow h-100 py-2">
-        <div class="card-body">
-          <div class="row no-gutters align-items-center">
-            <div class="col mr-2">
-              <div class="text-xs font-weight-bold text-primary text-uppercase mb-1">
-                Total Downloads
-              </div>
-              <div class="h5 mb-0 font-weight-bold text-gray-800">
-                {{ formatNumber(metrics.totalDownloads) }}
-              </div>
-            </div>
-            <div class="col-auto">
-              <i class="fas fa-download fa-2x text-gray-300"></i>
-            </div>
+    <mat-card>
+      <mat-card-content>
+        <div class="card-content">
+          <div>
+            <div class="card-label">Total Downloads</div>
+            <div class="card-value">{{ formatNumber(metrics.totalDownloads) }}</div>
           </div>
+          <mat-icon class="card-icon">download</mat-icon>
         </div>
-      </div>
-    </div>
+      </mat-card-content>
+    </mat-card>
 
     <!-- Average Rating -->
-    <div class="col-xl-3 col-md-6 mb-4">
-      <div class="card border-left-success shadow h-100 py-2">
-        <div class="card-body">
-          <div class="row no-gutters align-items-center">
-            <div class="col mr-2">
-              <div class="text-xs font-weight-bold text-success text-uppercase mb-1">
-                Average Rating
-              </div>
-              <div class="h5 mb-0 font-weight-bold text-gray-800">
-                {{ formatRating(metrics.averageRating) }}
-                <span class="text-warning">★</span>
-              </div>
-              <div class="text-xs text-muted">
-                {{ formatNumber(metrics.totalReviews) }} reviews
-              </div>
+    <mat-card>
+      <mat-card-content>
+        <div class="card-content">
+          <div>
+            <div class="card-label">Average Rating</div>
+            <div class="card-value">
+              {{ formatRating(metrics.averageRating) }} ★
             </div>
-            <div class="col-auto">
-              <i class="fas fa-star fa-2x text-gray-300"></i>
-            </div>
+            <div class="card-subtitle">{{ formatNumber(metrics.totalReviews) }} reviews</div>
           </div>
+          <mat-icon class="card-icon">star</mat-icon>
         </div>
-      </div>
-    </div>
+      </mat-card-content>
+    </mat-card>
 
     <!-- Monthly Active Users -->
-    <div class="col-xl-3 col-md-6 mb-4">
-      <div class="card border-left-info shadow h-100 py-2">
-        <div class="card-body">
-          <div class="row no-gutters align-items-center">
-            <div class="col mr-2">
-              <div class="text-xs font-weight-bold text-info text-uppercase mb-1">
-                Monthly Active Users
-              </div>
-              <div class="h5 mb-0 font-weight-bold text-gray-800">
-                {{ formatNumber(metrics.monthlyActiveUsers) }}
-              </div>
-              <div class="text-xs text-muted">
-                DAU: {{ formatNumber(metrics.dailyActiveUsers) }}
-              </div>
-            </div>
-            <div class="col-auto">
-              <i class="fas fa-users fa-2x text-gray-300"></i>
-            </div>
+    <mat-card>
+      <mat-card-content>
+        <div class="card-content">
+          <div>
+            <div class="card-label">Monthly Active Users</div>
+            <div class="card-value">{{ formatNumber(metrics.monthlyActiveUsers) }}</div>
+            <div class="card-subtitle">DAU: {{ formatNumber(metrics.dailyActiveUsers) }}</div>
           </div>
+          <mat-icon class="card-icon">people</mat-icon>
         </div>
-      </div>
-    </div>
+      </mat-card-content>
+    </mat-card>
 
     <!-- Growth -->
-    <div class="col-xl-3 col-md-6 mb-4">
-      <div class="card border-left-warning shadow h-100 py-2">
-        <div class="card-body">
-          <div class="row no-gutters align-items-center">
-            <div class="col mr-2">
-              <div class="text-xs font-weight-bold text-warning text-uppercase mb-1">
-                Growth
-              </div>
-              <div class="h5 mb-0 font-weight-bold text-gray-800">
-                <span [class.text-success]="metrics.growthPercentage > 0" 
-                      [class.text-danger]="metrics.growthPercentage < 0">
-                  {{ metrics.growthPercentage > 0 ? '+' : '' }}{{ metrics.growthPercentage.toFixed(1) }}%
-                </span>
-              </div>
-              <div class="text-xs text-muted">vs previous period</div>
+    <mat-card>
+      <mat-card-content>
+        <div class="card-content">
+          <div>
+            <div class="card-label">Growth</div>
+            <div class="card-value" [style.color]="metrics.growthPercentage > 0 ? '#4caf50' : '#f44336'">
+              {{ metrics.growthPercentage > 0 ? '+' : '' }}{{ metrics.growthPercentage.toFixed(1) }}%
             </div>
-            <div class="col-auto">
-              <i class="fas fa-chart-line fa-2x text-gray-300"></i>
-            </div>
+            <div class="card-subtitle">vs previous period</div>
           </div>
+          <mat-icon class="card-icon">trending_up</mat-icon>
         </div>
-      </div>
-    </div>
+      </mat-card-content>
+    </mat-card>
   </div>
 
   <!-- Retention Metrics -->
-  <div class="row">
-    <div class="col-12 mb-4">
-      <div class="card shadow">
-        <div class="card-header py-3">
-          <h6 class="m-0 font-weight-bold text-primary">Retention Metrics</h6>
+  <mat-card style="margin-top: 16px;">
+    <mat-card-header>
+      <mat-card-title>Retention Metrics</mat-card-title>
+    </mat-card-header>
+    <mat-card-content>
+      <div class="retention-grid">
+        <div class="retention-item">
+          <div class="retention-label">Day 1</div>
+          <div class="retention-value">{{ formatPercentage(metrics.retentionD1) }}</div>
         </div>
-        <div class="card-body">
-          <div class="row text-center">
-            <div class="col-md-4">
-              <div class="mb-2">
-                <span class="text-xs font-weight-bold text-uppercase text-muted">Day 1</span>
-              </div>
-              <div class="h4 mb-0 font-weight-bold text-primary">
-                {{ formatPercentage(metrics.retentionD1) }}
-              </div>
-            </div>
-            <div class="col-md-4">
-              <div class="mb-2">
-                <span class="text-xs font-weight-bold text-uppercase text-muted">Day 7</span>
-              </div>
-              <div class="h4 mb-0 font-weight-bold text-info">
-                {{ formatPercentage(metrics.retentionD7) }}
-              </div>
-            </div>
-            <div class="col-md-4">
-              <div class="mb-2">
-                <span class="text-xs font-weight-bold text-uppercase text-muted">Day 30</span>
-              </div>
-              <div class="h4 mb-0 font-weight-bold text-success">
-                {{ formatPercentage(metrics.retentionD30) }}
-              </div>
-            </div>
-          </div>
+        <div class="retention-item">
+          <div class="retention-label">Day 7</div>
+          <div class="retention-value">{{ formatPercentage(metrics.retentionD7) }}</div>
+        </div>
+        <div class="retention-item">
+          <div class="retention-label">Day 30</div>
+          <div class="retention-value">{{ formatPercentage(metrics.retentionD30) }}</div>
         </div>
       </div>
-    </div>
-  </div>
+    </mat-card-content>
+  </mat-card>
 </div>

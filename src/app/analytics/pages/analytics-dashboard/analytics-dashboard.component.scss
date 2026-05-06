@@ -1,22 +1,121 @@
 .analytics-dashboard {
-  padding: 1rem;
+  padding: 24px;
+  max-width: 1400px;
+  margin: 0 auto;
 
-  .text-gray-800 {
-    color: #5a5c69 !important;
-  }
+  .dashboard-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 24px;
+    flex-wrap: wrap;
+    gap: 16px;
 
-  .text-muted {
-    color: #858796 !important;
-  }
+    h1 {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      margin: 0;
+      font-size: 28px;
+      font-weight: 500;
 
-  .btn-group {
-    .btn {
-      font-size: 0.875rem;
+      mat-icon {
+        font-size: 32px;
+        width: 32px;
+        height: 32px;
+      }
+    }
+
+    .dashboard-actions {
+      display: flex;
+      align-items: center;
+      gap: 16px;
+      flex-wrap: wrap;
     }
   }
 
-  .badge {
-    font-size: 0.875rem;
-    padding: 0.5rem 0.75rem;
+  .loading-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    padding: 64px 0;
+
+    p {
+      margin-top: 16px;
+      color: #666;
+    }
+  }
+
+  .error-card {
+    margin-bottom: 24px;
+    background-color: #ffebee;
+
+    .error-content {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+
+      mat-icon {
+        flex-shrink: 0;
+      }
+
+      span {
+        flex: 1;
+      }
+    }
+  }
+
+  .info-card {
+    margin-bottom: 24px;
+    background-color: #e3f2fd;
+
+    mat-card-content {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+
+      mat-icon {
+        color: #1976d2;
+      }
+    }
+  }
+
+  .spinning {
+    animation: spin 1s linear infinite;
+  }
+
+  @keyframes spin {
+    from {
+      transform: rotate(0deg);
+    }
+    to {
+      transform: rotate(360deg);
+    }
+  }
+}
+
+@media (max-width: 768px) {
+  .analytics-dashboard {
+    padding: 16px;
+
+    .dashboard-header {
+      flex-direction: column;
+      align-items: flex-start;
+
+      .dashboard-actions {
+        width: 100%;
+        flex-direction: column;
+        align-items: stretch;
+
+        mat-button-toggle-group {
+          width: 100%;
+        }
+
+        button {
+          width: 100%;
+        }
+      }
+    }
   }
 }
