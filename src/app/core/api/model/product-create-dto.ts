@@ -22,5 +22,7 @@ export interface ProductCreateDto {
     stock: number;
     comission: number;
     shopId?: number;
+    unit?: string;
+    minimumOrderQuantity?: number;
 }
 

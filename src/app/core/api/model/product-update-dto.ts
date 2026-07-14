@@ -23,5 +23,7 @@ export interface ProductUpdateDto {
     comission?: number;
     photosOrder?: string;
     shopId?: number;
+    unit?: string;
+    minimumOrderQuantity?: number;
 }
 
