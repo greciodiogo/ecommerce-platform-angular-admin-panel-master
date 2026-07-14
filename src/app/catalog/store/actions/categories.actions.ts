@@ -127,3 +127,34 @@ export const deleteCategoryProductFailure = createAction(
   '[Categories] Delete Category Product Failure',
   props<{ error: string }>(),
 );
+
+// Category Photos Actions
+export const addCategoryPhoto = createAction(
+  '[Categories] Add Category Photo',
+  props<{ categoryId: number; data: File }>(),
+);
+
+export const addCategoryPhotoSuccess = createAction(
+  '[Categories] Add Category Photo Success',
+  props<{ categoryId: number; category: Category }>(),
+);
+
+export const addCategoryPhotoFailure = createAction(
+  '[Categories] Add Category Photo Failure',
+  props<{ error: string }>(),
+);
+
+export const deleteCategoryPhoto = createAction(
+  '[Categories] Delete Category Photo',
+  props<{ categoryId: number; photoId: number }>(),
+);
+
+export const deleteCategoryPhotoSuccess = createAction(
+  '[Categories] Delete Category Photo Success',
+  props<{ categoryId: number; category: Category }>(),
+);
+
+export const deleteCategoryPhotoFailure = createAction(
+  '[Categories] Delete Category Photo Failure',
+  props<{ error: string }>(),
+);

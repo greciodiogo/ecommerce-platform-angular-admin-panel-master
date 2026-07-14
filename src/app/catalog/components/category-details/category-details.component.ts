@@ -10,6 +10,7 @@ import { MatChipInputEvent } from '@angular/material/chips';
 import { combineLatestWith, map } from 'rxjs';
 import { MatAutocompleteSelectedEvent } from '@angular/material/autocomplete';
 import { selectUserRole } from 'src/app/core/auth/store';
+import { CategoryPhotoInputComponent } from '../category-photo-input/category-photo-input.component';
 
 @Component({
   selector: 'app-category-details',
@@ -17,8 +18,9 @@ import { selectUserRole } from 'src/app/core/auth/store';
   styleUrls: ['./category-details.component.scss'],
 })
 export class CategoryDetailsComponent implements OnInit {
-    role$ = this.store.select(selectUserRole);
+  role$ = this.store.select(selectUserRole);
   @Input() category: Category | null = null;
+  @ViewChild('categoryPhotoInput') categoryPhotoInput?: CategoryPhotoInputComponent;
 
   editForm = new FormGroup({
     name: new FormControl('', {
@@ -126,6 +128,13 @@ export class CategoryDetailsComponent implements OnInit {
     if (!this.category) {
       return;
     }
+    
+    // Salvar fotos primeiro
+    if (this.categoryPhotoInput) {
+      await this.categoryPhotoInput.save();
+    }
+    
+    // Depois salvar os dados da categoria
     this.store.dispatch(
       CategoriesActions.updateCategory({
         id: this.category.id,

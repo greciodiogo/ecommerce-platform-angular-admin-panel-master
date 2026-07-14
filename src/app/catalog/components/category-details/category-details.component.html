@@ -53,6 +53,15 @@
     <input type="number" matInput required formControlName="service_fee" />
     <mat-error>Invalid service fee</mat-error>
   </mat-form-field>
+
+  <!-- Category Photos -->
+  <app-category-photo-input
+    [category]="category"
+    #categoryPhotoInput
+    (dirty)="editForm.markAsDirty()"
+    (pristine)="editForm.markAsPristine()"
+  ></app-category-photo-input>
+
   <div>
     <button mat-flat-button type="button" (click)="delete()" color="warn">
       Delete category

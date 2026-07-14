@@ -13,6 +13,7 @@ export * from './category';
 export * from './category-create-dto';
 export * from './category-group';
 export * from './category-group-dto';
+export * from './category-photo';
 export * from './category-update-dto';
 export * from './code';
 export * from './code-update-dto';

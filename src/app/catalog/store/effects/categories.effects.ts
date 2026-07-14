@@ -170,4 +170,48 @@ export class CategoriesEffects {
       ),
     );
   });
+
+  // Category Photos Effects
+  addCategoryPhoto$ = createEffect(() => {
+    return this.actions$.pipe(
+      ofType(CategoriesActions.addCategoryPhoto),
+      concatMap(({ categoryId, data }) =>
+        this.categoriesApi.addCategoryPhoto(categoryId, data).pipe(
+          map((category) =>
+            CategoriesActions.addCategoryPhotoSuccess({ categoryId, category }),
+          ),
+          catchError(({ error }) =>
+            of(
+              CategoriesActions.addCategoryPhotoFailure({
+                error: error.message,
+              }),
+            ),
+          ),
+        ),
+      ),
+    );
+  });
+
+  deleteCategoryPhoto$ = createEffect(() => {
+    return this.actions$.pipe(
+      ofType(CategoriesActions.deleteCategoryPhoto),
+      mergeMap(({ categoryId, photoId }) =>
+        this.categoriesApi.deleteCategoryPhoto(categoryId, photoId).pipe(
+          map((category) =>
+            CategoriesActions.deleteCategoryPhotoSuccess({
+              categoryId,
+              category,
+            }),
+          ),
+          catchError(({ error }) =>
+            of(
+              CategoriesActions.deleteCategoryPhotoFailure({
+                error: error.message,
+              }),
+            ),
+          ),
+        ),
+      ),
+    );
+  });
 }

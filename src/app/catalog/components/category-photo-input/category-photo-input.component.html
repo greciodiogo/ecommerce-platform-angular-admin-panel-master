@@ -1,0 +1,50 @@
+<div class="category-photos" *ngIf="category">
+  <!-- Fotos existentes -->
+  <div class="existing-photos" *ngIf="category.photos && category.photos.length > 0">
+    <div *ngFor="let photo of category.photos" class="photo-container">
+      <img 
+        [src]="getCategoryPhotoUrl(category.id, photo.id, true)" 
+        alt="Category photo" 
+        class="category-photo"
+      />
+      <button
+        mat-icon-button
+        matTooltip="Excluir foto"
+        (click)="deleteCategoryPhoto(photo.id)"
+        type="button"
+        color="warn"
+        class="delete-button"
+      >
+        <mat-icon>delete</mat-icon>
+      </button>
+    </div>
+  </div>
+
+  <!-- Preview de novas fotos -->
+  <div class="new-photos" *ngIf="photosToDisplay.length > 0">
+    <div *ngFor="let photo of photosToDisplay" class="photo-container">
+      <img [src]="photo.data | safeUrl" alt="New category photo" class="category-photo" />
+      <button
+        mat-icon-button
+        matTooltip="Remove photo"
+        type="button"
+        (click)="removePhoto(photo.name)"
+        class="delete-button"
+      >
+        <mat-icon>delete</mat-icon>
+      </button>
+    </div>
+  </div>
+
+  <!-- Input para adicionar fotos -->
+  <mat-form-field appearance="outline" class="photo-upload-field">
+    <mat-label>Add photos</mat-label>
+    <ngx-mat-file-input
+      accept="image/*"
+      multiple
+      [formControl]="photosToSave"
+      (change)="updatePhotosToDisplay()"
+    ></ngx-mat-file-input>
+    <mat-icon matSuffix>add_photo_alternate</mat-icon>
+  </mat-form-field>
+</div>

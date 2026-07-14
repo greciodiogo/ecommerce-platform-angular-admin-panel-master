@@ -93,4 +93,19 @@ export const reducer = createReducer(
       ),
     }),
   ),
+  // Category Photos
+  on(
+    CategoriesActions.addCategoryPhotoSuccess,
+    (state, { categoryId, category }): State => ({
+      ...state,
+      list: state.list.map((c) => (c.id === categoryId ? category : c)),
+    }),
+  ),
+  on(
+    CategoriesActions.deleteCategoryPhotoSuccess,
+    (state, { categoryId, category }): State => ({
+      ...state,
+      list: state.list.map((c) => (c.id === categoryId ? category : c)),
+    }),
+  ),
 );

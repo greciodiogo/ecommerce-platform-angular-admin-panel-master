@@ -11,6 +11,7 @@
  */
 import { Product } from './product';
 import { CategoryGroup } from './category-group';
+import { CategoryPhoto } from './category-photo';
 
 
 export interface Category { 
@@ -25,5 +26,6 @@ export interface Category {
     childCategories: Array<Category>;
     groups: Array<CategoryGroup>;
     products: Array<Product>;
+    photos: Array<CategoryPhoto>;
 }
 
