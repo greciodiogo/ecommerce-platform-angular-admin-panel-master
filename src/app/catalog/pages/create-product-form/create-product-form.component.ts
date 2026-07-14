@@ -46,7 +46,29 @@ export class CreateProductFormComponent {
     visible: new FormControl('true', {
       nonNullable: true,
     }),
+    unit: new FormControl('unidade', {
+      nonNullable: true,
+    }),
+    minimumOrderQuantity: new FormControl(1, {
+      nonNullable: true,
+      validators: [Validators.required, Validators.min(1)],
+    }),
   });
+  
+  // Unidades de medida disponíveis
+  availableUnits = [
+    { value: 'kg', label: 'Quilograma (kg)' },
+    { value: 'g', label: 'Grama (g)' },
+    { value: 'mg', label: 'Miligrama (mg)' },
+    { value: 'litro', label: 'Litro' },
+    { value: 'ml', label: 'Mililitro (ml)' },
+    { value: 'unidade', label: 'Unidade' },
+    { value: 'pacote', label: 'Pacote' },
+    { value: 'caixa', label: 'Caixa' },
+    { value: 'duzia', label: 'Dúzia' },
+    { value: 'metro', label: 'Metro (m)' },
+    { value: 'cm', label: 'Centímetro (cm)' },
+  ];
   newProductId$ = this.store.select(selectCatalogNewProductId);
 
   @ViewChild(NewProductPhotosInputComponent)

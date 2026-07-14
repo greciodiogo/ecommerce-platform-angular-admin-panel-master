@@ -52,7 +52,29 @@ export class ProductDetailsComponent implements OnInit {
     visible: new FormControl('true', {
       nonNullable: true,
     }),
+    unit: new FormControl('unidade', {
+      nonNullable: true,
+    }),
+    minimumOrderQuantity: new FormControl(1, {
+      nonNullable: true,
+      validators: [Validators.required, Validators.min(1)],
+    }),
   });
+  
+  // Unidades de medida disponíveis
+  availableUnits = [
+    { value: 'kg', label: 'Quilograma (kg)' },
+    { value: 'g', label: 'Grama (g)' },
+    { value: 'mg', label: 'Miligrama (mg)' },
+    { value: 'litro', label: 'Litro' },
+    { value: 'ml', label: 'Mililitro (ml)' },
+    { value: 'unidade', label: 'Unidade' },
+    { value: 'pacote', label: 'Pacote' },
+    { value: 'caixa', label: 'Caixa' },
+    { value: 'duzia', label: 'Dúzia' },
+    { value: 'metro', label: 'Metro (m)' },
+    { value: 'cm', label: 'Centímetro (cm)' },
+  ];
 
   @ViewChild(ProductPhotosInputComponent)
   photosInput!: ProductPhotosInputComponent;
@@ -84,6 +106,8 @@ export class ProductDetailsComponent implements OnInit {
       stock: this.product.stock,
       // comission: this.product.stock,
       visible: this.product.visible.toString(),
+      unit: this.product.unit || 'unidade',
+      minimumOrderQuantity: this.product.minimumOrderQuantity || 1,
     });
   }
 
@@ -104,6 +128,8 @@ export class ProductDetailsComponent implements OnInit {
           stock: this.editForm.value.stock,
           // comission: this.editForm.value.comission,
           visible: this.editForm.value.visible === 'true',
+          unit: this.editForm.value.unit,
+          minimumOrderQuantity: this.editForm.value.minimumOrderQuantity,
         },
       }),
     );

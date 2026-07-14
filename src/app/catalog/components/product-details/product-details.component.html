@@ -49,6 +49,24 @@
       <input type="number" matInput required formControlName="stock" />
       <mat-error>Invalid stock</mat-error>
     </mat-form-field>
+    
+    <mat-form-field appearance="outline" class="product-unit">
+      <mat-label>Unidade de Medida</mat-label>
+      <mat-select formControlName="unit">
+        <mat-option *ngFor="let unit of availableUnits" [value]="unit.value">
+          {{ unit.label }}
+        </mat-option>
+      </mat-select>
+      <mat-hint>Selecione a unidade de venda do produto</mat-hint>
+    </mat-form-field>
+    
+    <mat-form-field appearance="outline" class="product-minimum-quantity">
+      <mat-label>Quantidade Mínima</mat-label>
+      <input type="number" matInput required formControlName="minimumOrderQuantity" min="1" />
+      <mat-hint>Quantidade mínima que pode ser encomendada</mat-hint>
+      <mat-error>Deve ser no mínimo 1</mat-error>
+    </mat-form-field>
+    
     <mat-form-field appearance="outline" class="product-visible"  [appAuthRole]="['admin', 'manager', 'sales']">
       <mat-label>Visibility</mat-label>
       <mat-select formControlName="visible">

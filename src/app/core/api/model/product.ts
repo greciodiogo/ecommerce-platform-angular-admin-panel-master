@@ -40,5 +40,7 @@ export interface Product {
     originalPrice?: number;
     discountPercentage?: number;
     activePromotion: ProductActivePromotion;
+    unit?: string; // Unidade de medida: kg, g, litro, ml, unidade, etc.
+    minimumOrderQuantity?: number; // Quantidade mínima de pedido
 }
 
