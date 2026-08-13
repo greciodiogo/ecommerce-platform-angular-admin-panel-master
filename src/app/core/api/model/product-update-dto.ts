@@ -13,17 +13,34 @@
 
 export interface ProductUpdateDto { 
     name?: string;
+    name_en?: string;
     price?: number;
     purchasePrice?: number;
     visible?: boolean;
     description?: string;
-    name_en?: string;
     description_en?: string;
     stock?: number;
     comission?: number;
+    unit?: ProductUpdateDto.UnitEnum;
+    minimumOrderQuantity?: number;
     photosOrder?: string;
     shopId?: number;
-    unit?: string;
-    minimumOrderQuantity?: number;
 }
+export namespace ProductUpdateDto {
+    export type UnitEnum = 'kg' | 'g' | 'mg' | 'litro' | 'ml' | 'unidade' | 'pacote' | 'caixa' | 'duzia' | 'metro' | 'cm';
+    export const UnitEnum = {
+        Kg: 'kg' as UnitEnum,
+        G: 'g' as UnitEnum,
+        Mg: 'mg' as UnitEnum,
+        Litro: 'litro' as UnitEnum,
+        Ml: 'ml' as UnitEnum,
+        Unidade: 'unidade' as UnitEnum,
+        Pacote: 'pacote' as UnitEnum,
+        Caixa: 'caixa' as UnitEnum,
+        Duzia: 'duzia' as UnitEnum,
+        Metro: 'metro' as UnitEnum,
+        Cm: 'cm' as UnitEnum
+    };
+}
+
 

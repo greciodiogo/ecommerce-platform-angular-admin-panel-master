@@ -11,9 +11,18 @@
  */
 
 
-export interface FaqUpdateDto { 
-    question?: string;
-    visible?: boolean;
-    answer?: string;
+export interface VersionMetrics { 
+    /**
+     * Version distribution
+     */
+    distribution: Array<object>;
+    /**
+     * Latest version
+     */
+    latestVersion: string;
+    /**
+     * Update rate (percentage of users on latest version)
+     */
+    updateRate: number;
 }
 

@@ -25,7 +25,7 @@ export interface OrderDelivery {
     country: string;
     addressEntity?: Address;
     price?: number;
-    delivery_option?: string;
+    delivery_option: object;
     scheduled_date?: string;
     scheduled_time?: string;
 }

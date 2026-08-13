@@ -11,9 +11,22 @@
  */
 
 
-export interface FaqUpdateDto { 
-    question?: string;
-    visible?: boolean;
-    answer?: string;
+export interface DownloadMetrics { 
+    /**
+     * Android downloads
+     */
+    android: number;
+    /**
+     * iOS downloads
+     */
+    ios: number;
+    /**
+     * Downloads by date
+     */
+    byDate: Array<object>;
+    /**
+     * Downloads by country
+     */
+    byCountry: Array<object>;
 }
 

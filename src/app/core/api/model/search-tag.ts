@@ -11,9 +11,15 @@
  */
 
 
-export interface FaqUpdateDto { 
-    question?: string;
-    visible?: boolean;
-    answer?: string;
+export interface SearchTag { 
+    id: number;
+    tag: string;
+    icon?: string;
+    color?: string;
+    order: number;
+    active: boolean;
+    click_count: number;
+    created_at: string;
+    updated_at: string;
 }
 

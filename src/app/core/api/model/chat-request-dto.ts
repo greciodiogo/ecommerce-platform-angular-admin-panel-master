@@ -11,9 +11,8 @@
  */
 
 
-export interface FaqUpdateDto { 
-    question?: string;
-    visible?: boolean;
-    answer?: string;
+export interface ChatRequestDto { 
+    message: string;
+    sessionId?: string;
 }
 

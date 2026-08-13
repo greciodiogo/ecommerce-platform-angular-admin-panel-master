@@ -9,11 +9,20 @@
  * https://openapi-generator.tech
  * Do not edit the class manually.
  */
+import { RatingMetrics } from './rating-metrics';
 
 
-export interface FaqUpdateDto { 
-    question?: string;
-    visible?: boolean;
-    answer?: string;
+/**
+ * Rating metrics
+ */
+export interface AnalyticsResponseDtoRatings { 
+    /**
+     * Rating distribution (1-5 stars)
+     */
+    distribution: object;
+    /**
+     * Recent reviews
+     */
+    recentReviews: Array<object>;
 }
 

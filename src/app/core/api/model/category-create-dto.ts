@@ -13,8 +13,8 @@
 
 export interface CategoryCreateDto { 
     name: string;
-    description: string;
     name_en?: string;
+    description: string;
     description_en?: string;
     slug?: string;
     seo_slug?: string;

@@ -11,9 +11,10 @@
  */
 
 
-export interface FaqUpdateDto { 
-    question?: string;
-    visible?: boolean;
-    answer?: string;
+export interface UpdateDeliverySettingDto { 
+    /**
+     * New value for the setting
+     */
+    value: object;
 }
 

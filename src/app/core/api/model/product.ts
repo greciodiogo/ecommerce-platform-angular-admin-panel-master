@@ -21,17 +21,19 @@ export interface Product {
     created: string;
     updated: string;
     name: string;
+    name_en?: string;
     price: number;
     purchasePrice: number;
     visible: boolean;
     description: string;
-    name_en?: string;
     description_en?: string;
     stock: number;
     attributes: Array<Attribute>;
     photos: Array<ProductPhoto>;
     photosOrder: string;
     comission: number;
+    unit: string;
+    minimumOrderQuantity: number;
     ratings: Array<ProductRating>;
     shop: Shop;
     shopId: number;
@@ -40,7 +42,5 @@ export interface Product {
     originalPrice?: number;
     discountPercentage?: number;
     activePromotion: ProductActivePromotion;
-    unit?: string; // Unidade de medida: kg, g, litro, ml, unidade, etc.
-    minimumOrderQuantity?: number; // Quantidade mínima de pedido
 }
 

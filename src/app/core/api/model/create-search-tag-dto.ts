@@ -11,9 +11,11 @@
  */
 
 
-export interface FaqUpdateDto { 
-    question?: string;
-    visible?: boolean;
-    answer?: string;
+export interface CreateSearchTagDto { 
+    tag: string;
+    icon?: string;
+    color?: string;
+    order?: number;
+    active?: boolean;
 }
 

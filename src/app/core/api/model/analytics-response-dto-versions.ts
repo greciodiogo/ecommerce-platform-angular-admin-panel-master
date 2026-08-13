@@ -9,11 +9,24 @@
  * https://openapi-generator.tech
  * Do not edit the class manually.
  */
+import { VersionMetrics } from './version-metrics';
 
 
-export interface FaqUpdateDto { 
-    question?: string;
-    visible?: boolean;
-    answer?: string;
+/**
+ * Version metrics
+ */
+export interface AnalyticsResponseDtoVersions { 
+    /**
+     * Version distribution
+     */
+    distribution: Array<object>;
+    /**
+     * Latest version
+     */
+    latestVersion: string;
+    /**
+     * Update rate (percentage of users on latest version)
+     */
+    updateRate: number;
 }
 

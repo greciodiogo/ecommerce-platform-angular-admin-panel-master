@@ -10,23 +10,23 @@
  * Do not edit the class manually.
  */
 import { Product } from './product';
-import { CategoryGroup } from './category-group';
 import { CategoryPhoto } from './category-photo';
+import { CategoryGroup } from './category-group';
 
 
 export interface Category { 
     id: number;
     name: string;
-    description: string;
     name_en?: string;
+    description: string;
     description_en?: string;
     slug?: string;
     seo_slug?: string;
     service_fee: number;
     parentCategory?: Category;
     childCategories: Array<Category>;
+    photos: Array<CategoryPhoto>;
     groups: Array<CategoryGroup>;
     products: Array<Product>;
-    photos: Array<CategoryPhoto>;
 }
 

@@ -17,6 +17,10 @@ export interface Address {
     slug?: string;
     visible: boolean;
     price?: number;
+    latitude?: number;
+    longitude?: number;
+    radius_km?: number;
+    is_zone: boolean;
     parentAddress?: Address;
     childAddresses: Array<Address>;
 }

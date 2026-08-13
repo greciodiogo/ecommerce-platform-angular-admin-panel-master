@@ -13,16 +13,33 @@
 
 export interface ProductCreateDto { 
     name: string;
+    name_en?: string;
     price: number;
     purchasePrice: number;
     visible?: boolean;
     description: string;
-    name_en?: string;
     description_en?: string;
     stock: number;
     comission: number;
-    shopId?: number;
-    unit?: string;
+    unit?: ProductCreateDto.UnitEnum;
     minimumOrderQuantity?: number;
+    shopId?: number;
 }
+export namespace ProductCreateDto {
+    export type UnitEnum = 'kg' | 'g' | 'mg' | 'litro' | 'ml' | 'unidade' | 'pacote' | 'caixa' | 'duzia' | 'metro' | 'cm';
+    export const UnitEnum = {
+        Kg: 'kg' as UnitEnum,
+        G: 'g' as UnitEnum,
+        Mg: 'mg' as UnitEnum,
+        Litro: 'litro' as UnitEnum,
+        Ml: 'ml' as UnitEnum,
+        Unidade: 'unidade' as UnitEnum,
+        Pacote: 'pacote' as UnitEnum,
+        Caixa: 'caixa' as UnitEnum,
+        Duzia: 'duzia' as UnitEnum,
+        Metro: 'metro' as UnitEnum,
+        Cm: 'cm' as UnitEnum
+    };
+}
+
 

@@ -11,9 +11,16 @@
  */
 
 
-export interface FaqUpdateDto { 
-    question?: string;
-    visible?: boolean;
-    answer?: string;
+export interface ChatConfig { 
+    id: number;
+    created: string;
+    updated: string;
+    assistantName: string;
+    welcomeMessage: string;
+    avatarUrl: string;
+    greetingMessage: string;
+    greetingMessageWithName: string;
+    quickReplies: Array<string>;
+    isActive: boolean;
 }
 

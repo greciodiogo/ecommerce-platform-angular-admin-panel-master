@@ -17,5 +17,9 @@ export interface UpdateAddressDto {
     visible?: boolean;
     parentAddressId?: number;
     price?: number;
+    latitude?: number;
+    longitude?: number;
+    radius_km?: number;
+    is_zone?: boolean;
 }
 

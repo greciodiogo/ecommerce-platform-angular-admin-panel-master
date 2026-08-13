@@ -9,11 +9,18 @@
  * https://openapi-generator.tech
  * Do not edit the class manually.
  */
+import { User } from './user';
+import { ChatMessage } from './chat-message';
 
 
-export interface FaqUpdateDto { 
-    question?: string;
-    visible?: boolean;
-    answer?: string;
+export interface ChatSession { 
+    id: string;
+    userId: number;
+    user: User;
+    active: boolean;
+    metadata: object;
+    messages: Array<ChatMessage>;
+    createdAt: string;
+    updatedAt: string;
 }
 

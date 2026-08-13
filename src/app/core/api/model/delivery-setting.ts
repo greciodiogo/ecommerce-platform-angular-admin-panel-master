@@ -11,9 +11,13 @@
  */
 
 
-export interface FaqUpdateDto { 
-    question?: string;
-    visible?: boolean;
-    answer?: string;
+export interface DeliverySetting { 
+    id: number;
+    key: string;
+    value: string;
+    type: object;
+    description?: string;
+    created_at: string;
+    updated_at: string;
 }
 

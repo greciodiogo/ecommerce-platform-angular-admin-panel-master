@@ -9,11 +9,15 @@
  * https://openapi-generator.tech
  * Do not edit the class manually.
  */
+import { Category } from './category';
+
 
 export interface CategoryPhoto { 
+    category: Category;
     id: number;
     path: string;
     mimeType: string;
     thumbnailPath: string;
-    placeholderBase64?: string;
+    placeholderBase64: string;
 }
+

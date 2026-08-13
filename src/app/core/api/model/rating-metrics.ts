@@ -11,9 +11,14 @@
  */
 
 
-export interface FaqUpdateDto { 
-    question?: string;
-    visible?: boolean;
-    answer?: string;
+export interface RatingMetrics { 
+    /**
+     * Rating distribution (1-5 stars)
+     */
+    distribution: object;
+    /**
+     * Recent reviews
+     */
+    recentReviews: Array<object>;
 }
 
