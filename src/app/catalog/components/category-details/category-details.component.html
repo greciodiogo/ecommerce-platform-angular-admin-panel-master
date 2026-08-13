@@ -47,6 +47,12 @@
     <input matInput type="text" formControlName="slug" />
     <mat-error>Invalid URL slug</mat-error>
   </mat-form-field>
+  <mat-form-field appearance="outline" class="category-seo-slug">
+    <mat-label>Category SEO slug</mat-label>
+    <input matInput type="text" formControlName="seo_slug" />
+    <mat-hint>URL amigável para SEO (ex: moda-vestuario)</mat-hint>
+    <mat-error>Invalid SEO slug</mat-error>
+  </mat-form-field>
   <mat-form-field appearance="outline" class="product-service_fee">
     <mat-label>Service Fee</mat-label>
     <span matPrefix>{{ 0 | formatCurrency : true }}&nbsp;</span>

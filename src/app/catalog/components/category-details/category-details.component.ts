@@ -39,6 +39,9 @@ export class CategoryDetailsComponent implements OnInit {
     slug: new FormControl('', {
       nonNullable: true,
     }),
+    seo_slug: new FormControl('', {
+      nonNullable: false,
+    }),
     groups: new FormControl<string[]>([], {
       nonNullable: true,
     }),
@@ -88,6 +91,7 @@ export class CategoryDetailsComponent implements OnInit {
       description: this.category.description,
       description_en: this.category.description_en || '',
       slug: this.category.slug,
+      seo_slug: this.category.seo_slug || '',
       groups: [],
     });
   }
@@ -144,6 +148,7 @@ export class CategoryDetailsComponent implements OnInit {
           description: this.editForm.value.description,
           description_en: this.editForm.value.description_en,
           slug: this.editForm.value.slug,
+          seo_slug: this.editForm.value.seo_slug || undefined,
           groups: this.editForm.getRawValue().groups.map((g) => ({ name: g })),
         },
       }),

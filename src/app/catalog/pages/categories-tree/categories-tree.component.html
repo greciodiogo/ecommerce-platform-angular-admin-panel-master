@@ -39,6 +39,11 @@
             <mat-label>Name</mat-label>
             <input matInput type="text" formControlName="newName" />
           </mat-form-field>
+          <mat-form-field appearance="outline">
+            <mat-label>SEO slug</mat-label>
+            <input matInput type="text" formControlName="newSeoSlug" />
+            <mat-hint>Opcional</mat-hint>
+          </mat-form-field>
           <button mat-flat-button color="primary" [ngClass]="{
             'admin_color': (role$ | async) === 'admin',
             'sales_color': (role$ | async) === 'sales',

@@ -71,6 +71,7 @@ describe('CategoryDetailsComponent', () => {
       name: 'Category 1',
       description: 'Description 1',
       slug: 'category-1',
+      seo_slug: 'category-1-seo',
       groups: [{ name: 'main' }],
     } as Category;
     store = TestBed.inject(MockStore);
@@ -134,6 +135,7 @@ describe('CategoryDetailsComponent', () => {
             name: 'Category 2',
             description: 'Description 2',
             slug: 'category-2',
+            seo_slug: 'category-1-seo',
             groups: [{ name: 'test2' }, { name: 'test' }],
           },
         }),

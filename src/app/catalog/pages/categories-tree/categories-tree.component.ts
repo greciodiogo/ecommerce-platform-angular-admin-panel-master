@@ -42,6 +42,9 @@ export class CategoriesTreeComponent implements OnInit, OnDestroy {
       nonNullable: true,
       validators: [Validators.required],
     }),
+    newSeoSlug: new FormControl('', {
+      nonNullable: false,
+    }),
   });
 
   constructor(private store: Store) {}
@@ -116,6 +119,7 @@ export class CategoriesTreeComponent implements OnInit, OnDestroy {
         data: {
           name: this.formGroup.value.newName,
           description: '',
+          seo_slug: this.formGroup.value.newSeoSlug || undefined,
           parentCategoryId: this.newNode.parentCategory?.id,
         },
       }),
